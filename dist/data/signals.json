@@ -1,0 +1,72 @@
+{
+  "generatedAt": "2026-09-06T11:29:17.053Z",
+  "signals": {
+    "AU": {
+      "run": 1,
+      "drop": 2.33,
+      "level": "HOLD",
+      "price": 109.06999969482422,
+      "date": "2026-09-04"
+    },
+    "KGC": {
+      "run": 1,
+      "drop": 2.28,
+      "level": "HOLD",
+      "price": 30.8700008392334,
+      "date": "2026-09-04"
+    },
+    "HMY": {
+      "run": 1,
+      "drop": 2.36,
+      "level": "HOLD",
+      "price": 20.270000457763672,
+      "date": "2026-09-04"
+    },
+    "GFI": {
+      "run": 1,
+      "drop": 1.58,
+      "level": "HOLD",
+      "price": 47.400001525878906,
+      "date": "2026-09-04"
+    },
+    "GDX": {
+      "run": 1,
+      "drop": 2.2,
+      "level": "HOLD",
+      "price": 99.26000213623047,
+      "date": "2026-09-04"
+    },
+    "GLD": {
+      "run": 1,
+      "drop": 0.84,
+      "level": "HOLD",
+      "price": 406.7699890136719,
+      "date": "2026-09-04"
+    },
+    "SLV": {
+      "run": 1,
+      "drop": 1.21,
+      "level": "HOLD",
+      "price": 59.81999969482422,
+      "date": "2026-09-04"
+    },
+    "PAXG": {
+      "run": 2,
+      "drop": 1.17,
+      "level": "HOLD",
+      "price": 4429.397414212927,
+      "date": "2026-09-06"
+    },
+    "XAUT": {
+      "run": 2,
+      "drop": 1.04,
+      "level": "HOLD",
+      "price": 4425.221649090201,
+      "date": "2026-09-06"
+    }
+  },
+  "errors": {
+    "XAUUSD": "Yahoo 404",
+    "XAGUSD": "Yahoo 404"
+  }
+}
