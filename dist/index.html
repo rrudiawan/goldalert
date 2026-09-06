@@ -1715,6 +1715,7 @@ applyTheme(); applyI18n(); buildChips(); loadCfg(); bind();
 $("currSel").value = currCode;
 renderTargetSelect(); renderTargetList();
 fillAssetSelect("compareA","XAUUSD"); fillAssetSelect("compareB","GDX"); fillAssetSelect("watchAsset","XAUUSD"); renderWatchlist();
+renderComparison();
 if("Notification" in window && Notification.permission==="granted"){
   $("notifStatus").textContent=t("notifGranted"); $("notifStatus").className="status-msg ok";
 }
