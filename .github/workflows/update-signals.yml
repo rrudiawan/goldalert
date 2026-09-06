@@ -1,0 +1,47 @@
+name: Update market signals
+
+# Runs the server-side data + signal script (scripts/update-signals.mjs) so the site
+# doesn't depend on the browser-side CORS proxy for most visitors, and so Telegram
+# alerts can be sent without ever exposing a bot token to the browser.
+#
+# Setup:
+#   1. (Optional, for Telegram alerts) Repo Settings -> Secrets and variables -> Actions:
+#        TELEGRAM_BOT_TOKEN  = the token BotFather gave you
+#        TELEGRAM_CHAT_ID    = your channel's numeric ID (add the bot as channel admin first)
+#   2. Actions tab -> "Update market signals" -> Run workflow (to run it once manually).
+#      After that it runs automatically on the schedule below.
+
+on:
+  schedule:
+    # 23:20 UTC, Monday-Friday (after most relevant markets have closed for the day).
+    - cron: "20 23 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update-signals:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch data and compute signals
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: node scripts/update-signals.mjs
+
+      - name: Commit updated data
+        run: |
+          git config user.name "goldalert-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add dist/data/market-history.json dist/data/signals.json
+          git diff --cached --quiet && echo "No data changes to commit." || git commit -m "chore: update market signals [skip ci]"
+          git push
