@@ -1,30 +1,36 @@
 import fs from "node:fs/promises";
 
+// NOTE (Sep 2026): Stooq was originally used here but reliably returns empty/blocked
+// responses when called from GitHub Actions runners (likely blocking Azure's shared IP
+// ranges, a known pattern with several free data providers). Switched the 9 metal/stock
+// assets to Yahoo Finance's public chart endpoint, which is widely used from server/cloud
+// environments precisely because it doesn't have this issue. CoinGecko (for PAXG/XAUT)
+// was unaffected and is unchanged.
 const ASSETS=[
-  {id:"XAUUSD",src:"stooq",code:"xauusd"},{id:"XAGUSD",src:"stooq",code:"xagusd"},
-  {id:"AU",src:"stooq",code:"au.us"},{id:"KGC",src:"stooq",code:"kgc.us"},
-  {id:"HMY",src:"stooq",code:"hmy.us"},{id:"GFI",src:"stooq",code:"gfi.us"},
-  {id:"GDX",src:"stooq",code:"gdx.us"},{id:"GLD",src:"stooq",code:"gld.us"},
-  {id:"SLV",src:"stooq",code:"slv.us"},{id:"PAXG",src:"coingecko",code:"pax-gold"},
+  {id:"XAUUSD",src:"yahoo",code:"XAUUSD=X"},{id:"XAGUSD",src:"yahoo",code:"XAGUSD=X"},
+  {id:"AU",src:"yahoo",code:"AU"},{id:"KGC",src:"yahoo",code:"KGC"},
+  {id:"HMY",src:"yahoo",code:"HMY"},{id:"GFI",src:"yahoo",code:"GFI"},
+  {id:"GDX",src:"yahoo",code:"GDX"},{id:"GLD",src:"yahoo",code:"GLD"},
+  {id:"SLV",src:"yahoo",code:"SLV"},{id:"PAXG",src:"coingecko",code:"pax-gold"},
   {id:"XAUT",src:"coingecko",code:"tether-gold"}
 ];
 
-// A realistic browser User-Agent avoids Stooq/CoinGecko's bot-blocking of default
-// server-side HTTP clients (both services have been known to reject requests that
-// look like they come from scripts rather than browsers).
 const BROWSER_HEADERS={
   "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
   "Accept":"text/html,application/json,text/plain,*/*"
 };
 
-async function stooq(code){
-  const r=await fetch(`https://stooq.com/q/d/l/?s=${code}&i=d`,{headers:BROWSER_HEADERS});
-  if(!r.ok) throw new Error(`Stooq ${r.status}`);
-  const text=await r.text();
-  if(/exceeded the daily hits limit/i.test(text)) throw new Error("Stooq daily limit exceeded");
-  const lines=text.trim().split(/\r?\n/);
-  const rows=lines.slice(1).map(line=>{const p=line.split(",");return {d:p[0],c:Number(p[4])};}).filter(r=>r.d&&Number.isFinite(r.c)&&r.c>0);
-  if(rows.length<20) throw new Error(`Stooq returned insufficient history (${rows.length} rows)`);
+async function yahoo(symbol){
+  const r=await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?range=2y&interval=1d`,{headers:BROWSER_HEADERS});
+  if(!r.ok) throw new Error(`Yahoo ${r.status}`);
+  const j=await r.json();
+  const result=j?.chart?.result?.[0];
+  if(!result) throw new Error(`Yahoo: no data (${j?.chart?.error?.description||"unknown"})`);
+  const ts=result.timestamp||[];
+  const closes=result.indicators?.quote?.[0]?.close||[];
+  const rows=ts.map((t,i)=>({d:new Date(t*1000).toISOString().slice(0,10),c:Number(closes[i])}))
+    .filter(r=>Number.isFinite(r.c)&&r.c>0);
+  if(rows.length<20) throw new Error(`Yahoo returned insufficient history (${rows.length} rows)`);
   return rows.slice(-600);
 }
 async function coingecko(code){
@@ -45,7 +51,7 @@ try{previous=JSON.parse(await fs.readFile("dist/data/signals.json","utf8"));}cat
 const assets={},signals={},errors={};
 for(const asset of ASSETS){
   try{
-    const rows=asset.src==="stooq"?await stooq(asset.code):await coingecko(asset.code);
+    const rows=asset.src==="yahoo"?await yahoo(asset.code):await coingecko(asset.code);
     assets[asset.id]=rows; signals[asset.id]=tier(rows);
     console.log(`OK  ${asset.id}: ${rows.length} rows, latest close ${rows.at(-1).c} on ${rows.at(-1).d}`);
   }catch(error){
