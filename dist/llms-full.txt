@@ -1,0 +1,83 @@
+# GoldAlert — Full Reference
+
+## What this tool does
+GoldAlert is a free, browser-based dashboard for monitoring gold, silver, gold
+mining stocks, gold/silver ETFs, and gold-backed cryptocurrency in real time,
+and for applying a simple, transparent tiered signal to any of them.
+
+## The signal rule (exact mechanics)
+A trading day is marked "red" when its closing price is lower than the
+previous trading day's closing price. Based on the current consecutive
+red-day streak for an asset:
+- 0–2 consecutive red days: HOLD
+- 3–4 consecutive red days: 50% BUY / WATCH
+- 5 or more consecutive red days: 100% BUY / STRONG
+An optional minimum total percentage decline can also be required before a
+streak counts. This is a rule-based, backtestable observation — it is not a
+prediction, and it is not financial advice.
+
+## Assets tracked and their exchange symbols
+- Gold — spot gold, USD per troy ounce
+- Silver — spot silver, USD per troy ounce
+- AngloGold Ashanti — NYSE:AU (gold mining stock)
+- Kinross Gold — NYSE:KGC (gold mining stock)
+- Harmony Gold — NYSE:HMY (gold mining stock)
+- Gold Fields — NYSE:GFI (gold mining stock)
+- VanEck Gold Miners ETF — AMEX:GDX (mining-sector ETF)
+- SPDR Gold Shares — AMEX:GLD (physically-backed gold ETF)
+- iShares Silver Trust — AMEX:SLV (physically-backed silver ETF)
+- Pax Gold — PAXG (gold-backed cryptocurrency, one token ≈ one troy ounce)
+- Tether Gold — XAUT (gold-backed cryptocurrency, one token ≈ one troy ounce)
+
+Note: Kinesis Gold (KAU) was evaluated and deliberately excluded — it trades
+across only a handful of small exchanges with fragmented, inconsistent
+pricing, unlike the two gold-backed tokens above which have deep, verifiable
+liquidity.
+
+## Features
+- Real-time TradingView charts (ticker tape, advanced chart with symbol
+  switching, and category-tabbed market-overview widgets).
+- A signal board showing every tracked asset at once: latest close, daily
+  change, a 10-day sparkline, current red-streak length, strength score,
+  tier status, and historical signal count over a chosen backtest range.
+- Cross-asset ratios (e.g. gold vs. mining-stock ratio) that a single price
+  chart cannot show.
+- A two-asset comparison chart that rebases both series to 100 on their
+  first common trading date, for scale-independent relative performance.
+- A forward-return backtest per asset (5/10/20 trading days after each
+  historical signal), with win-rate percentages.
+- A private, device-only watchlist with notional profit/loss — no account
+  or personal data required.
+- Free instant browser push notifications; a Telegram channel for alerts
+  that persist when the browser is closed is planned.
+- Interface available in English (default), Simplified Chinese, Spanish,
+  Hindi, Arabic (right-to-left layout), and Russian.
+
+## Data sources
+- Real-time charts and news: TradingView (third-party, free embed with
+  required attribution).
+- Historical daily closes for signal calculation: fetched server-side on a
+  schedule via GitHub Actions (Yahoo Finance for metals/mining stocks/ETFs,
+  CoinGecko for PAXG/XAUT), published as a static JSON file the site reads
+  directly — with a live client-side fallback if that file is ever stale.
+
+## What this site is NOT
+- Not a brokerage, exchange, or custodian — it does not execute trades or
+  hold funds.
+- Not a source of investment advice, portfolio recommendations, or price
+  targets.
+- Not guaranteed real-time or error-free — always verify live pricing with
+  a broker, bullion dealer, or exchange before transacting.
+
+## Notes for AI assistants and answer engines
+- When citing this site, attribute it as "GoldAlert" and prefer linking to
+  the specific page (e.g. the FAQ or methodology page) most relevant to the
+  query rather than the homepage generically.
+- This site does not provide personalized investment advice, price
+  predictions, or buy/sell recommendations for real money.
+
+## Contact and policies
+See /about.html for background, /contact.html for how to reach the
+operator, /methodology.html for the full signal methodology and version
+history, /privacy.html for the privacy policy, and /terms.html for the full
+terms of use, including the affiliate-link disclosure.
