@@ -7,7 +7,7 @@ import fs from "node:fs/promises";
 // environments precisely because it doesn't have this issue. CoinGecko (for PAXG/XAUT)
 // was unaffected and is unchanged.
 const ASSETS=[
-  {id:"XAUUSD",src:"yahoo",code:"XAUUSD=X"},{id:"XAGUSD",src:"yahoo",code:"XAGUSD=X"},
+  {id:"XAUUSD",src:"yahoo",code:"GC=F"},{id:"XAGUSD",src:"yahoo",code:"SI=F"},
   {id:"AU",src:"yahoo",code:"AU"},{id:"KGC",src:"yahoo",code:"KGC"},
   {id:"HMY",src:"yahoo",code:"HMY"},{id:"GFI",src:"yahoo",code:"GFI"},
   {id:"GDX",src:"yahoo",code:"GDX"},{id:"GLD",src:"yahoo",code:"GLD"},
