@@ -446,13 +446,36 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
 <!-- NOTIFICATIONS -->
 <section class="panel" id="notifications">
   <h2 data-i18n="notifTitle">Enable Buy Signal Notifications</h2>
-  <p class="sub" style="margin-top:-4px;margin-bottom:14px" data-i18n="notifSub2">Browser alerts work instantly while this page is open. A Telegram channel for alerts that arrive even when your browser is closed is coming soon.</p>
+  <p class="sub" style="margin-top:-4px;margin-bottom:14px" data-i18n="notifSub">Get notified the moment an asset hits the rule you set above — three ways, pick any or all.</p>
+
+  <h3 data-i18n="notifBrowserTitle">1. Browser push (free, instant, while this page is open)</h3>
   <button id="notifBtn" class="ghost" data-i18n="btnNotif">🔔 Enable Browser Notifications</button>
   <div class="status-msg" id="notifStatus"></div>
 
   <hr>
-  <h3 data-i18n="targetTitle">Or set a simple price target alert</h3>
-  <p class="sub" style="margin-top:-2px;margin-bottom:10px" data-i18n="targetSub">No streak rule needed — just tell us the price and direction.</p>
+  <h3 data-i18n="notifPersonalTitle">2. Personal email &amp; Telegram alerts (works even when this page is closed)</h3>
+  <p class="sub" style="margin-top:-2px;margin-bottom:10px" data-i18n="notifPersonalSub">Get a message the moment your chosen assets change tier, checked automatically on a schedule.</p>
+  <div class="notify-grid">
+    <div class="field"><label for="subEmail" data-i18n="lblEmail">Email (optional)</label><input id="subEmail" type="email" placeholder="you@example.com"></div>
+    <div class="field"><label for="subTelegram" data-i18n="lblTelegram">Telegram Chat ID (optional)</label><input id="subTelegram" type="text" placeholder="123456789"></div>
+  </div>
+  <p class="note" data-i18n="telegramHelp">Don't know your Telegram Chat ID? Message <a href="https://t.me/userinfobot" target="_blank" rel="noopener">@userinfobot</a> to get it, then open our alert bot and send <code>/start</code> so it's allowed to message you.</p>
+  <div class="field">
+    <label for="subPref" data-i18n="lblNotifyPref">Notify me about</label>
+    <select id="subPref">
+      <option value="any" data-i18n="prefAny">Any asset reaching WATCH or STRONG</option>
+      <option value="metals" data-i18n="prefMetals">Gold &amp; silver only</option>
+      <option value="stocks" data-i18n="prefStocks">Mining stocks only</option>
+      <option value="etf" data-i18n="prefEtf">ETFs only</option>
+      <option value="crypto" data-i18n="prefCrypto">Gold-backed crypto only</option>
+    </select>
+  </div>
+  <div class="row"><button id="btnSubscribe" data-i18n="btnSubscribe">Subscribe — it's free</button></div>
+  <div class="status-msg" id="subStatus"></div>
+
+  <hr>
+  <h3 data-i18n="targetTitle">3. Simple price target alert</h3>
+  <p class="sub" style="margin-top:-2px;margin-bottom:10px" data-i18n="targetSub">No streak rule needed — just tell us the price and direction. Fires as a browser notification.</p>
   <div class="grid3">
     <div class="field"><label for="targetAsset" data-i18n="targetAssetLbl">Asset</label><select id="targetAsset"></select></div>
     <div class="field"><label for="targetDir" data-i18n="targetDirLbl">Alert when price is</label>
@@ -610,6 +633,13 @@ en:{
   notifGranted:"✓ Browser notifications enabled. You'll be alerted when a buy signal appears.",
   notifDenied:"Notification permission denied. You can re-enable it in your browser settings.",
   subErrEmpty:"Enter at least an email or a Telegram Chat ID.",
+  notifPersonalTitle:"2. Personal email & Telegram alerts (works even when this page is closed)",
+  notifPersonalSub:"Get a message the moment your chosen assets change tier, checked automatically on a schedule.",
+  lblEmail:"Email (optional)", lblTelegram:"Telegram Chat ID (optional)",
+  telegramHelp:"Don't know your Telegram Chat ID? Message @userinfobot to get it, then open our alert bot and send /start so it's allowed to message you.",
+  lblNotifyPref:"Notify me about",
+  subErrNotConfigured:"Personal alerts aren't connected yet — the site owner needs to finish the backend setup (see the Methodology page).",
+  subSending:"Sending…", subErrNetwork:"Couldn't reach the alert service. Please try again in a moment.",
   subOkTelegramMissing:"✓ Saved. Browser notifications stay active; for Telegram, also add your bot token under Advanced settings.",
   subOkEmailMissing:"✓ Saved. For email, add a webhook URL (Formspree/Zapier/n8n) under Advanced settings so messages actually send.",
   subOkFull:"✓ Subscribed. You'll be notified when a signal appears.",
@@ -699,6 +729,13 @@ zh:{
   notifGranted:"✓ 浏览器通知已开启，出现买入信号时会提醒您。",
   notifDenied:"通知权限被拒绝，可在浏览器设置中重新开启。",
   subErrEmpty:"请至少填写邮箱或 Telegram Chat ID。",
+  notifPersonalTitle:"2. 个人邮件与 Telegram 提醒（此页面关闭后仍有效）",
+  notifPersonalSub:"当您选择的资产变更等级时立即收到消息，系统会按计划自动检查。",
+  lblEmail:"邮箱（可选）", lblTelegram:"Telegram Chat ID（可选）",
+  telegramHelp:"不知道您的 Telegram Chat ID？给 @userinfobot 发消息获取，然后打开我们的提醒机器人并发送 /start，这样它才能给您发消息。",
+  lblNotifyPref:"提醒范围",
+  subErrNotConfigured:"个人提醒功能尚未连接——站长需要先完成后端设置（详见方法论页面）。",
+  subSending:"发送中…", subErrNetwork:"无法连接提醒服务，请稍后再试。",
   subOkTelegramMissing:"✓ 已保存。浏览器通知仍然有效；如需 Telegram 提醒，请在高级设置中填写机器人令牌。",
   subOkEmailMissing:"✓ 已保存。如需邮件提醒，请在高级设置中添加 Webhook 地址（Formspree/Zapier/n8n）才能真正发送。",
   subOkFull:"✓ 订阅成功，信号出现时会通知您。",
@@ -787,6 +824,13 @@ es:{
   notifGranted:"✓ Notificaciones del navegador activadas. Se le avisará cuando aparezca una señal de compra.",
   notifDenied:"Permiso de notificación denegado. Puede reactivarlo en la configuración de su navegador.",
   subErrEmpty:"Ingrese al menos un correo o un ID de chat de Telegram.",
+  notifPersonalTitle:"2. Alertas personales por correo y Telegram (funciona con la página cerrada)",
+  notifPersonalSub:"Reciba un mensaje en cuanto sus activos elegidos cambien de nivel, verificado automáticamente en un horario.",
+  lblEmail:"Correo (opcional)", lblTelegram:"ID de chat de Telegram (opcional)",
+  telegramHelp:"¿No conoce su ID de chat de Telegram? Escriba a @userinfobot para obtenerlo, luego abra nuestro bot de alertas y envíe /start para que pueda enviarle mensajes.",
+  lblNotifyPref:"Avisarme sobre",
+  subErrNotConfigured:"Las alertas personales aún no están conectadas — el operador del sitio debe completar la configuración del backend (vea la página de Metodología).",
+  subSending:"Enviando…", subErrNetwork:"No se pudo conectar con el servicio de alertas. Intente de nuevo en un momento.",
   subOkTelegramMissing:"✓ Guardado. Las notificaciones del navegador siguen activas; para Telegram, agregue también el token del bot en Configuración avanzada.",
   subOkEmailMissing:"✓ Guardado. Para el correo, agregue una URL de webhook (Formspree/Zapier/n8n) en Configuración avanzada para que realmente se envíe.",
   subOkFull:"✓ Suscripción exitosa. Se le notificará cuando aparezca una señal.",
@@ -875,6 +919,13 @@ hi:{
   notifGranted:"✓ ब्राउज़र नोटिफिकेशन चालू हो गए। बाय सिग्नल आने पर आपको सूचित किया जाएगा।",
   notifDenied:"नोटिफिकेशन की अनुमति अस्वीकृत हुई। इसे अपनी ब्राउज़र सेटिंग्स में फिर से चालू कर सकते हैं।",
   subErrEmpty:"कम से कम एक ईमेल या टेलीग्राम चैट ID दर्ज करें।",
+  notifPersonalTitle:"2. निजी ईमेल और टेलीग्राम अलर्ट (यह पेज बंद होने पर भी काम करता है)",
+  notifPersonalSub:"जैसे ही आपके चुने गए एसेट का स्तर बदले, तुरंत संदेश पाएं — यह अपने आप शेड्यूल पर जांचा जाता है।",
+  lblEmail:"ईमेल (वैकल्पिक)", lblTelegram:"टेलीग्राम चैट ID (वैकल्पिक)",
+  telegramHelp:"अपना टेलीग्राम चैट ID नहीं पता? @userinfobot को मैसेज करें, फिर हमारे अलर्ट बॉट को खोलकर /start भेजें ताकि वह आपको मैसेज कर सके।",
+  lblNotifyPref:"किस बारे में सूचित करें",
+  subErrNotConfigured:"निजी अलर्ट अभी कनेक्ट नहीं हैं — साइट के मालिक को पहले बैकएंड सेटअप पूरा करना होगा (मेथडोलॉजी पेज देखें)।",
+  subSending:"भेजा जा रहा है…", subErrNetwork:"अलर्ट सेवा तक नहीं पहुंच सका। कृपया थोड़ी देर बाद फिर कोशिश करें।",
   subOkTelegramMissing:"✓ सेव हो गया। ब्राउज़र नोटिफिकेशन सक्रिय रहेंगे; टेलीग्राम के लिए एडवांस्ड सेटिंग्स में बॉट टोकन भी जोड़ें।",
   subOkEmailMissing:"✓ सेव हो गया। ईमेल के लिए, वाकई भेजे जाने हेतु एडवांस्ड सेटिंग्स में वेबहुक URL (Formspree/Zapier/n8n) जोड़ें।",
   subOkFull:"✓ सब्सक्रिप्शन सफल। सिग्नल आने पर आपको सूचित किया जाएगा।",
@@ -963,6 +1014,13 @@ ar:{
   notifGranted:"✓ تم تفعيل إشعارات المتصفح. سيتم تنبيهك عند ظهور إشارة شراء.",
   notifDenied:"تم رفض إذن الإشعارات. يمكنك إعادة تفعيله من إعدادات المتصفح.",
   subErrEmpty:"أدخل بريدًا إلكترونيًا أو معرف محادثة تيليجرام على الأقل.",
+  notifPersonalTitle:"٢. تنبيهات شخصية عبر البريد الإلكتروني وتيليجرام (تعمل حتى مع إغلاق هذه الصفحة)",
+  notifPersonalSub:"احصل على رسالة بمجرد تغيّر مستوى الأصول التي اخترتها، يتم التحقق تلقائيًا حسب جدول زمني.",
+  lblEmail:"البريد الإلكتروني (اختياري)", lblTelegram:"معرف محادثة تيليجرام (اختياري)",
+  telegramHelp:"لا تعرف معرف محادثة تيليجرام الخاص بك؟ راسل @userinfobot للحصول عليه، ثم افتح بوت التنبيهات الخاص بنا وأرسل /start حتى يُسمح له بمراسلتك.",
+  lblNotifyPref:"أبلغني عن",
+  subErrNotConfigured:"التنبيهات الشخصية غير متصلة بعد — يحتاج مالك الموقع إلى إكمال إعداد الخلفية (راجع صفحة المنهجية).",
+  subSending:"جارٍ الإرسال…", subErrNetwork:"تعذّر الوصول إلى خدمة التنبيهات. يرجى المحاولة مرة أخرى بعد قليل.",
   subOkTelegramMissing:"✓ تم الحفظ. تظل إشعارات المتصفح فعّالة؛ بالنسبة لتيليجرام، أضف أيضًا رمز البوت ضمن الإعدادات المتقدمة.",
   subOkEmailMissing:"✓ تم الحفظ. بالنسبة للبريد الإلكتروني، أضف رابط ويب هوك (Formspree/Zapier/n8n) ضمن الإعدادات المتقدمة حتى تُرسل الرسائل فعليًا.",
   subOkFull:"✓ تم الاشتراك بنجاح. سيتم إعلامك عند ظهور إشارة.",
@@ -1051,6 +1109,13 @@ ru:{
   notifGranted:"✓ Уведомления браузера включены. Вы получите оповещение при появлении сигнала на покупку.",
   notifDenied:"Доступ к уведомлениям запрещён. Вы можете включить его заново в настройках браузера.",
   subErrEmpty:"Укажите хотя бы email или Telegram Chat ID.",
+  notifPersonalTitle:"2. Личные оповещения по email и Telegram (работают даже при закрытой странице)",
+  notifPersonalSub:"Получайте сообщение, как только выбранные активы сменят уровень — проверка идёт автоматически по расписанию.",
+  lblEmail:"Email (необязательно)", lblTelegram:"Telegram Chat ID (необязательно)",
+  telegramHelp:"Не знаете свой Telegram Chat ID? Напишите @userinfobot, чтобы узнать его, затем откройте нашего бота оповещений и отправьте /start, чтобы разрешить ему писать вам.",
+  lblNotifyPref:"Уведомлять о",
+  subErrNotConfigured:"Личные оповещения пока не подключены — владельцу сайта нужно завершить настройку бэкенда (см. страницу «Методология»).",
+  subSending:"Отправка…", subErrNetwork:"Не удалось связаться со службой оповещений. Попробуйте ещё раз через минуту.",
   subOkTelegramMissing:"✓ Сохранено. Уведомления браузера остаются активными; для Telegram добавьте также токен бота в разделе «Дополнительные настройки».",
   subOkEmailMissing:"✓ Сохранено. Для email добавьте URL веб-хука (Formspree/Zapier/n8n) в разделе «Дополнительные настройки», чтобы сообщения действительно отправлялись.",
   subOkFull:"✓ Подписка оформлена. Вы получите уведомление при появлении сигнала.",
@@ -1575,6 +1640,36 @@ function checkTargets(){
   if(changed){ LS.set("sim.targets", targets); renderTargetList(); }
 }
 
+/* ================= personal email/Telegram subscription ================= */
+// TODO (site owner): after deploying the Apps Script backend (see /scripts/AppsScript.gs
+// and README.md "Personal email & Telegram alerts"), paste the Web App URL here.
+// Leave empty and the subscribe form will show a clear "not connected yet" message
+// instead of silently failing.
+const SUBSCRIBE_ENDPOINT = "";
+
+async function submitSubscription(){
+  const email=$("subEmail").value.trim(), telegram=$("subTelegram").value.trim(), pref=$("subPref").value;
+  const status=$("subStatus");
+  if(!email && !telegram){
+    status.textContent=t("subErrEmpty"); status.className="status-msg err"; return;
+  }
+  if(!SUBSCRIBE_ENDPOINT){
+    status.textContent=t("subErrNotConfigured"); status.className="status-msg err"; return;
+  }
+  status.textContent=t("subSending"); status.className="status-msg";
+  try{
+    await fetch(SUBSCRIBE_ENDPOINT,{
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"}, // avoids a CORS preflight against Apps Script
+      body: JSON.stringify({email, telegram, pref, lang})
+    });
+    LS.set("sim.subscribed", {email,telegram,pref});
+    status.textContent=t("subOkFull"); status.className="status-msg ok";
+  }catch(e){
+    status.textContent=t("subErrNetwork"); status.className="status-msg err";
+  }
+}
+
 /* ================= notifications ================= */
 let notified = LS.get("sim.notified", []);
 function liveSignalsNow(){
@@ -1707,6 +1802,7 @@ function bind(){
   if($("btnExport")) $("btnExport").onclick = exportCSV;
 
   $("btnAddTarget").onclick = addTarget;
+  $("btnSubscribe").onclick = submitSubscription;
   if($("btnCompare")) $("btnCompare").onclick = renderComparison;
   $("btnWatch").onclick = addWatchPosition;
 }
@@ -1714,6 +1810,12 @@ function bind(){
 applyTheme(); applyI18n(); buildChips(); loadCfg(); bind();
 $("currSel").value = currCode;
 renderTargetSelect(); renderTargetList();
+const savedSubscription = LS.get("sim.subscribed", null);
+if(savedSubscription){
+  $("subEmail").value = savedSubscription.email||"";
+  $("subTelegram").value = savedSubscription.telegram||"";
+  $("subPref").value = savedSubscription.pref||"any";
+}
 fillAssetSelect("compareA","XAUUSD"); fillAssetSelect("compareB","GDX"); fillAssetSelect("watchAsset","XAUUSD"); renderWatchlist();
 renderComparison();
 if("Notification" in window && Notification.permission==="granted"){
