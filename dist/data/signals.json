@@ -1,6 +1,20 @@
 {
-  "generatedAt": "2026-09-06T11:29:17.053Z",
+  "generatedAt": "2026-09-06T14:14:43.153Z",
   "signals": {
+    "XAUUSD": {
+      "run": 1,
+      "drop": 0.34,
+      "level": "HOLD",
+      "price": 4476.60009765625,
+      "date": "2026-09-04"
+    },
+    "XAGUSD": {
+      "run": 1,
+      "drop": 0.34,
+      "level": "HOLD",
+      "price": 66.74800109863281,
+      "date": "2026-09-04"
+    },
     "AU": {
       "run": 1,
       "drop": 2.33,
@@ -52,21 +66,18 @@
     },
     "PAXG": {
       "run": 2,
-      "drop": 1.17,
+      "drop": 1.23,
       "level": "HOLD",
-      "price": 4429.397414212927,
+      "price": 4426.618088945694,
       "date": "2026-09-06"
     },
     "XAUT": {
       "run": 2,
-      "drop": 1.04,
+      "drop": 1.13,
       "level": "HOLD",
-      "price": 4425.221649090201,
+      "price": 4421.321505492101,
       "date": "2026-09-06"
     }
   },
-  "errors": {
-    "XAUUSD": "Yahoo 404",
-    "XAGUSD": "Yahoo 404"
-  }
+  "errors": {}
 }
