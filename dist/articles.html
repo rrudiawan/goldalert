@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Articles | GoldAlert</title>
+<meta name="description" content="Guides and comparisons to help you read GoldAlert's multi-asset gold pullback signals.">
+<link rel="canonical" href="https://goldalert.org/articles.html">
+<link rel="icon" type="image/svg+xml" href="icons/logo.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="static-page.css">
+<style>.artlist{display:grid;gap:14px}.art{display:block;text-decoration:none;color:inherit}.art .cat{color:#D9A441;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}.art h2{margin:6px 0 4px}.art .date{color:var(--muted);font-size:.85rem}.art:hover{border-color:#D9A441}</style>
+</head><body><main class="page">
+<nav><a href="index.html">Simulator</a><a href="about.html">About</a><a href="methodology.html">Methodology</a><a href="contact.html">Contact</a></nav>
+<h1>Articles</h1>
+<p class="lede">Guides and comparisons to help you read the signal board, written in plain language.</p>
+<div class="artlist" id="artlist"><p class="note">Loading articles…</p></div>
+<footer>GoldAlert · Educational use only</footer>
+</main>
+<script>
+fetch("articles/articles.json",{cache:"no-store"}).then(r=>r.json()).then(list=>{
+  list.sort((a,b)=> (b.date||"").localeCompare(a.date||""));
+  document.getElementById("artlist").innerHTML = list.map(a=>`
+    <a class="art card" href="${a.url}">
+      <div class="cat">${a.category||"Article"}</div>
+      <h2>${a.title}</h2>
+      <p>${a.excerpt||""}</p>
+      <div class="date">${a.date||""}</div>
+    </a>`).join("") || '<p class="note">No articles published yet.</p>';
+}).catch(()=>{
+  document.getElementById("artlist").innerHTML = '<p class="note">Could not load the article list right now.</p>';
+});
+</script>
+</body></html>

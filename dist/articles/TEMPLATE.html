@@ -1,0 +1,44 @@
+<!--
+  HOW TO ADD A NEW ARTICLE — read this, then delete this comment block.
+
+  1. Copy this file and rename it, e.g. articles/why-gold-silver-ratio-matters.html
+  2. Replace every [BRACKETED] placeholder below with your real content.
+  3. Open dist/articles/articles.json and add one new entry at the top of the array:
+       {
+         "slug": "why-gold-silver-ratio-matters",
+         "title": "Why the Gold/Silver Ratio Matters",
+         "category": "Guide",
+         "excerpt": "One or two sentences that make someone want to click.",
+         "date": "2026-10-01",
+         "url": "articles/why-gold-silver-ratio-matters.html"
+       }
+  4. That's it. articles.html (the articles index) reads this JSON file automatically —
+     you do not need to edit any other page for the new article to appear there.
+  5. Optional: if you also want it to appear in the 3-card "From the Blog" teaser on the
+     homepage, edit the relevant <div class="article-card"> block in dist/index.html directly
+     (search for id="articles") and update the I18N.en.art1/art2/art3 keys (and the other
+     5 languages, if you keep them in sync) — the homepage teaser is intentionally static
+     so it doesn't need JavaScript to render, but the full list on articles.html always
+     stays current automatically.
+  6. Add the new article's URL to dist/sitemap.xml so search engines find it faster.
+-->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>[ARTICLE TITLE] | GoldAlert</title>
+<meta name="description" content="[ONE-SENTENCE SEO DESCRIPTION, UNDER 160 CHARACTERS]">
+<link rel="canonical" href="https://goldalert.org/articles/[FILE-SLUG].html">
+<link rel="icon" type="image/svg+xml" href="../icons/logo.svg">
+<link rel="stylesheet" href="../static-page.css">
+</head><body><article class="page">
+<nav><a href="../index.html">Simulator</a><a href="../articles.html">Articles</a><a href="../methodology.html">Methodology</a></nav>
+<h1>[ARTICLE TITLE]</h1>
+<p class="lede">[ONE-SENTENCE HOOK THAT SUMMARIZES THE ARTICLE'S POINT]</p>
+
+<h2>[FIRST SUBHEADING]</h2>
+<p>[PARAGRAPH]</p>
+
+<h2>[SECOND SUBHEADING]</h2>
+<p>[PARAGRAPH]</p>
+
+<p class="note">[EDUCATIONAL DISCLAIMER LINE — KEEP ON EVERY ARTICLE, E.G. "This article explains general concepts and is not investment advice."]</p>
+<footer>GoldAlert · [MONTH YEAR]</footer>
+</article></body></html>

@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B1724">
+<title>GoldAlert — Multi-Asset Gold Signal Simulator</title>
+<meta name="description" content="Free real-time gold, silver, mining stock, ETF and gold-backed crypto price simulator with a rule-based buy signal for multi-day price pullbacks. Live TradingView charts, news, and alerts.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://goldalert.org/">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="icons/logo.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<!-- TODO: paste your own Google Search Console verification code, or delete this tag if verifying via DNS TXT instead. -->
+<meta name="google-site-verification" content="REPLACE_WITH_YOUR_VERIFICATION_CODE">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="GoldAlert — Live Gold, Silver, Miners, ETF & Crypto Signals">
+<meta property="og:description" content="Track gold, silver, mining stocks, ETFs and gold-backed crypto in real time, with an automatic buy signal on multi-day pullbacks.">
+<meta property="og:url" content="https://goldalert.org/">
+<meta property="og:site_name" content="GoldAlert">
+<meta property="og:image" content="https://goldalert.org/icons/icon-512.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GoldAlert — Live Gold, Silver, Miners, ETF & Crypto Signals">
+<meta name="twitter:description" content="Track gold, silver, mining stocks, ETFs and gold-backed crypto in real time, with an automatic buy signal on multi-day pullbacks.">
+<meta name="twitter:image" content="https://goldalert.org/icons/icon-512.png">
+
+<!-- Structured data: helps both classic search and AI answer engines understand this page (GEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "GoldAlert",
+  "url": "https://goldalert.org/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any (Web Browser)",
+  "description": "Free real-time simulator tracking gold, silver, gold mining stocks, gold ETFs, and gold-backed cryptocurrency, with an automatic buy signal on multi-day price pullbacks.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "GoldAlert",
+  "url": "https://goldalert.org/",
+  "logo": "https://goldalert.org/icons/icon-512.png",
+  "sameAs": []
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What is a gold buy signal?","acceptedAnswer":{"@type":"Answer","text":"A buy signal in this simulator fires when an asset's closing price falls for a chosen number of consecutive trading days, optionally combined with a minimum total percentage drop. It is a rule-based observation, not investment advice."}},
+    {"@type":"Question","name":"How is the red streak calculated?","acceptedAnswer":{"@type":"Answer","text":"A trading day counts as red when its closing price is lower than the previous trading day's closing price. The streak counter resets to zero the first time a day closes higher."}},
+    {"@type":"Question","name":"Which assets does this simulator track?","acceptedAnswer":{"@type":"Answer","text":"Gold (XAU/USD), silver (XAG/USD), four gold mining stocks, three ETFs, and two gold-backed cryptoassets: PAXG and XAUT."}},
+    {"@type":"Question","name":"Is this financial advice?","acceptedAnswer":{"@type":"Answer","text":"No. This simulator is an educational tool. It does not constitute financial advice, an investment recommendation, or a solicitation to buy or sell any asset. Always do your own research and consult a licensed financial advisor."}},
+    {"@type":"Question","name":"How do buy signal notifications work?","acceptedAnswer":{"@type":"Answer","text":"Browser alerts work while the page is open. The included scheduled workflow can send Telegram channel alerts after the site owner configures repository secrets."}}
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B1724; --panel:#10202F; --panel-2:#152A3C; --line:#1E3A50;
+  --brass:#D9A441; --brass-soft:#F0CE85; --silver:#9FB6C9; --sky:#5FA8D3;
+  --paper:#E9F0F6; --muted:#8CA6BD; --red:#E2585B; --green:#39B58C;
+  --radius:14px;
+}
+html[data-theme="light"]{
+  --ink:#F4F7FA;--panel:#FFFFFF;--panel-2:#F7F9FC;--line:#D5DEE8;
+  --brass:#A96F00;--brass-soft:#815500;--silver:#536779;--sky:#277EB3;
+  --paper:#182635;--muted:#607487;--red:#C83E43;--green:#14805E;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:radial-gradient(1100px 560px at 82% -12%, #17324a 0%, transparent 60%), var(--ink);
+  color:var(--paper); font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  font-size:16px; line-height:1.5; font-variant-numeric:tabular-nums; -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:18px 16px 80px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;letter-spacing:-.01em;margin:0}
+h1{font-size:27px;line-height:1.14}
+h2{font-size:19px;margin-bottom:10px}
+h3{font-size:15px;margin-bottom:6px}
+a{color:var(--brass-soft)}
+.sub{color:var(--muted);font-size:13px}
+header.top{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between;
+  border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .logo-mark{width:42px;height:42px;flex-shrink:0;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+.brand h1{line-height:1.05}
+.brand .brand-tag{font-family:"IBM Plex Sans",sans-serif;font-weight:500;font-size:12.5px;color:var(--muted);letter-spacing:.02em}
+.headRight{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+[dir="rtl"] .headRight{align-items:flex-start}
+.status{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--muted)}
+.dot.on{background:var(--green)} .dot.warn{background:var(--brass)} .dot.err{background:var(--red)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:16px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.between{justify-content:space-between}
+label{display:block;font-size:14px;color:var(--muted);margin-bottom:4px}
+input,select{width:100%;background:#0B1B29;border:1px solid var(--line);color:var(--paper);border-radius:9px;padding:9px 10px;font-family:inherit;font-size:14px}
+button{font-family:inherit;font-size:14px;background:var(--brass);color:#231803;border:0;border-radius:9px;padding:9px 14px;font-weight:600;cursor:pointer}
+button.ghost{background:transparent;border:1px solid var(--line);color:var(--paper);font-weight:500}
+button.ghost:hover{border-color:var(--brass)}
+button:disabled{opacity:.5;cursor:not-allowed}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--brass);outline-offset:1px}
+.field{margin-bottom:10px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:820px){.grid3,.grid4{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.grid3,.grid4{grid-template-columns:1fr}}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:99px;padding:6px 12px;font-size:13px;cursor:pointer;font-weight:500}
+.chip[aria-pressed="true"]{background:var(--brass);color:#231803;border-color:var(--brass);font-weight:600}
+.chip .g{font-size:11px;opacity:.7;display:block}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.seg button{background:transparent;color:var(--muted);border-radius:0;padding:7px 12px;font-weight:500}
+.seg button[aria-pressed="true"]{background:var(--brass);color:#231803;font-weight:600}
+.tvbox{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#0B1B29}
+#tvChart{height:520px}
+@media(max-width:760px){#tvChart{height:400px}}
+.ovbox{height:400px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:right;padding:8px 6px;border-bottom:1px solid rgba(255,255,255,.06)}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--muted);font-weight:500;font-size:12px}
+tr.sig td{background:rgba(57,181,140,.08)}
+.up{color:var(--green)} .down{color:var(--red)} .flat{color:var(--muted)}
+.bars{display:inline-flex;gap:2px;align-items:flex-end;height:18px;direction:ltr}
+.bars i{width:4px;border-radius:1px;background:#20384c;display:block}
+.bars i.r{background:var(--red)} .bars i.g{background:var(--green)}
+.pill{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+.pill.ok{color:var(--green);border-color:#2b7f65} .pill.bad{color:var(--red);border-color:#7f3b3b}
+.pill.watch{color:var(--brass-soft);border-color:#8a6828;background:rgba(217,164,65,.08)}
+.pill.strong{color:#8ff0ca;border-color:#2b7f65;background:rgba(57,181,140,.1);font-weight:600}
+.note{font-size:12.5px;color:var(--muted)}
+.scroll{overflow:auto;max-height:340px}
+details summary{cursor:pointer;color:var(--brass-soft);font-size:13.5px}
+hr{border:0;border-top:1px solid var(--line);margin:14px 0}
+
+.ad-slot{
+  border:1px dashed var(--line); border-radius:12px; color:var(--muted);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:12px; letter-spacing:.03em;
+  background:repeating-linear-gradient(45deg,rgba(255,255,255,.015),rgba(255,255,255,.015) 10px,transparent 10px,transparent 20px);
+}
+.ad-slot.leaderboard{height:90px;margin-bottom:16px}
+.ad-slot.inline{height:100px;margin-bottom:16px}
+.ad-slot.rect{height:250px;max-width:336px;margin:0 auto}
+.ad-slot.chart-ad{min-height:90px;margin:-2px 0 16px;padding:12px}
+.ad-slot .ad-meta{display:block;font-size:11px;margin-top:3px;opacity:.78}
+@media(max-width:760px){.ad-slot.chart-ad{min-height:100px}}
+
+.notify-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:700px){.notify-grid{grid-template-columns:1fr}}
+.status-msg{font-size:12.5px;margin-top:8px;color:var(--muted)}
+.status-msg.ok{color:var(--green)} .status-msg.err{color:var(--red)}
+
+.article-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.article-card{border:1px solid var(--line);border-radius:11px;padding:14px 15px;background:#0B1B29}
+.article-card .cat{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--brass);margin-bottom:6px}
+.article-card h3{margin:0 0 6px;font-size:14.5px;color:var(--brass-soft)}
+.article-card p{margin:0;color:var(--muted);font-size:12.8px;line-height:1.5}
+.article-card a.readmore{display:inline-block;margin-top:8px;font-size:12.5px}
+
+.langSel{width:auto;min-width:150px}
+.theme-switch{display:flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:10px;padding:3px;background:var(--panel)}
+.theme-switch .label{font-size:12px;color:var(--muted);padding:0 5px}
+.theme-btn{background:transparent;color:var(--muted);border-radius:7px;padding:6px 10px;font-size:12.5px;font-weight:500}
+.theme-btn[aria-pressed="true"]{background:var(--brass);color:#231803;font-weight:600}
+.trust-strip{display:flex;gap:8px;flex-wrap:wrap;margin:-4px 0 14px}
+.trust-strip span,.trust-strip a{border:1px solid var(--line);border-radius:999px;padding:5px 10px;color:var(--muted);font-size:12px;text-decoration:none;background:var(--panel)}
+
+html[data-theme="light"] body{background:linear-gradient(180deg,#FFFFFF 0,#F4F7FA 280px);color:var(--paper)}
+html[data-theme="light"] input,html[data-theme="light"] select,
+html[data-theme="light"] .tvbox,html[data-theme="light"] .article-card,
+html[data-theme="light"] .affiliate-item,html[data-theme="light"] .target-item,
+html[data-theme="light"] .stat,html[data-theme="light"] .tier,
+html[data-theme="light"] .snap-card{background:#FFFFFF}
+html[data-theme="light"] .panel{box-shadow:0 5px 18px rgba(24,38,53,.055)}
+html[data-theme="light"] .ad-slot{background:#FAFBFC}
+html[data-theme="light"] th,html[data-theme="light"] td{border-bottom-color:#E8EDF2}
+
+[dir="rtl"] table{direction:ltr}
+[dir="rtl"] table th:first-child,[dir="rtl"] table td:first-child{text-align:right}
+[dir="rtl"] table th:not(:first-child),[dir="rtl"] table td:not(:first-child){text-align:left}
+
+.intro{font-size:14px;color:var(--paper);border-inline-start:3px solid var(--brass);padding:2px 0 2px 14px;margin-bottom:16px}
+[dir="rtl"] .intro{border-inline-start:0;border-inline-end:3px solid var(--brass);padding:2px 14px 2px 0}
+
+.affiliate-list{display:grid;gap:10px}
+.affiliate-item{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:11px;padding:12px 14px;background:#0B1B29}
+.affiliate-item .name{font-weight:600;color:var(--brass-soft);font-size:14px}
+.affiliate-item .desc{font-size:12px;color:var(--muted);margin-top:2px}
+.affiliate-item a.go{flex-shrink:0;background:var(--brass);color:#231803;border-radius:9px;padding:8px 14px;font-weight:600;font-size:13px;text-decoration:none;white-space:nowrap}
+
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item:last-child{border-bottom:0}
+.faq-q{width:100%;text-align:inherit;background:none;border:0;color:var(--paper);font-family:Fraunces,serif;font-size:15px;padding:13px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:600}
+.faq-q .x{color:var(--brass);font-size:18px;flex-shrink:0;transition:transform .15s}
+.faq-q[aria-expanded="true"] .x{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .2s ease}
+.faq-a p{margin:0 0 13px;color:var(--muted);font-size:13.5px;line-height:1.55}
+
+footer.site{border-top:1px solid var(--line);margin-top:8px;padding-top:18px;padding-bottom:10px}
+footer.site .flinks{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:10px;font-size:13px}
+footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
+
+.cookie-bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:200;max-width:640px;margin:0 auto;
+  background:var(--panel-2);border:1px solid var(--line);border-radius:13px;padding:14px 16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);display:none;gap:12px;flex-wrap:wrap;align-items:center}
+.cookie-bar.show{display:flex}
+.cookie-bar p{margin:0;font-size:12.5px;color:var(--muted);flex:1;min-width:200px}
+.cookie-bar .btns{display:flex;gap:8px}
+.cookie-bar button{padding:7px 13px;font-size:12.5px}
+
+.snapshot{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+@media(max-width:560px){.snapshot{grid-template-columns:1fr}}
+.snap-card{background:linear-gradient(160deg,var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:13px;padding:14px 16px}
+.snap-card .lbl{font-size:12px;color:var(--muted)}
+.snap-card .val{font-family:Fraunces,serif;font-size:24px;color:var(--brass-soft);margin:2px 0}
+.snap-card .chg{font-size:13px;font-weight:600}
+
+.stat{background:#0B1B29;border:1px solid var(--line);border-radius:11px;padding:11px}
+.stat .n{font-family:Fraunces,serif;font-size:18px;color:var(--brass-soft)}
+.stat .l{font-size:11.5px;color:var(--muted)}
+
+.strength{display:flex;align-items:center;gap:6px;min-width:74px}
+.strength .track{flex:1;height:6px;border-radius:3px;background:#20384c;overflow:hidden}
+.strength .fill{height:100%;border-radius:3px}
+.strength .num{font-size:11px;color:var(--muted);min-width:22px;text-align:right}
+
+.currSel{width:auto;min-width:88px}
+
+.site-nav{display:flex;gap:14px;flex-wrap:wrap;margin:-2px 0 16px;font-size:14px}
+.site-nav a{text-decoration:none;color:var(--muted)} .site-nav a:hover{color:var(--brass-soft)}
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.tier{border:1px solid var(--line);border-radius:11px;padding:12px;background:#0B1B29}
+.tier b{display:block;color:var(--paper);margin-bottom:3px}.tier.watch{border-color:#8a6828}.tier.strong{border-color:#2b7f65}
+.compare-controls{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;margin-bottom:12px}
+#compareCanvas{display:block;width:100%;height:280px;background:#0B1B29;border:1px solid var(--line);border-radius:11px}
+.watch-form{display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:10px;align-items:end;margin-bottom:12px}
+.backtest-scroll{overflow:auto;max-height:380px;margin-top:10px}
+@media(max-width:700px){.tier-grid{grid-template-columns:1fr}.compare-controls,.watch-form{grid-template-columns:1fr 1fr}.compare-controls button,.watch-form button{width:100%}}
+
+.target-item{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:9px;padding:9px 12px;background:#0B1B29;margin-bottom:6px;font-size:13px}
+.target-item .x{color:var(--muted);cursor:pointer;font-size:16px;line-height:1;background:none;border:0}
+.target-item .x:hover{color:var(--red)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="brand">
+    <img class="logo-mark" src="icons/logo.svg" alt="GoldAlert logo" width="42" height="42">
+    <div>
+      <h1 data-i18n="title">GoldAlert</h1>
+      <div class="sub" data-i18n="subtitle">Gold, silver, mining stocks, ETFs, and gold-backed crypto — real-time charts plus a rule-based buy signal for multi-day pullbacks</div>
+    </div>
+  </div>
+  <div class="headRight">
+    <select id="langSel" class="langSel">
+      <option value="en">English</option>
+      <option value="zh">中文 (简体)</option>
+      <option value="es">Español</option>
+      <option value="hi">हिन्दी</option>
+      <option value="ar">العربية</option>
+      <option value="ru">Русский</option>
+    </select>
+    <div class="theme-switch" role="group" aria-label="Appearance">
+      <span class="label">Appearance</span>
+      <button type="button" class="theme-btn" data-theme-choice="dark" aria-pressed="true">Dark</button>
+      <button type="button" class="theme-btn" data-theme-choice="light" aria-pressed="false">Light</button>
+    </div>
+    <div class="status"><span class="dot" id="dot"></span><span id="statusText" data-i18n="statusLoading">Loading…</span></div>
+  </div>
+</header>
+
+<nav class="site-nav" aria-label="Primary navigation">
+  <a href="#board" data-i18n="navBoard">Signal Board</a>
+  <a href="#watchlist" data-i18n="navWatchlist">Watchlist</a>
+  <a href="#news" data-i18n="navNews">News</a>
+  <a href="#articles" data-i18n="navLearn">Learn</a>
+  <a href="methodology.html" data-i18n="navMethodology">Methodology</a>
+</nav>
+
+<p class="intro" data-i18n="introTLDR">This free tool tracks gold, silver, four gold mining stocks, three ETFs, and two gold-backed cryptoassets. It marks 3–4 consecutive red days as 50% BUY / WATCH and 5 or more as 100% BUY / STRONG. The labels describe rule stages, not probabilities or individualized position sizes.</p>
+<div class="trust-strip" aria-label="Simulator attributes">
+  <span data-i18n="trustRuleBased">Rule-based signals</span>
+  <span data-i18n="trustNoLogin">No login required</span>
+  <a href="methodology.html" data-i18n="trustMethodology">Transparent methodology</a>
+  <span data-i18n="trustSources">TradingView · Stooq · CoinGecko</span>
+</div>
+
+<div class="row between" style="margin-bottom:8px">
+  <span class="sub" data-i18n="snapshotLabel">At a glance</span>
+  <select id="currSel" class="currSel">
+    <option value="USD">USD $</option>
+    <option value="EUR">EUR €</option>
+    <option value="GBP">GBP £</option>
+    <option value="IDR">IDR Rp</option>
+    <option value="INR">INR ₹</option>
+    <option value="CNY">CNY ¥</option>
+    <option value="JPY">JPY ¥</option>
+  </select>
+</div>
+<div class="snapshot" id="snapshot"></div>
+
+<!-- AD SLOT: Leaderboard 728x90 -->
+<div class="ad-slot leaderboard" data-i18n="adLeaderboard">Ad Space 728×90 (Leaderboard)</div>
+
+<!-- REAL-TIME TICKER -->
+<div class="tvbox" style="margin-bottom:16px"><div id="tvTicker"></div></div>
+
+<!-- MAIN REAL-TIME CHART -->
+<section class="panel">
+  <div class="row between" style="margin-bottom:12px">
+    <h2 style="margin:0" data-i18n="chartTitle">Real-Time Charts</h2>
+    <span class="note" data-i18n="chartSub">Live data from the exchanges, via TradingView</span>
+  </div>
+  <div class="chips" id="assetChips" style="margin-bottom:12px"></div>
+  <div class="tvbox"><div id="tvChart"></div></div>
+</section>
+
+<!-- AD SLOT: Between primary chart and market overview -->
+<div class="ad-slot chart-ad" role="region" aria-label="Advertisement" data-ad-slot="chart-1">
+  <div>Advertisement · Responsive leaderboard<span class="ad-meta">Recommended creative: 970×90 desktop / 320×100 mobile</span></div>
+</div>
+
+<!-- MARKETS AT A GLANCE -->
+<section class="panel">
+  <div class="row between" style="margin-bottom:12px">
+    <h2 style="margin:0" data-i18n="overviewTitle">Markets at a Glance</h2>
+    <div class="seg" id="segGroup"></div>
+  </div>
+  <div class="tvbox ovbox"><div id="tvOverview" style="height:100%"></div></div>
+</section>
+
+<!-- AD SLOT: Between market overview and signal rules -->
+<div class="ad-slot chart-ad" role="region" aria-label="Advertisement" data-ad-slot="chart-2">
+  <div>Advertisement · Sponsor placement<span class="ad-meta">Precious metals, investing, fintech or market-data partners</span></div>
+</div>
+
+<!-- RULE -->
+<section class="panel" id="board">
+  <h2 data-i18n="rulesTitle">Buy Signal Rule</h2>
+  <div class="tier-grid" aria-label="Signal levels">
+    <div class="tier"><b data-i18n="tierHoldLabel">HOLD</b><span class="note" data-i18n="tierHoldNote">0–2 consecutive red trading days</span></div>
+    <div class="tier watch"><b data-i18n="tierWatchLabel">50% BUY / WATCH</b><span class="note" data-i18n="tierWatchNote">3–4 consecutive red trading days</span></div>
+    <div class="tier strong"><b data-i18n="tierStrongLabel">100% BUY / STRONG</b><span class="note" data-i18n="tierStrongNote">5 or more consecutive red trading days</span></div>
+  </div>
+  <div class="grid4">
+    <div class="field">
+      <label for="streakLen" data-i18n="lblBacktestLevel">Backtest signal level</label>
+      <select id="streakLen">
+        <option value="3" data-i18n="optWatch3">3-day 50% Buy / Watch</option>
+        <option value="5" data-i18n="optStrong5">5-day 100% Buy / Strong</option>
+      </select>
+    </div>
+    <div class="field"><label for="minDrop" data-i18n="lblMinDrop">Minimum total drop (%)</label><input id="minDrop" type="number" step="0.1" value="0"></div>
+    <div class="field"><label for="cooldown" data-i18n="lblCooldown">Cooldown between signals (days)</label><input id="cooldown" type="number" value="5"></div>
+    <div class="field"><label for="rangeDays" data-i18n="lblRange">Backtest range (trading days)</label>
+      <select id="rangeDays"><option value="120">120</option><option value="250" selected>250</option><option value="500">500</option></select>
+    </div>
+  </div>
+  <div class="note" data-i18n="rulesNote">Signals are calculated from each asset's daily close. A day counts as "red" when its close is lower than the previous trading day's.</div>
+</section>
+
+<!-- CROSS-ASSET RATIOS -->
+<section class="panel">
+  <h2 data-i18n="ratiosTitle">Cross-Asset Ratios</h2>
+  <p class="sub" style="margin-top:-4px;margin-bottom:12px" data-i18n="ratiosSub">Relationships between asset categories that a single price chart can't show.</p>
+  <div class="grid3" id="ratioStrip"></div>
+</section>
+
+<!-- SIGNAL BOARD -->
+<section class="panel">
+  <div class="row between" style="margin-bottom:10px">
+    <h2 style="margin:0" data-i18n="boardTitle">Signal Board — All Assets</h2>
+    <div class="row">
+      <button id="btnExport" class="ghost" data-i18n="btnExport">Export CSV</button>
+      <button id="btnReload" class="ghost" data-i18n="btnReload">Reload daily data</button>
+    </div>
+  </div>
+  <div class="scroll"><table id="boardTable">
+    <thead><tr>
+      <th data-i18n="thAsset">Asset</th><th data-i18n="thClose">Close</th><th data-i18n="thChange">Day Δ</th>
+      <th data-i18n="thLast10">Last 10 Days</th><th data-i18n="thStreak">Red Streak</th>
+      <th data-i18n="thStrength">Strength</th>
+      <th data-i18n="thStatus">Status</th><th data-i18n="thSignals">Signals in Range</th>
+    </tr></thead>
+    <tbody><tr><td colspan="8" class="note" data-i18n="loadingData">Fetching daily data…</td></tr></tbody>
+  </table></div>
+  <div class="note" style="margin-top:8px" data-i18n="boardNote">The close column uses official daily data (usually one session behind the real-time chart above). Use the chart to watch the market; use this table to calculate signals.</div>
+  <p class="note" style="margin-top:10px" id="trackRecord"></p>
+  <details>
+    <summary data-i18n="backtestSummary">Show forward-return backtest by asset</summary>
+    <div class="backtest-scroll"><table id="backtestTable"></table></div>
+  </details>
+</section>
+
+<!-- COMPARE ASSETS -->
+<section class="panel">
+  <h2 data-i18n="compareTitle">Compare Two Assets</h2>
+  <p class="sub" style="margin-top:-4px;margin-bottom:12px" data-i18n="compareSub">Both series rebased to 100 at the start of the range, so relative performance is easy to read regardless of price scale.</p>
+  <div class="compare-controls">
+    <div class="field"><label for="compareA" data-i18n="compareALbl">Asset A</label><select id="compareA"></select></div>
+    <div class="field"><label for="compareB" data-i18n="compareBLbl">Asset B</label><select id="compareB"></select></div>
+    <button id="btnCompare" class="ghost" data-i18n="btnCompare">Compare</button>
+  </div>
+  <canvas id="compareCanvas" width="900" height="280"></canvas>
+  <p class="note" id="compareNote" style="margin-top:8px"></p>
+</section>
+
+<!-- LOCAL WATCHLIST -->
+<section class="panel" id="watchlist">
+  <h2 data-i18n="watchTitle">Private Watchlist &amp; Notional P/L</h2>
+  <p class="sub" style="margin-top:-4px" data-i18n="watchSub">Saved only on this device. No account or personal information is required.</p>
+  <div class="watch-form">
+    <div class="field"><label for="watchAsset" data-i18n="watchAssetLbl">Asset</label><select id="watchAsset"></select></div>
+    <div class="field"><label for="watchEntry" data-i18n="watchEntryLbl">Entry price (USD)</label><input id="watchEntry" type="number" min="0" step="0.01"></div>
+    <div class="field"><label for="watchQty" data-i18n="watchQtyLbl">Quantity</label><input id="watchQty" type="number" min="0" step="0.0001" value="1"></div>
+    <button id="btnWatch" class="ghost" data-i18n="btnWatchAdd">Add position</button>
+  </div>
+  <div class="scroll"><table id="watchTable"></table></div>
+</section>
+
+<!-- AD SLOT: In-content -->
+<div class="ad-slot inline" data-i18n="adInline">Ad Space (responsive)</div>
+
+<!-- NOTIFICATIONS -->
+<section class="panel" id="notifications">
+  <h2 data-i18n="notifTitle">Enable Buy Signal Notifications</h2>
+  <p class="sub" style="margin-top:-4px;margin-bottom:14px" data-i18n="notifSub2">Browser alerts work instantly while this page is open. A Telegram channel for alerts that arrive even when your browser is closed is coming soon.</p>
+  <button id="notifBtn" class="ghost" data-i18n="btnNotif">🔔 Enable Browser Notifications</button>
+  <div class="status-msg" id="notifStatus"></div>
+
+  <hr>
+  <h3 data-i18n="targetTitle">Or set a simple price target alert</h3>
+  <p class="sub" style="margin-top:-2px;margin-bottom:10px" data-i18n="targetSub">No streak rule needed — just tell us the price and direction.</p>
+  <div class="grid3">
+    <div class="field"><label for="targetAsset" data-i18n="targetAssetLbl">Asset</label><select id="targetAsset"></select></div>
+    <div class="field"><label for="targetDir" data-i18n="targetDirLbl">Alert when price is</label>
+      <select id="targetDir">
+        <option value="below" data-i18n="targetBelow">At or below</option>
+        <option value="above" data-i18n="targetAbove">At or above</option>
+      </select>
+    </div>
+    <div class="field"><label for="targetPrice" data-i18n="targetPriceLbl">Target price (USD)</label><input id="targetPrice" type="number" step="0.01" placeholder="4200"></div>
+  </div>
+  <div class="row"><button id="btnAddTarget" class="ghost" data-i18n="btnAddTarget">Add price alert</button></div>
+  <div id="targetList" style="margin-top:10px"></div>
+</section>
+
+<!-- AFFILIATE RESOURCES -->
+<section class="panel" id="resources">
+  <h2 data-i18n="resourcesTitle">Where to Buy Physical Gold &amp; Silver</h2>
+  <p class="sub" style="margin-top:-4px;margin-bottom:14px" data-i18n="resourcesSub">A few reputable bullion dealers, for when a signal above points you toward an actual purchase.</p>
+  <div class="affiliate-list">
+    <div class="affiliate-item">
+      <div><div class="name">JM Bullion</div><div class="desc" data-i18n="resJmBody">Bullion coins &amp; bars from trusted mints, competitive pricing.</div></div>
+      <!-- TODO: replace with your approved JM Bullion affiliate link once accepted -->
+      <a class="go" href="https://www.jmbullion.com/" target="_blank" rel="noopener sponsored" data-i18n="resGo">Visit →</a>
+    </div>
+    <div class="affiliate-item">
+      <div><div class="name">Money Metals Exchange</div><div class="desc" data-i18n="resMmeBody">Buy and sell physical gold and silver at live market rates.</div></div>
+      <!-- TODO: replace with your approved Money Metals Exchange affiliate link once accepted -->
+      <a class="go" href="https://www.moneymetals.com/" target="_blank" rel="noopener sponsored" data-i18n="resGo">Visit →</a>
+    </div>
+    <div class="affiliate-item">
+      <div><div class="name">Silver Gold Bull</div><div class="desc" data-i18n="resSgbBody">Wide bullion selection with market analysis and investment guides.</div></div>
+      <!-- TODO: replace with your approved Silver Gold Bull affiliate link once accepted -->
+      <a class="go" href="https://www.silvergoldbull.com/" target="_blank" rel="noopener sponsored" data-i18n="resGo">Visit →</a>
+    </div>
+  </div>
+  <p class="note" style="margin-top:12px">Disclosure: these are currently standard outbound links. Replace them with approved affiliate links only after joining each program, and keep this disclosure updated.</p>
+</section>
+
+<!-- NEWS -->
+<section class="panel" id="news">
+  <h2 data-i18n="newsTitle">Live Gold &amp; Precious Metals News</h2>
+  <p class="sub" style="margin-top:-4px;margin-bottom:14px" data-i18n="newsSub">Real-time headlines covering gold, mining stocks, ETFs, and the broader metals market — powered by TradingView.</p>
+  <div class="tvbox" style="height:400px"><div id="tvNews" style="height:100%"></div></div>
+</section>
+
+<!-- ARTICLES -->
+<section class="panel" id="articles">
+  <h2 data-i18n="articlesTitle">From the Blog</h2>
+  <p class="sub" style="margin-top:-4px;margin-bottom:14px" data-i18n="articlesSub">Guides and analysis to help you read the gold market.</p>
+  <div class="article-grid">
+    <div class="article-card">
+      <div class="cat" data-i18n="art1cat">Guide</div>
+      <h3 data-i18n="art1title">How to Read a Gold Buy Signal</h3>
+      <p data-i18n="art1body">A beginner-friendly walkthrough of the multi-day pullback rule this simulator uses.</p>
+      <a class="readmore" href="articles/read-gold-buy-signal.html" data-i18n="readmore">Read more →</a>
+    </div>
+    <div class="article-card">
+      <div class="cat" data-i18n="art2cat">Comparison</div>
+      <h3 data-i18n="art2title">Gold Stocks vs. Gold ETFs vs. Gold Crypto</h3>
+      <p data-i18n="art2body">Physical bullion, mining stocks, ETFs, and gold-backed tokens, compared side by side.</p>
+      <a class="readmore" href="articles/gold-stocks-etfs-crypto.html" data-i18n="readmore">Read more →</a>
+    </div>
+    <div class="article-card">
+      <div class="cat" data-i18n="art3cat">Methodology</div>
+      <h3 data-i18n="art3title">How This Simulator Works</h3>
+      <p data-i18n="art3body">See the exact signal rules, data limitations, and version history used by the simulator.</p>
+      <a class="readmore" href="methodology.html" data-i18n="readmore">Read more →</a>
+    </div>
+  </div>
+</section>
+
+<!-- AD SLOT: Rectangle -->
+<div class="ad-slot rect" data-i18n="adRect">Ad Space 300×250</div>
+
+<!-- FAQ -->
+<section class="panel" id="faq">
+  <h2 data-i18n="faqTitle">Frequently Asked Questions</h2>
+  <div id="faqList"></div>
+</section>
+
+<section class="panel" style="margin-top:16px">
+  <h2 data-i18n="disclaimerTitle">Disclaimer</h2>
+  <p class="note" data-i18n="disclaimerBody">This simulator is an educational tool and does not constitute financial advice, an investment recommendation, or a solicitation to buy or sell any asset. Prices and charts are sourced from third-party data providers (including TradingView) and may be delayed or differ from your broker's or dealer's actual execution price. Always verify live pricing with your broker, bullion dealer, or exchange before transacting. Past price behavior does not guarantee future performance. All financial decisions are solely your own responsibility — consult a licensed financial advisor in your jurisdiction if you are unsure.</p>
+</section>
+
+<footer class="site">
+  <div class="flinks">
+    <a href="about.html" data-i18n="navAbout">About</a>
+    <a href="contact.html" data-i18n="navContact">Contact</a>
+    <a href="privacy.html" data-i18n="navPrivacy">Privacy Policy</a>
+    <a href="terms.html" data-i18n="navTerms">Terms of Use</a>
+    <a href="methodology.html">Methodology</a>
+  </div>
+  <div class="fmeta">
+    <span data-i18n="footerNote">Educational tool only — not financial advice. Market data via TradingView, Stooq and CoinGecko.</span><br>
+    © <span id="fyear"></span> Gold Signal Simulator.
+  </div>
+</footer>
+
+<div class="cookie-bar" id="cookieBar">
+  <p data-i18n="cookieText">This site uses cookies for basic analytics to understand how the tool is used. No personal data is sold.</p>
+  <div class="btns">
+    <button class="ghost" id="cookieReject" data-i18n="cookieReject">Reject</button>
+    <button id="cookieAccept" data-i18n="cookieAccept">Accept</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const fmt=(n,d=2)=>n==null||isNaN(n)?"—":Number(n).toLocaleString("en-US",{minimumFractionDigits:d,maximumFractionDigits:d});
+const money=n=>n==null||isNaN(n)?"—":"$"+fmt(n);
+const pctFmt=n=>(n>0?"+":"")+n.toFixed(2)+"%";
+const LS={get(k,f){try{const v=localStorage.getItem(k);return v?JSON.parse(v):f}catch(e){return f}},
+          set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let themeMode=LS.get("sim.theme","dark")==="light"?"light":"dark";
+const tvTheme=()=>themeMode==="light"?"light":"dark";
+const tvBackground=()=>themeMode==="light"?"#FFFFFF":"#0B1B29";
+function applyTheme(){
+  document.documentElement.dataset.theme=themeMode;
+  document.querySelectorAll("[data-theme-choice]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.themeChoice===themeMode)));
+  const meta=document.querySelector('meta[name="theme-color"]');
+  if(meta) meta.content=themeMode==="light"?"#F4F7FA":"#0B1724";
+}
+
+/* ================= i18n ================= */
+const I18N = {
+en:{
+  title:"Gold Signal Simulator — Multi-Asset",
+  subtitle:"Gold, silver, mining stocks, ETFs, and gold-backed crypto — real-time charts plus a rule-based buy signal for multi-day pullbacks",
+  statusLoading:"Loading…",
+  adLeaderboard:"Ad Space 728×90 (Leaderboard)", adInline:"Ad Space (responsive)", adRect:"Ad Space 300×250",
+  chartTitle:"Real-Time Charts", chartSub:"Live data from the exchanges, via TradingView",
+  overviewTitle:"Markets at a Glance",
+  rulesTitle:"Buy Signal Rule", lblStreak:"Consecutive red days", lblMinDrop:"Minimum total drop (%)",
+  lblCooldown:"Cooldown between signals (days)", lblRange:"Backtest range (trading days)",
+  rulesNote:"Signals are calculated from each asset's daily close. A day counts as \u201cred\u201d when its close is lower than the previous trading day's.",
+  boardTitle:"Signal Board — All Assets", btnReload:"Reload daily data",
+  thAsset:"Asset", thClose:"Close", thChange:"Day Δ", thLast10:"Last 10 Days", thStreak:"Red Streak", thStatus:"Status", thSignals:"Signals in Range",
+  statusBuy:"Buy", statusHold:"Hold",
+  boardNote:"The close column uses official daily data (usually one session behind the real-time chart above). Use the chart to watch the market; use this table to calculate signals.",
+  loadingData:"Fetching daily data…", dataUnavailable:"Data unavailable", loadingCell:"Loading…",
+  notifTitle:"Enable Buy Signal Notifications", notifSub:"Get notified automatically the moment an asset hits the rule you set above.",
+  notifBrowserTitle:"1. Browser / Mobile Push (free, instant)", btnNotif:"🔔 Enable Browser Notifications",
+  notifEmailTitle:"2. Email & Telegram (works even when the browser is closed)",
+  phEmail:"you@example.com", phTelegram:"Telegram Chat ID (optional)", lblNotifyAt:"Notify me when:",
+  prefAny:"Any asset matches the rule above", prefMetals:"Gold & silver only", prefStocks:"Mining stocks only",
+  prefEtf:"ETFs only", prefCrypto:"Gold-backed crypto only",
+  btnSubscribe:"Subscribe — it's free", advancedSettings:"Advanced settings",
+  lblTgToken:"Telegram bot token (optional)", lblHook:"Email webhook URL (Formspree/Zapier/n8n)",
+  notifNotSupported:"Your browser doesn't support notifications.",
+  notifGranted:"✓ Browser notifications enabled. You'll be alerted when a buy signal appears.",
+  notifDenied:"Notification permission denied. You can re-enable it in your browser settings.",
+  subErrEmpty:"Enter at least an email or a Telegram Chat ID.",
+  subOkTelegramMissing:"✓ Saved. Browser notifications stay active; for Telegram, also add your bot token under Advanced settings.",
+  subOkEmailMissing:"✓ Saved. For email, add a webhook URL (Formspree/Zapier/n8n) under Advanced settings so messages actually send.",
+  subOkFull:"✓ Subscribed. You'll be notified when a signal appears.",
+  newsTitle:"Live Gold & Precious Metals News",
+  newsSub:"Real-time headlines covering gold, mining stocks, ETFs, and the broader metals market — powered by TradingView.",
+  articlesTitle:"From the Blog", articlesSub:"Guides and analysis to help you read the gold market.",
+  art1cat:"Guide", art1title:"How to Read a Gold Buy Signal", art1body:"A beginner-friendly walkthrough of the multi-day pullback rule this simulator uses.",
+  art2cat:"Comparison", art2title:"Gold Stocks vs. Gold ETFs vs. Gold Crypto", art2body:"Physical bullion, mining stocks, ETFs, and gold-backed tokens, compared side by side.",
+  art3cat:"Methodology", art3title:"How This Simulator Works", art3body:"See the exact signal rules, data limitations, and version history used by the simulator.",
+  readmore:"Read more →",
+  disclaimerTitle:"Disclaimer",
+  disclaimerBody:"This simulator is an educational tool and does not constitute financial advice, an investment recommendation, or a solicitation to buy or sell any asset. Prices and charts are sourced from third-party data providers (including TradingView) and may be delayed or differ from your broker's or dealer's actual execution price. Always verify live pricing with your broker, bullion dealer, or exchange before transacting. Past price behavior does not guarantee future performance. All financial decisions are solely your own responsibility — consult a licensed financial advisor in your jurisdiction if you are unsure.",
+  statusFetching:"Fetching daily history…", statusAllReady:"All daily data ready", statusFailed:"Daily data failed to load, please try again later",
+  notifMsgTitle:"Buy signal detected", notifMsgBody:a=>a+" matched your rule.",
+  signalHeader:"BUY SIGNAL DETECTED", signalLine:(n,d,l,p)=>`${n}: down ${d}% over ${l} days, price ${p}`,
+  groups:{logam:"Metals",saham:"Mining Stocks",etf:"ETFs",kripto:"Gold Crypto"},
+  assetNote:{spot:"spot per oz",miningEtf:"Mining ETF",goldEtf:"Gold ETF",silverEtf:"Silver ETF",crypto:"Gold-backed crypto"},
+  goldName:"Gold", silverName:"Silver", days:n=>`${n} Days`, dateLocale:"en-US", tvLocale:"en",
+  introTLDR:"This free tool tracks gold, silver, four gold mining stocks, three ETFs, and three gold-backed cryptoassets. It marks 3–4 consecutive red days as 50% BUY / WATCH and 5 or more as 100% BUY / STRONG. The labels describe rule stages, not probabilities or individualized position sizes.",
+  resourcesTitle:"Where to Buy Physical Gold & Silver", resourcesSub:"A few reputable bullion dealers, for when a signal above points you toward an actual purchase.",
+  resJmBody:"Bullion coins & bars from trusted mints, competitive pricing.", resMmeBody:"Buy and sell physical gold and silver at live market rates.",
+  resSgbBody:"Wide bullion selection with market analysis and investment guides.", resGo:"Visit \u2192",
+  affiliateDisclosure:"Affiliate disclosure: some links on this page are affiliate links. If you make a purchase through them, this site may earn a commission at no extra cost to you. This never affects which assets are shown or how signals are calculated.",
+  faqTitle:"Frequently Asked Questions",
+  faq:[
+    ["What is a gold buy signal?","A buy signal in this simulator fires when an asset's closing price falls for a chosen number of consecutive trading days, optionally combined with a minimum total percentage drop. It is a rule-based observation, not investment advice."],
+    ["How is the red streak calculated?","A trading day counts as red when its closing price is lower than the previous trading day's closing price. The streak counter resets to zero the first time a day closes higher."],
+    ["Which assets does this simulator track?","Gold (XAU/USD), silver (XAG/USD), four gold mining stocks, three ETFs, and two gold-backed cryptoassets: PAXG and XAUT."],
+    ["Is this financial advice?","No. This simulator is an educational tool. It does not constitute financial advice, an investment recommendation, or a solicitation to buy or sell any asset. Always do your own research and consult a licensed financial advisor."],
+    ["How do buy signal notifications work?","Browser alerts work while this page is open. The included scheduled workflow can send secure Telegram channel alerts after the site owner configures repository secrets."]
+  ],
+  navAbout:"About", navContact:"Contact", navPrivacy:"Privacy Policy", navTerms:"Terms of Use",
+  footerNote:"Educational tool only \u2014 not financial advice. Market data via TradingView, Stooq and CoinGecko.",
+  cookieText:"This site uses cookies for basic analytics to understand how the tool is used. No personal data is sold.",
+  cookieAccept:"Accept", cookieReject:"Reject",
+  snapshotLabel:"At a glance",
+  ratiosTitle:"Cross-Asset Ratios", ratiosSub:"Relationships between asset categories that a single price chart can't show.",
+  ratioGS:"Gold/Silver Ratio", ratioGSNote:"Ounces of silver equal to one ounce of gold",
+  ratioGM:"Gold/Miners Ratio", ratioGMNote:"Gold price relative to the VanEck Gold Miners ETF",
+  ratioPaxg:"PAXG vs Spot Gold", ratioPaxgNote:"Premium or discount of Pax Gold vs the spot price",
+  thStrength:"Strength", btnExport:"Export CSV",
+  targetTitle:"Or set a simple price target alert", targetSub:"No streak rule needed \u2014 just tell us the price and direction.",
+  targetAssetLbl:"Asset", targetDirLbl:"Alert when price is", targetBelow:"At or below", targetAbove:"At or above",
+  targetPriceLbl:"Target price (USD)", btnAddTarget:"Add price alert", targetEmpty:"No price alerts set yet.",
+  navBoard:"Signal Board", navWatchlist:"Watchlist", navNews:"News", navLearn:"Learn", navMethodology:"Methodology",
+  trustRuleBased:"Rule-based signals", trustNoLogin:"No login required", trustMethodology:"Transparent methodology", trustSources:"TradingView · Stooq · CoinGecko",
+  tierHoldLabel:"HOLD", tierHoldNote:"0–2 consecutive red trading days",
+  tierWatchLabel:"50% BUY / WATCH", tierWatchNote:"3–4 consecutive red trading days",
+  tierStrongLabel:"100% BUY / STRONG", tierStrongNote:"5 or more consecutive red trading days",
+  lblBacktestLevel:"Backtest signal level", optWatch3:"3-day 50% Buy / Watch", optStrong5:"5-day 100% Buy / Strong",
+  backtestSummary:"Show forward-return backtest by asset",
+  backtestIntro:(len,count)=>`Per-asset forward returns after each ${len}-day signal. Results are historical observations, not predictions. ${count} signals have a complete 10-day outcome.`,
+  thBAsset:"Asset", thBSignals:"Signals", colAvg:h=>`${h}D avg`, colWin:h=>`${h}D win`, smallSampleTitle:"Small sample",
+  compareTitle:"Compare Two Assets", compareSub:"Both series rebased to 100 at the start of the range, so relative performance is easy to read regardless of price scale.",
+  compareALbl:"Asset A", compareBLbl:"Asset B", btnCompare:"Compare",
+  compareErrData:"Daily data is not available for both assets.", compareErrDates:"Not enough common trading dates for this comparison.",
+  compareResult:(d0,d1)=>`${d0} to ${d1}. Both series rebased to 100; common dates only.`,
+  watchTitle:"Private Watchlist & Notional P/L", watchSub:"Saved only on this device. No account or personal information is required.",
+  watchAssetLbl:"Asset", watchEntryLbl:"Entry price (USD)", watchQtyLbl:"Quantity", btnWatchAdd:"Add position",
+  watchThEntry:"Entry", watchThLatest:"Latest", watchThQty:"Quantity", watchThPL:"Notional P/L", watchEmpty:"No positions saved on this device.",
+  notifSub2:"Browser alerts work instantly while this page is open. A Telegram channel for alerts that arrive even when your browser is closed is coming soon."
+},
+zh:{
+  title:"黄金信号模拟器 — 多资产",
+  subtitle:"黄金、白银、矿业股、ETF 与黄金挂钩加密货币 — 实时图表，加上基于多日回调规则的买入信号",
+  statusLoading:"加载中…",
+  adLeaderboard:"广告位 728×90（横幅）", adInline:"广告位（自适应）", adRect:"广告位 300×250",
+  chartTitle:"实时图表", chartSub:"通过 TradingView 获取交易所实时数据",
+  overviewTitle:"市场概览",
+  rulesTitle:"买入信号规则", lblStreak:"连续下跌天数", lblMinDrop:"最小累计跌幅（%）",
+  lblCooldown:"信号冷却期（天）", lblRange:"回测范围（交易日）",
+  rulesNote:"信号根据各资产的每日收盘价计算。当某天收盘价低于前一交易日收盘价时，该天记为“下跌日”。",
+  boardTitle:"信号看板 — 全部资产", btnReload:"重新获取每日数据",
+  thAsset:"资产", thClose:"收盘价", thChange:"日涨跌", thLast10:"近10天", thStreak:"连续下跌", thStatus:"状态", thSignals:"区间内信号数",
+  statusBuy:"买入", statusHold:"观望",
+  boardNote:"收盘价列使用官方每日数据（通常比上方实时图表滞后一个交易时段）。请用图表观察行情，用此表计算信号。",
+  loadingData:"正在获取每日数据…", dataUnavailable:"数据暂不可用", loadingCell:"加载中…",
+  notifTitle:"开启买入信号通知", notifSub:"当资产触发您设定的规则时，自动获得提醒。",
+  notifBrowserTitle:"1. 浏览器 / 手机推送（免费，即时）", btnNotif:"🔔 开启浏览器通知",
+  notifEmailTitle:"2. 邮件与 Telegram（浏览器关闭也能收到）",
+  phEmail:"you@example.com", phTelegram:"Telegram Chat ID（可选）", lblNotifyAt:"提醒范围：",
+  prefAny:"任意资产触发上述规则", prefMetals:"仅黄金与白银", prefStocks:"仅矿业股",
+  prefEtf:"仅 ETF", prefCrypto:"仅黄金挂钩加密货币",
+  btnSubscribe:"订阅 — 免费", advancedSettings:"高级设置",
+  lblTgToken:"Telegram 机器人令牌（可选）", lblHook:"邮件 Webhook 地址（Formspree/Zapier/n8n）",
+  notifNotSupported:"您的浏览器不支持通知功能。",
+  notifGranted:"✓ 浏览器通知已开启，出现买入信号时会提醒您。",
+  notifDenied:"通知权限被拒绝，可在浏览器设置中重新开启。",
+  subErrEmpty:"请至少填写邮箱或 Telegram Chat ID。",
+  subOkTelegramMissing:"✓ 已保存。浏览器通知仍然有效；如需 Telegram 提醒，请在高级设置中填写机器人令牌。",
+  subOkEmailMissing:"✓ 已保存。如需邮件提醒，请在高级设置中添加 Webhook 地址（Formspree/Zapier/n8n）才能真正发送。",
+  subOkFull:"✓ 订阅成功，信号出现时会通知您。",
+  newsTitle:"黄金与贵金属实时新闻", newsSub:"由 TradingView 提供的黄金、矿业股、ETF 及整体贵金属市场实时头条。",
+  articlesTitle:"博客精选", articlesSub:"帮助您解读黄金市场的指南与分析。",
+  art1cat:"指南", art1title:"如何解读黄金买入信号", art1body:"本模拟器所用多日回调规则的新手教程。",
+  art2cat:"对比", art2title:"黄金股票 vs 黄金 ETF vs 黄金加密货币", art2body:"实物金条、矿业股、ETF 与黄金代币的并列比较。",
+  art3cat:"方法论", art3title:"本模拟器如何运作", art3body:"查看模拟器所用的确切信号规则、数据局限与版本历史。",
+  readmore:"阅读更多 →",
+  disclaimerTitle:"免责声明",
+  disclaimerBody:"本模拟器仅为教育工具，不构成财务建议、投资推荐或买卖任何资产的招揽。价格与图表来自第三方数据提供商（包括 TradingView），可能存在延迟，或与您的经纪商/交易商实际成交价不同。交易前请务必向经纪商、金商或交易所核实实时报价。过往表现不代表未来结果。一切财务决策均由您自行负责——如有疑问，请咨询您所在司法辖区的持牌财务顾问。",
+  statusFetching:"正在获取历史数据…", statusAllReady:"全部每日数据已就绪", statusFailed:"每日数据加载失败，请稍后重试",
+  notifMsgTitle:"检测到买入信号", notifMsgBody:a=>a+" 符合您的规则。",
+  signalHeader:"检测到买入信号", signalLine:(n,d,l,p)=>`${n}：${l}天内下跌 ${d}%，价格 ${p}`,
+  groups:{logam:"贵金属",saham:"矿业股",etf:"ETF",kripto:"黄金加密货币"},
+  assetNote:{spot:"现货每盎司",miningEtf:"矿业ETF",goldEtf:"黄金ETF",silverEtf:"白银ETF",crypto:"黄金挂钩加密货币"},
+  goldName:"黄金", silverName:"白银", days:n=>`${n}天`, dateLocale:"zh-CN", tvLocale:"zh",
+  introTLDR:"这款免费工具实时追踪黄金、白银、四只黄金矿业股、三只ETF以及两种黄金挂钩加密货币的价格，并在某资产连续多个交易日下跌时标记“买入信号”。本工具仅供教育用途，不构成财务建议。",
+  resourcesTitle:"实物黄金与白银购买渠道", resourcesSub:"当上方信号提示您考虑实际购买时，这里是几家信誉良好的贵金属经销商。",
+  resJmBody:"来自可信铸币厂的金条金币，价格具有竞争力。", resMmeBody:"按实时市场价买卖实物黄金和白银。",
+  resSgbBody:"贵金属品类丰富，并提供市场分析与投资指南。", resGo:"前往 →",
+  affiliateDisclosure:"联盟营销披露：本页部分链接为联盟链接。若您通过这些链接完成购买，本站可能获得佣金，您无需为此额外付费。这不会影响展示的资产或信号计算方式。",
+  faqTitle:"常见问题",
+  faq:[
+    ["什么是黄金买入信号？","当资产收盘价连续若干个交易日下跌（可附加最小累计跌幅条件）时，本模拟器即触发买入信号。这是基于规则的观察，并非投资建议。"],
+    ["连续下跌天数如何计算？","当某交易日收盘价低于前一交易日收盘价时，该日计为“下跌日”。一旦某天收盘价高于前一日，连续计数即重置为零。"],
+    ["本模拟器追踪哪些资产？","黄金（XAU/USD）、白银（XAG/USD）、四只黄金矿业股（AngloGold Ashanti、Kinross Gold、Harmony Gold、Gold Fields）、三只ETF（SPDR Gold Shares、iShares Silver Trust、VanEck Gold Miners），以及两种黄金挂钩加密货币（Pax Gold、Tether Gold）。"],
+    ["这是财务建议吗？","不是。本模拟器是教育工具，不构成财务建议、投资推荐或任何买卖要约。请始终自行研究并咨询持牌财务顾问。"],
+    ["买入信号通知如何运作？","浏览器提醒会在此页面打开时立即生效。包含的定时工作流可在站长配置好仓库密钥后，发送 Telegram 频道提醒。"]
+  ],
+  navAbout:"关于", navContact:"联系我们", navPrivacy:"隐私政策", navTerms:"使用条款",
+  footerNote:"仅供教育用途，不构成财务建议。市场数据来自 TradingView、Stooq 与 CoinGecko。",
+  cookieText:"本网站使用 Cookie 进行基础访问统计，不会出售任何个人数据。",
+  cookieAccept:"接受", cookieReject:"拒绝",
+  snapshotLabel:"一览",
+  ratiosTitle:"跨资产比率", ratiosSub:"单一价格图表无法呈现的资产类别间关系。",
+  ratioGS:"金银比", ratioGSNote:"一盎司黄金相当于多少盎司白银",
+  ratioGM:"黄金/矿业股比率", ratioGMNote:"黄金价格相对于 VanEck 黄金矿业 ETF 的比率",
+  ratioPaxg:"PAXG 对比现货黄金", ratioPaxgNote:"Pax Gold 相对现货价格的溢价或折价",
+  thStrength:"强度", btnExport:"导出 CSV",
+  targetTitle:"或设置简单的目标价提醒", targetSub:"无需连续下跌规则——只需告诉我们价格和方向。",
+  targetAssetLbl:"资产", targetDirLbl:"提醒条件", targetBelow:"低于或等于", targetAbove:"高于或等于",
+  targetPriceLbl:"目标价格（美元）", btnAddTarget:"添加价格提醒", targetEmpty:"尚未设置价格提醒。",
+  navBoard:"信号看板", navWatchlist:"自选清单", navNews:"新闻", navLearn:"学习", navMethodology:"方法论",
+  trustRuleBased:"基于规则的信号", trustNoLogin:"无需登录", trustMethodology:"透明的方法论", trustSources:"TradingView · Stooq · CoinGecko",
+  tierHoldLabel:"观望（HOLD）", tierHoldNote:"连续0-2个下跌交易日",
+  tierWatchLabel:"50% 买入 / 关注", tierWatchNote:"连续3-4个下跌交易日",
+  tierStrongLabel:"100% 买入 / 强烈", tierStrongNote:"连续5个及以上下跌交易日",
+  lblBacktestLevel:"回测信号级别", optWatch3:"3天 · 50%买入/关注", optStrong5:"5天 · 100%买入/强烈",
+  backtestSummary:"显示各资产的远期收益回测",
+  backtestIntro:(len,count)=>`每次${len}天信号后各资产的远期收益。结果为历史观察，并非预测。其中 ${count} 个信号已有完整的10天结果。`,
+  thBAsset:"资产", thBSignals:"信号数", colAvg:h=>`${h}日均值`, colWin:h=>`${h}日胜率`, smallSampleTitle:"样本量小",
+  compareTitle:"两资产对比", compareSub:"两条序列均以区间起点为100进行重新计算，方便在不同价格量级下比较相对表现。",
+  compareALbl:"资产A", compareBLbl:"资产B", btnCompare:"对比",
+  compareErrData:"两个资产的每日数据不完整。", compareErrDates:"共同交易日期不足，无法比较。",
+  compareResult:(d0,d1)=>`${d0} 至 ${d1}。两条序列均以100为基准重新计算；仅取共同日期。`,
+  watchTitle:"私人自选清单与浮动盈亏", watchSub:"仅保存在本设备上，无需账户或个人信息。",
+  watchAssetLbl:"资产", watchEntryLbl:"买入价（美元）", watchQtyLbl:"数量", btnWatchAdd:"添加持仓",
+  watchThEntry:"买入价", watchThLatest:"最新价", watchThQty:"数量", watchThPL:"浮动盈亏", watchEmpty:"此设备上尚未保存任何持仓。",
+  notifSub2:"只要此页面保持打开，浏览器提醒会立即生效。可在浏览器关闭时也能收到提醒的 Telegram 频道即将推出。"
+},
+es:{
+  title:"Simulador de Señales de Oro — Multiactivo",
+  subtitle:"Oro, plata, mineras auríferas, ETF y criptomonedas respaldadas por oro — gráficos en tiempo real y una señal de compra basada en caídas consecutivas",
+  statusLoading:"Cargando…",
+  adLeaderboard:"Espacio publicitario 728×90 (Leaderboard)", adInline:"Espacio publicitario (responsivo)", adRect:"Espacio publicitario 300×250",
+  chartTitle:"Gráficos en tiempo real", chartSub:"Datos en vivo de los mercados, vía TradingView",
+  overviewTitle:"Panorama de mercados",
+  rulesTitle:"Regla de señal de compra", lblStreak:"Días consecutivos en rojo", lblMinDrop:"Caída total mínima (%)",
+  lblCooldown:"Espera entre señales (días)", lblRange:"Rango de backtest (días bursátiles)",
+  rulesNote:"Las señales se calculan con el cierre diario de cada activo. Un día cuenta como “rojo” si su cierre es menor que el del día bursátil anterior.",
+  boardTitle:"Panel de señales — Todos los activos", btnReload:"Actualizar datos diarios",
+  thAsset:"Activo", thClose:"Cierre", thChange:"Δ diaria", thLast10:"Últimos 10 días", thStreak:"Racha en rojo", thStatus:"Estado", thSignals:"Señales en el rango",
+  statusBuy:"Comprar", statusHold:"Esperar",
+  boardNote:"La columna de cierre usa datos diarios oficiales (normalmente una sesión por detrás del gráfico en tiempo real de arriba). Use el gráfico para seguir el mercado y esta tabla para calcular señales.",
+  loadingData:"Obteniendo datos diarios…", dataUnavailable:"Datos no disponibles", loadingCell:"Cargando…",
+  notifTitle:"Activar notificaciones de señal de compra", notifSub:"Reciba un aviso automático en cuanto un activo cumpla la regla que definió arriba.",
+  notifBrowserTitle:"1. Notificaciones del navegador / móvil (gratis, instantáneo)", btnNotif:"🔔 Activar notificaciones del navegador",
+  notifEmailTitle:"2. Correo y Telegram (funciona aunque el navegador esté cerrado)",
+  phEmail:"tu@correo.com", phTelegram:"ID de chat de Telegram (opcional)", lblNotifyAt:"Avisarme cuando:",
+  prefAny:"Cualquier activo cumpla la regla anterior", prefMetals:"Solo oro y plata", prefStocks:"Solo mineras",
+  prefEtf:"Solo ETF", prefCrypto:"Solo cripto respaldada por oro",
+  btnSubscribe:"Suscribirse — es gratis", advancedSettings:"Configuración avanzada",
+  lblTgToken:"Token del bot de Telegram (opcional)", lblHook:"URL de webhook para correo (Formspree/Zapier/n8n)",
+  notifNotSupported:"Su navegador no admite notificaciones.",
+  notifGranted:"✓ Notificaciones del navegador activadas. Se le avisará cuando aparezca una señal de compra.",
+  notifDenied:"Permiso de notificación denegado. Puede reactivarlo en la configuración de su navegador.",
+  subErrEmpty:"Ingrese al menos un correo o un ID de chat de Telegram.",
+  subOkTelegramMissing:"✓ Guardado. Las notificaciones del navegador siguen activas; para Telegram, agregue también el token del bot en Configuración avanzada.",
+  subOkEmailMissing:"✓ Guardado. Para el correo, agregue una URL de webhook (Formspree/Zapier/n8n) en Configuración avanzada para que realmente se envíe.",
+  subOkFull:"✓ Suscripción exitosa. Se le notificará cuando aparezca una señal.",
+  newsTitle:"Noticias en vivo de oro y metales preciosos", newsSub:"Titulares en tiempo real sobre oro, mineras, ETF y el mercado de metales en general — con tecnología de TradingView.",
+  articlesTitle:"Del blog", articlesSub:"Guías y análisis para leer el mercado del oro.",
+  art1cat:"Guía", art1title:"Cómo leer una señal de compra de oro", art1body:"Una explicación sencilla de la regla de caídas consecutivas que usa este simulador.",
+  art2cat:"Comparación", art2title:"Acciones de oro vs. ETF de oro vs. cripto de oro", art2body:"Oro físico, acciones mineras, ETF y tokens respaldados por oro, comparados lado a lado.",
+  art3cat:"Metodología", art3title:"Cómo funciona este simulador", art3body:"Vea las reglas exactas de las señales, las limitaciones de los datos y el historial de versiones que usa el simulador.",
+  readmore:"Leer más →",
+  disclaimerTitle:"Aviso legal",
+  disclaimerBody:"Este simulador es una herramienta educativa y no constituye asesoría financiera, una recomendación de inversión ni una invitación a comprar o vender ningún activo. Los precios y gráficos provienen de proveedores de datos externos (incluido TradingView) y pueden tener retraso o diferir del precio de ejecución real de su bróker o distribuidor. Verifique siempre el precio en vivo con su bróker, casa de cambio de oro o bolsa antes de operar. El comportamiento pasado no garantiza resultados futuros. Toda decisión financiera es responsabilidad exclusiva suya: consulte a un asesor financiero autorizado en su jurisdicción si tiene dudas.",
+  statusFetching:"Obteniendo historial diario…", statusAllReady:"Todos los datos diarios listos", statusFailed:"No se pudieron cargar los datos diarios, intente más tarde",
+  notifMsgTitle:"Señal de compra detectada", notifMsgBody:a=>a+" cumplen su regla.",
+  signalHeader:"SEÑAL DE COMPRA DETECTADA", signalLine:(n,d,l,p)=>`${n}: cayó ${d}% en ${l} días, precio ${p}`,
+  groups:{logam:"Metales",saham:"Mineras",etf:"ETF",kripto:"Cripto de oro"},
+  assetNote:{spot:"spot por onza",miningEtf:"ETF minero",goldEtf:"ETF de oro",silverEtf:"ETF de plata",crypto:"Cripto respaldada por oro"},
+  goldName:"Oro", silverName:"Plata", days:n=>`${n} días`, dateLocale:"es-ES", tvLocale:"es",
+  introTLDR:"Esta herramienta gratuita sigue el precio en vivo del oro, la plata, cuatro acciones de mineras auríferas, tres ETF y dos criptomonedas respaldadas por oro, y marca una \u201cseñal de compra\u201d cuando el precio de un activo cae durante un número determinado de días consecutivos. Es educativa y no constituye asesoría financiera.",
+  resourcesTitle:"Dónde comprar oro y plata físicos", resourcesSub:"Algunos distribuidores de bullion de confianza, para cuando una señal arriba le indique considerar una compra real.",
+  resJmBody:"Monedas y lingotes de casas de moneda confiables, precios competitivos.", resMmeBody:"Compre y venda oro y plata físicos a precios de mercado en vivo.",
+  resSgbBody:"Amplia selección de bullion con análisis de mercado y guías de inversión.", resGo:"Visitar \u2192",
+  affiliateDisclosure:"Divulgación de afiliados: algunos enlaces de esta página son enlaces de afiliado. Si realiza una compra a través de ellos, este sitio puede ganar una comisión sin costo adicional para usted. Esto nunca afecta qué activos se muestran ni cómo se calculan las señales.",
+  faqTitle:"Preguntas frecuentes",
+  faq:[
+    ["¿Qué es una señal de compra de oro?","Una señal de compra en este simulador se activa cuando el precio de cierre de un activo cae durante un número elegido de días consecutivos, opcionalmente combinado con una caída porcentual total mínima. Es una observación basada en reglas, no un consejo de inversión."],
+    ["¿Cómo se calcula la racha en rojo?","Un día bursátil cuenta como rojo cuando su cierre es menor que el cierre del día bursátil anterior. El contador de racha vuelve a cero la primera vez que un día cierra al alza."],
+    ["¿Qué activos sigue este simulador?","Oro (XAU/USD), plata (XAG/USD), cuatro acciones de mineras auríferas (AngloGold Ashanti, Kinross Gold, Harmony Gold, Gold Fields), tres ETF (SPDR Gold Shares, iShares Silver Trust, VanEck Gold Miners) y dos criptomonedas respaldadas por oro (Pax Gold, Tether Gold)."],
+    ["¿Es esto asesoría financiera?","No. Este simulador es una herramienta educativa. No constituye asesoría financiera, recomendación de inversión ni una invitación a comprar o vender ningún activo. Investigue siempre por su cuenta y consulte a un asesor financiero autorizado."],
+    ["¿Cómo funcionan las notificaciones de señal de compra?","Las alertas del navegador funcionan al instante mientras esta página está abierta. El flujo de trabajo programado incluido puede enviar alertas a un canal de Telegram una vez que el operador del sitio configure los secretos del repositorio."]
+  ],
+  navAbout:"Acerca de", navContact:"Contacto", navPrivacy:"Aviso de privacidad", navTerms:"Términos de uso",
+  footerNote:"Solo herramienta educativa \u2014 no es asesoría financiera. Datos de mercado vía TradingView, Stooq y CoinGecko.",
+  cookieText:"Este sitio usa cookies para analítica básica y entender cómo se usa la herramienta. No se vende ningún dato personal.",
+  cookieAccept:"Aceptar", cookieReject:"Rechazar",
+  snapshotLabel:"De un vistazo",
+  ratiosTitle:"Ratios entre activos", ratiosSub:"Relaciones entre categorías de activos que un solo gráfico de precio no puede mostrar.",
+  ratioGS:"Ratio Oro/Plata", ratioGSNote:"Onzas de plata equivalentes a una onza de oro",
+  ratioGM:"Ratio Oro/Mineras", ratioGMNote:"Precio del oro respecto al ETF VanEck Gold Miners",
+  ratioPaxg:"PAXG vs. oro spot", ratioPaxgNote:"Prima o descuento de Pax Gold frente al precio spot",
+  thStrength:"Fuerza", btnExport:"Exportar CSV",
+  targetTitle:"O configure una alerta simple de precio objetivo", targetSub:"No requiere regla de racha \u2014 solo indique el precio y la dirección.",
+  targetAssetLbl:"Activo", targetDirLbl:"Avisar cuando el precio esté", targetBelow:"En o por debajo de", targetAbove:"En o por encima de",
+  targetPriceLbl:"Precio objetivo (USD)", btnAddTarget:"Agregar alerta de precio", targetEmpty:"Aún no hay alertas de precio configuradas.",
+  navBoard:"Panel de señales", navWatchlist:"Watchlist", navNews:"Noticias", navLearn:"Aprender", navMethodology:"Metodología",
+  trustRuleBased:"Señales basadas en reglas", trustNoLogin:"Sin necesidad de cuenta", trustMethodology:"Metodología transparente", trustSources:"TradingView · Stooq · CoinGecko",
+  tierHoldLabel:"ESPERAR (HOLD)", tierHoldNote:"0–2 días bursátiles en rojo consecutivos",
+  tierWatchLabel:"50% COMPRA / VIGILAR", tierWatchNote:"3–4 días bursátiles en rojo consecutivos",
+  tierStrongLabel:"100% COMPRA / FUERTE", tierStrongNote:"5 o más días bursátiles en rojo consecutivos",
+  lblBacktestLevel:"Nivel de señal para backtest", optWatch3:"3 días · 50% Compra / Vigilar", optStrong5:"5 días · 100% Compra / Fuerte",
+  backtestSummary:"Mostrar backtest de rendimiento futuro por activo",
+  backtestIntro:(len,count)=>`Rendimiento futuro por activo tras cada señal de ${len} días. Los resultados son observaciones históricas, no predicciones. ${count} señales tienen un resultado completo a 10 días.`,
+  thBAsset:"Activo", thBSignals:"Señales", colAvg:h=>`Prom. ${h}D`, colWin:h=>`Acierto ${h}D`, smallSampleTitle:"Muestra pequeña",
+  compareTitle:"Comparar dos activos", compareSub:"Ambas series se rebasan a 100 al inicio del rango, para leer fácilmente el rendimiento relativo sin importar la escala de precio.",
+  compareALbl:"Activo A", compareBLbl:"Activo B", btnCompare:"Comparar",
+  compareErrData:"Los datos diarios no están disponibles para ambos activos.", compareErrDates:"No hay suficientes fechas de negociación comunes para esta comparación.",
+  compareResult:(d0,d1)=>`${d0} a ${d1}. Ambas series rebasadas a 100; solo fechas comunes.`,
+  watchTitle:"Watchlist privada y P/L nocional", watchSub:"Se guarda solo en este dispositivo. No se requiere cuenta ni datos personales.",
+  watchAssetLbl:"Activo", watchEntryLbl:"Precio de entrada (USD)", watchQtyLbl:"Cantidad", btnWatchAdd:"Agregar posición",
+  watchThEntry:"Entrada", watchThLatest:"Último", watchThQty:"Cantidad", watchThPL:"P/L nocional", watchEmpty:"No hay posiciones guardadas en este dispositivo.",
+  notifSub2:"Las alertas del navegador funcionan al instante mientras esta página está abierta. Un canal de Telegram para alertas que lleguen incluso con el navegador cerrado estará disponible próximamente."
+},
+hi:{
+  title:"गोल्ड सिग्नल सिम्युलेटर — मल्टी-एसेट",
+  subtitle:"सोना, चांदी, माइनिंग स्टॉक्स, ETF और गोल्ड-बैक्ड क्रिप्टो — रीयल-टाइम चार्ट्स के साथ लगातार गिरावट पर आधारित बाय सिग्नल",
+  statusLoading:"लोड हो रहा है…",
+  adLeaderboard:"विज्ञापन स्थान 728×90 (लीडरबोर्ड)", adInline:"विज्ञापन स्थान (रेस्पॉन्सिव)", adRect:"विज्ञापन स्थान 300×250",
+  chartTitle:"रीयल-टाइम चार्ट", chartSub:"TradingView के ज़रिए एक्सचेंजों से लाइव डेटा",
+  overviewTitle:"बाज़ार एक नज़र में",
+  rulesTitle:"बाय सिग्नल नियम", lblStreak:"लगातार लाल दिन", lblMinDrop:"न्यूनतम कुल गिरावट (%)",
+  lblCooldown:"सिग्नल के बीच अंतराल (दिन)", lblRange:"बैकटेस्ट रेंज (ट्रेडिंग दिन)",
+  rulesNote:"सिग्नल हर एसेट की दैनिक क्लोज़िंग कीमत से तय होते हैं। जब किसी दिन की क्लोज़िंग पिछले ट्रेडिंग दिन से कम हो, तो उसे “लाल” दिन माना जाता है।",
+  boardTitle:"सिग्नल बोर्ड — सभी एसेट", btnReload:"दैनिक डेटा फिर से लोड करें",
+  thAsset:"एसेट", thClose:"क्लोज़", thChange:"दिन का बदलाव", thLast10:"पिछले 10 दिन", thStreak:"लाल स्ट्रीक", thStatus:"स्थिति", thSignals:"रेंज में सिग्नल",
+  statusBuy:"खरीदें", statusHold:"रुकें",
+  boardNote:"क्लोज़ कॉलम आधिकारिक दैनिक डेटा पर आधारित है (आमतौर पर ऊपर के रीयल-टाइम चार्ट से एक सेशन पीछे)। बाज़ार देखने के लिए चार्ट और सिग्नल गणना के लिए यह तालिका उपयोग करें।",
+  loadingData:"दैनिक डेटा लाया जा रहा है…", dataUnavailable:"डेटा उपलब्ध नहीं है", loadingCell:"लोड हो रहा है…",
+  notifTitle:"बाय सिग्नल नोटिफिकेशन चालू करें", notifSub:"जब भी कोई एसेट आपके ऊपर तय किए गए नियम को पूरा करे, तुरंत सूचना पाएं।",
+  notifBrowserTitle:"1. ब्राउज़र / मोबाइल पुश (मुफ़्त, तुरंत)", btnNotif:"🔔 ब्राउज़र नोटिफिकेशन चालू करें",
+  notifEmailTitle:"2. ईमेल और टेलीग्राम (ब्राउज़र बंद होने पर भी काम करता है)",
+  phEmail:"aap@email.com", phTelegram:"टेलीग्राम चैट ID (वैकल्पिक)", lblNotifyAt:"मुझे कब सूचित करें:",
+  prefAny:"कोई भी एसेट ऊपर के नियम को पूरा करे", prefMetals:"सिर्फ़ सोना और चांदी", prefStocks:"सिर्फ़ माइनिंग स्टॉक्स",
+  prefEtf:"सिर्फ़ ETF", prefCrypto:"सिर्फ़ गोल्ड-बैक्ड क्रिप्टो",
+  btnSubscribe:"सब्सक्राइब करें — मुफ़्त", advancedSettings:"एडवांस्ड सेटिंग्स",
+  lblTgToken:"टेलीग्राम बॉट टोकन (वैकल्पिक)", lblHook:"ईमेल वेबहुक URL (Formspree/Zapier/n8n)",
+  notifNotSupported:"आपका ब्राउज़र नोटिफिकेशन सपोर्ट नहीं करता।",
+  notifGranted:"✓ ब्राउज़र नोटिफिकेशन चालू हो गए। बाय सिग्नल आने पर आपको सूचित किया जाएगा।",
+  notifDenied:"नोटिफिकेशन की अनुमति अस्वीकृत हुई। इसे अपनी ब्राउज़र सेटिंग्स में फिर से चालू कर सकते हैं।",
+  subErrEmpty:"कम से कम एक ईमेल या टेलीग्राम चैट ID दर्ज करें।",
+  subOkTelegramMissing:"✓ सेव हो गया। ब्राउज़र नोटिफिकेशन सक्रिय रहेंगे; टेलीग्राम के लिए एडवांस्ड सेटिंग्स में बॉट टोकन भी जोड़ें।",
+  subOkEmailMissing:"✓ सेव हो गया। ईमेल के लिए, वाकई भेजे जाने हेतु एडवांस्ड सेटिंग्स में वेबहुक URL (Formspree/Zapier/n8n) जोड़ें।",
+  subOkFull:"✓ सब्सक्रिप्शन सफल। सिग्नल आने पर आपको सूचित किया जाएगा।",
+  newsTitle:"गोल्ड और प्रेशियस मेटल्स की लाइव खबरें", newsSub:"सोना, माइनिंग स्टॉक्स, ETF और व्यापक मेटल्स मार्केट से जुड़ी रीयल-टाइम हेडलाइंस — TradingView द्वारा संचालित।",
+  articlesTitle:"ब्लॉग से", articlesSub:"गोल्ड मार्केट समझने में मदद करने वाली गाइड्स और विश्लेषण।",
+  art1cat:"गाइड", art1title:"गोल्ड बाय सिग्नल कैसे पढ़ें", art1body:"इस सिम्युलेटर में इस्तेमाल होने वाले लगातार गिरावट नियम की आसान जानकारी।",
+  art2cat:"तुलना", art2title:"गोल्ड स्टॉक्स बनाम गोल्ड ETF बनाम गोल्ड क्रिप्टो", art2body:"फिज़िकल बुलियन, माइनिंग स्टॉक्स, ETF और गोल्ड-बैक्ड टोकन की साथ-साथ तुलना।",
+  art3cat:"मेथडोलॉजी", art3title:"यह सिम्युलेटर कैसे काम करता है", art3body:"सिम्युलेटर में इस्तेमाल सटीक सिग्नल नियम, डेटा सीमाएं और वर्ज़न इतिहास देखें।",
+  readmore:"और पढ़ें →",
+  disclaimerTitle:"अस्वीकरण",
+  disclaimerBody:"यह सिम्युलेटर एक शैक्षणिक टूल है और यह वित्तीय सलाह, निवेश सिफ़ारिश या किसी भी एसेट को खरीदने/बेचने का आग्रह नहीं है। कीमतें और चार्ट थर्ड-पार्टी डेटा प्रोवाइडर्स (TradingView सहित) से लिए गए हैं और आपके ब्रोकर या डीलर की वास्तविक एग्ज़िक्यूशन कीमत से देरी या भिन्न हो सकते हैं। लेन-देन से पहले हमेशा अपने ब्रोकर, बुलियन डीलर या एक्सचेंज से लाइव कीमत की पुष्टि करें। पिछला प्रदर्शन भविष्य के परिणामों की गारंटी नहीं देता। सभी वित्तीय निर्णय पूरी तरह आपकी अपनी ज़िम्मेदारी हैं — अनिश्चित होने पर अपने क्षेत्राधिकार के लाइसेंसशुदा वित्तीय सलाहकार से सलाह लें।",
+  statusFetching:"दैनिक इतिहास लाया जा रहा है…", statusAllReady:"सभी दैनिक डेटा तैयार", statusFailed:"दैनिक डेटा लोड नहीं हो सका, कृपया बाद में फिर कोशिश करें",
+  notifMsgTitle:"बाय सिग्नल मिला", notifMsgBody:a=>a+" आपके नियम से मेल खाते हैं।",
+  signalHeader:"बाय सिग्नल मिला", signalLine:(n,d,l,p)=>`${n}: ${l} दिनों में ${d}% गिरावट, कीमत ${p}`,
+  groups:{logam:"धातुएं",saham:"माइनिंग स्टॉक्स",etf:"ETF",kripto:"गोल्ड क्रिप्टो"},
+  assetNote:{spot:"स्पॉट प्रति औंस",miningEtf:"माइनिंग ETF",goldEtf:"गोल्ड ETF",silverEtf:"सिल्वर ETF",crypto:"गोल्ड-बैक्ड क्रिप्टो"},
+  goldName:"सोना", silverName:"चांदी", days:n=>`${n} दिन`, dateLocale:"hi-IN", tvLocale:"en",
+  introTLDR:"यह मुफ़्त टूल सोना, चांदी, चार गोल्ड माइनिंग स्टॉक्स, तीन ETF और दो गोल्ड-बैक्ड क्रिप्टोकरेंसी की लाइव कीमत ट्रैक करता है, और जब किसी एसेट की कीमत तय संख्या में लगातार ट्रेडिंग दिनों तक गिरती है तो \u201cबाय सिग्नल\u201d दिखाता है। यह शैक्षणिक है और वित्तीय सलाह नहीं है।",
+  resourcesTitle:"फिज़िकल सोना और चांदी कहाँ से खरीदें", resourcesSub:"जब ऊपर का कोई सिग्नल आपको वास्तविक खरीद की ओर इशारा करे, तो ये कुछ भरोसेमंद बुलियन डीलर हैं।",
+  resJmBody:"भरोसेमंद मिंट से बुलियन सिक्के और बार, प्रतिस्पर्धी कीमतों पर।", resMmeBody:"लाइव मार्केट रेट पर फिज़िकल सोना और चांदी खरीदें-बेचें।",
+  resSgbBody:"मार्केट एनालिसिस और निवेश गाइड्स के साथ व्यापक बुलियन चयन।", resGo:"जाएं →",
+  affiliateDisclosure:"एफ़िलिएट डिस्क्लोज़र: इस पेज के कुछ लिंक एफ़िलिएट लिंक हैं। इनके ज़रिए खरीदारी करने पर, आपको कोई अतिरिक्त कीमत चुकाए बिना इस साइट को कमीशन मिल सकता है। इससे दिखाए गए एसेट या सिग्नल गणना पर कोई असर नहीं पड़ता।",
+  faqTitle:"अक्सर पूछे जाने वाले सवाल",
+  faq:[
+    ["गोल्ड बाय सिग्नल क्या है?","इस सिम्युलेटर में बाय सिग्नल तब बनता है जब किसी एसेट की क्लोज़िंग कीमत चुने गए दिनों तक लगातार गिरती है, साथ में वैकल्पिक रूप से न्यूनतम कुल प्रतिशत गिरावट भी हो सकती है। यह नियम-आधारित अवलोकन है, निवेश सलाह नहीं।"],
+    ["लाल स्ट्रीक की गणना कैसे होती है?","जब किसी ट्रेडिंग दिन की क्लोज़िंग पिछले ट्रेडिंग दिन से कम हो, तो वह दिन \u201cलाल\u201d माना जाता है। जिस दिन क्लोज़िंग ऊपर हो, स्ट्रीक काउंटर वापस शून्य पर आ जाता है।"],
+    ["यह सिम्युलेटर कौन-कौन से एसेट ट्रैक करता है?","सोना (XAU/USD), चांदी (XAG/USD), चार गोल्ड माइनिंग स्टॉक्स (AngloGold Ashanti, Kinross Gold, Harmony Gold, Gold Fields), तीन ETF (SPDR Gold Shares, iShares Silver Trust, VanEck Gold Miners), और दो गोल्ड-बैक्ड क्रिप्टोकरेंसी (Pax Gold, Tether Gold)।"],
+    ["क्या यह वित्तीय सलाह है?","नहीं। यह सिम्युलेटर एक शैक्षणिक टूल है। यह वित्तीय सलाह, निवेश सिफ़ारिश या किसी भी एसेट को खरीदने/बेचने का आग्रह नहीं है। हमेशा खुद रिसर्च करें और लाइसेंसशुदा वित्तीय सलाहकार से सलाह लें।"],
+    ["बाय सिग्नल नोटिफिकेशन कैसे काम करते हैं?","जब तक यह पेज खुला है, ब्राउज़र अलर्ट तुरंत काम करते हैं। साइट स्वामी द्वारा रिपॉज़िटरी सीक्रेट्स सेट करने के बाद, शामिल शेड्यूल्ड वर्कफ़्लो टेलीग्राम चैनल पर अलर्ट भेज सकता है।"]
+  ],
+  navAbout:"परिचय", navContact:"संपर्क करें", navPrivacy:"गोपनीयता नीति", navTerms:"उपयोग की शर्तें",
+  footerNote:"केवल शैक्षणिक टूल — वित्तीय सलाह नहीं। मार्केट डेटा TradingView, Stooq और CoinGecko से।",
+  cookieText:"यह साइट टूल के उपयोग को समझने के लिए बुनियादी एनालिटिक्स हेतु कुकीज़ इस्तेमाल करती है। कोई व्यक्तिगत डेटा बेचा नहीं जाता।",
+  cookieAccept:"स्वीकार करें", cookieReject:"अस्वीकार करें",
+  snapshotLabel:"एक नज़र में",
+  ratiosTitle:"क्रॉस-एसेट रेशियो", ratiosSub:"एसेट श्रेणियों के बीच के संबंध, जो एक अकेला प्राइस चार्ट नहीं दिखा सकता।",
+  ratioGS:"गोल्ड/सिल्वर रेशियो", ratioGSNote:"एक औंस सोने के बराबर कितने औंस चांदी",
+  ratioGM:"गोल्ड/माइनर्स रेशियो", ratioGMNote:"VanEck गोल्ड माइनर्स ETF के सापेक्ष सोने की कीमत",
+  ratioPaxg:"PAXG बनाम स्पॉट गोल्ड", ratioPaxgNote:"स्पॉट कीमत की तुलना में Pax Gold का प्रीमियम या डिस्काउंट",
+  thStrength:"स्ट्रेंथ", btnExport:"CSV एक्सपोर्ट करें",
+  targetTitle:"या एक सिंपल टारगेट-प्राइस अलर्ट सेट करें", targetSub:"स्ट्रीक नियम की ज़रूरत नहीं — बस कीमत और दिशा बताएं।",
+  targetAssetLbl:"एसेट", targetDirLbl:"कब अलर्ट करें", targetBelow:"इस कीमत या इससे कम पर", targetAbove:"इस कीमत या इससे ज़्यादा पर",
+  targetPriceLbl:"टारगेट कीमत (USD)", btnAddTarget:"प्राइस अलर्ट जोड़ें", targetEmpty:"अभी तक कोई प्राइस अलर्ट सेट नहीं है।",
+  navBoard:"सिग्नल बोर्ड", navWatchlist:"वॉचलिस्ट", navNews:"समाचार", navLearn:"सीखें", navMethodology:"मेथडोलॉजी",
+  trustRuleBased:"नियम-आधारित सिग्नल", trustNoLogin:"लॉगिन की ज़रूरत नहीं", trustMethodology:"पारदर्शी मेथडोलॉजी", trustSources:"TradingView · Stooq · CoinGecko",
+  tierHoldLabel:"रुकें (HOLD)", tierHoldNote:"0–2 लगातार लाल ट्रेडिंग दिन",
+  tierWatchLabel:"50% खरीदें / नज़र रखें", tierWatchNote:"3–4 लगातार लाल ट्रेडिंग दिन",
+  tierStrongLabel:"100% खरीदें / मज़बूत", tierStrongNote:"5 या उससे ज़्यादा लगातार लाल ट्रेडिंग दिन",
+  lblBacktestLevel:"बैकटेस्ट सिग्नल स्तर", optWatch3:"3 दिन · 50% खरीदें / नज़र रखें", optStrong5:"5 दिन · 100% खरीदें / मज़बूत",
+  backtestSummary:"हर एसेट का फॉरवर्ड-रिटर्न बैकटेस्ट दिखाएं",
+  backtestIntro:(len,count)=>`हर ${len}-दिन के सिग्नल के बाद प्रति-एसेट फॉरवर्ड रिटर्न। नतीजे ऐतिहासिक अवलोकन हैं, भविष्यवाणी नहीं। ${count} सिग्नल के पास पूरा 10-दिन का नतीजा है।`,
+  thBAsset:"एसेट", thBSignals:"सिग्नल", colAvg:h=>`${h}दिन औसत`, colWin:h=>`${h}दिन जीत दर`, smallSampleTitle:"छोटा सैंपल",
+  compareTitle:"दो एसेट की तुलना करें", compareSub:"दोनों सीरीज़ को रेंज की शुरुआत में 100 पर रीबेस किया गया है, ताकि कीमत के स्तर से अलग सापेक्ष प्रदर्शन आसानी से पढ़ा जा सके।",
+  compareALbl:"एसेट A", compareBLbl:"एसेट B", btnCompare:"तुलना करें",
+  compareErrData:"दोनों एसेट के लिए दैनिक डेटा उपलब्ध नहीं है।", compareErrDates:"इस तुलना के लिए पर्याप्त सामान्य ट्रेडिंग तारीखें नहीं हैं।",
+  compareResult:(d0,d1)=>`${d0} से ${d1} तक। दोनों सीरीज़ 100 पर रीबेस्ड; सिर्फ़ सामान्य तारीखें।`,
+  watchTitle:"निजी वॉचलिस्ट और नोशनल P/L", watchSub:"सिर्फ़ इस डिवाइस पर सेव होता है। किसी अकाउंट या व्यक्तिगत जानकारी की ज़रूरत नहीं।",
+  watchAssetLbl:"एसेट", watchEntryLbl:"एंट्री कीमत (USD)", watchQtyLbl:"मात्रा", btnWatchAdd:"पोज़िशन जोड़ें",
+  watchThEntry:"एंट्री", watchThLatest:"नवीनतम", watchThQty:"मात्रा", watchThPL:"नोशनल P/L", watchEmpty:"इस डिवाइस पर कोई पोज़िशन सेव नहीं है।",
+  notifSub2:"जब तक यह पेज खुला है, ब्राउज़र अलर्ट तुरंत काम करते हैं। ब्राउज़र बंद होने पर भी अलर्ट देने वाला टेलीग्राम चैनल जल्द आ रहा है।"
+},
+ar:{
+  title:"محاكي إشارات الذهب — متعدد الأصول",
+  subtitle:"الذهب والفضة وأسهم التعدين وصناديق المؤشرات المتداولة والعملات الرقمية المدعومة بالذهب — رسوم بيانية لحظية إلى جانب إشارة شراء مبنية على تراجع متتالٍ",
+  statusLoading:"جارٍ التحميل…",
+  adLeaderboard:"مساحة إعلانية 728×90 (لوحة رئيسية)", adInline:"مساحة إعلانية (متجاوبة)", adRect:"مساحة إعلانية 300×250",
+  chartTitle:"الرسوم البيانية اللحظية", chartSub:"بيانات مباشرة من الأسواق عبر TradingView",
+  overviewTitle:"نظرة عامة على الأسواق",
+  rulesTitle:"قاعدة إشارة الشراء", lblStreak:"أيام الانخفاض المتتالية", lblMinDrop:"الحد الأدنى لإجمالي الانخفاض (%)",
+  lblCooldown:"الفاصل بين الإشارات (أيام)", lblRange:"نطاق الاختبار الرجعي (أيام تداول)",
+  rulesNote:"تُحسب الإشارات من سعر الإغلاق اليومي لكل أصل. يُعتبر اليوم «منخفضًا» إذا كان إغلاقه أقل من إغلاق يوم التداول السابق.",
+  boardTitle:"لوحة الإشارات — كل الأصول", btnReload:"إعادة تحميل البيانات اليومية",
+  thAsset:"الأصل", thClose:"الإغلاق", thChange:"تغير اليوم", thLast10:"آخر 10 أيام", thStreak:"تتابع الانخفاض", thStatus:"الحالة", thSignals:"إشارات ضمن النطاق",
+  statusBuy:"شراء", statusHold:"انتظار",
+  boardNote:"يعتمد عمود الإغلاق على البيانات اليومية الرسمية (عادة متأخر بجلسة واحدة عن الرسم البياني اللحظي أعلاه). استخدم الرسم البياني لمتابعة السوق، وهذا الجدول لحساب الإشارات.",
+  loadingData:"جارٍ جلب البيانات اليومية…", dataUnavailable:"البيانات غير متوفرة", loadingCell:"جارٍ التحميل…",
+  notifTitle:"تفعيل إشعارات إشارة الشراء", notifSub:"احصل على تنبيه تلقائي بمجرد أن يستوفي أحد الأصول القاعدة التي حددتها أعلاه.",
+  notifBrowserTitle:"١. إشعارات المتصفح / الهاتف (مجانية وفورية)", btnNotif:"🔔 تفعيل إشعارات المتصفح",
+  notifEmailTitle:"٢. البريد الإلكتروني وتيليجرام (يعمل حتى مع إغلاق المتصفح)",
+  phEmail:"you@example.com", phTelegram:"معرف محادثة تيليجرام (اختياري)", lblNotifyAt:"أبلغني عندما:",
+  prefAny:"يستوفي أي أصل القاعدة أعلاه", prefMetals:"الذهب والفضة فقط", prefStocks:"أسهم التعدين فقط",
+  prefEtf:"صناديق المؤشرات فقط", prefCrypto:"العملات الرقمية المدعومة بالذهب فقط",
+  btnSubscribe:"اشترك — مجانًا", advancedSettings:"إعدادات متقدمة",
+  lblTgToken:"رمز بوت تيليجرام (اختياري)", lblHook:"رابط ويب هوك للبريد الإلكتروني (Formspree/Zapier/n8n)",
+  notifNotSupported:"متصفحك لا يدعم الإشعارات.",
+  notifGranted:"✓ تم تفعيل إشعارات المتصفح. سيتم تنبيهك عند ظهور إشارة شراء.",
+  notifDenied:"تم رفض إذن الإشعارات. يمكنك إعادة تفعيله من إعدادات المتصفح.",
+  subErrEmpty:"أدخل بريدًا إلكترونيًا أو معرف محادثة تيليجرام على الأقل.",
+  subOkTelegramMissing:"✓ تم الحفظ. تظل إشعارات المتصفح فعّالة؛ بالنسبة لتيليجرام، أضف أيضًا رمز البوت ضمن الإعدادات المتقدمة.",
+  subOkEmailMissing:"✓ تم الحفظ. بالنسبة للبريد الإلكتروني، أضف رابط ويب هوك (Formspree/Zapier/n8n) ضمن الإعدادات المتقدمة حتى تُرسل الرسائل فعليًا.",
+  subOkFull:"✓ تم الاشتراك بنجاح. سيتم إعلامك عند ظهور إشارة.",
+  newsTitle:"أخبار الذهب والمعادن الثمينة مباشرةً", newsSub:"عناوين لحظية تغطي الذهب وأسهم التعدين وصناديق المؤشرات وسوق المعادن بشكل عام — مدعومة من TradingView.",
+  articlesTitle:"من المدونة", articlesSub:"أدلة وتحليلات تساعدك على قراءة سوق الذهب.",
+  art1cat:"دليل", art1title:"كيف تقرأ إشارة شراء الذهب", art1body:"شرح مبسّط لقاعدة التراجع المتتالي التي يعتمدها هذا المحاكي.",
+  art2cat:"مقارنة", art2title:"أسهم الذهب مقابل صناديق الذهب مقابل عملات الذهب الرقمية", art2body:"مقارنة جنبًا إلى جنب بين الذهب المادي وأسهم التعدين وصناديق المؤشرات ورموز الذهب الرقمية.",
+  art3cat:"المنهجية", art3title:"كيف يعمل هذا المحاكي", art3body:"اطّلع على قواعد الإشارات الدقيقة وحدود البيانات وسجل الإصدارات المستخدمة في المحاكي.",
+  readmore:"اقرأ المزيد ←",
+  disclaimerTitle:"إخلاء مسؤولية",
+  disclaimerBody:"هذا المحاكي أداة تعليمية ولا يُعد نصيحة مالية أو توصية استثمارية أو دعوة لشراء أو بيع أي أصل. تُستقى الأسعار والرسوم البيانية من مزودي بيانات خارجيين (بما في ذلك TradingView) وقد تكون متأخرة أو مختلفة عن سعر التنفيذ الفعلي لدى وسيطك أو تاجرك. تحقق دائمًا من السعر اللحظي لدى وسيطك أو تاجر المعادن أو البورصة قبل التداول. الأداء السابق لا يضمن نتائج مستقبلية. جميع القرارات المالية هي مسؤوليتك وحدك — استشر مستشارًا ماليًا مرخصًا في نطاقك القانوني إذا لم تكن متأكدًا.",
+  statusFetching:"جارٍ جلب السجل اليومي…", statusAllReady:"جميع البيانات اليومية جاهزة", statusFailed:"فشل تحميل البيانات اليومية، حاول لاحقًا",
+  notifMsgTitle:"تم رصد إشارة شراء", notifMsgBody:a=>a+" تستوفي قاعدتك.",
+  signalHeader:"تم رصد إشارة شراء", signalLine:(n,d,l,p)=>`${n}: انخفض ${d}% خلال ${l} أيام، السعر ${p}`,
+  groups:{logam:"المعادن",saham:"أسهم التعدين",etf:"صناديق المؤشرات",kripto:"عملات الذهب الرقمية"},
+  assetNote:{spot:"سعر فوري للأونصة",miningEtf:"صندوق تعدين",goldEtf:"صندوق ذهب",silverEtf:"صندوق فضة",crypto:"عملة رقمية مدعومة بالذهب"},
+  goldName:"الذهب", silverName:"الفضة", days:n=> n===2?"يومان":`${n} أيام`, dateLocale:"ar-EG", tvLocale:"ar",
+  introTLDR:"تتابع هذه الأداة المجانية السعر اللحظي للذهب والفضة وأربعة أسهم لشركات تعدين الذهب وثلاثة صناديق مؤشرات متداولة وعملتين رقميتين مدعومتين بالذهب، وتُظهر \u201cإشارة شراء\u201d عندما ينخفض سعر أحد الأصول لعدد محدد من أيام التداول المتتالية. الأداة تعليمية ولا تُعد نصيحة مالية.",
+  resourcesTitle:"أين تشتري الذهب والفضة الفعليين", resourcesSub:"بعض تجار المعادن الثمينة الموثوقين، لعندما تشير إشارة أعلاه إلى النظر في عملية شراء فعلية.",
+  resJmBody:"عملات وسبائك من دور سك موثوقة، بأسعار تنافسية.", resMmeBody:"بيع وشراء الذهب والفضة الفعليين بأسعار السوق اللحظية.",
+  resSgbBody:"تشكيلة واسعة من المعادن مع تحليلات سوقية وأدلة استثمارية.", resGo:"زيارة ←",
+  affiliateDisclosure:"إفصاح عن الشراكة التسويقية: بعض روابط هذه الصفحة هي روابط تابعة. إذا أجريت عملية شراء عبرها، فقد يحصل هذا الموقع على عمولة دون أي تكلفة إضافية عليك. هذا لا يؤثر أبدًا على الأصول المعروضة أو طريقة حساب الإشارات.",
+  faqTitle:"الأسئلة الشائعة",
+  faq:[
+    ["ما هي إشارة شراء الذهب؟","تظهر إشارة الشراء في هذا المحاكي عندما ينخفض سعر إغلاق أحد الأصول لعدد مختار من أيام التداول المتتالية، مع إمكانية إضافة حد أدنى لإجمالي نسبة الانخفاض. إنها ملاحظة مبنية على قاعدة، وليست نصيحة استثمارية."],
+    ["كيف يُحسب تتابع الانخفاض؟","يُعتبر يوم التداول \u201cمنخفضًا\u201d إذا كان إغلاقه أقل من إغلاق يوم التداول السابق. يعود عداد التتابع إلى الصفر أول مرة يُغلق فيها اليوم بارتفاع."],
+    ["ما الأصول التي يتابعها هذا المحاكي؟","الذهب (XAU/USD)، الفضة (XAG/USD)، أربعة أسهم لشركات تعدين الذهب (AngloGold Ashanti وKinross Gold وHarmony Gold وGold Fields)، ثلاثة صناديق مؤشرات (SPDR Gold Shares وiShares Silver Trust وVanEck Gold Miners)، وعملتان رقميتان مدعومتان بالذهب (Pax Gold وTether Gold)."],
+    ["هل هذه نصيحة مالية؟","لا. هذا المحاكي أداة تعليمية. لا يُعد نصيحة مالية أو توصية استثمارية أو دعوة لشراء أو بيع أي أصل. ابحث دائمًا بنفسك واستشر مستشارًا ماليًا مرخصًا."],
+    ["كيف تعمل إشعارات إشارة الشراء؟","تعمل إشعارات المتصفح فورًا طالما هذه الصفحة مفتوحة. يمكن لسير العمل المجدول المرفق إرسال تنبيهات إلى قناة تيليجرام بعد أن يقوم مالك الموقع بإعداد أسرار المستودع (repository secrets)."]
+  ],
+  navAbout:"من نحن", navContact:"تواصل معنا", navPrivacy:"سياسة الخصوصية", navTerms:"شروط الاستخدام",
+  footerNote:"أداة تعليمية فقط — ليست نصيحة مالية. بيانات السوق عبر TradingView وStooq وCoinGecko.",
+  cookieText:"يستخدم هذا الموقع ملفات تعريف الارتباط لتحليلات أساسية لفهم كيفية استخدام الأداة. لا يُباع أي بيانات شخصية.",
+  cookieAccept:"موافقة", cookieReject:"رفض",
+  snapshotLabel:"لمحة سريعة",
+  ratiosTitle:"نسب بين الأصول", ratiosSub:"علاقات بين فئات الأصول لا يمكن لرسم بياني واحد للسعر إظهارها.",
+  ratioGS:"نسبة الذهب/الفضة", ratioGSNote:"عدد أونصات الفضة المعادلة لأونصة ذهب واحدة",
+  ratioGM:"نسبة الذهب/شركات التعدين", ratioGMNote:"سعر الذهب مقارنة بصندوق VanEck لشركات تعدين الذهب",
+  ratioPaxg:"PAXG مقابل الذهب الفوري", ratioPaxgNote:"علاوة أو خصم Pax Gold مقارنة بالسعر الفوري",
+  thStrength:"القوة", btnExport:"تصدير CSV",
+  targetTitle:"أو عيّن تنبيه سعر مستهدف بسيط", targetSub:"لا حاجة لقاعدة التتابع — فقط حدد السعر والاتجاه.",
+  targetAssetLbl:"الأصل", targetDirLbl:"نبّهني عندما يكون السعر", targetBelow:"عند أو أقل من", targetAbove:"عند أو أعلى من",
+  targetPriceLbl:"السعر المستهدف (USD)", btnAddTarget:"إضافة تنبيه سعر", targetEmpty:"لم يتم تعيين أي تنبيهات سعر بعد.",
+  navBoard:"لوحة الإشارات", navWatchlist:"قائمة المتابعة", navNews:"الأخبار", navLearn:"تعلّم", navMethodology:"المنهجية",
+  trustRuleBased:"إشارات مبنية على قواعد", trustNoLogin:"لا حاجة لتسجيل الدخول", trustMethodology:"منهجية شفافة", trustSources:"TradingView · Stooq · CoinGecko",
+  tierHoldLabel:"انتظار (HOLD)", tierHoldNote:"0–2 يوم تداول أحمر متتالٍ",
+  tierWatchLabel:"شراء 50% / مراقبة", tierWatchNote:"3–4 أيام تداول حمراء متتالية",
+  tierStrongLabel:"شراء 100% / قوي", tierStrongNote:"5 أيام تداول حمراء متتالية أو أكثر",
+  lblBacktestLevel:"مستوى إشارة الاختبار الرجعي", optWatch3:"3 أيام · شراء 50% / مراقبة", optStrong5:"5 أيام · شراء 100% / قوي",
+  backtestSummary:"إظهار اختبار العائد المستقبلي لكل أصل",
+  backtestIntro:(len,count)=>`العائد المستقبلي لكل أصل بعد كل إشارة مدتها ${len} أيام. النتائج ملاحظات تاريخية وليست تنبؤات. ${count} إشارة لديها نتيجة كاملة خلال 10 أيام.`,
+  thBAsset:"الأصل", thBSignals:"الإشارات", colAvg:h=>`متوسط ${h} يوم`, colWin:h=>`نسبة نجاح ${h} يوم`, smallSampleTitle:"عيّنة صغيرة",
+  compareTitle:"مقارنة أصلين", compareSub:"يُعاد ضبط كلتا السلسلتين إلى 100 في بداية النطاق، ليسهل قراءة الأداء النسبي بغض النظر عن مستوى السعر.",
+  compareALbl:"الأصل A", compareBLbl:"الأصل B", btnCompare:"قارن",
+  compareErrData:"البيانات اليومية غير متوفرة لكلا الأصلين.", compareErrDates:"لا توجد تواريخ تداول مشتركة كافية لهذه المقارنة.",
+  compareResult:(d0,d1)=>`من ${d0} إلى ${d1}. كلتا السلسلتين معادة الضبط إلى 100؛ التواريخ المشتركة فقط.`,
+  watchTitle:"قائمة متابعة خاصة وربح/خسارة افتراضي", watchSub:"يُحفظ فقط على هذا الجهاز. لا حاجة لحساب أو معلومات شخصية.",
+  watchAssetLbl:"الأصل", watchEntryLbl:"سعر الدخول (USD)", watchQtyLbl:"الكمية", btnWatchAdd:"إضافة مركز",
+  watchThEntry:"الدخول", watchThLatest:"الأحدث", watchThQty:"الكمية", watchThPL:"ربح/خسارة افتراضي", watchEmpty:"لا توجد مراكز محفوظة على هذا الجهاز.",
+  notifSub2:"تعمل إشعارات المتصفح فورًا طالما هذه الصفحة مفتوحة. قناة تيليجرام للتنبيهات التي تصل حتى مع إغلاق المتصفح ستتوفر قريبًا."
+},
+ru:{
+  title:"Симулятор золотых сигналов — мультиактивный",
+  subtitle:"Золото, серебро, акции золотодобытчиков, ETF и криптовалюты, обеспеченные золотом — графики в реальном времени и сигнал на покупку по правилу серии падений",
+  statusLoading:"Загрузка…",
+  adLeaderboard:"Рекламное место 728×90 (лидерборд)", adInline:"Рекламное место (адаптивное)", adRect:"Рекламное место 300×250",
+  chartTitle:"Графики в реальном времени", chartSub:"Данные бирж в реальном времени через TradingView",
+  overviewTitle:"Обзор рынков",
+  rulesTitle:"Правило сигнала на покупку", lblStreak:"Дней подряд в минусе", lblMinDrop:"Минимальное общее падение (%)",
+  lblCooldown:"Пауза между сигналами (дней)", lblRange:"Диапазон бэктеста (торговых дней)",
+  rulesNote:"Сигналы рассчитываются по дневному закрытию каждого актива. День считается «красным», если его закрытие ниже закрытия предыдущего торгового дня.",
+  boardTitle:"Панель сигналов — все активы", btnReload:"Обновить дневные данные",
+  thAsset:"Актив", thClose:"Закрытие", thChange:"Δ за день", thLast10:"Последние 10 дней", thStreak:"Серия падений", thStatus:"Статус", thSignals:"Сигналов в диапазоне",
+  statusBuy:"Покупать", statusHold:"Ждать",
+  boardNote:"Столбец закрытия использует официальные дневные данные (обычно на одну сессию позже графика в реальном времени выше). Используйте график для наблюдения за рынком, а эту таблицу — для расчёта сигналов.",
+  loadingData:"Загрузка дневных данных…", dataUnavailable:"Данные недоступны", loadingCell:"Загрузка…",
+  notifTitle:"Включить уведомления о сигнале на покупку", notifSub:"Получайте уведомление автоматически, как только актив выполнит выбранное вами правило.",
+  notifBrowserTitle:"1. Уведомления браузера / телефона (бесплатно, мгновенно)", btnNotif:"🔔 Включить уведомления браузера",
+  notifEmailTitle:"2. Email и Telegram (работает даже при закрытом браузере)",
+  phEmail:"you@example.com", phTelegram:"Telegram Chat ID (необязательно)", lblNotifyAt:"Уведомлять меня, когда:",
+  prefAny:"Любой актив выполнит правило выше", prefMetals:"Только золото и серебро", prefStocks:"Только акции золотодобытчиков",
+  prefEtf:"Только ETF", prefCrypto:"Только криптовалюты, обеспеченные золотом",
+  btnSubscribe:"Подписаться — бесплатно", advancedSettings:"Дополнительные настройки",
+  lblTgToken:"Токен Telegram-бота (необязательно)", lblHook:"URL веб-хука для email (Formspree/Zapier/n8n)",
+  notifNotSupported:"Ваш браузер не поддерживает уведомления.",
+  notifGranted:"✓ Уведомления браузера включены. Вы получите оповещение при появлении сигнала на покупку.",
+  notifDenied:"Доступ к уведомлениям запрещён. Вы можете включить его заново в настройках браузера.",
+  subErrEmpty:"Укажите хотя бы email или Telegram Chat ID.",
+  subOkTelegramMissing:"✓ Сохранено. Уведомления браузера остаются активными; для Telegram добавьте также токен бота в разделе «Дополнительные настройки».",
+  subOkEmailMissing:"✓ Сохранено. Для email добавьте URL веб-хука (Formspree/Zapier/n8n) в разделе «Дополнительные настройки», чтобы сообщения действительно отправлялись.",
+  subOkFull:"✓ Подписка оформлена. Вы получите уведомление при появлении сигнала.",
+  newsTitle:"Новости золота и драгметаллов в реальном времени", newsSub:"Актуальные заголовки о золоте, акциях золотодобытчиков, ETF и рынке драгметаллов в целом — на основе TradingView.",
+  articlesTitle:"Из блога", articlesSub:"Гайды и аналитика, которые помогут разобраться в рынке золота.",
+  art1cat:"Гайд", art1title:"Как читать сигнал на покупку золота", art1body:"Понятное объяснение правила серии падений, которое использует этот симулятор.",
+  art2cat:"Сравнение", art2title:"Акции золотодобытчиков vs золотые ETF vs золотая криптовалюта", art2body:"Физическое золото, акции добытчиков, ETF и токены, обеспеченные золотом — сравнение бок о бок.",
+  art3cat:"Скоро", art3title:"Еженедельный обзор рынка золота", art3body:"Регулярно обновляемый обзор динамики цены золота на основе собственных данных панели сигналов этого симулятора.",
+  readmore:"Читать далее →",
+  disclaimerTitle:"Отказ от ответственности",
+  disclaimerBody:"Этот симулятор — образовательный инструмент и не является финансовой консультацией, инвестиционной рекомендацией или предложением купить либо продать какой-либо актив. Цены и графики предоставлены сторонними поставщиками данных (включая TradingView) и могут отставать или отличаться от реальной цены исполнения у вашего брокера или дилера. Всегда проверяйте актуальную цену у брокера, дилера драгметаллов или биржи перед сделкой. Результаты в прошлом не гарантируют результатов в будущем. Все финансовые решения — исключительно ваша ответственность; при сомнениях обратитесь к лицензированному финансовому консультанту в вашей юрисдикции.",
+  statusFetching:"Загрузка дневной истории…", statusAllReady:"Все дневные данные готовы", statusFailed:"Не удалось загрузить дневные данные, попробуйте позже",
+  notifMsgTitle:"Обнаружен сигнал на покупку", notifMsgBody:a=>a+" соответствуют вашему правилу.",
+  signalHeader:"ОБНАРУЖЕН СИГНАЛ НА ПОКУПКУ", signalLine:(n,d,l,p)=>`${n}: падение на ${d}% за ${l} дн., цена ${p}`,
+  groups:{logam:"Металлы",saham:"Акции золотодобытчиков",etf:"ETF",kripto:"Золотая крипта"},
+  assetNote:{spot:"спот за унцию",miningEtf:"ETF золотодобытчиков",goldEtf:"золотой ETF",silverEtf:"серебряный ETF",crypto:"крипто, обеспеченная золотом"},
+  goldName:"Золото", silverName:"Серебро",
+  days:n=>{const m10=n%10,m100=n%100; const w=(m10===1&&m100!==11)?"день":([2,3,4].includes(m10)&&![12,13,14].includes(m100))?"дня":"дней"; return `${n} ${w}`;},
+  dateLocale:"ru-RU", tvLocale:"ru",
+  introTLDR:"Этот бесплатный инструмент отслеживает цену золота, серебра, четырёх акций золотодобытчиков, трёх ETF и двух криптовалют, обеспеченных золотом, в реальном времени и отмечает \u00ab\u0441\u0438\u0433\u043d\u0430\u043b \u043d\u0430 \u043f\u043e\u043a\u0443\u043f\u043a\u0443\u00bb, когда цена актива падает заданное число торговых дней подряд. Инструмент образовательный и не является финансовой консультацией.",
+  resourcesTitle:"Где купить физическое золото и серебро", resourcesSub:"Несколько проверенных дилеров драгметаллов — на случай, если сигнал выше подтолкнёт вас к реальной покупке.",
+  resJmBody:"Монеты и слитки от надёжных монетных дворов по конкурентным ценам.", resMmeBody:"Покупка и продажа физического золота и серебра по текущим рыночным ценам.",
+  resSgbBody:"Широкий выбор драгметаллов с рыночной аналитикой и инвестиционными гайдами.", resGo:"Перейти \u2192",
+  affiliateDisclosure:"Партнёрское раскрытие: некоторые ссылки на этой странице являются партнёрскими. При покупке по ним сайт может получить комиссию без дополнительных затрат для вас. Это никак не влияет на то, какие активы показаны и как рассчитываются сигналы.",
+  faqTitle:"Часто задаваемые вопросы",
+  faq:[
+    ["Что такое сигнал на покупку золота?","Сигнал на покупку в этом симуляторе срабатывает, когда цена закрытия актива падает заданное число торговых дней подряд, опционально в сочетании с минимальным суммарным падением в процентах. Это наблюдение по правилу, а не инвестиционный совет."],
+    ["Как рассчитывается серия падений?","Торговый день считается «красным», если его закрытие ниже закрытия предыдущего торгового дня. Счётчик серии сбрасывается на ноль, как только день закрывается выше."],
+    ["Какие активы отслеживает этот симулятор?","Золото (XAU/USD), серебро (XAG/USD), четыре акции золотодобытчиков (AngloGold Ashanti, Kinross Gold, Harmony Gold, Gold Fields), три ETF (SPDR Gold Shares, iShares Silver Trust, VanEck Gold Miners) и две криптовалюты, обеспеченные золотом (Pax Gold, Tether Gold)."],
+    ["Это финансовая консультация?","Нет. Этот симулятор — образовательный инструмент. Он не является финансовой консультацией, инвестиционной рекомендацией или предложением купить либо продать какой-либо актив. Всегда проводите собственное исследование и консультируйтесь с лицензированным финансовым консультантом."],
+    ["Как работают уведомления о сигнале на покупку?","Уведомления браузера работают мгновенно, пока эта страница открыта. Встроенный запланированный workflow может отправлять оповещения в канал Telegram после того, как владелец сайта настроит секреты репозитория."]
+  ],
+  navAbout:"О проекте", navContact:"Контакты", navPrivacy:"Политика конфиденциальности", navTerms:"Условия использования",
+  footerNote:"Только образовательный инструмент — не финансовая консультация. Рыночные данные через TradingView, Stooq и CoinGecko.",
+  cookieText:"Этот сайт использует куки для базовой аналитики использования инструмента. Персональные данные не продаются.",
+  cookieAccept:"Принять", cookieReject:"Отклонить",
+  snapshotLabel:"Коротко",
+  ratiosTitle:"Межактивные соотношения", ratiosSub:"Связи между категориями активов, которые не показать на одном графике цены.",
+  ratioGS:"Соотношение золото/серебро", ratioGSNote:"Сколько унций серебра равны одной унции золота",
+  ratioGM:"Соотношение золото/добытчики", ratioGMNote:"Цена золота относительно ETF VanEck Gold Miners",
+  ratioPaxg:"PAXG против спотового золота", ratioPaxgNote:"Премия или дисконт Pax Gold к спотовой цене",
+  thStrength:"Сила", btnExport:"Экспорт CSV",
+  targetTitle:"Или задайте простое ценовое оповещение", targetSub:"Без правила серии — просто укажите цену и направление.",
+  targetAssetLbl:"Актив", targetDirLbl:"Уведомить, когда цена", targetBelow:"На уровне или ниже", targetAbove:"На уровне или выше",
+  targetPriceLbl:"Целевая цена (USD)", btnAddTarget:"Добавить оповещение", targetEmpty:"Ценовые оповещения пока не заданы.",
+  navBoard:"Панель сигналов", navWatchlist:"Список отслеживания", navNews:"Новости", navLearn:"Обучение", navMethodology:"Методология",
+  trustRuleBased:"Сигналы по правилам", trustNoLogin:"Без регистрации", trustMethodology:"Прозрачная методология", trustSources:"TradingView · Stooq · CoinGecko",
+  tierHoldLabel:"ЖДАТЬ (HOLD)", tierHoldNote:"0–2 дня подряд в минусе",
+  tierWatchLabel:"50% ПОКУПКА / НАБЛЮДЕНИЕ", tierWatchNote:"3–4 дня подряд в минусе",
+  tierStrongLabel:"100% ПОКУПКА / СИЛЬНЫЙ", tierStrongNote:"5 и более дней подряд в минусе",
+  lblBacktestLevel:"Уровень сигнала для бэктеста", optWatch3:"3 дня · 50% Покупка / Наблюдение", optStrong5:"5 дней · 100% Покупка / Сильный",
+  backtestSummary:"Показать бэктест доходности по активам",
+  backtestIntro:(len,count)=>`Доходность по каждому активу после ${len}-дневного сигнала. Результаты — исторические наблюдения, а не прогноз. ${count} сигналов имеют полный 10-дневный результат.`,
+  thBAsset:"Актив", thBSignals:"Сигналы", colAvg:h=>`${h}д сред.`, colWin:h=>`${h}д успех`, smallSampleTitle:"Малая выборка",
+  compareTitle:"Сравнение двух активов", compareSub:"Обе серии приведены к 100 в начале диапазона, чтобы легко читать относительную динамику независимо от масштаба цены.",
+  compareALbl:"Актив A", compareBLbl:"Актив B", btnCompare:"Сравнить",
+  compareErrData:"Дневные данные недоступны для обоих активов.", compareErrDates:"Недостаточно общих торговых дат для этого сравнения.",
+  compareResult:(d0,d1)=>`С ${d0} по ${d1}. Обе серии приведены к 100; только общие даты.`,
+  watchTitle:"Личный список отслеживания и условная P/L", watchSub:"Сохраняется только на этом устройстве. Аккаунт или личные данные не требуются.",
+  watchAssetLbl:"Актив", watchEntryLbl:"Цена входа (USD)", watchQtyLbl:"Количество", btnWatchAdd:"Добавить позицию",
+  watchThEntry:"Вход", watchThLatest:"Последняя", watchThQty:"Количество", watchThPL:"Условная P/L", watchEmpty:"На этом устройстве не сохранено ни одной позиции.",
+  notifSub2:"Уведомления браузера работают мгновенно, пока эта страница открыта. Канал Telegram для оповещений, приходящих даже при закрытом браузере, скоро появится."
+}
+};
+let lang = LS.get("sim.lang","en");
+if(!I18N[lang]) lang="en";
+const t = k => (I18N[lang]&&I18N[lang][k]!==undefined) ? I18N[lang][k] : I18N.en[k];
+
+function applyI18n(){
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang==="ar" ? "rtl" : "ltr";
+  document.title = t("title");
+  document.querySelectorAll("[data-i18n]").forEach(el=>{ el.textContent = t(el.getAttribute("data-i18n")); });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{ el.placeholder = t(el.getAttribute("data-i18n-ph")); });
+  $("langSel").value = lang;
+  renderFAQ();
+}
+
+function renderFAQ(){
+  const list = t("faq") || [];
+  $("faqList").innerHTML = list.map((pair,i)=>`
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" data-i="${i}">${pair[0]}<span class="x">+</span></button>
+      <div class="faq-a" id="faqA${i}"><p>${pair[1]}</p></div>
+    </div>`).join("");
+  $("faqList").querySelectorAll(".faq-q").forEach(btn=>{
+    btn.onclick = ()=>{
+      const open = btn.getAttribute("aria-expanded")==="true";
+      const body = $("faqA"+btn.dataset.i);
+      btn.setAttribute("aria-expanded", open?"false":"true");
+      body.style.maxHeight = open ? "0px" : body.scrollHeight+"px";
+    };
+  });
+}
+
+/* ================= assets ================= */
+const ASSETS=[
+  {id:"XAUUSD", nameKey:"goldName",  note:"spot",      tv:"OANDA:XAUUSD",     grp:"logam",  src:"stooq",     code:"xauusd", dec:2},
+  {id:"XAGUSD", nameKey:"silverName",note:"spot",      tv:"OANDA:XAGUSD",     grp:"logam",  src:"stooq",     code:"xagusd", dec:3},
+  {id:"AU",     name:"AngloGold Ashanti",note:"NYSE: AU",     tv:"NYSE:AU",          grp:"saham",  src:"stooq",     code:"au.us",  dec:2},
+  {id:"KGC",    name:"Kinross Gold",     note:"NYSE: KGC",    tv:"NYSE:KGC",         grp:"saham",  src:"stooq",     code:"kgc.us", dec:2},
+  {id:"HMY",    name:"Harmony Gold",     note:"NYSE: HMY",    tv:"NYSE:HMY",         grp:"saham",  src:"stooq",     code:"hmy.us", dec:2},
+  {id:"GFI",    name:"Gold Fields",      note:"NYSE: GFI",    tv:"NYSE:GFI",         grp:"saham",  src:"stooq",     code:"gfi.us", dec:2},
+  {id:"GDX",    name:"VanEck Gold Miners",note:"miningEtf",   tv:"AMEX:GDX",         grp:"etf",    src:"stooq",     code:"gdx.us", dec:2},
+  {id:"GLD",    name:"SPDR Gold Shares", note:"goldEtf",      tv:"AMEX:GLD",         grp:"etf",    src:"stooq",     code:"gld.us", dec:2},
+  {id:"SLV",    name:"iShares Silver",   note:"silverEtf",    tv:"AMEX:SLV",         grp:"etf",    src:"stooq",     code:"slv.us", dec:2},
+  {id:"PAXG",   name:"Pax Gold",         note:"crypto",       tv:"COINBASE:PAXGUSD", grp:"kripto", src:"coingecko", code:"pax-gold", dec:2},
+  {id:"XAUT",   name:"Tether Gold",      note:"crypto",       tv:"KRAKEN:XAUTUSD",   grp:"kripto", src:"coingecko", code:"tether-gold", dec:2}
+];
+const GROUP_IDS=["logam","saham","etf","kripto"];
+const byId=id=>ASSETS.find(a=>a.id===id);
+const aName = a => a.nameKey ? t(a.nameKey) : a.name;
+const aNote = a => t("assetNote")[a.note] || a.note;
+const data={}; const srcState={};
+let current="XAUUSD", curGroup="logam";
+const PROXY="https://api.allorigins.win/raw?url=";
+const fmtDate=s=>new Date(s+"T00:00:00").toLocaleDateString(t("dateLocale"),{day:"numeric",month:"short"});
+let scheduledHistoryPromise;
+async function scheduledHistory(){
+  if(!scheduledHistoryPromise){
+    scheduledHistoryPromise=fetch("data/market-history.json",{cache:"no-store"})
+      .then(r=>r.ok?r.json():null).catch(()=>null);
+  }
+  return scheduledHistoryPromise;
+}
+
+/* ================= TradingView widgets ================= */
+function tvEmbed(hostId, file, cfg, height, attrText, attrHref){
+  const host=$(hostId); if(!host) return;
+  host.innerHTML="";
+  const box=document.createElement("div");
+  box.className="tradingview-widget-container";
+  box.style.height=height||"100%";
+  const inner=document.createElement("div");
+  inner.className="tradingview-widget-container__widget";
+  inner.style.height="100%";
+  box.appendChild(inner);
+  // Required attribution per TradingView's free widget terms — do not remove.
+  const copy=document.createElement("div");
+  copy.className="tradingview-widget-copyright";
+  copy.style.cssText="font-size:11px;text-align:center;padding-top:4px;";
+  copy.innerHTML=`<a href="${attrHref||'https://www.tradingview.com/'}" rel="noopener nofollow" target="_blank" style="color:${themeMode==="light"?'#607487':'#8CA6BD'};text-decoration:none">${attrText||'Track all markets on TradingView'}</a>`;
+  box.appendChild(copy);
+  const s=document.createElement("script");
+  s.type="text/javascript";
+  s.src="https://s3.tradingview.com/external-embedding/embed-widget-"+file+".js";
+  s.async=true;
+  s.innerHTML=JSON.stringify(cfg);
+  box.appendChild(s);
+  host.appendChild(box);
+}
+function mountTicker(){
+  tvEmbed("tvTicker","ticker-tape",{
+    symbols: ASSETS.map(a=>({proName:a.tv, title:aName(a)})),
+    showSymbolLogo:true, isTransparent:true, displayMode:"adaptive",
+    colorTheme:tvTheme(), locale:t("tvLocale")
+  },"46px","Market data by TradingView","https://www.tradingview.com/");
+}
+function mountChart(){
+  const a=byId(current);
+  tvEmbed("tvChart","advanced-chart",{
+    autosize:true, symbol:a.tv, interval:"D", timezone:"Etc/UTC",
+    theme:tvTheme(), style:"1", locale:t("tvLocale"),
+    backgroundColor:tvBackground(), gridColor:themeMode==="light"?"rgba(24,38,53,0.08)":"rgba(255,255,255,0.06)",
+    hide_side_toolbar:false, allow_symbol_change:true, withdateranges:true,
+    details:false, watchlist: ASSETS.map(x=>x.tv), support_host:"https://www.tradingview.com"
+  }, null, aName(a)+" chart by TradingView", "https://www.tradingview.com/symbols/"+a.tv.replace(":","-")+"/");
+}
+function mountNews(){
+  const a=byId(current);
+  tvEmbed("tvNews","timeline",{
+    feedMode:"symbol", symbol: a.tv, colorTheme:tvTheme(),
+    isTransparent:true, displayMode:"regular", width:"100%", height:"100%", locale:t("tvLocale")
+  }, null, aName(a)+" news by TradingView", "https://www.tradingview.com/symbols/"+a.tv.replace(":","-")+"/news/");
+}
+function mountOverview(){
+  const list=ASSETS.filter(a=>a.grp===curGroup);
+  tvEmbed("tvOverview","symbol-overview",{
+    symbols: list.map(a=>[aName(a), a.tv+"|6M"]),
+    chartOnly:false, width:"100%", height:"100%", locale:t("tvLocale"),
+    colorTheme:tvTheme(), isTransparent:true, autosize:true,
+    showVolume:false, showMA:false, fontSize:"11", gridLineColor:"rgba(255,255,255,0.06)",
+    backgroundColor:tvBackground(), lineWidth:2, dateFormat:"dd MMM 'yy",
+    chartType:"area", lineColor:"#D9A441", bottomColor:"rgba(217,164,65,0.05)", topColor:"rgba(217,164,65,0.25)"
+  }, null, "Market data by TradingView", "https://www.tradingview.com/");
+}
+
+/* ================= daily data fetching ================= */
+async function fetchStooq(a){
+  const url="https://stooq.com/q/d/l/?s="+a.code+"&i=d";
+  const res=await fetch(PROXY+encodeURIComponent(url));
+  const txt=await res.text();
+  const lines=txt.trim().split("\n");
+  if(lines.length<20 || !/Date/i.test(lines[0])) throw new Error("unrecognized format");
+  const out=[];
+  lines.slice(1).forEach(l=>{
+    const p=l.split(","); if(p.length<5) return;
+    const c=+p[4]; if(!c||isNaN(c)) return;
+    out.push({d:p[0], c});
+  });
+  if(out.length<20) throw new Error("empty data");
+  return out.slice(-600);
+}
+async function fetchCoingecko(a){
+  const url="https://api.coingecko.com/api/v3/coins/"+a.code+"/market_chart?vs_currency=usd&days=400&interval=daily";
+  const r=await fetch(url); if(!r.ok) throw new Error(r.status);
+  const j=await r.json();
+  return j.prices.map(p=>({d:new Date(p[0]).toISOString().slice(0,10), c:+p[1]}));
+}
+async function loadAsset(a){
+  const cacheKey="sim.d."+a.id;
+  const cached=LS.get(cacheKey,null);
+  const today=new Date().toISOString().slice(0,10);
+  if(cached && cached.day===today && cached.rows && cached.rows.length){
+    data[a.id]=cached.rows; srcState[a.id]="cached"; return;
+  }
+  srcState[a.id]="loading";
+  try{
+    const scheduled=await scheduledHistory();
+    const scheduledRows=scheduled&&scheduled.assets&&scheduled.assets[a.id];
+    const rows = scheduledRows&&scheduledRows.length>20 ? scheduledRows : (a.src==="stooq" ? await fetchStooq(a) : await fetchCoingecko(a));
+    data[a.id]=rows; srcState[a.id]="ok";
+    LS.set(cacheKey,{day:today,rows});
+  }catch(e){
+    if(cached && cached.rows){ data[a.id]=cached.rows; srcState[a.id]="cached-fallback"; }
+    else { data[a.id]=null; srcState[a.id]="failed"; }
+  }
+}
+async function loadAll(){
+  setStatus("warn", t("statusFetching"));
+  const queue=ASSETS.slice();
+  const workers=Array.from({length:3},async()=>{
+    while(queue.length){ await loadAsset(queue.shift()); board(); }
+  });
+  await Promise.all(workers);
+  const ok=ASSETS.filter(a=>data[a.id]).length;
+  setStatus(ok===ASSETS.length?"on":ok?"warn":"err",
+    ok===ASSETS.length ? t("statusAllReady")+" · "+new Date().toLocaleTimeString(t("dateLocale"),{hour:"2-digit",minute:"2-digit"})
+    : ok ? ok+"/"+ASSETS.length : t("statusFailed"));
+  board(); checkNotify();
+  renderSnapshot(); renderRatios(); updateTrackRecord(); renderComparison(); renderWatchlist(); checkTargets();
+}
+function setStatus(k,m){ $("dot").className="dot "+k; $("statusText").textContent=m; }
+
+/* ================= signal engine ================= */
+function opts(){
+  return { len:+$("streakLen").value, minDrop:+$("minDrop").value||0,
+           cooldown:+$("cooldown").value||0, range:+$("rangeDays").value };
+}
+function slice(id){
+  const r=data[id]; if(!r) return null;
+  const o=opts(); return r.slice(-o.range);
+}
+function evalAt(rows,i,o){
+  if(i<o.len) return null;
+  for(let k=0;k<o.len;k++) if(!(rows[i-k].c<rows[i-k-1].c)) return null;
+  const drop=(rows[i-o.len].c-rows[i].c)/rows[i-o.len].c*100;
+  if(drop<o.minDrop) return null;
+  return {d:rows[i].d, price:rows[i].c, drop, i};
+}
+function signals(rows,o){
+  const out=[]; let last=-999;
+  for(let i=0;i<rows.length;i++){ if(i-last<o.cooldown) continue;
+    const s=evalAt(rows,i,o); if(s){ out.push(s); last=i; } }
+  return out;
+}
+function redRun(rows){
+  let n=0; for(let i=rows.length-1;i>0;i--){ if(rows[i].c<rows[i-1].c) n++; else break; } return n;
+}
+function liveTier(rows,o){
+  const run=redRun(rows);
+  if(run<3) return {key:"hold",run,score:Math.round(run/3*49)};
+  const start=rows.length-1-run;
+  const drop=start>=0?(rows[start].c-rows[rows.length-1].c)/rows[start].c*100:0;
+  if(drop<o.minDrop) return {key:"hold",run,score:49,drop};
+  if(run>=5) return {key:"strong",run,score:100,drop};
+  return {key:"watch",run,score:50,drop};
+}
+
+/* ================= signal board ================= */
+function strengthScore(rows,o,run){
+  return liveTier(rows,o).score;
+}
+function strengthColor(sc){ return sc>=67 ? "#39B58C" : sc>=34 ? "#D9A441" : "#3a4f61"; }
+function strengthBar(sc){
+  return `<div class="strength"><div class="track"><div class="fill" style="width:${sc}%;background:${strengthColor(sc)}"></div></div><span class="num">${sc}</span></div>`;
+}
+
+function board(){
+  const o=opts();
+  const table=$("boardTable"); if(!table) return;
+  const body=table.tBodies[0];
+  body.innerHTML=ASSETS.map(a=>{
+    const rows=slice(a.id);
+    if(!rows) return `<tr><td>${aName(a)}</td><td colspan="7" class="note">${srcState[a.id]==="loading"?t("loadingCell"):t("dataUnavailable")}</td></tr>`;
+    const last=rows[rows.length-1], prev=rows[rows.length-2];
+    const d=prev?(last.c-prev.c)/prev.c*100:0;
+    const run=redRun(rows);
+    const sigs=signals(rows,o);
+    const tier=liveTier(rows,o);
+    const live=tier.key!=="hold";
+    const score=tier.score;
+    const bars=rows.slice(-10).map((r,i,arr)=>{
+      if(!i) return `<i style="height:6px"></i>`;
+      const ch=(r.c-arr[i-1].c)/arr[i-1].c;
+      const h=clamp(4+Math.abs(ch)*900,4,18);
+      return `<i class="${ch<0?"r":ch>0?"g":""}" style="height:${h.toFixed(0)}px"></i>`;
+    }).join("");
+    return `<tr class="${live?"sig":""}">
+      <td><b>${aName(a)}</b><br><span class="note">${aNote(a)}</span></td>
+      <td>${fmtCurr(last.c)}<br><span class="note">${fmtDate(last.d)}</span></td>
+      <td class="${d>0?"up":d<0?"down":"flat"}">${prev?pctFmt(d):"—"}</td>
+      <td><span class="bars">${bars}</span></td>
+      <td>${t("days")(run)}</td>
+      <td>${strengthBar(score)}</td>
+      <td>${tier.key==="strong"?'<span class="pill strong">100% BUY</span>':tier.key==="watch"?'<span class="pill watch">50% BUY</span>':'<span class="pill">'+t("statusHold")+'</span>'}</td>
+      <td>${sigs.length}×</td></tr>`;
+  }).join("");
+}
+
+/* ================= currency conversion ================= */
+let currCode = LS.get("sim.currency","USD");
+let fxRates = null;
+const CURR_SYM = {USD:"$",EUR:"€",GBP:"£",IDR:"Rp",INR:"₹",CNY:"¥",JPY:"¥"};
+const CURR_DEC = {USD:2,EUR:2,GBP:2,IDR:0,INR:2,CNY:2,JPY:0};
+async function loadFx(){
+  const cacheKey="fx.rates";
+  const cached=LS.get(cacheKey,null);
+  const today=new Date().toISOString().slice(0,10);
+  if(cached && cached.day===today){ fxRates=cached.rates; return; }
+  try{
+    const r=await fetch("https://open.er-api.com/v6/latest/USD");
+    const j=await r.json();
+    if(j && j.rates){ fxRates=j.rates; LS.set(cacheKey,{day:today,rates:j.rates}); }
+  }catch(e){}
+}
+function convert(usdVal){
+  if(currCode==="USD" || !fxRates || !fxRates[currCode]) return usdVal;
+  return usdVal * fxRates[currCode];
+}
+function fmtCurr(usdVal){
+  const v = convert(usdVal);
+  const dec = CURR_DEC[currCode]!==undefined ? CURR_DEC[currCode] : 2;
+  const sym = CURR_SYM[currCode] || "$";
+  return sym + fmt(v,dec);
+}
+
+/* ================= at-a-glance snapshot ================= */
+function renderSnapshot(){
+  const box=$("snapshot"); if(!box) return;
+  const g=slice("XAUUSD"), s=slice("XAGUSD");
+  if(!g || !s){ box.innerHTML=""; return; }
+  const o=opts();
+  const mk=(a,rows)=>{
+    const last=rows[rows.length-1], prev=rows[rows.length-2];
+    const d = prev ? (last.c-prev.c)/prev.c*100 : 0;
+    const tier=liveTier(rows,o);
+    const badge=tier.key==="strong"?'<span class="pill strong">100% BUY</span>':tier.key==="watch"?'<span class="pill watch">50% BUY</span>':'<span class="pill">HOLD</span>';
+    return `<div class="snap-card">
+      <div class="lbl">${aName(a)} · ${aNote(a)}</div>
+      <div class="val">${fmtCurr(last.c)}</div>
+      <div class="row between"><div class="chg ${d>0?"up":d<0?"down":"flat"}">${prev?pctFmt(d):"—"}</div>${badge}</div>
+    </div>`;
+  };
+  box.innerHTML = mk(byId("XAUUSD"), g) + mk(byId("XAGUSD"), s);
+}
+
+/* ================= cross-asset ratios ================= */
+function renderRatios(){
+  const box=$("ratioStrip"); if(!box) return;
+  const g=slice("XAUUSD"), s=slice("XAGUSD"), gm=slice("GDX"), px=slice("PAXG");
+  if(!g||!s||!gm||!px){ box.innerHTML=`<div class="stat"><div class="l">${t("loadingCell")}</div></div>`; return; }
+  const gs=commonSeries(g,s),gg=commonSeries(g,gm),gp=commonSeries(g,px);
+  if(gs.length<2||gg.length<2||!gp.length){ box.innerHTML=`<div class="stat"><div class="l">Insufficient aligned dates</div></div>`; return; }
+  const gsLast=gs[gs.length-1],gsPrev=gs[gs.length-2],ggLast=gg[gg.length-1],ggPrev=gg[gg.length-2],gpLast=gp[gp.length-1];
+  const ratioGS = gsLast.a/gsLast.b, ratioGM = ggLast.a/ggLast.b;
+  const ratioGSPrev = gsPrev.a/gsPrev.b, ratioGMPrev = ggPrev.a/ggPrev.b;
+  const chg=(cur,prev)=> prev ? (cur-prev)/prev*100 : null;
+  const dGS=chg(ratioGS,ratioGSPrev), dGM=chg(ratioGM,ratioGMPrev);
+  const paxgPrem = (gpLast.b-gpLast.a)/gpLast.a*100;
+  const card=(label,note,val,delta)=>`<div class="stat">
+      <div class="n">${val}</div><div class="l">${label}</div>
+      ${delta!=null?`<div class="${delta>0?"up":delta<0?"down":"flat"}" style="font-size:11.5px;margin-top:3px">${pctFmt(delta)}</div>`:""}
+      <div class="note" style="margin-top:4px">${note}</div></div>`;
+  box.innerHTML = card(t("ratioGS"), t("ratioGSNote"), ratioGS.toFixed(2), dGS)
+    + card(t("ratioGM"), t("ratioGMNote"), ratioGM.toFixed(2), dGM)
+    + card(t("ratioPaxg"), t("ratioPaxgNote"), pctFmt(paxgPrem), null);
+}
+
+/* ================= transparent track record ================= */
+function updateTrackRecord(){
+  const el=$("trackRecord"); if(!el) return;
+  const o=opts();
+  const horizons=[5,10,20];
+  const stats=ASSETS.map(a=>{
+    const rows=slice(a.id); if(!rows) return null;
+    const sigs=signals(rows,o);
+    const result={a,count:sigs.length};
+    horizons.forEach(h=>{
+      const vals=sigs.filter(s=>s.i+h<rows.length).map(s=>(rows[s.i+h].c-s.price)/s.price*100);
+      result[h]={n:vals.length,avg:vals.length?vals.reduce((x,y)=>x+y,0)/vals.length:null,win:vals.length?vals.filter(v=>v>0).length/vals.length*100:null};
+    });
+    return result;
+  }).filter(Boolean);
+  const usable=stats.reduce((n,s)=>n+s[10].n,0);
+  el.textContent=t("backtestIntro")(o.len,usable);
+  $("backtestTable").innerHTML=`<thead><tr><th>${t("thBAsset")}</th><th>${t("thBSignals")}</th>${horizons.map(h=>`<th>${t("colAvg")(h)}</th><th>${t("colWin")(h)}</th>`).join("")}</tr></thead><tbody>${stats.map(s=>`<tr><td>${aName(s.a)}</td><td>${s.count}</td>${horizons.map(h=>`<td>${s[h].avg==null?"—":pctFmt(s[h].avg)}</td><td>${s[h].win==null?"—":s[h].win.toFixed(0)+"%"}${s[h].n>0&&s[h].n<5?` <span title="${t("smallSampleTitle")}">*</span>`:''}</td>`).join("")}</tr>`).join("")}</tbody>`;
+}
+
+/* ================= normalized comparison ================= */
+function fillAssetSelect(id,selected){
+  const el=$(id); if(!el) return;
+  el.innerHTML=ASSETS.map(a=>`<option value="${a.id}">${aName(a)}</option>`).join("");
+  el.value=selected;
+}
+function commonSeries(aRows,bRows){
+  const bm=new Map(bRows.map(r=>[r.d,r.c]));
+  return aRows.filter(r=>bm.has(r.d)).map(r=>({d:r.d,a:r.c,b:bm.get(r.d)}));
+}
+function renderComparison(){
+  const canvas=$("compareCanvas"); if(!canvas||!$("compareA")||!$("compareB")) return;
+  const a=byId($("compareA").value), b=byId($("compareB").value);
+  const ctx=canvas.getContext("2d"), ar=slice(a.id), br=slice(b.id);
+  ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle="#0B1B29"; ctx.fillRect(0,0,canvas.width,canvas.height);
+  if(!ar||!br){ $("compareNote").textContent=t("compareErrData"); return; }
+  const series=commonSeries(ar,br).slice(-250);
+  if(series.length<20){ $("compareNote").textContent=t("compareErrDates"); return; }
+  const a0=series[0].a,b0=series[0].b, vals=series.flatMap(r=>[r.a/a0*100,r.b/b0*100]);
+  let min=Math.min(...vals),max=Math.max(...vals); if(max===min){max++;min--;}
+  const pad={l:48,r:20,t:22,b:30}, w=canvas.width-pad.l-pad.r,h=canvas.height-pad.t-pad.b;
+  ctx.strokeStyle="#1E3A50";ctx.lineWidth=1;ctx.fillStyle="#8CA6BD";ctx.font="13px IBM Plex Sans";
+  for(let i=0;i<=4;i++){const y=pad.t+h*i/4,v=max-(max-min)*i/4;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(canvas.width-pad.r,y);ctx.stroke();ctx.fillText(v.toFixed(0),8,y+4);}
+  const draw=(key,color)=>{ctx.strokeStyle=color;ctx.lineWidth=3;ctx.beginPath();series.forEach((r,i)=>{const x=pad.l+w*i/(series.length-1),v=r[key]/(key==="a"?a0:b0)*100,y=pad.t+(max-v)/(max-min)*h;i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();};
+  draw("a","#D9A441");draw("b","#5FA8D3");
+  ctx.fillStyle="#D9A441";ctx.fillText(aName(a),pad.l,16);ctx.fillStyle="#5FA8D3";ctx.fillText(aName(b),pad.l+180,16);
+  $("compareNote").textContent=t("compareResult")(series[0].d, series[series.length-1].d);
+}
+
+/* ================= local watchlist ================= */
+let watchPositions=LS.get("sim.watchPositions",[]);
+function renderWatchlist(){
+  const el=$("watchTable"); if(!el) return;
+  el.innerHTML=`<thead><tr><th data-i18n="thAsset">${t("thAsset")}</th><th>${t("watchThEntry")}</th><th>${t("watchThLatest")}</th><th>${t("watchThQty")}</th><th>${t("watchThPL")}</th><th></th></tr></thead><tbody>${watchPositions.length?watchPositions.map(p=>{
+    const a=byId(p.asset), rows=slice(p.asset), latest=rows?rows[rows.length-1].c:null, pl=latest==null?null:(latest-p.entry)*p.qty, pc=latest==null?null:(latest-p.entry)/p.entry*100;
+    return `<tr><td>${a?aName(a):p.asset}</td><td>$${fmt(p.entry,2)}</td><td>${latest==null?"—":"$"+fmt(latest,2)}</td><td>${fmt(p.qty,4)}</td><td class="${pl>0?'up':pl<0?'down':'flat'}">${pl==null?"—":(pl>=0?"+":"-")+"$"+fmt(Math.abs(pl),2)+" ("+pctFmt(pc)+")"}</td><td><button class="ghost watch-remove" data-id="${p.id}" aria-label="Remove position">×</button></td></tr>`;
+  }).join(""):`<tr><td colspan="6" class="note">${t("watchEmpty")}</td></tr>`}</tbody>`;
+  el.querySelectorAll(".watch-remove").forEach(b=>b.onclick=()=>{watchPositions=watchPositions.filter(p=>p.id!==b.dataset.id);LS.set("sim.watchPositions",watchPositions);renderWatchlist();});
+}
+function addWatchPosition(){
+  const asset=$("watchAsset").value,entry=+$("watchEntry").value,qty=+$("watchQty").value;
+  if(!asset||entry<=0||qty<=0) return;
+  watchPositions.push({id:Date.now().toString(36),asset,entry,qty});LS.set("sim.watchPositions",watchPositions);$("watchEntry").value="";renderWatchlist();
+}
+
+/* ================= CSV export ================= */
+function exportCSV(){
+  const o=opts();
+  const header=["Asset","Close (USD)","Day % Change","Red Streak (days)","Strength Score","Status","Signals in Range"];
+  const rows=[header];
+  ASSETS.forEach(a=>{
+    const r=slice(a.id); if(!r) return;
+    const last=r[r.length-1], prev=r[r.length-2];
+    const d=prev?((last.c-prev.c)/prev.c*100).toFixed(2):"";
+    const run=redRun(r);
+    const score=strengthScore(r,o,run);
+    const tier=liveTier(r,o);
+    rows.push([aName(a), last.c.toFixed(a.dec), d, run, score, tier.key==="strong"?"100% BUY":tier.key==="watch"?"50% BUY":"HOLD", signals(r,o).length]);
+  });
+  const csv=rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement("a");
+  link.href=url; link.download="gold-signal-board-"+new Date().toISOString().slice(0,10)+".csv";
+  document.body.appendChild(link); link.click(); document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+/* ================= custom price target alerts ================= */
+let targets = LS.get("sim.targets", []);
+function renderTargetSelect(){
+  const el=$("targetAsset"); if(!el) return;
+  el.innerHTML = ASSETS.map(a=>`<option value="${a.id}">${aName(a)}</option>`).join("");
+}
+function renderTargetList(){
+  const box=$("targetList"); if(!box) return;
+  if(!targets.length){ box.innerHTML = `<p class="note">${t("targetEmpty")}</p>`; return; }
+  box.innerHTML = targets.map(tg=>{
+    const a=byId(tg.asset); if(!a) return "";
+    const dirLabel = t(tg.dir==="below" ? "targetBelow" : "targetAbove");
+    return `<div class="target-item"><span>${aName(a)} — ${dirLabel} $${tg.price}</span><button class="x" data-id="${tg.id}" aria-label="remove">×</button></div>`;
+  }).join("");
+  box.querySelectorAll(".x").forEach(b=>b.onclick=()=>{
+    targets = targets.filter(x=>x.id!==b.dataset.id);
+    LS.set("sim.targets", targets);
+    renderTargetList();
+  });
+}
+function addTarget(){
+  const asset=$("targetAsset").value, dir=$("targetDir").value, price=+$("targetPrice").value;
+  if(!price || price<=0) return;
+  targets.push({id:Date.now().toString(36), asset, dir, price, fired:false});
+  LS.set("sim.targets", targets);
+  $("targetPrice").value="";
+  renderTargetList();
+}
+function checkTargets(){
+  let changed=false;
+  targets.forEach(tg=>{
+    if(tg.fired) return;
+    const rows=slice(tg.asset); if(!rows) return;
+    const last=rows[rows.length-1].c;
+    const hit = tg.dir==="below" ? last<=tg.price : last>=tg.price;
+    if(hit){
+      tg.fired=true; changed=true;
+      const a=byId(tg.asset);
+      const dirLabel=t(tg.dir==="below"?"targetBelow":"targetAbove").toLowerCase();
+      if("Notification" in window && Notification.permission==="granted"){
+        try{ new Notification(t("notifMsgTitle"), {body: `${aName(a)} ${dirLabel} $${tg.price}.`, tag:"target-"+tg.id}); }catch(e){}
+      }
+    }
+  });
+  if(changed){ LS.set("sim.targets", targets); renderTargetList(); }
+}
+
+/* ================= notifications ================= */
+let notified = LS.get("sim.notified", []);
+function liveSignalsNow(){
+  const o=opts(); const out=[];
+  ASSETS.forEach(a=>{ const rows=slice(a.id); if(!rows) return;
+    const tier=liveTier(rows,o);
+    if(tier.key!=="hold") out.push({a,s:{...tier,price:rows[rows.length-1].c}}); });
+  return out;
+}
+function signalText(hits){
+  const lines=hits.map(({a,s})=>`${aName(a)}: ${s.key==="strong"?"100% BUY":"50% BUY"}, down ${s.drop.toFixed(2)}% over ${s.run} red days, price ${fmt(s.price,a.dec)}`);
+  return t("signalHeader")+"\n"+lines.join("\n");
+}
+function sendBrowserNotif(hits){
+  if(!("Notification" in window) || Notification.permission!=="granted") return;
+  try{ new Notification(t("notifMsgTitle"), { body: t("notifMsgBody")(hits.map(h=>aName(h.a)).join(", ")), tag:"signal" }); }catch(e){}
+}
+async function checkNotify(){
+  if(!("Notification" in window) || Notification.permission!=="granted") return;
+  const hits=liveSignalsNow();
+  if(!hits.length) return;
+  const today=new Date().toISOString().slice(0,10);
+  const key=today+":"+hits.map(h=>h.a.id).sort().join(",");
+  if(notified.includes(key)) return;
+  notified.unshift(key); notified=notified.slice(0,20); LS.set("sim.notified",notified);
+  sendBrowserNotif(hits);
+}
+
+/* ================= UI ================= */
+function buildChips(){
+  $("assetChips").innerHTML=ASSETS.map(a=>
+    `<button class="chip" data-id="${a.id}" aria-pressed="${a.id===current}">${aName(a)}<span class="g">${aNote(a)}</span></button>`).join("");
+  $("assetChips").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{
+    $("assetChips").querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed","false"));
+    b.setAttribute("aria-pressed","true"); current=b.dataset.id; mountChart(); newsMounted=true; mountNews();
+  });
+  $("segGroup").innerHTML=GROUP_IDS.map(g=>`<button data-g="${g}" aria-pressed="${g===curGroup}">${t("groups")[g]}</button>`).join("");
+  $("segGroup").querySelectorAll("button").forEach(b=>b.onclick=()=>{
+    $("segGroup").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed","false"));
+    b.setAttribute("aria-pressed","true"); curGroup=b.dataset.g; overviewMounted=true; mountOverview();
+  });
+}
+
+const CFG=["streakLen","minDrop","cooldown","rangeDays"];
+function loadCfg(){ const c=LS.get("sim.cfg",{}); CFG.forEach(k=>{ if(c[k]!==undefined&&$(k)) $(k).value=c[k]; }); }
+function saveCfg(){ const c={}; CFG.forEach(k=>{ if($(k)) c[k]=$(k).value; }); LS.set("sim.cfg",c); }
+
+/* ================= lazy-load below-the-fold widgets ================= */
+let newsMounted=false, overviewMounted=false;
+function setupLazyWidgets(){
+  const nEl=$("tvNews"), oEl=$("tvOverview");
+  if(!("IntersectionObserver" in window)){ mountNews(); mountOverview(); newsMounted=overviewMounted=true; return; }
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      if(e.target.id==="tvNews" && !newsMounted){ newsMounted=true; mountNews(); io.unobserve(e.target); }
+      if(e.target.id==="tvOverview" && !overviewMounted){ overviewMounted=true; mountOverview(); io.unobserve(e.target); }
+    });
+  }, {rootMargin:"200px"});
+  if(nEl) io.observe(nEl);
+  if(oEl) io.observe(oEl);
+}
+
+/* ================= cookie consent + analytics (GA4) ================= */
+// Leave empty until analytics is configured and the privacy policy is updated.
+const GA_MEASUREMENT_ID = "";
+function loadAnalytics(){
+  if(!GA_MEASUREMENT_ID) return;
+  const s1=document.createElement("script");
+  s1.async=true; s1.src="https://www.googletagmanager.com/gtag/js?id="+GA_MEASUREMENT_ID;
+  document.head.appendChild(s1);
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=function(){dataLayer.push(arguments);};
+  gtag("js", new Date());
+  gtag("config", GA_MEASUREMENT_ID, {anonymize_ip:true});
+}
+function setupCookieConsent(){
+  if(!GA_MEASUREMENT_ID) return;
+  const consent=LS.get("cookie.consent", null);
+  if(consent==="accepted") loadAnalytics();
+  if(consent===null) $("cookieBar").classList.add("show");
+  $("cookieAccept").onclick=()=>{ LS.set("cookie.consent","accepted"); $("cookieBar").classList.remove("show"); loadAnalytics(); };
+  $("cookieReject").onclick=()=>{ LS.set("cookie.consent","rejected"); $("cookieBar").classList.remove("show"); };
+}
+
+function fullRefresh(){
+  applyI18n(); buildChips(); board();
+  renderSnapshot(); renderRatios(); updateTrackRecord(); renderTargetSelect(); renderTargetList(); renderComparison(); renderWatchlist();
+  mountTicker(); mountChart();
+  if(newsMounted) mountNews();
+  if(overviewMounted) mountOverview();
+}
+
+function bind(){
+  CFG.forEach(k=>$(k)&&$(k).addEventListener("change",()=>{ saveCfg(); board(); updateTrackRecord(); renderComparison(); checkNotify(); }));
+  if($("btnReload")) $("btnReload").onclick=()=>{ ASSETS.forEach(a=>localStorage.removeItem("sim.d."+a.id)); loadAll(); };
+
+  $("langSel").onchange = ()=>{
+    lang = $("langSel").value; if(!I18N[lang]) lang="en";
+    LS.set("sim.lang", lang);
+    fullRefresh();
+  };
+
+  document.querySelectorAll("[data-theme-choice]").forEach(button=>button.onclick=()=>{
+    themeMode=button.dataset.themeChoice==="light"?"light":"dark";
+    LS.set("sim.theme",themeMode);applyTheme();
+    mountTicker();mountChart();
+    if(newsMounted) mountNews();
+    if(overviewMounted) mountOverview();
+  });
+
+  $("notifBtn").onclick = async ()=>{
+    if(!("Notification" in window)){
+      $("notifStatus").textContent=t("notifNotSupported"); $("notifStatus").className="status-msg err"; return;
+    }
+    const perm = await Notification.requestPermission();
+    if(perm==="granted"){
+      $("notifStatus").textContent=t("notifGranted"); $("notifStatus").className="status-msg ok";
+    } else {
+      $("notifStatus").textContent=t("notifDenied"); $("notifStatus").className="status-msg err";
+    }
+  };
+
+  $("currSel").onchange = async ()=>{
+    currCode = $("currSel").value; LS.set("sim.currency", currCode);
+    if(currCode!=="USD" && !fxRates) await loadFx();
+    board(); renderSnapshot();
+  };
+
+  if($("btnExport")) $("btnExport").onclick = exportCSV;
+
+  $("btnAddTarget").onclick = addTarget;
+  if($("btnCompare")) $("btnCompare").onclick = renderComparison;
+  $("btnWatch").onclick = addWatchPosition;
+}
+
+applyTheme(); applyI18n(); buildChips(); loadCfg(); bind();
+$("currSel").value = currCode;
+renderTargetSelect(); renderTargetList();
+fillAssetSelect("compareA","XAUUSD"); fillAssetSelect("compareB","GDX"); fillAssetSelect("watchAsset","XAUUSD"); renderWatchlist();
+if("Notification" in window && Notification.permission==="granted"){
+  $("notifStatus").textContent=t("notifGranted"); $("notifStatus").className="status-msg ok";
+}
+mountTicker(); mountChart(); setupLazyWidgets(); setupCookieConsent();
+$("fyear").textContent = new Date().getFullYear();
+if(currCode!=="USD") loadFx().then(()=>{ board(); renderSnapshot(); });
+loadAll();
+setInterval(loadAll, 30*60000);
+if("serviceWorker" in navigator && location.protocol.startsWith("http")){
+  navigator.serviceWorker.register("sw.js").catch(()=>{});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Gold Signal Simulator
+
+Gold Signal Simulator is an educational multi-asset dashboard covering spot gold, silver, gold-mining shares, gold and silver ETFs, and gold-backed cryptoassets.
+
+Core rule:
+- 0–2 consecutive lower daily closes: HOLD
+- 3–4 consecutive lower daily closes: 50% BUY / WATCH
+- 5 or more consecutive lower daily closes: 100% BUY / STRONG
+
+The percentage labels are rule stages, not probabilities, guarantees, or individualized position-size recommendations.
+
+Primary pages:
+- /index.html — charts, signals, backtests, ratios, watchlist and comparison
+- /methodology.html — calculation rules, limitations and version history
+- /privacy.html — local storage and third-party data disclosures
+
+All content is educational and does not constitute financial advice.
