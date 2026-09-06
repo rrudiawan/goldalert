@@ -9,16 +9,26 @@ const ASSETS=[
   {id:"XAUT",src:"coingecko",code:"tether-gold"}
 ];
 
+// A realistic browser User-Agent avoids Stooq/CoinGecko's bot-blocking of default
+// server-side HTTP clients (both services have been known to reject requests that
+// look like they come from scripts rather than browsers).
+const BROWSER_HEADERS={
+  "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+  "Accept":"text/html,application/json,text/plain,*/*"
+};
+
 async function stooq(code){
-  const r=await fetch(`https://stooq.com/q/d/l/?s=${code}&i=d`);
+  const r=await fetch(`https://stooq.com/q/d/l/?s=${code}&i=d`,{headers:BROWSER_HEADERS});
   if(!r.ok) throw new Error(`Stooq ${r.status}`);
-  const lines=(await r.text()).trim().split(/\r?\n/);
+  const text=await r.text();
+  if(/exceeded the daily hits limit/i.test(text)) throw new Error("Stooq daily limit exceeded");
+  const lines=text.trim().split(/\r?\n/);
   const rows=lines.slice(1).map(line=>{const p=line.split(",");return {d:p[0],c:Number(p[4])};}).filter(r=>r.d&&Number.isFinite(r.c)&&r.c>0);
-  if(rows.length<20) throw new Error("Stooq returned insufficient history");
+  if(rows.length<20) throw new Error(`Stooq returned insufficient history (${rows.length} rows)`);
   return rows.slice(-600);
 }
 async function coingecko(code){
-  const r=await fetch(`https://api.coingecko.com/api/v3/coins/${code}/market_chart?vs_currency=usd&days=365&interval=daily`);
+  const r=await fetch(`https://api.coingecko.com/api/v3/coins/${code}/market_chart?vs_currency=usd&days=365&interval=daily`,{headers:BROWSER_HEADERS});
   if(!r.ok) throw new Error(`CoinGecko ${r.status}`);
   const j=await r.json();
   const byDay=new Map(j.prices.map(p=>[new Date(p[0]).toISOString().slice(0,10),Number(p[1])]));
@@ -37,9 +47,17 @@ for(const asset of ASSETS){
   try{
     const rows=asset.src==="stooq"?await stooq(asset.code):await coingecko(asset.code);
     assets[asset.id]=rows; signals[asset.id]=tier(rows);
-  }catch(error){errors[asset.id]=String(error.message||error);}
+    console.log(`OK  ${asset.id}: ${rows.length} rows, latest close ${rows.at(-1).c} on ${rows.at(-1).d}`);
+  }catch(error){
+    errors[asset.id]=String(error.message||error);
+    console.log(`FAIL ${asset.id}: ${errors[asset.id]}`);
+  }
 }
-if(Object.keys(assets).length<8) throw new Error(`Only ${Object.keys(assets).length} assets updated; refusing to publish incomplete data.`);
+if(Object.keys(assets).length<8){
+  const summary=Object.entries(errors).map(([id,msg])=>`${id}: ${msg}`).join(" | ");
+  console.log(`::error::Only ${Object.keys(assets).length}/${ASSETS.length} assets updated, refusing to publish. ${summary}`);
+  throw new Error(`Only ${Object.keys(assets).length} assets updated; refusing to publish incomplete data.`);
+}
 await fs.mkdir("dist/data",{recursive:true});
 const generatedAt=new Date().toISOString();
 await fs.writeFile("dist/data/market-history.json",JSON.stringify({generatedAt,assets,errors}));
