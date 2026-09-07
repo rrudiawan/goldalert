@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0B1724">
-<title>GoldAlert — Multi-Asset Gold Signal Simulator</title>
-<meta name="description" content="Free real-time gold, silver, mining stock, ETF and gold-backed crypto price simulator with a rule-based buy signal for multi-day price pullbacks. Live TradingView charts, news, and alerts.">
+<title>GoldAlert: Gold Price Alerts & Multi-Asset Signal Tracker</title>
+<meta name="description" content="Free gold price alert tool tracking gold, silver, mining stocks, ETFs and gold-backed crypto in real time, with a rule-based buy signal for multi-day pullbacks.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://goldalert.org/">
 <link rel="manifest" href="manifest.webmanifest">
@@ -609,7 +609,7 @@ function applyTheme(){
 /* ================= i18n ================= */
 const I18N = {
 en:{
-  title:"Gold Signal Simulator — Multi-Asset",
+  title:"GoldAlert", pageTitle:"GoldAlert: Gold Price Alerts & Multi-Asset Signal Tracker",
   subtitle:"Gold, silver, mining stocks, ETFs, and gold-backed crypto — real-time charts plus a rule-based buy signal for multi-day pullbacks",
   statusLoading:"Loading…",
   adLeaderboard:"Ad Space 728×90 (Leaderboard)", adInline:"Ad Space (responsive)", adRect:"Ad Space 300×250",
@@ -705,7 +705,7 @@ en:{
   notifSub2:"Browser alerts work instantly while this page is open. A Telegram channel for alerts that arrive even when your browser is closed is coming soon."
 },
 zh:{
-  title:"黄金信号模拟器 — 多资产",
+  title:"GoldAlert", pageTitle:"GoldAlert：黄金价格提醒与多资产信号追踪工具",
   subtitle:"黄金、白银、矿业股、ETF 与黄金挂钩加密货币 — 实时图表，加上基于多日回调规则的买入信号",
   statusLoading:"加载中…",
   adLeaderboard:"广告位 728×90（横幅）", adInline:"广告位（自适应）", adRect:"广告位 300×250",
@@ -800,7 +800,7 @@ zh:{
   notifSub2:"只要此页面保持打开，浏览器提醒会立即生效。可在浏览器关闭时也能收到提醒的 Telegram 频道即将推出。"
 },
 es:{
-  title:"Simulador de Señales de Oro — Multiactivo",
+  title:"GoldAlert", pageTitle:"GoldAlert: Alertas de Precio del Oro y Rastreador de Señales",
   subtitle:"Oro, plata, mineras auríferas, ETF y criptomonedas respaldadas por oro — gráficos en tiempo real y una señal de compra basada en caídas consecutivas",
   statusLoading:"Cargando…",
   adLeaderboard:"Espacio publicitario 728×90 (Leaderboard)", adInline:"Espacio publicitario (responsivo)", adRect:"Espacio publicitario 300×250",
@@ -895,7 +895,7 @@ es:{
   notifSub2:"Las alertas del navegador funcionan al instante mientras esta página está abierta. Un canal de Telegram para alertas que lleguen incluso con el navegador cerrado estará disponible próximamente."
 },
 hi:{
-  title:"गोल्ड सिग्नल सिम्युलेटर — मल्टी-एसेट",
+  title:"GoldAlert", pageTitle:"GoldAlert: गोल्ड प्राइस अलर्ट और मल्टी-एसेट सिग्नल ट्रैकर",
   subtitle:"सोना, चांदी, माइनिंग स्टॉक्स, ETF और गोल्ड-बैक्ड क्रिप्टो — रीयल-टाइम चार्ट्स के साथ लगातार गिरावट पर आधारित बाय सिग्नल",
   statusLoading:"लोड हो रहा है…",
   adLeaderboard:"विज्ञापन स्थान 728×90 (लीडरबोर्ड)", adInline:"विज्ञापन स्थान (रेस्पॉन्सिव)", adRect:"विज्ञापन स्थान 300×250",
@@ -990,7 +990,7 @@ hi:{
   notifSub2:"जब तक यह पेज खुला है, ब्राउज़र अलर्ट तुरंत काम करते हैं। ब्राउज़र बंद होने पर भी अलर्ट देने वाला टेलीग्राम चैनल जल्द आ रहा है।"
 },
 ar:{
-  title:"محاكي إشارات الذهب — متعدد الأصول",
+  title:"GoldAlert", pageTitle:"GoldAlert: تنبيهات سعر الذهب ومتتبع إشارات متعدد الأصول",
   subtitle:"الذهب والفضة وأسهم التعدين وصناديق المؤشرات المتداولة والعملات الرقمية المدعومة بالذهب — رسوم بيانية لحظية إلى جانب إشارة شراء مبنية على تراجع متتالٍ",
   statusLoading:"جارٍ التحميل…",
   adLeaderboard:"مساحة إعلانية 728×90 (لوحة رئيسية)", adInline:"مساحة إعلانية (متجاوبة)", adRect:"مساحة إعلانية 300×250",
@@ -1085,7 +1085,7 @@ ar:{
   notifSub2:"تعمل إشعارات المتصفح فورًا طالما هذه الصفحة مفتوحة. قناة تيليجرام للتنبيهات التي تصل حتى مع إغلاق المتصفح ستتوفر قريبًا."
 },
 ru:{
-  title:"Симулятор золотых сигналов — мультиактивный",
+  title:"GoldAlert", pageTitle:"GoldAlert: Оповещения о цене золота и трекер сигналов",
   subtitle:"Золото, серебро, акции золотодобытчиков, ETF и криптовалюты, обеспеченные золотом — графики в реальном времени и сигнал на покупку по правилу серии падений",
   statusLoading:"Загрузка…",
   adLeaderboard:"Рекламное место 728×90 (лидерборд)", adInline:"Рекламное место (адаптивное)", adRect:"Рекламное место 300×250",
@@ -1189,7 +1189,7 @@ const t = k => (I18N[lang]&&I18N[lang][k]!==undefined) ? I18N[lang][k] : I18N.en
 function applyI18n(){
   document.documentElement.lang = lang;
   document.documentElement.dir = lang==="ar" ? "rtl" : "ltr";
-  document.title = t("title");
+  document.title = t("pageTitle");
   document.querySelectorAll("[data-i18n]").forEach(el=>{ el.textContent = t(el.getAttribute("data-i18n")); });
   document.querySelectorAll("[data-i18n-ph]").forEach(el=>{ el.placeholder = t(el.getAttribute("data-i18n-ph")); });
   $("langSel").value = lang;
