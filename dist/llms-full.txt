@@ -76,6 +76,17 @@ liquidity.
 - This site does not provide personalized investment advice, price
   predictions, or buy/sell recommendations for real money.
 
+## Articles
+Eight educational articles are published under /articles/, indexed at /articles.html:
+- "How to Read a Gold Buy Signal" — explains the streak rule, why daily closes are used, and how to read the backtest responsibly.
+- "Gold Stocks vs. ETFs vs. Gold-Backed Crypto" — compares physical bullion, mining shares, ETFs, and gold-backed tokens.
+- "Backtesting a Pullback Rule: What the Numbers Actually Show" — how to interpret the forward-return backtest table, sample-size caveats, and why average return and win rate must be read together.
+- "What Moves the Gold Price Day to Day" — real interest rates, the US dollar, safe-haven demand, central bank buying, and physical demand.
+- "Why Silver Is More Volatile Than Gold" — market size, industrial demand, and the gold/silver ratio.
+- "How Mining Stocks Amplify Gold Price Moves" — the cost-margin leverage mechanism and its company-specific risks.
+- "GLD vs. Physical Gold: Costs and Trade-offs" — expense ratios, dealer premiums, liquidity, and custody differences.
+- "PAXG vs. XAUT: Which Gold-Backed Token Fits You" — issuer, redemption terms, and exchange-availability differences between the two gold-backed tokens this site tracks.
+
 ## Contact and policies
 See /about.html for background, /contact.html for how to reach the
 operator, /methodology.html for the full signal methodology and version
