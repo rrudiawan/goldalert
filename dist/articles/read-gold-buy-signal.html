@@ -1,28 +1,38 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>How to Read a Gold Buy Signal | GoldAlert</title><meta name="description" content="Learn how 3-day watch and 5-day strong-buy gold pullback signals are calculated, tested and interpreted."><link rel="canonical" href="https://goldalert.org/articles/read-gold-buy-signal.html"><link rel="icon" type="image/svg+xml" href="../icons/logo.svg"><link rel="stylesheet" href="../static-page.css"><script type="application/ld+json">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>How to Read a Gold Buy Signal | GoldAlert</title><meta name="description" content="Learn how 3-day watch and 5-day strong-buy gold pullback signals are calculated, tested and interpreted."><link rel="canonical" href="https://goldalert.org/articles/read-gold-buy-signal.html"><link rel="icon" type="image/svg+xml" href="../icons/logo.svg"><link rel="stylesheet" href="../static-page.css">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "How to Read a Gold Buy Signal",
   "description": "Learn how the 3-day watch and 5-day strong-buy pullback signals are calculated, tested and interpreted.",
   "datePublished": "2026-09-01",
-  "dateModified": "2026-09-01",
-  "author": {
-    "@type": "Organization",
-    "name": "GoldAlert"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "GoldAlert",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://goldalert.org/icons/icon-512.png"
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://goldalert.org/articles/read-gold-buy-signal.html"
-  },
+  "dateModified": "2026-09-07",
+  "author": {"@type": "Organization", "name": "GoldAlert"},
+  "publisher": {"@type": "Organization", "name": "GoldAlert", "logo": {"@type": "ImageObject", "url": "https://goldalert.org/icons/icon-512.png"}},
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://goldalert.org/articles/read-gold-buy-signal.html"},
   "image": "https://goldalert.org/icons/og-image.png"
 }
 </script>
-</head><body><article class="page"><nav><a href="../index.html">Simulator</a><a href="../articles.html">Articles</a><a href="../methodology.html">Methodology</a></nav><h1>How to read a gold buy signal</h1><p class="lede">A red-day streak is an observation about recent price direction—not proof that the next trading day will rise.</p><h2>What the two levels mean</h2><p>The simulator marks an asset as <b>50% BUY / WATCH</b> after three or four consecutive lower daily closes. At five or more consecutive lower closes, it displays <b>100% BUY / STRONG</b>. The percentages are staged labels for the rule, not calculated probabilities of profit and not instructions about how much money an individual should invest.</p><h2>Why use daily closes?</h2><p>Daily closing data makes the rule transparent and easy to reproduce. Intraday prices can cross above and below a threshold many times, while an official daily close provides one consistent observation for each available trading session. Markets have different calendars, so weekends and exchange holidays do not count as red days.</p><h2>Check magnitude as well as duration</h2><p>Five small declines can produce a long streak without a meaningful total pullback. The optional minimum-drop filter lets visitors require both duration and magnitude. Volatile mining shares and gold-backed tokens can behave differently from spot gold, so the same streak should not be assumed to carry the same risk across every asset.</p><h2>Use the historical table responsibly</h2><p>The backtest shows per-asset average returns and win rates after 5, 10 and 20 trading days. Look at the number of completed observations before drawing a conclusion. A high average driven by one exceptional rebound can conceal many losing signals; a win rate without the average return can hide the size of losses. Small samples are marked with an asterisk.</p><h2>A practical research workflow</h2><p>Start with the signal board, review the asset’s live TradingView chart, compare it with spot gold or GDX, and then inspect the historical outcomes. Confirm the latest price with a broker, exchange or bullion dealer before making any decision. Consider position size, liquidity, fees, tax and personal risk tolerance independently from the streak indicator.</p><p class="note">This article explains the simulator’s rule and is not investment advice. A 100% label does not mean a guaranteed return or 100% confidence.</p><footer>GoldAlert · September 2026</footer></article></body></html>
+</head><body><article class="page">
+<nav><a href="../index.html">Simulator</a><a href="../articles.html">Articles</a><a href="../methodology.html">Methodology</a></nav>
+<h1>How to read a gold buy signal</h1>
+<p class="lede">Gold just closed lower for the third day running. Is that a buying opportunity or a warning sign? Neither, really — it's just a pattern. Here's what GoldAlert's signal actually means, and just as important, what it doesn't.</p>
+
+<h2>Start with the rule, not the feeling</h2>
+<p>Three consecutive lower closes flips an asset to WATCH. Five flips it to STRONG. That's the whole mechanism — no hidden formula, no black box. We built it this way on purpose: a rule you can check by hand beats a "smart" model you have to trust blindly. Pull up any asset's price history and count the red days yourself. You'll land on the same answer the site does.</p>
+
+<h2>Why "consecutive," not "big drop"</h2>
+<p>A single ugly 4% day can look scarier than five quiet 1% declines in a row, but the streak rule cares about persistence, not size. There's a reason for that: a sustained pullback tends to reflect sentiment shifting over several sessions, while a one-day drop is often just noise — an earnings miss, a stray headline, a thin-volume afternoon. Neither is inherently more "buyable." They're different animals, and the streak rule only tracks one of them.</p>
+
+<h2>The optional minimum-drop filter</h2>
+<p>Some pullbacks are technically three red days but add up to almost nothing — a few cents here, a few cents there. If that kind of noise bothers you, set a minimum total decline and the tool ignores streaks that don't clear it. Leave it at zero and every qualifying streak counts, however small.</p>
+
+<h2>What the tier badge is not telling you</h2>
+<p>WATCH and STRONG label a pattern. They are not a prediction. The badge doesn't know whether this particular pullback is about to reverse or keep sliding — no rule does. Treat it the way you'd treat a smoke detector: worth a closer look, not an instruction.</p>
+
+<h2>Before you act on one</h2>
+<p>Pull up the asset's chart and actually look at it. Check the news. Glance at the backtest table for that specific asset — how has this exact rule performed on it historically, and how many times has it even fired? A signal built on three past occurrences tells you a lot less than one built on thirty. None of that turns a signal into advice, but it does turn a blinking badge into an informed decision.</p>
+
+<p class="note">This article explains how the tool works and is not financial advice.</p>
+<footer>GoldAlert · September 2026</footer>
+</article></body></html>
