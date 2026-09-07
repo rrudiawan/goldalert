@@ -1,17 +1,33 @@
-# Gold Signal Simulator
+# GoldAlert
 
-Gold Signal Simulator is an educational multi-asset dashboard covering spot gold, silver, gold-mining shares, gold and silver ETFs, and gold-backed cryptoassets.
+GoldAlert (goldalert.org) is a free, educational multi-asset dashboard covering spot gold, spot silver, gold-mining shares, gold and silver ETFs, and gold-backed cryptoassets.
 
-Core rule:
+Core signal rule:
 - 0–2 consecutive lower daily closes: HOLD
 - 3–4 consecutive lower daily closes: 50% BUY / WATCH
 - 5 or more consecutive lower daily closes: 100% BUY / STRONG
 
 The percentage labels are rule stages, not probabilities, guarantees, or individualized position-size recommendations.
 
-Primary pages:
-- /index.html — charts, signals, backtests, ratios, watchlist and comparison
-- /methodology.html — calculation rules, limitations and version history
-- /privacy.html — local storage and third-party data disclosures
+Assets tracked: spot gold (XAU/USD), spot silver (XAG/USD), AngloGold Ashanti (NYSE:AU), Kinross Gold (NYSE:KGC), Harmony Gold (NYSE:HMY), Gold Fields (NYSE:GFI), VanEck Gold Miners ETF (GDX), SPDR Gold Shares (GLD), iShares Silver Trust (SLV), Pax Gold (PAXG), Tether Gold (XAUT).
 
-All content is educational and does not constitute financial advice.
+## Primary pages
+- /index.html — live charts, signal board, cross-asset ratios, comparison tool, backtest table, private watchlist, and alert sign-up
+- /methodology.html — exact calculation rules, data limitations, and version history
+- /articles.html — full article index (see below)
+- /about.html — background on the project
+- /contact.html — how to reach the operator
+- /privacy.html — data and cookie disclosures
+- /terms.html — terms of use, including the affiliate-link disclosure
+
+## Articles
+- /articles/read-gold-buy-signal.html — How to Read a Gold Buy Signal
+- /articles/gold-stocks-etfs-crypto.html — Gold Stocks vs. ETFs vs. Gold-Backed Crypto
+- /articles/backtesting-pullback-rule.html — Backtesting a Pullback Rule: What the Numbers Actually Show
+- /articles/what-moves-gold-price.html — What Moves the Gold Price Day to Day
+- /articles/why-silver-more-volatile.html — Why Silver Is More Volatile Than Gold
+- /articles/mining-stocks-amplify-gold-moves.html — How Mining Stocks Amplify Gold Price Moves
+- /articles/gld-vs-physical-gold.html — GLD vs. Physical Gold: Costs and Trade-offs
+- /articles/paxg-vs-xaut.html — PAXG vs. XAUT: Which Gold-Backed Token Fits You
+
+All content is educational and does not constitute financial, investment, tax, or legal advice.
