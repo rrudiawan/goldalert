@@ -1,0 +1,26 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Backtesting a Pullback Rule: What the Numbers Actually Show | GoldAlert</title><meta name="description" content="How to read GoldAlert's forward-return backtest table without over-trusting a small sample or a lucky average."><link rel="canonical" href="https://goldalert.org/articles/backtesting-pullback-rule.html"><link rel="icon" type="image/svg+xml" href="../icons/logo.svg"><link rel="stylesheet" href="../static-page.css"></head><body><article class="page">
+<nav><a href="../index.html">Simulator</a><a href="../articles.html">Articles</a><a href="../methodology.html">Methodology</a></nav>
+<h1>Backtesting a pullback rule: what the numbers actually show</h1>
+<p class="lede">A backtest answers "what happened after this pattern in the past," not "what will happen next time." The distinction matters more than the headline number.</p>
+
+<h2>What GoldAlert's backtest measures</h2>
+<p>For every historical WATCH or STRONG signal on an asset, the table looks 5, 10, and 20 trading days ahead and records two things: the average percentage return, and the share of those cases where the price ended up higher than the signal day's close (the "win rate"). Both numbers are shown together because either one alone can mislead.</p>
+
+<h2>Why the average alone can lie</h2>
+<p>A handful of large rebounds can pull an average return sharply positive even if most individual signals lost money. Ten signals with nine small losses and one large gain can still show a positive average. That is why the win rate sits next to the average in the same table — a low win rate paired with a positive average is a sign to look closer, not a reason to ignore the row.</p>
+
+<h2>Why the win rate alone can also lie</h2>
+<p>The reverse problem exists too: a high win rate built from many tiny gains can still lose money overall if the occasional loss is large. Position sizing and stop-loss discipline — decisions this simulator does not make for you — determine whether a high win rate translates into a healthy account.</p>
+
+<h2>Sample size is the first thing to check</h2>
+<p>An asset with only three or four completed signals in the selected date range does not have enough history to say anything reliable about its typical behavior. The table marks any row built from fewer than five completed observations with an asterisk. Treat those rows as anecdotes, not evidence, until more history accumulates.</p>
+
+<h2>The backtest range changes the picture</h2>
+<p>Choosing 120, 250, or 500 trading days for the backtest range changes which market conditions are included. A shorter range might happen to capture mostly a rising market, mostly a falling one, or a particularly calm or volatile stretch — none of which necessarily represents what comes next. Comparing the same asset across a few different range lengths is a quick way to see how stable — or fragile — a pattern actually is.</p>
+
+<h2>What a backtest cannot tell you</h2>
+<p>Past frequency and past average outcome say nothing certain about the next occurrence. Markets change regime: a rule that worked well in one stretch of history can perform very differently once conditions shift. A backtest is a starting point for research, not a green light.</p>
+
+<p class="note">This article explains how to interpret historical statistics and is not investment advice. Past performance does not guarantee future results.</p>
+<footer>GoldAlert · September 2026</footer>
+</article></body></html>
