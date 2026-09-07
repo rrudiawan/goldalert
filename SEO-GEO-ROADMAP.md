@@ -1,5 +1,38 @@
 # SEO/GEO Roadmap — Tracked Recommendations
 
+## 🔴 PENDING — To do next session, consolidated (updated Sept 2026)
+
+**Needs the owner directly (cannot be done by an AI assistant):**
+1. Create Google Analytics 4 property (analytics.google.com), send the Measurement ID (G-XXXXXXXXXX) so it can be wired into `GA_MEASUREMENT_ID` in index.html.
+2. Check PageSpeed Insights: pagespeed.web.dev/analysis?url=https://goldalert.org — report the mobile score.
+3. Check that `www.goldalert.org` redirects to the canonical `goldalert.org` in a browser.
+4. Apply to Google AdSense (google.com/adsense) — all technical prerequisites are now in place.
+5. Apply to affiliate programs: JM Bullion, Money Metals Exchange, Silver Gold Bull.
+6. Reddit distribution — see `scripts/reddit-poster-colab.py`: a semi-automated (manual-trigger, 14-day cooldown guard) posting tool for r/PreciousMetals and r/Gold, meant to run in Google Colab. Requires: creating a Reddit "script" app at reddit.com/prefs/apps for a client_id/client_secret, then running the script manually — it is intentionally NOT a background/unattended scheduler, to avoid Reddit's spam detection. Read each subreddit's self-promotion rules before the first post, and genuinely participate before posting a link.
+
+**Can be done by an AI assistant on request (no credentials needed):**
+7. Write 7–12 more articles toward the 15–20 target (currently 8 live). Two specific ones already scoped from a GLM cross-review: an honest "how to set a gold price alert" piece (browser/email/Telegram on the website, not an "on iPhone" framing since this is a website, not a native app) and a balanced "is gold a good investment" piece (pro/con overview, no yes/no conclusion — stays out of investment-advice territory).
+8. Add data tables + properly sourced statistics to existing articles — requires real web research per claim first, never fabricated numbers.
+9. Submit to Product Hunt and AlternativeTo.
+
+**Deliberately deferred (with reasoning already recorded below — do not redo this research):**
+10. Automated monthly historical-price pages (`/gold-price-history/2024` style) — needs new infrastructure the static site doesn't have.
+11. Programmatic SEO at scale (hundreds of templated pages) — real risk of a Google Helpful Content penalty on a brand-new domain; if revisited, do it small (5–10 genuinely unique pages), not templated.
+12. Extending stored historical data beyond ~2 years (Yahoo Finance `range=2y`) — prerequisite before any "N years of data" PR/content angle can be pursued honestly.
+
+---
+
+## Session log — what was completed (Sept 2026, SEO/GEO deep-dive session)
+- Fixed a real rebranding bug: the homepage H1 and browser tab title were still rendering the old pre-rebrand name ("Gold Signal Simulator — Multi-Asset") in all 6 languages after JavaScript ran, despite the visible logo/header already saying "GoldAlert." Root cause: a single i18n key was reused for both the H1 and `document.title`. Fixed by splitting into two keys (`title` for the short H1, new `pageTitle` for the SEO-optimized page title) across all 6 languages.
+- Homepage `<title>` and meta description rewritten to correct length (title 57 chars incl. "Gold Price Alerts" keyword; description exactly 160 chars) and to stay in sync with the new `pageTitle` i18n key (previously the static tag and the JS-driven title could drift apart).
+- Article-level SEO audit: found and fixed one over-length title (71 → 39 chars) and one missing brand suffix, for consistency across all 8 articles.
+- Found and fixed a real internal-linking gap: several articles mentioned "companion articles" in prose but never actually hyperlinked them. Added a genuine "Related articles" section (2 relevant cross-links) to the bottom of all 8 articles.
+- Data-source transparency (E-E-A-T): About and Methodology pages previously said prices come from generic "third parties" / only named TradingView and CoinGecko, omitting Yahoo Finance even though it's the actual source powering signal calculations. Both pages now name all three sources explicitly.
+- Cross-reviewed a second AI assistant's (GLM-5.3-Flash) SEO/GEO audit and roadmap suggestions; evaluated each on its merits rather than accepting them wholesale — see the sections below for which were adopted, adjusted, or rejected and why.
+- Built `scripts/reddit-poster-colab.py`, a semi-automated Reddit distribution tool (see pending item 6 above for how to use it).
+
+
+
 This file consolidates SEO/GEO recommendations gathered from multiple advisory sessions (Claude + GLM-5.3-Flash cross-review, September 2026) so nothing gets lost between sessions. Status is tracked per item. Update this file directly when an item's status changes.
 
 Legend: ✅ Done · 🔧 Adjusted (done differently than originally suggested, with reason) · ⏳ Queued · ⚠️ Needs owner action · ❌ Rejected (with reason)
