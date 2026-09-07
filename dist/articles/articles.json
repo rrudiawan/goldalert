@@ -1,5 +1,53 @@
 [
   {
+    "slug": "backtesting-pullback-rule",
+    "title": "Backtesting a Pullback Rule: What the Numbers Actually Show",
+    "category": "Guide",
+    "excerpt": "How to read the forward-return backtest table without over-trusting a small sample or a lucky average.",
+    "date": "2026-09-07",
+    "url": "articles/backtesting-pullback-rule.html"
+  },
+  {
+    "slug": "what-moves-gold-price",
+    "title": "What Moves the Gold Price Day to Day",
+    "category": "Fundamentals",
+    "excerpt": "The main forces behind day-to-day moves in the spot gold price, in plain language.",
+    "date": "2026-09-07",
+    "url": "articles/what-moves-gold-price.html"
+  },
+  {
+    "slug": "why-silver-more-volatile",
+    "title": "Why Silver Is More Volatile Than Gold",
+    "category": "Fundamentals",
+    "excerpt": "Why silver tends to swing harder than gold in percentage terms, and what that means for reading its signal streaks.",
+    "date": "2026-09-07",
+    "url": "articles/why-silver-more-volatile.html"
+  },
+  {
+    "slug": "mining-stocks-amplify-gold-moves",
+    "title": "How Mining Stocks Amplify Gold Price Moves",
+    "category": "Fundamentals",
+    "excerpt": "Why gold mining shares often move by a larger percentage than gold itself, and where that leverage can break down.",
+    "date": "2026-09-07",
+    "url": "articles/mining-stocks-amplify-gold-moves.html"
+  },
+  {
+    "slug": "gld-vs-physical-gold",
+    "title": "GLD vs. Physical Gold: Costs and Trade-offs",
+    "category": "Comparison",
+    "excerpt": "How SPDR Gold Shares (GLD) and physical bullion differ in cost, custody, and liquidity before you compare their price charts.",
+    "date": "2026-09-07",
+    "url": "articles/gld-vs-physical-gold.html"
+  },
+  {
+    "slug": "paxg-vs-xaut",
+    "title": "PAXG vs. XAUT: Which Gold-Backed Token Fits You",
+    "category": "Comparison",
+    "excerpt": "Pax Gold and Tether Gold both track spot gold, but differ in issuer, redemption terms, and where they trade.",
+    "date": "2026-09-07",
+    "url": "articles/paxg-vs-xaut.html"
+  },
+  {
     "slug": "read-gold-buy-signal",
     "title": "How to Read a Gold Buy Signal",
     "category": "Guide",
