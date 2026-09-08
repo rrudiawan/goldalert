@@ -3,17 +3,17 @@
 ## 🔴 PENDING — To do next session, consolidated (updated Sept 2026)
 
 **Needs the owner directly (cannot be done by an AI assistant):**
-1. Create Google Analytics 4 property (analytics.google.com), send the Measurement ID (G-XXXXXXXXXX) so it can be wired into `GA_MEASUREMENT_ID` in index.html.
-2. Check PageSpeed Insights: pagespeed.web.dev/analysis?url=https://goldalert.org — report the mobile score.
-3. Check that `www.goldalert.org` redirects to the canonical `goldalert.org` in a browser.
-4. Apply to Google AdSense (google.com/adsense) — all technical prerequisites are now in place.
-5. Apply to affiliate programs: JM Bullion, Money Metals Exchange, Silver Gold Bull.
+1. ✅ DONE — Google Analytics 4 installed (G-2JKWMB077G), wired into index.html.
+2. ✅ DONE — PageSpeed checked (Mobile: Performance 72, Accessibility 90, Best Practices 77, SEO 100; Desktop: 83/90/77/100). Several findable issues fixed same session (see log below); "Reduce unused JavaScript" and ">4 preconnect" are inherent to embedding TradingView widgets and not further reducible without dropping that feature.
+3. ✅ DONE — `www.goldalert.org` confirmed redirecting correctly to the canonical `goldalert.org`.
+4. ✅ DONE (submitted, awaiting Google's decision) — Applied to Google AdSense. Verification script placed on all 15 pages, `ads.txt` filled in with the standard `google.com, pub-4893271383583986, DIRECT, f08c47fec0942fa0` line. Site status: "Getting ready" as of Sept 2026 — normal, can take days to weeks for a new domain. No further action needed until Google's dashboard shows a status change.
+5. ⏳ IN PROGRESS — Affiliate program applications. Findings: JM Bullion runs on Awin (content-category eligibility confirmed: Precious Metals/Finance are both listed acceptable categories); Money Metals Exchange runs on ShareASale; Silver Gold Bull has a direct application portal at affiliates.silvergoldbull.com (program branded "Profit Trove," also listed on CJ Affiliate/FlexOffers as secondary channels). Owner needs to create accounts on the relevant networks and apply to each merchant individually — this cannot be done by an AI assistant since it requires the owner's own payment/tax details.
 6. Reddit distribution — see `scripts/reddit-poster-colab.py`: a semi-automated (manual-trigger, 14-day cooldown guard) posting tool for r/PreciousMetals and r/Gold, meant to run in Google Colab. Requires: creating a Reddit "script" app at reddit.com/prefs/apps for a client_id/client_secret, then running the script manually — it is intentionally NOT a background/unattended scheduler, to avoid Reddit's spam detection. Read each subreddit's self-promotion rules before the first post, and genuinely participate before posting a link.
 
 **Can be done by an AI assistant on request (no credentials needed):**
 7. Write 7–12 more articles toward the 15–20 target (currently 8 live). Two specific ones already scoped from a GLM cross-review: an honest "how to set a gold price alert" piece (browser/email/Telegram on the website, not an "on iPhone" framing since this is a website, not a native app) and a balanced "is gold a good investment" piece (pro/con overview, no yes/no conclusion — stays out of investment-advice territory).
 8. Add data tables + properly sourced statistics to existing articles — requires real web research per claim first, never fabricated numbers.
-9. Submit to Product Hunt and AlternativeTo.
+9. Submit to Product Hunt and AlternativeTo (needs the owner's own accounts, but content/copy can be drafted by an assistant).
 
 **Deliberately deferred (with reasoning already recorded below — do not redo this research):**
 10. Automated monthly historical-price pages (`/gold-price-history/2024` style) — needs new infrastructure the static site doesn't have.
@@ -21,6 +21,14 @@
 12. Extending stored historical data beyond ~2 years (Yahoo Finance `range=2y`) — prerequisite before any "N years of data" PR/content angle can be pursued honestly.
 
 ---
+
+## Session log — Sept 2026, PageSpeed/AdSense follow-up session
+- Installed GA4 (G-2JKWMB077G).
+- Ran PageSpeed Insights; fixed everything confidently actionable from the report: added a missing `<main>` landmark, added `aria-label` to two unlabeled `<select>` elements (language and currency pickers), gave the three identical "Read more" links unique accessible names, and fixed a stale footer brand mention ("Gold Signal Simulator" → "GoldAlert").
+- Found and fixed a second, more significant stale-data-source issue: the client-side browser fallback fetch function was still calling Stooq directly (via the CORS proxy) even though the server-side pipeline had already been migrated to Yahoo Finance weeks earlier. Migrated the client-side fallback to Yahoo Finance too (matching symbols: GC=F, SI=F, and plain tickers for the miners/ETFs), for consistency and to avoid ever depending on Stooq again. Also corrected all 16 remaining text mentions of "Stooq" (trust strip, footer, methodology) across all 6 languages to say "Yahoo Finance."
+- Applied to Google AdSense: placed the verification/ad script on all 15 pages (homepage, 4 legal pages, methodology, articles index, all 8 articles), then filled in `ads.txt` with the standard Google-format line once the account reached "Getting ready" status.
+- Researched and documented the actual affiliate networks behind all three target dealer programs (see item 5 above) — this was previously assumed to be direct sign-up and turned out to require third-party network accounts (Awin, ShareASale) for two of the three.
+
 
 ## Session log — what was completed (Sept 2026, SEO/GEO deep-dive session)
 - Fixed a real rebranding bug: the homepage H1 and browser tab title were still rendering the old pre-rebrand name ("Gold Signal Simulator — Multi-Asset") in all 6 languages after JavaScript ran, despite the visible logo/header already saying "GoldAlert." Root cause: a single i18n key was reused for both the H1 and `document.title`. Fixed by splitting into two keys (`title` for the short H1, new `pageTitle` for the SEO-optimized page title) across all 6 languages.
