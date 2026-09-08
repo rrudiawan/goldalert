@@ -276,7 +276,7 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
     </div>
   </div>
   <div class="headRight">
-    <select id="langSel" class="langSel">
+    <select id="langSel" class="langSel" aria-label="Select language">
       <option value="en">English</option>
       <option value="zh">中文 (简体)</option>
       <option value="es">Español</option>
@@ -293,6 +293,7 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
   </div>
 </header>
 
+<main id="main">
 <nav class="site-nav" aria-label="Primary navigation">
   <a href="#board" data-i18n="navBoard">Signal Board</a>
   <a href="#watchlist" data-i18n="navWatchlist">Watchlist</a>
@@ -306,12 +307,12 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
   <span data-i18n="trustRuleBased">Rule-based signals</span>
   <span data-i18n="trustNoLogin">No login required</span>
   <a href="methodology.html" data-i18n="trustMethodology">Transparent methodology</a>
-  <span data-i18n="trustSources">TradingView · Stooq · CoinGecko</span>
+  <span data-i18n="trustSources">TradingView · Yahoo Finance · CoinGecko</span>
 </div>
 
 <div class="row between" style="margin-bottom:8px">
   <span class="sub" data-i18n="snapshotLabel">At a glance</span>
-  <select id="currSel" class="currSel">
+  <select id="currSel" class="currSel" aria-label="Select display currency">
     <option value="USD">USD $</option>
     <option value="EUR">EUR €</option>
     <option value="GBP">GBP £</option>
@@ -532,19 +533,19 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
       <div class="cat" data-i18n="art1cat">Guide</div>
       <h3 data-i18n="art1title">How to Read a Gold Buy Signal</h3>
       <p data-i18n="art1body">A beginner-friendly walkthrough of the multi-day pullback rule this simulator uses.</p>
-      <a class="readmore" href="articles/read-gold-buy-signal.html" data-i18n="readmore">Read more →</a>
+      <a class="readmore" href="articles/read-gold-buy-signal.html" data-i18n="readmore" aria-label="Read more: How to Read a Gold Buy Signal">Read more →</a>
     </div>
     <div class="article-card">
       <div class="cat" data-i18n="art2cat">Comparison</div>
       <h3 data-i18n="art2title">Gold Stocks vs. Gold ETFs vs. Gold Crypto</h3>
       <p data-i18n="art2body">Physical bullion, mining stocks, ETFs, and gold-backed tokens, compared side by side.</p>
-      <a class="readmore" href="articles/gold-stocks-etfs-crypto.html" data-i18n="readmore">Read more →</a>
+      <a class="readmore" href="articles/gold-stocks-etfs-crypto.html" data-i18n="readmore" aria-label="Read more: Gold Stocks vs. ETFs vs. Gold-Backed Crypto">Read more →</a>
     </div>
     <div class="article-card">
       <div class="cat" data-i18n="art3cat">Methodology</div>
       <h3 data-i18n="art3title">How This Simulator Works</h3>
       <p data-i18n="art3body">See the exact signal rules, data limitations, and version history used by the simulator.</p>
-      <a class="readmore" href="methodology.html" data-i18n="readmore">Read more →</a>
+      <a class="readmore" href="methodology.html" data-i18n="readmore" aria-label="Read more: How This Simulator Works">Read more →</a>
     </div>
   </div>
 </section>
@@ -572,10 +573,11 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
     <a href="methodology.html">Methodology</a>
   </div>
   <div class="fmeta">
-    <span data-i18n="footerNote">Educational tool only — not financial advice. Market data via TradingView, Stooq and CoinGecko.</span><br>
-    © <span id="fyear"></span> Gold Signal Simulator.
+    <span data-i18n="footerNote">Educational tool only — not financial advice. Market data via TradingView, Yahoo Finance and CoinGecko.</span><br>
+    © <span id="fyear"></span> GoldAlert.
   </div>
 </footer>
+</main>
 
 <div class="cookie-bar" id="cookieBar">
   <p data-i18n="cookieText">This site uses cookies for basic analytics to understand how the tool is used. No personal data is sold.</p>
@@ -674,7 +676,7 @@ en:{
     ["How do buy signal notifications work?","Browser alerts work while this page is open. The included scheduled workflow can send secure Telegram channel alerts after the site owner configures repository secrets."]
   ],
   navAbout:"About", navContact:"Contact", navPrivacy:"Privacy Policy", navTerms:"Terms of Use",
-  footerNote:"Educational tool only \u2014 not financial advice. Market data via TradingView, Stooq and CoinGecko.",
+  footerNote:"Educational tool only \u2014 not financial advice. Market data via TradingView, Yahoo Finance and CoinGecko.",
   cookieText:"This site uses cookies for basic analytics to understand how the tool is used. No personal data is sold.",
   cookieAccept:"Accept", cookieReject:"Reject",
   snapshotLabel:"At a glance",
@@ -687,7 +689,7 @@ en:{
   targetAssetLbl:"Asset", targetDirLbl:"Alert when price is", targetBelow:"At or below", targetAbove:"At or above",
   targetPriceLbl:"Target price (USD)", btnAddTarget:"Add price alert", targetEmpty:"No price alerts set yet.",
   navBoard:"Signal Board", navWatchlist:"Watchlist", navNews:"News", navLearn:"Learn", navMethodology:"Methodology",
-  trustRuleBased:"Rule-based signals", trustNoLogin:"No login required", trustMethodology:"Transparent methodology", trustSources:"TradingView · Stooq · CoinGecko",
+  trustRuleBased:"Rule-based signals", trustNoLogin:"No login required", trustMethodology:"Transparent methodology", trustSources:"TradingView · Yahoo Finance · CoinGecko",
   tierHoldLabel:"HOLD", tierHoldNote:"0–2 consecutive red trading days",
   tierWatchLabel:"50% BUY / WATCH", tierWatchNote:"3–4 consecutive red trading days",
   tierStrongLabel:"100% BUY / STRONG", tierStrongNote:"5 or more consecutive red trading days",
@@ -769,7 +771,7 @@ zh:{
     ["买入信号通知如何运作？","浏览器提醒会在此页面打开时立即生效。包含的定时工作流可在站长配置好仓库密钥后，发送 Telegram 频道提醒。"]
   ],
   navAbout:"关于", navContact:"联系我们", navPrivacy:"隐私政策", navTerms:"使用条款",
-  footerNote:"仅供教育用途，不构成财务建议。市场数据来自 TradingView、Stooq 与 CoinGecko。",
+  footerNote:"仅供教育用途，不构成财务建议。市场数据来自 TradingView、Yahoo Finance 与 CoinGecko。",
   cookieText:"本网站使用 Cookie 进行基础访问统计，不会出售任何个人数据。",
   cookieAccept:"接受", cookieReject:"拒绝",
   snapshotLabel:"一览",
@@ -782,7 +784,7 @@ zh:{
   targetAssetLbl:"资产", targetDirLbl:"提醒条件", targetBelow:"低于或等于", targetAbove:"高于或等于",
   targetPriceLbl:"目标价格（美元）", btnAddTarget:"添加价格提醒", targetEmpty:"尚未设置价格提醒。",
   navBoard:"信号看板", navWatchlist:"自选清单", navNews:"新闻", navLearn:"学习", navMethodology:"方法论",
-  trustRuleBased:"基于规则的信号", trustNoLogin:"无需登录", trustMethodology:"透明的方法论", trustSources:"TradingView · Stooq · CoinGecko",
+  trustRuleBased:"基于规则的信号", trustNoLogin:"无需登录", trustMethodology:"透明的方法论", trustSources:"TradingView · Yahoo Finance · CoinGecko",
   tierHoldLabel:"观望（HOLD）", tierHoldNote:"连续0-2个下跌交易日",
   tierWatchLabel:"50% 买入 / 关注", tierWatchNote:"连续3-4个下跌交易日",
   tierStrongLabel:"100% 买入 / 强烈", tierStrongNote:"连续5个及以上下跌交易日",
@@ -864,7 +866,7 @@ es:{
     ["¿Cómo funcionan las notificaciones de señal de compra?","Las alertas del navegador funcionan al instante mientras esta página está abierta. El flujo de trabajo programado incluido puede enviar alertas a un canal de Telegram una vez que el operador del sitio configure los secretos del repositorio."]
   ],
   navAbout:"Acerca de", navContact:"Contacto", navPrivacy:"Aviso de privacidad", navTerms:"Términos de uso",
-  footerNote:"Solo herramienta educativa \u2014 no es asesoría financiera. Datos de mercado vía TradingView, Stooq y CoinGecko.",
+  footerNote:"Solo herramienta educativa \u2014 no es asesoría financiera. Datos de mercado vía TradingView, Yahoo Finance y CoinGecko.",
   cookieText:"Este sitio usa cookies para analítica básica y entender cómo se usa la herramienta. No se vende ningún dato personal.",
   cookieAccept:"Aceptar", cookieReject:"Rechazar",
   snapshotLabel:"De un vistazo",
@@ -877,7 +879,7 @@ es:{
   targetAssetLbl:"Activo", targetDirLbl:"Avisar cuando el precio esté", targetBelow:"En o por debajo de", targetAbove:"En o por encima de",
   targetPriceLbl:"Precio objetivo (USD)", btnAddTarget:"Agregar alerta de precio", targetEmpty:"Aún no hay alertas de precio configuradas.",
   navBoard:"Panel de señales", navWatchlist:"Watchlist", navNews:"Noticias", navLearn:"Aprender", navMethodology:"Metodología",
-  trustRuleBased:"Señales basadas en reglas", trustNoLogin:"Sin necesidad de cuenta", trustMethodology:"Metodología transparente", trustSources:"TradingView · Stooq · CoinGecko",
+  trustRuleBased:"Señales basadas en reglas", trustNoLogin:"Sin necesidad de cuenta", trustMethodology:"Metodología transparente", trustSources:"TradingView · Yahoo Finance · CoinGecko",
   tierHoldLabel:"ESPERAR (HOLD)", tierHoldNote:"0–2 días bursátiles en rojo consecutivos",
   tierWatchLabel:"50% COMPRA / VIGILAR", tierWatchNote:"3–4 días bursátiles en rojo consecutivos",
   tierStrongLabel:"100% COMPRA / FUERTE", tierStrongNote:"5 o más días bursátiles en rojo consecutivos",
@@ -959,7 +961,7 @@ hi:{
     ["बाय सिग्नल नोटिफिकेशन कैसे काम करते हैं?","जब तक यह पेज खुला है, ब्राउज़र अलर्ट तुरंत काम करते हैं। साइट स्वामी द्वारा रिपॉज़िटरी सीक्रेट्स सेट करने के बाद, शामिल शेड्यूल्ड वर्कफ़्लो टेलीग्राम चैनल पर अलर्ट भेज सकता है।"]
   ],
   navAbout:"परिचय", navContact:"संपर्क करें", navPrivacy:"गोपनीयता नीति", navTerms:"उपयोग की शर्तें",
-  footerNote:"केवल शैक्षणिक टूल — वित्तीय सलाह नहीं। मार्केट डेटा TradingView, Stooq और CoinGecko से।",
+  footerNote:"केवल शैक्षणिक टूल — वित्तीय सलाह नहीं। मार्केट डेटा TradingView, Yahoo Finance और CoinGecko से।",
   cookieText:"यह साइट टूल के उपयोग को समझने के लिए बुनियादी एनालिटिक्स हेतु कुकीज़ इस्तेमाल करती है। कोई व्यक्तिगत डेटा बेचा नहीं जाता।",
   cookieAccept:"स्वीकार करें", cookieReject:"अस्वीकार करें",
   snapshotLabel:"एक नज़र में",
@@ -972,7 +974,7 @@ hi:{
   targetAssetLbl:"एसेट", targetDirLbl:"कब अलर्ट करें", targetBelow:"इस कीमत या इससे कम पर", targetAbove:"इस कीमत या इससे ज़्यादा पर",
   targetPriceLbl:"टारगेट कीमत (USD)", btnAddTarget:"प्राइस अलर्ट जोड़ें", targetEmpty:"अभी तक कोई प्राइस अलर्ट सेट नहीं है।",
   navBoard:"सिग्नल बोर्ड", navWatchlist:"वॉचलिस्ट", navNews:"समाचार", navLearn:"सीखें", navMethodology:"मेथडोलॉजी",
-  trustRuleBased:"नियम-आधारित सिग्नल", trustNoLogin:"लॉगिन की ज़रूरत नहीं", trustMethodology:"पारदर्शी मेथडोलॉजी", trustSources:"TradingView · Stooq · CoinGecko",
+  trustRuleBased:"नियम-आधारित सिग्नल", trustNoLogin:"लॉगिन की ज़रूरत नहीं", trustMethodology:"पारदर्शी मेथडोलॉजी", trustSources:"TradingView · Yahoo Finance · CoinGecko",
   tierHoldLabel:"रुकें (HOLD)", tierHoldNote:"0–2 लगातार लाल ट्रेडिंग दिन",
   tierWatchLabel:"50% खरीदें / नज़र रखें", tierWatchNote:"3–4 लगातार लाल ट्रेडिंग दिन",
   tierStrongLabel:"100% खरीदें / मज़बूत", tierStrongNote:"5 या उससे ज़्यादा लगातार लाल ट्रेडिंग दिन",
@@ -1054,7 +1056,7 @@ ar:{
     ["كيف تعمل إشعارات إشارة الشراء؟","تعمل إشعارات المتصفح فورًا طالما هذه الصفحة مفتوحة. يمكن لسير العمل المجدول المرفق إرسال تنبيهات إلى قناة تيليجرام بعد أن يقوم مالك الموقع بإعداد أسرار المستودع (repository secrets)."]
   ],
   navAbout:"من نحن", navContact:"تواصل معنا", navPrivacy:"سياسة الخصوصية", navTerms:"شروط الاستخدام",
-  footerNote:"أداة تعليمية فقط — ليست نصيحة مالية. بيانات السوق عبر TradingView وStooq وCoinGecko.",
+  footerNote:"أداة تعليمية فقط — ليست نصيحة مالية. بيانات السوق عبر TradingView وYahoo Finance وCoinGecko.",
   cookieText:"يستخدم هذا الموقع ملفات تعريف الارتباط لتحليلات أساسية لفهم كيفية استخدام الأداة. لا يُباع أي بيانات شخصية.",
   cookieAccept:"موافقة", cookieReject:"رفض",
   snapshotLabel:"لمحة سريعة",
@@ -1067,7 +1069,7 @@ ar:{
   targetAssetLbl:"الأصل", targetDirLbl:"نبّهني عندما يكون السعر", targetBelow:"عند أو أقل من", targetAbove:"عند أو أعلى من",
   targetPriceLbl:"السعر المستهدف (USD)", btnAddTarget:"إضافة تنبيه سعر", targetEmpty:"لم يتم تعيين أي تنبيهات سعر بعد.",
   navBoard:"لوحة الإشارات", navWatchlist:"قائمة المتابعة", navNews:"الأخبار", navLearn:"تعلّم", navMethodology:"المنهجية",
-  trustRuleBased:"إشارات مبنية على قواعد", trustNoLogin:"لا حاجة لتسجيل الدخول", trustMethodology:"منهجية شفافة", trustSources:"TradingView · Stooq · CoinGecko",
+  trustRuleBased:"إشارات مبنية على قواعد", trustNoLogin:"لا حاجة لتسجيل الدخول", trustMethodology:"منهجية شفافة", trustSources:"TradingView · Yahoo Finance · CoinGecko",
   tierHoldLabel:"انتظار (HOLD)", tierHoldNote:"0–2 يوم تداول أحمر متتالٍ",
   tierWatchLabel:"شراء 50% / مراقبة", tierWatchNote:"3–4 أيام تداول حمراء متتالية",
   tierStrongLabel:"شراء 100% / قوي", tierStrongNote:"5 أيام تداول حمراء متتالية أو أكثر",
@@ -1151,7 +1153,7 @@ ru:{
     ["Как работают уведомления о сигнале на покупку?","Уведомления браузера работают мгновенно, пока эта страница открыта. Встроенный запланированный workflow может отправлять оповещения в канал Telegram после того, как владелец сайта настроит секреты репозитория."]
   ],
   navAbout:"О проекте", navContact:"Контакты", navPrivacy:"Политика конфиденциальности", navTerms:"Условия использования",
-  footerNote:"Только образовательный инструмент — не финансовая консультация. Рыночные данные через TradingView, Stooq и CoinGecko.",
+  footerNote:"Только образовательный инструмент — не финансовая консультация. Рыночные данные через TradingView, Yahoo Finance и CoinGecko.",
   cookieText:"Этот сайт использует куки для базовой аналитики использования инструмента. Персональные данные не продаются.",
   cookieAccept:"Принять", cookieReject:"Отклонить",
   snapshotLabel:"Коротко",
@@ -1164,7 +1166,7 @@ ru:{
   targetAssetLbl:"Актив", targetDirLbl:"Уведомить, когда цена", targetBelow:"На уровне или ниже", targetAbove:"На уровне или выше",
   targetPriceLbl:"Целевая цена (USD)", btnAddTarget:"Добавить оповещение", targetEmpty:"Ценовые оповещения пока не заданы.",
   navBoard:"Панель сигналов", navWatchlist:"Список отслеживания", navNews:"Новости", navLearn:"Обучение", navMethodology:"Методология",
-  trustRuleBased:"Сигналы по правилам", trustNoLogin:"Без регистрации", trustMethodology:"Прозрачная методология", trustSources:"TradingView · Stooq · CoinGecko",
+  trustRuleBased:"Сигналы по правилам", trustNoLogin:"Без регистрации", trustMethodology:"Прозрачная методология", trustSources:"TradingView · Yahoo Finance · CoinGecko",
   tierHoldLabel:"ЖДАТЬ (HOLD)", tierHoldNote:"0–2 дня подряд в минусе",
   tierWatchLabel:"50% ПОКУПКА / НАБЛЮДЕНИЕ", tierWatchNote:"3–4 дня подряд в минусе",
   tierStrongLabel:"100% ПОКУПКА / СИЛЬНЫЙ", tierStrongNote:"5 и более дней подряд в минусе",
@@ -1215,15 +1217,15 @@ function renderFAQ(){
 
 /* ================= assets ================= */
 const ASSETS=[
-  {id:"XAUUSD", nameKey:"goldName",  note:"spot",      tv:"OANDA:XAUUSD",     grp:"logam",  src:"stooq",     code:"xauusd", dec:2},
-  {id:"XAGUSD", nameKey:"silverName",note:"spot",      tv:"OANDA:XAGUSD",     grp:"logam",  src:"stooq",     code:"xagusd", dec:3},
-  {id:"AU",     name:"AngloGold Ashanti",note:"NYSE: AU",     tv:"NYSE:AU",          grp:"saham",  src:"stooq",     code:"au.us",  dec:2},
-  {id:"KGC",    name:"Kinross Gold",     note:"NYSE: KGC",    tv:"NYSE:KGC",         grp:"saham",  src:"stooq",     code:"kgc.us", dec:2},
-  {id:"HMY",    name:"Harmony Gold",     note:"NYSE: HMY",    tv:"NYSE:HMY",         grp:"saham",  src:"stooq",     code:"hmy.us", dec:2},
-  {id:"GFI",    name:"Gold Fields",      note:"NYSE: GFI",    tv:"NYSE:GFI",         grp:"saham",  src:"stooq",     code:"gfi.us", dec:2},
-  {id:"GDX",    name:"VanEck Gold Miners",note:"miningEtf",   tv:"AMEX:GDX",         grp:"etf",    src:"stooq",     code:"gdx.us", dec:2},
-  {id:"GLD",    name:"SPDR Gold Shares", note:"goldEtf",      tv:"AMEX:GLD",         grp:"etf",    src:"stooq",     code:"gld.us", dec:2},
-  {id:"SLV",    name:"iShares Silver",   note:"silverEtf",    tv:"AMEX:SLV",         grp:"etf",    src:"stooq",     code:"slv.us", dec:2},
+  {id:"XAUUSD", nameKey:"goldName",  note:"spot",      tv:"OANDA:XAUUSD",     grp:"logam",  src:"yahoo",     code:"GC=F", dec:2},
+  {id:"XAGUSD", nameKey:"silverName",note:"spot",      tv:"OANDA:XAGUSD",     grp:"logam",  src:"yahoo",     code:"SI=F", dec:3},
+  {id:"AU",     name:"AngloGold Ashanti",note:"NYSE: AU",     tv:"NYSE:AU",          grp:"saham",  src:"yahoo",     code:"AU",  dec:2},
+  {id:"KGC",    name:"Kinross Gold",     note:"NYSE: KGC",    tv:"NYSE:KGC",         grp:"saham",  src:"yahoo",     code:"KGC", dec:2},
+  {id:"HMY",    name:"Harmony Gold",     note:"NYSE: HMY",    tv:"NYSE:HMY",         grp:"saham",  src:"yahoo",     code:"HMY", dec:2},
+  {id:"GFI",    name:"Gold Fields",      note:"NYSE: GFI",    tv:"NYSE:GFI",         grp:"saham",  src:"yahoo",     code:"GFI", dec:2},
+  {id:"GDX",    name:"VanEck Gold Miners",note:"miningEtf",   tv:"AMEX:GDX",         grp:"etf",    src:"yahoo",     code:"GDX", dec:2},
+  {id:"GLD",    name:"SPDR Gold Shares", note:"goldEtf",      tv:"AMEX:GLD",         grp:"etf",    src:"yahoo",     code:"GLD", dec:2},
+  {id:"SLV",    name:"iShares Silver",   note:"silverEtf",    tv:"AMEX:SLV",         grp:"etf",    src:"yahoo",     code:"SLV", dec:2},
   {id:"PAXG",   name:"Pax Gold",         note:"crypto",       tv:"COINBASE:PAXGUSD", grp:"kripto", src:"coingecko", code:"pax-gold", dec:2},
   {id:"XAUT",   name:"Tether Gold",      note:"crypto",       tv:"KRAKEN:XAUTUSD",   grp:"kripto", src:"coingecko", code:"tether-gold", dec:2}
 ];
@@ -1306,18 +1308,15 @@ function mountOverview(){
 }
 
 /* ================= daily data fetching ================= */
-async function fetchStooq(a){
-  const url="https://stooq.com/q/d/l/?s="+a.code+"&i=d";
+async function fetchYahoo(a){
+  const url="https://query1.finance.yahoo.com/v8/finance/chart/"+encodeURIComponent(a.code)+"?range=2y&interval=1d";
   const res=await fetch(PROXY+encodeURIComponent(url));
-  const txt=await res.text();
-  const lines=txt.trim().split("\n");
-  if(lines.length<20 || !/Date/i.test(lines[0])) throw new Error("unrecognized format");
-  const out=[];
-  lines.slice(1).forEach(l=>{
-    const p=l.split(","); if(p.length<5) return;
-    const c=+p[4]; if(!c||isNaN(c)) return;
-    out.push({d:p[0], c});
-  });
+  const j=await res.json();
+  const result=j&&j.chart&&j.chart.result&&j.chart.result[0];
+  if(!result) throw new Error("no data");
+  const ts=result.timestamp||[];
+  const closes=(result.indicators&&result.indicators.quote&&result.indicators.quote[0]&&result.indicators.quote[0].close)||[];
+  const out=ts.map((t,i)=>({d:new Date(t*1000).toISOString().slice(0,10), c:+closes[i]})).filter(r=>r.c&&!isNaN(r.c));
   if(out.length<20) throw new Error("empty data");
   return out.slice(-600);
 }
@@ -1338,7 +1337,7 @@ async function loadAsset(a){
   try{
     const scheduled=await scheduledHistory();
     const scheduledRows=scheduled&&scheduled.assets&&scheduled.assets[a.id];
-    const rows = scheduledRows&&scheduledRows.length>20 ? scheduledRows : (a.src==="stooq" ? await fetchStooq(a) : await fetchCoingecko(a));
+    const rows = scheduledRows&&scheduledRows.length>20 ? scheduledRows : (a.src==="yahoo" ? await fetchYahoo(a) : await fetchCoingecko(a));
     data[a.id]=rows; srcState[a.id]="ok";
     LS.set(cacheKey,{day:today,rows});
   }catch(e){
