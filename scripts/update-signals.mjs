@@ -15,7 +15,12 @@ const ASSETS=[
   {id:"OIL",src:"yahoo",code:"CL=F"},
   {id:"COPPER",src:"yahoo",code:"HG=F"},
   {id:"NATGAS",src:"yahoo",code:"NG=F"},
-  {id:"BTC",src:"coingecko",code:"bitcoin"}
+  {id:"CL",src:"yahoo",code:"CL=F"},
+  {id:"NG",src:"yahoo",code:"NG=F"},
+  {id:"HG",src:"yahoo",code:"HG=F"},
+  {id:"PL",src:"yahoo",code:"PL=F"},
+  {id:"BTC",src:"yahoo",code:"BTC-USD"},
+  {id:"ETH",src:"yahoo",code:"ETH-USD"}
 ];
 
 const SIGNAL_ASSETS=new Set([
