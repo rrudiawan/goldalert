@@ -373,7 +373,7 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
   <div class="grid4">
     <div class="field">
       <label for="streakLen" data-i18n="lblBacktestLevel">Backtest signal level</label>
-      <select id="streakLen">
+      <select id="streakLen" aria-label="Select backtest signal level">
         <option value="3" data-i18n="optWatch3">3-day 50% Buy / Watch</option>
         <option value="5" data-i18n="optStrong5">5-day 100% Buy / Strong</option>
       </select>
@@ -381,7 +381,7 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
     <div class="field"><label for="minDrop" data-i18n="lblMinDrop">Minimum total drop (%)</label><input id="minDrop" type="number" step="0.1" value="0"></div>
     <div class="field"><label for="cooldown" data-i18n="lblCooldown">Cooldown between signals (days)</label><input id="cooldown" type="number" value="5"></div>
     <div class="field"><label for="rangeDays" data-i18n="lblRange">Backtest range (trading days)</label>
-      <select id="rangeDays"><option value="120">120</option><option value="250" selected>250</option><option value="500">500</option></select>
+      <select id="rangeDays" aria-label="Select backtest date range"><option value="120">120</option><option value="250" selected>250</option><option value="500">500</option></select>
     </div>
   </div>
   <div class="note" data-i18n="rulesNote">Signals are calculated from each asset's daily close. A day counts as "red" when its close is lower than the previous trading day's.</div>
@@ -425,8 +425,8 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
   <h2 data-i18n="compareTitle">Compare Two Assets</h2>
   <p class="sub" style="margin-top:-4px;margin-bottom:12px" data-i18n="compareSub">Both series rebased to 100 at the start of the range, so relative performance is easy to read regardless of price scale.</p>
   <div class="compare-controls">
-    <div class="field"><label for="compareA" data-i18n="compareALbl">Asset A</label><select id="compareA"></select></div>
-    <div class="field"><label for="compareB" data-i18n="compareBLbl">Asset B</label><select id="compareB"></select></div>
+    <div class="field"><label for="compareA" data-i18n="compareALbl">Asset A</label><select id="compareA" aria-label="Select first asset to compare"></select></div>
+    <div class="field"><label for="compareB" data-i18n="compareBLbl">Asset B</label><select id="compareB" aria-label="Select second asset to compare"></select></div>
     <button id="btnCompare" class="ghost" data-i18n="btnCompare">Compare</button>
   </div>
   <canvas id="compareCanvas" width="900" height="280"></canvas>
@@ -438,7 +438,7 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
   <h2 data-i18n="watchTitle">Private Watchlist &amp; Notional P/L</h2>
   <p class="sub" style="margin-top:-4px" data-i18n="watchSub">Saved only on this device. No account or personal information is required.</p>
   <div class="watch-form">
-    <div class="field"><label for="watchAsset" data-i18n="watchAssetLbl">Asset</label><select id="watchAsset"></select></div>
+    <div class="field"><label for="watchAsset" data-i18n="watchAssetLbl">Asset</label><select id="watchAsset" aria-label="Add asset to watchlist"></select></div>
     <div class="field"><label for="watchEntry" data-i18n="watchEntryLbl">Entry price (USD)</label><input id="watchEntry" type="number" min="0" step="0.01"></div>
     <div class="field"><label for="watchQty" data-i18n="watchQtyLbl">Quantity</label><input id="watchQty" type="number" min="0" step="0.0001" value="1"></div>
     <button id="btnWatch" class="ghost" data-i18n="btnWatchAdd">Add position</button>
@@ -468,7 +468,7 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
   <p class="note" data-i18n="telegramHelp">Don't know your Telegram Chat ID? Message <a href="https://t.me/userinfobot" target="_blank" rel="noopener">@userinfobot</a> to get it, then open our alert bot and send <code>/start</code> so it's allowed to message you.</p>
   <div class="field">
     <label for="subPref" data-i18n="lblNotifyPref">Notify me about</label>
-    <select id="subPref">
+    <select id="subPref" aria-label="Select notification preference">
       <option value="any" data-i18n="prefAny">Any asset reaching WATCH or STRONG</option>
       <option value="metals" data-i18n="prefMetals">Gold &amp; silver only</option>
       <option value="stocks" data-i18n="prefStocks">Mining stocks only</option>
@@ -483,9 +483,9 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
   <h3 data-i18n="targetTitle">3. Simple price target alert</h3>
   <p class="sub" style="margin-top:-2px;margin-bottom:10px" data-i18n="targetSub">No streak rule needed — just tell us the price and direction. Fires as a browser notification.</p>
   <div class="grid3">
-    <div class="field"><label for="targetAsset" data-i18n="targetAssetLbl">Asset</label><select id="targetAsset"></select></div>
+    <div class="field"><label for="targetAsset" data-i18n="targetAssetLbl">Asset</label><select id="targetAsset" aria-label="Select price target asset"></select></div>
     <div class="field"><label for="targetDir" data-i18n="targetDirLbl">Alert when price is</label>
-      <select id="targetDir">
+      <select id="targetDir" aria-label="Select price target direction">
         <option value="below" data-i18n="targetBelow">At or below</option>
         <option value="above" data-i18n="targetAbove">At or above</option>
       </select>
@@ -662,7 +662,7 @@ en:{
   statusFetching:"Fetching daily history…", statusAllReady:"All daily data ready", statusFailed:"Daily data failed to load, please try again later",
   notifMsgTitle:"Buy signal detected", notifMsgBody:a=>a+" matched your rule.",
   signalHeader:"BUY SIGNAL DETECTED", signalLine:(n,d,l,p)=>`${n}: down ${d}% over ${l} days, price ${p}`,
-  groups:{logam:"Metals",saham:"Mining Stocks",etf:"ETFs",kripto:"Gold Crypto"},
+  groups:{logam:"Metals",saham:"Mining Stocks",etf:"ETFs",kripto:"Gold Crypto",komoditas:"Commodities",broadcrypto:"Broad Crypto"},
   assetNote:{spot:"spot per oz",miningEtf:"Mining ETF",goldEtf:"Gold ETF",silverEtf:"Silver ETF",crypto:"Gold-backed crypto"},
   goldName:"Gold", silverName:"Silver", days:n=>`${n} Days`, dateLocale:"en-US", tvLocale:"en",
   introTLDR:"This free tool tracks gold, silver, four gold mining stocks, three ETFs, and three gold-backed cryptoassets. It marks 3–4 consecutive red days as 50% BUY / WATCH and 5 or more as 100% BUY / STRONG. The labels describe rule stages, not probabilities or individualized position sizes.",
@@ -686,7 +686,7 @@ en:{
   ratiosTitle:"Cross-Asset Ratios", ratiosSub:"Relationships between asset categories that a single price chart can't show.",
   ratioGS:"Gold/Silver Ratio", ratioGSNote:"Ounces of silver equal to one ounce of gold",
   ratioGM:"Gold/Miners Ratio", ratioGMNote:"Gold price relative to the VanEck Gold Miners ETF",
-  ratioPaxg:"PAXG vs Spot Gold", ratioPaxgNote:"Premium or discount of Pax Gold vs the spot price",
+  ratioPaxg:"PAXG vs Spot Gold", ratioPaxgNote:"Premium or discount of Pax Gold vs the spot price",ratioGO:"Gold/Oil ratio",ratioGONote:"Ounces of WTI crude oil per ounce of gold. Rising = gold outperforms oil.",ratioGB:"Gold/Bitcoin ratio",ratioGBNote:"How many Bitcoins one ounce of gold buys. Falling = Bitcoin gaining vs gold.",ratioGPt:"Gold/Platinum ratio",ratioGPtNote:"Above 1 means gold is more expensive than platinum — historically unusual.",
   thStrength:"Strength", btnExport:"Export CSV",
   targetTitle:"Or set a simple price target alert", targetSub:"No streak rule needed \u2014 just tell us the price and direction.",
   targetAssetLbl:"Asset", targetDirLbl:"Alert when price is", targetBelow:"At or below", targetAbove:"At or above",
@@ -757,7 +757,7 @@ zh:{
   statusFetching:"正在获取历史数据…", statusAllReady:"全部每日数据已就绪", statusFailed:"每日数据加载失败，请稍后重试",
   notifMsgTitle:"检测到买入信号", notifMsgBody:a=>a+" 符合您的规则。",
   signalHeader:"检测到买入信号", signalLine:(n,d,l,p)=>`${n}：${l}天内下跌 ${d}%，价格 ${p}`,
-  groups:{logam:"贵金属",saham:"矿业股",etf:"ETF",kripto:"黄金加密货币"},
+  groups:{logam:"贵金属",saham:"矿业股",etf:"ETF",kripto:"黄金加密货币",komoditas:"大宗商品",broadcrypto:"主流加密货币"},
   assetNote:{spot:"现货每盎司",miningEtf:"矿业ETF",goldEtf:"黄金ETF",silverEtf:"白银ETF",crypto:"黄金挂钩加密货币"},
   goldName:"黄金", silverName:"白银", days:n=>`${n}天`, dateLocale:"zh-CN", tvLocale:"zh",
   introTLDR:"这款免费工具实时追踪黄金、白银、四只黄金矿业股、三只ETF以及两种黄金挂钩加密货币的价格，并在某资产连续多个交易日下跌时标记“买入信号”。本工具仅供教育用途，不构成财务建议。",
@@ -781,7 +781,7 @@ zh:{
   ratiosTitle:"跨资产比率", ratiosSub:"单一价格图表无法呈现的资产类别间关系。",
   ratioGS:"金银比", ratioGSNote:"一盎司黄金相当于多少盎司白银",
   ratioGM:"黄金/矿业股比率", ratioGMNote:"黄金价格相对于 VanEck 黄金矿业 ETF 的比率",
-  ratioPaxg:"PAXG 对比现货黄金", ratioPaxgNote:"Pax Gold 相对现货价格的溢价或折价",
+  ratioPaxg:"PAXG 对比现货黄金", ratioPaxgNote:"Pax Gold 相对现货价格的溢价或折价",ratioGO:"黄金/石油比率",ratioGONote:"一盎司黄金相当于多少桶WTI原油。上升=黄金跑赢石油。",ratioGB:"黄金/比特币比率",ratioGBNote:"一盎司黄金能买多少比特币。下降=比特币走强。",ratioGPt:"黄金/铂金比率",ratioGPtNote:"高于1=黄金比铂金贵，历史上罕见。",
   thStrength:"强度", btnExport:"导出 CSV",
   targetTitle:"或设置简单的目标价提醒", targetSub:"无需连续下跌规则——只需告诉我们价格和方向。",
   targetAssetLbl:"资产", targetDirLbl:"提醒条件", targetBelow:"低于或等于", targetAbove:"高于或等于",
@@ -852,7 +852,7 @@ es:{
   statusFetching:"Obteniendo historial diario…", statusAllReady:"Todos los datos diarios listos", statusFailed:"No se pudieron cargar los datos diarios, intente más tarde",
   notifMsgTitle:"Señal de compra detectada", notifMsgBody:a=>a+" cumplen su regla.",
   signalHeader:"SEÑAL DE COMPRA DETECTADA", signalLine:(n,d,l,p)=>`${n}: cayó ${d}% en ${l} días, precio ${p}`,
-  groups:{logam:"Metales",saham:"Mineras",etf:"ETF",kripto:"Cripto de oro"},
+  groups:{logam:"Metales",saham:"Mineras",etf:"ETF",kripto:"Cripto de oro",komoditas:"Materias primas",broadcrypto:"Cripto amplia"},
   assetNote:{spot:"spot por onza",miningEtf:"ETF minero",goldEtf:"ETF de oro",silverEtf:"ETF de plata",crypto:"Cripto respaldada por oro"},
   goldName:"Oro", silverName:"Plata", days:n=>`${n} días`, dateLocale:"es-ES", tvLocale:"es",
   introTLDR:"Esta herramienta gratuita sigue el precio en vivo del oro, la plata, cuatro acciones de mineras auríferas, tres ETF y dos criptomonedas respaldadas por oro, y marca una \u201cseñal de compra\u201d cuando el precio de un activo cae durante un número determinado de días consecutivos. Es educativa y no constituye asesoría financiera.",
@@ -876,7 +876,7 @@ es:{
   ratiosTitle:"Ratios entre activos", ratiosSub:"Relaciones entre categorías de activos que un solo gráfico de precio no puede mostrar.",
   ratioGS:"Ratio Oro/Plata", ratioGSNote:"Onzas de plata equivalentes a una onza de oro",
   ratioGM:"Ratio Oro/Mineras", ratioGMNote:"Precio del oro respecto al ETF VanEck Gold Miners",
-  ratioPaxg:"PAXG vs. oro spot", ratioPaxgNote:"Prima o descuento de Pax Gold frente al precio spot",
+  ratioPaxg:"PAXG vs. oro spot", ratioPaxgNote:"Prima o descuento de Pax Gold frente al precio spot",ratioGO:"Ratio Oro/Petróleo",ratioGONote:"Barriles WTI por onza de oro. Subida=oro supera al petróleo.",ratioGB:"Ratio Oro/Bitcoin",ratioGBNote:"Bitcoins que compra una onza de oro. Bajada=Bitcoin se fortalece.",ratioGPt:"Ratio Oro/Platino",ratioGPtNote:"Sobre 1=oro más caro que platino, señal histórica inusual.",
   thStrength:"Fuerza", btnExport:"Exportar CSV",
   targetTitle:"O configure una alerta simple de precio objetivo", targetSub:"No requiere regla de racha \u2014 solo indique el precio y la dirección.",
   targetAssetLbl:"Activo", targetDirLbl:"Avisar cuando el precio esté", targetBelow:"En o por debajo de", targetAbove:"En o por encima de",
@@ -947,7 +947,7 @@ hi:{
   statusFetching:"दैनिक इतिहास लाया जा रहा है…", statusAllReady:"सभी दैनिक डेटा तैयार", statusFailed:"दैनिक डेटा लोड नहीं हो सका, कृपया बाद में फिर कोशिश करें",
   notifMsgTitle:"बाय सिग्नल मिला", notifMsgBody:a=>a+" आपके नियम से मेल खाते हैं।",
   signalHeader:"बाय सिग्नल मिला", signalLine:(n,d,l,p)=>`${n}: ${l} दिनों में ${d}% गिरावट, कीमत ${p}`,
-  groups:{logam:"धातुएं",saham:"माइनिंग स्टॉक्स",etf:"ETF",kripto:"गोल्ड क्रिप्टो"},
+  groups:{logam:"धातुएं",saham:"माइनिंग स्टॉक्स",etf:"ETF",kripto:"गोल्ड क्रिप्टो",komoditas:"कमोडिटीज़",broadcrypto:"ब्रॉड क्रिप्टो"},
   assetNote:{spot:"स्पॉट प्रति औंस",miningEtf:"माइनिंग ETF",goldEtf:"गोल्ड ETF",silverEtf:"सिल्वर ETF",crypto:"गोल्ड-बैक्ड क्रिप्टो"},
   goldName:"सोना", silverName:"चांदी", days:n=>`${n} दिन`, dateLocale:"hi-IN", tvLocale:"en",
   introTLDR:"यह मुफ़्त टूल सोना, चांदी, चार गोल्ड माइनिंग स्टॉक्स, तीन ETF और दो गोल्ड-बैक्ड क्रिप्टोकरेंसी की लाइव कीमत ट्रैक करता है, और जब किसी एसेट की कीमत तय संख्या में लगातार ट्रेडिंग दिनों तक गिरती है तो \u201cबाय सिग्नल\u201d दिखाता है। यह शैक्षणिक है और वित्तीय सलाह नहीं है।",
@@ -971,7 +971,7 @@ hi:{
   ratiosTitle:"क्रॉस-एसेट रेशियो", ratiosSub:"एसेट श्रेणियों के बीच के संबंध, जो एक अकेला प्राइस चार्ट नहीं दिखा सकता।",
   ratioGS:"गोल्ड/सिल्वर रेशियो", ratioGSNote:"एक औंस सोने के बराबर कितने औंस चांदी",
   ratioGM:"गोल्ड/माइनर्स रेशियो", ratioGMNote:"VanEck गोल्ड माइनर्स ETF के सापेक्ष सोने की कीमत",
-  ratioPaxg:"PAXG बनाम स्पॉट गोल्ड", ratioPaxgNote:"स्पॉट कीमत की तुलना में Pax Gold का प्रीमियम या डिस्काउंट",
+  ratioPaxg:"PAXG बनाम स्पॉट गोल्ड", ratioPaxgNote:"स्पॉट कीमत की तुलना में Pax Gold का प्रीमियम या डिस्काउंट",ratioGO:"सोना/तेल अनुपात",ratioGONote:"एक औंस सोने के बराबर WTI बैरल। ऊपर=सोना तेल से बेहतर।",ratioGB:"सोना/बिटकॉइन अनुपात",ratioGBNote:"एक औंस सोना कितने बिटकॉइन खरीदता है।",ratioGPt:"सोना/प्लैटिनम अनुपात",ratioGPtNote:"1 से ऊपर=सोना प्लैटिनम से महंगा।",
   thStrength:"स्ट्रेंथ", btnExport:"CSV एक्सपोर्ट करें",
   targetTitle:"या एक सिंपल टारगेट-प्राइस अलर्ट सेट करें", targetSub:"स्ट्रीक नियम की ज़रूरत नहीं — बस कीमत और दिशा बताएं।",
   targetAssetLbl:"एसेट", targetDirLbl:"कब अलर्ट करें", targetBelow:"इस कीमत या इससे कम पर", targetAbove:"इस कीमत या इससे ज़्यादा पर",
@@ -1042,7 +1042,7 @@ ar:{
   statusFetching:"جارٍ جلب السجل اليومي…", statusAllReady:"جميع البيانات اليومية جاهزة", statusFailed:"فشل تحميل البيانات اليومية، حاول لاحقًا",
   notifMsgTitle:"تم رصد إشارة شراء", notifMsgBody:a=>a+" تستوفي قاعدتك.",
   signalHeader:"تم رصد إشارة شراء", signalLine:(n,d,l,p)=>`${n}: انخفض ${d}% خلال ${l} أيام، السعر ${p}`,
-  groups:{logam:"المعادن",saham:"أسهم التعدين",etf:"صناديق المؤشرات",kripto:"عملات الذهب الرقمية"},
+  groups:{logam:"المعادن",saham:"أسهم التعدين",etf:"صناديق المؤشرات",kripto:"عملات الذهب الرقمية",komoditas:"السلع",broadcrypto:"عملات رقمية واسعة"},
   assetNote:{spot:"سعر فوري للأونصة",miningEtf:"صندوق تعدين",goldEtf:"صندوق ذهب",silverEtf:"صندوق فضة",crypto:"عملة رقمية مدعومة بالذهب"},
   goldName:"الذهب", silverName:"الفضة", days:n=> n===2?"يومان":`${n} أيام`, dateLocale:"ar-EG", tvLocale:"ar",
   introTLDR:"تتابع هذه الأداة المجانية السعر اللحظي للذهب والفضة وأربعة أسهم لشركات تعدين الذهب وثلاثة صناديق مؤشرات متداولة وعملتين رقميتين مدعومتين بالذهب، وتُظهر \u201cإشارة شراء\u201d عندما ينخفض سعر أحد الأصول لعدد محدد من أيام التداول المتتالية. الأداة تعليمية ولا تُعد نصيحة مالية.",
@@ -1066,7 +1066,7 @@ ar:{
   ratiosTitle:"نسب بين الأصول", ratiosSub:"علاقات بين فئات الأصول لا يمكن لرسم بياني واحد للسعر إظهارها.",
   ratioGS:"نسبة الذهب/الفضة", ratioGSNote:"عدد أونصات الفضة المعادلة لأونصة ذهب واحدة",
   ratioGM:"نسبة الذهب/شركات التعدين", ratioGMNote:"سعر الذهب مقارنة بصندوق VanEck لشركات تعدين الذهب",
-  ratioPaxg:"PAXG مقابل الذهب الفوري", ratioPaxgNote:"علاوة أو خصم Pax Gold مقارنة بالسعر الفوري",
+  ratioPaxg:"PAXG مقابل الذهب الفوري", ratioPaxgNote:"علاوة أو خصم Pax Gold مقارنة بالسعر الفوري",ratioGO:"نسبة الذهب/النفط",ratioGONote:"براميل WTI مقابل أونصة ذهب. ارتفاع=الذهب يتفوق.",ratioGB:"نسبة الذهب/البيتكوين",ratioGBNote:"بيتكوين مقابل أونصة ذهب. انخفاض=قوة بيتكوين.",ratioGPt:"نسبة الذهب/البلاتين",ratioGPtNote:"فوق 1=الذهب أغلى من البلاتين، نادر تاريخياً.",
   thStrength:"القوة", btnExport:"تصدير CSV",
   targetTitle:"أو عيّن تنبيه سعر مستهدف بسيط", targetSub:"لا حاجة لقاعدة التتابع — فقط حدد السعر والاتجاه.",
   targetAssetLbl:"الأصل", targetDirLbl:"نبّهني عندما يكون السعر", targetBelow:"عند أو أقل من", targetAbove:"عند أو أعلى من",
@@ -1137,7 +1137,7 @@ ru:{
   statusFetching:"Загрузка дневной истории…", statusAllReady:"Все дневные данные готовы", statusFailed:"Не удалось загрузить дневные данные, попробуйте позже",
   notifMsgTitle:"Обнаружен сигнал на покупку", notifMsgBody:a=>a+" соответствуют вашему правилу.",
   signalHeader:"ОБНАРУЖЕН СИГНАЛ НА ПОКУПКУ", signalLine:(n,d,l,p)=>`${n}: падение на ${d}% за ${l} дн., цена ${p}`,
-  groups:{logam:"Металлы",saham:"Акции золотодобытчиков",etf:"ETF",kripto:"Золотая крипта"},
+  groups:{logam:"Металлы",saham:"Акции золотодобытчиков",etf:"ETF",kripto:"Золотая крипта",komoditas:"Сырьё",broadcrypto:"Широкая крипта"},
   assetNote:{spot:"спот за унцию",miningEtf:"ETF золотодобытчиков",goldEtf:"золотой ETF",silverEtf:"серебряный ETF",crypto:"крипто, обеспеченная золотом"},
   goldName:"Золото", silverName:"Серебро",
   days:n=>{const m10=n%10,m100=n%100; const w=(m10===1&&m100!==11)?"день":([2,3,4].includes(m10)&&![12,13,14].includes(m100))?"дня":"дней"; return `${n} ${w}`;},
@@ -1163,7 +1163,7 @@ ru:{
   ratiosTitle:"Межактивные соотношения", ratiosSub:"Связи между категориями активов, которые не показать на одном графике цены.",
   ratioGS:"Соотношение золото/серебро", ratioGSNote:"Сколько унций серебра равны одной унции золота",
   ratioGM:"Соотношение золото/добытчики", ratioGMNote:"Цена золота относительно ETF VanEck Gold Miners",
-  ratioPaxg:"PAXG против спотового золота", ratioPaxgNote:"Премия или дисконт Pax Gold к спотовой цене",
+  ratioPaxg:"PAXG против спотового золота", ratioPaxgNote:"Премия или дисконт Pax Gold к спотовой цене",ratioGO:"Золото/Нефть",ratioGONote:"Баррелей WTI на унцию золота. Рост=золото обгоняет нефть.",ratioGB:"Золото/Биткоин",ratioGBNote:"Биткоинов на унцию золота. Падение=биткоин растёт.",ratioGPt:"Золото/Платина",ratioGPtNote:"Выше 1=золото дороже платины, исторически редко.",
   thStrength:"Сила", btnExport:"Экспорт CSV",
   targetTitle:"Или задайте простое ценовое оповещение", targetSub:"Без правила серии — просто укажите цену и направление.",
   targetAssetLbl:"Актив", targetDirLbl:"Уведомить, когда цена", targetBelow:"На уровне или ниже", targetAbove:"На уровне или выше",
@@ -1229,10 +1229,16 @@ const ASSETS=[
   {id:"GDX",    name:"VanEck Gold Miners",note:"miningEtf",   tv:"AMEX:GDX",         grp:"etf",    src:"yahoo",     code:"GDX", dec:2},
   {id:"GLD",    name:"SPDR Gold Shares", note:"goldEtf",      tv:"AMEX:GLD",         grp:"etf",    src:"yahoo",     code:"GLD", dec:2},
   {id:"SLV",    name:"iShares Silver",   note:"silverEtf",    tv:"AMEX:SLV",         grp:"etf",    src:"yahoo",     code:"SLV", dec:2},
-  {id:"PAXG",   name:"Pax Gold",         note:"crypto",       tv:"COINBASE:PAXGUSD", grp:"kripto", src:"coingecko", code:"pax-gold", dec:2},
-  {id:"XAUT",   name:"Tether Gold",      note:"crypto",       tv:"KRAKEN:XAUTUSD",   grp:"kripto", src:"coingecko", code:"tether-gold", dec:2}
+  {id:"PAXG",   name:"Pax Gold",         note:"crypto",       tv:"COINBASE:PAXGUSD", grp:"kripto",    src:"coingecko", code:"pax-gold",    dec:2},
+  {id:"XAUT",   name:"Tether Gold",      note:"crypto",       tv:"KRAKEN:XAUTUSD",   grp:"kripto",    src:"coingecko", code:"tether-gold", dec:2},
+  {id:"CL",     name:"WTI Crude Oil",    note:"NYMEX",        tv:"NYMEX:CL1!",       grp:"komoditas", src:"yahoo",     code:"CL=F",        dec:2},
+  {id:"NG",     name:"Natural Gas",      note:"NYMEX",        tv:"NYMEX:NG1!",       grp:"komoditas", src:"yahoo",     code:"NG=F",        dec:3},
+  {id:"HG",     name:"Copper",           note:"COMEX",        tv:"COMEX:HG1!",       grp:"komoditas", src:"yahoo",     code:"HG=F",        dec:3},
+  {id:"PL",     name:"Platinum",         note:"NYMEX",        tv:"NYMEX:PL1!",       grp:"komoditas", src:"yahoo",     code:"PL=F",        dec:2},
+  {id:"BTC",    name:"Bitcoin",          note:"BTC/USD",      tv:"COINBASE:BTCUSD",  grp:"broadcrypto",src:"yahoo",   code:"BTC-USD",     dec:0},
+  {id:"ETH",    name:"Ethereum",         note:"ETH/USD",      tv:"COINBASE:ETHUSD",  grp:"broadcrypto",src:"yahoo",   code:"ETH-USD",     dec:2}
 ];
-const GROUP_IDS=["logam","saham","etf","kripto"];
+const GROUP_IDS=["logam","saham","etf","kripto","komoditas","broadcrypto"];
 const byId=id=>ASSETS.find(a=>a.id===id);
 const aName = a => a.nameKey ? t(a.nameKey) : a.name;
 const aNote = a => t("assetNote")[a.note] || a.note;
@@ -1490,23 +1496,33 @@ function renderSnapshot(){
 /* ================= cross-asset ratios ================= */
 function renderRatios(){
   const box=$("ratioStrip"); if(!box) return;
-  const g=slice("XAUUSD"), s=slice("XAGUSD"), gm=slice("GDX"), px=slice("PAXG");
-  if(!g||!s||!gm||!px){ box.innerHTML=`<div class="stat"><div class="l">${t("loadingCell")}</div></div>`; return; }
-  const gs=commonSeries(g,s),gg=commonSeries(g,gm),gp=commonSeries(g,px);
-  if(gs.length<2||gg.length<2||!gp.length){ box.innerHTML=`<div class="stat"><div class="l">Insufficient aligned dates</div></div>`; return; }
-  const gsLast=gs[gs.length-1],gsPrev=gs[gs.length-2],ggLast=gg[gg.length-1],ggPrev=gg[gg.length-2],gpLast=gp[gp.length-1];
-  const ratioGS = gsLast.a/gsLast.b, ratioGM = ggLast.a/ggLast.b;
-  const ratioGSPrev = gsPrev.a/gsPrev.b, ratioGMPrev = ggPrev.a/ggPrev.b;
-  const chg=(cur,prev)=> prev ? (cur-prev)/prev*100 : null;
-  const dGS=chg(ratioGS,ratioGSPrev), dGM=chg(ratioGM,ratioGMPrev);
-  const paxgPrem = (gpLast.b-gpLast.a)/gpLast.a*100;
+  const g=slice("XAUUSD"), sv=slice("XAGUSD"), gm=slice("GDX"), px=slice("PAXG");
+  const oil=slice("CL"), btc=slice("BTC"), pt=slice("PL");
+  if(!g||!sv||!gm||!px){ box.innerHTML=`<div class="stat"><div class="l">${t("loadingCell")}</div></div>`; return; }
+  const gs=commonSeries(g,sv), gg=commonSeries(g,gm), gp=commonSeries(g,px);
+  const go=oil?commonSeries(g,oil):[], gb=btc?commonSeries(g,btc):[], gpt=pt?commonSeries(g,pt):[];
+  const L=arr=>arr.length>=2?arr[arr.length-1]:null;
+  const V=arr=>arr.length>=2?arr[arr.length-2]:null;
+  const chg=(cur,prv)=>(cur!=null&&prv!=null&&prv)?(cur-prv)/prv*100:null;
   const card=(label,note,val,delta)=>`<div class="stat">
       <div class="n">${val}</div><div class="l">${label}</div>
       ${delta!=null?`<div class="${delta>0?"up":delta<0?"down":"flat"}" style="font-size:11.5px;margin-top:3px">${pctFmt(delta)}</div>`:""}
       <div class="note" style="margin-top:4px">${note}</div></div>`;
-  box.innerHTML = card(t("ratioGS"), t("ratioGSNote"), ratioGS.toFixed(2), dGS)
-    + card(t("ratioGM"), t("ratioGMNote"), ratioGM.toFixed(2), dGM)
-    + card(t("ratioPaxg"), t("ratioPaxgNote"), pctFmt(paxgPrem), null);
+  const gsL=L(gs),gsP=V(gs),ggL=L(gg),ggP=V(gg),gpL=L(gp);
+  const goL=L(go),goP=V(go),gbL=L(gb),gbP=V(gb),gptL=L(gpt),gptP=V(gpt);
+  const rGS=gsL?gsL.a/gsL.b:null, rGM=ggL?ggL.a/ggL.b:null;
+  const rGSp=gsP?gsP.a/gsP.b:null, rGMp=ggP?ggP.a/ggP.b:null;
+  const paxgPrem=gpL?(gpL.b-gpL.a)/gpL.a*100:null;
+  const rGO=goL?goL.a/goL.b:null, rGOp=goP?goP.a/goP.b:null;
+  const rGB=gbL?gbL.a/gbL.b:null, rGBp=gbP?gbP.a/gbP.b:null;
+  const rGPt=gptL?gptL.a/gptL.b:null, rGPtp=gptP?gptP.a/gptP.b:null;
+  let html=card(t("ratioGS"),t("ratioGSNote"),rGS!=null?rGS.toFixed(2):"—",chg(rGS,rGSp))
+    +card(t("ratioGM"),t("ratioGMNote"),rGM!=null?rGM.toFixed(2):"—",chg(rGM,rGMp))
+    +card(t("ratioPaxg"),t("ratioPaxgNote"),paxgPrem!=null?pctFmt(paxgPrem):"—",null);
+  if(rGO!=null) html+=card(t("ratioGO"),t("ratioGONote"),rGO.toFixed(2),chg(rGO,rGOp));
+  if(rGB!=null) html+=card(t("ratioGB"),t("ratioGBNote"),rGB.toFixed(4),chg(rGB,rGBp));
+  if(rGPt!=null) html+=card(t("ratioGPt"),t("ratioGPtNote"),rGPt.toFixed(3),chg(rGPt,rGPtp));
+  box.innerHTML=html;
 }
 
 /* ================= transparent track record ================= */
