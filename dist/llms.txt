@@ -1,6 +1,6 @@
 # GoldAlert
 
-GoldAlert (goldalert.org) is a free, educational multi-asset dashboard covering spot gold, spot silver, gold-mining shares, gold and silver ETFs, and gold-backed cryptoassets.
+GoldAlert (goldalert.org) is a free, educational multi-asset dashboard covering spot gold, spot silver, gold-mining shares, gold and silver ETFs, gold-backed cryptoassets, commodities (WTI crude oil, natural gas, copper, platinum), and broad crypto (Bitcoin, Ethereum).
 
 Core signal rule:
 - 0–2 consecutive lower daily closes: HOLD
@@ -9,12 +9,16 @@ Core signal rule:
 
 The percentage labels are rule stages, not probabilities, guarantees, or individualized position-size recommendations.
 
-Assets tracked: spot gold (XAU/USD), spot silver (XAG/USD), AngloGold Ashanti (NYSE:AU), Kinross Gold (NYSE:KGC), Harmony Gold (NYSE:HMY), Gold Fields (NYSE:GFI), VanEck Gold Miners ETF (GDX), SPDR Gold Shares (GLD), iShares Silver Trust (SLV), Pax Gold (PAXG), Tether Gold (XAUT).
+Assets tracked: spot gold (XAU/USD), spot silver (XAG/USD), AngloGold Ashanti (NYSE:AU), Kinross Gold (NYSE:KGC), Harmony Gold (NYSE:HMY), Gold Fields (NYSE:GFI), VanEck Gold Miners ETF (GDX), SPDR Gold Shares (GLD), iShares Silver Trust (SLV), Pax Gold (PAXG), Tether Gold (XAUT), WTI Crude Oil (CL=F), Natural Gas (NG=F), Copper (HG=F), Platinum (PL=F), Bitcoin (BTC-USD), Ethereum (ETH-USD).
+
+Cross-Asset Ratios tracked: Gold/Silver ratio, Gold/Miners ratio, PAXG spot premium, Gold/Oil ratio, Gold/Bitcoin ratio, Gold/Platinum ratio.
 
 ## Primary pages
-- /index.html — live charts, signal board, cross-asset ratios, comparison tool, backtest table, private watchlist, and alert sign-up
+- /index.html — live charts, signal board, cross-asset ratios (6 pairs), comparison tool, backtest table, private watchlist, and alert sign-up
 - /methodology.html — exact calculation rules, data limitations, and version history
-- /articles.html — full article index (see below)
+- /commodities/ — commodity signal dashboard (WTI Oil, Natural Gas, Copper)
+- /ratios/ — cross-asset ratio tools (Gold/Silver, Gold/Oil, Gold/Bitcoin, Gold/Copper)
+- /articles.html — full article index (15 articles)
 - /about.html — background on the project
 - /contact.html — how to reach the operator
 - /privacy.html — data and cookie disclosures
@@ -29,5 +33,12 @@ Assets tracked: spot gold (XAU/USD), spot silver (XAG/USD), AngloGold Ashanti (N
 - /articles/mining-stocks-amplify-gold-moves.html — How Mining Stocks Amplify Gold Price Moves
 - /articles/gld-vs-physical-gold.html — GLD vs. Physical Gold: Costs and Trade-offs
 - /articles/paxg-vs-xaut.html — PAXG vs. XAUT: Which Gold-Backed Token Fits You
+- /articles/how-to-set-gold-price-alert.html — How to Set a Gold Price Alert (Browser, Email & Telegram)
+- /articles/is-gold-good-investment.html — Is Gold a Good Investment? Arguments on Both Sides
+- /articles/gold-vs-sp500.html — Gold vs. S&P 500: How They've Compared Over Time
+- /articles/what-is-gold-etf.html — What Is a Gold ETF and How Does It Work?
+- /articles/gold-price-history-major-moves.html — Gold Price History: Major Moves and What Drove Them
+- /articles/gold-silver-ratio-explained.html — The Gold/Silver Ratio Explained
+- /articles/central-bank-gold-buying.html — Why Central Banks Buy Gold (And Why It Matters for the Price)
 
 All content is educational and does not constitute financial, investment, tax, or legal advice.
