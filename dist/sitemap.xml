@@ -7,6 +7,17 @@
   <url><loc>https://goldalert.org/privacy.html</loc></url>
   <url><loc>https://goldalert.org/terms.html</loc></url>
   <url><loc>https://goldalert.org/articles.html</loc></url>
+
+  <url><loc>https://goldalert.org/commodities/</loc></url>
+  <url><loc>https://goldalert.org/commodities/oil/</loc></url>
+  <url><loc>https://goldalert.org/commodities/copper/</loc></url>
+  <url><loc>https://goldalert.org/commodities/natural-gas/</loc></url>
+
+  <url><loc>https://goldalert.org/ratios/</loc></url>
+  <url><loc>https://goldalert.org/ratios/gold-silver/</loc></url>
+  <url><loc>https://goldalert.org/ratios/bitcoin-gold/</loc></url>
+  <url><loc>https://goldalert.org/ratios/gold-copper/</loc></url>
+
   <url><loc>https://goldalert.org/articles/read-gold-buy-signal.html</loc></url>
   <url><loc>https://goldalert.org/articles/gold-stocks-etfs-crypto.html</loc></url>
   <url><loc>https://goldalert.org/articles/backtesting-pullback-rule.html</loc></url>
