@@ -15,6 +15,13 @@ const ASSET_META={
     path:"/commodities/copper/",
     summary:"An industrial-demand barometer often called Dr. Copper."
   },
+  PL:{
+    name:"Platinum",
+    unit:"USD per troy ounce",
+    dec:2,
+    path:"/commodities/platinum/",
+    summary:"A precious and industrial metal with major uses in catalytic converters and fuel cells."
+  },
   NATGAS:{
     name:"Natural Gas",
     unit:"USD per MMBtu",
@@ -42,6 +49,27 @@ const ASSET_META={
     dec:2,
     path:"/ratios/bitcoin-gold/",
     summary:"Used here only as a macro comparison with gold."
+  },
+  PL:{
+    name:"Platinum",
+    unit:"USD per troy ounce",
+    dec:2,
+    path:"/commodities/platinum/",
+    summary:"A precious and industrial metal with major uses in catalytic converters and fuel cells."
+  },
+  CL:{
+    name:"WTI Crude Oil",
+    unit:"USD per barrel",
+    dec:2,
+    path:"/commodities/oil/",
+    summary:"A global energy benchmark watched for inflation and growth signals."
+  },
+  ETH:{
+    name:"Ethereum",
+    unit:"USD",
+    dec:2,
+    path:"/ratios/bitcoin-gold/",
+    summary:"Second-largest cryptocurrency by market cap."
   }
 };
 
@@ -75,6 +103,36 @@ const RATIO_META={
     unit:"ratio points",
     formula:"Gold close ÷ Copper close",
     summary:"A simple defensive-versus-industrial market relationship."
+  },
+  "gold-platinum":{
+    name:"Gold/Platinum Ratio",
+    a:"XAUUSD",
+    b:"PL",
+    dec:3,
+    path:"/ratios/gold-platinum/",
+    unit:"ratio (gold ÷ platinum)",
+    formula:"Gold close ÷ Platinum close",
+    summary:"Above 1 means gold is more expensive than platinum — historically unusual."
+  },
+  "gold-oil":{
+    name:"Gold/Oil Ratio",
+    a:"XAUUSD",
+    b:"CL",
+    dec:1,
+    path:"/ratios/gold-oil/",
+    unit:"barrels of oil per ounce of gold",
+    formula:"Gold close ÷ WTI crude close",
+    summary:"How many barrels of oil one ounce of gold can buy. A classic macro signal."
+  },
+  "gold-bitcoin":{
+    name:"Gold/Bitcoin Ratio",
+    a:"XAUUSD",
+    b:"BTC",
+    dec:6,
+    path:"/ratios/bitcoin-gold/",
+    unit:"fraction of Bitcoin per ounce of gold",
+    formula:"Gold close ÷ Bitcoin close",
+    summary:"How much of one Bitcoin an ounce of gold is worth."
   }
 };
 
