@@ -15,13 +15,6 @@ const ASSET_META={
     path:"/commodities/copper/",
     summary:"An industrial-demand barometer often called Dr. Copper."
   },
-  PL:{
-    name:"Platinum",
-    unit:"USD per troy ounce",
-    dec:2,
-    path:"/commodities/platinum/",
-    summary:"A precious and industrial metal with major uses in catalytic converters and fuel cells."
-  },
   NATGAS:{
     name:"Natural Gas",
     unit:"USD per MMBtu",
@@ -64,13 +57,6 @@ const ASSET_META={
     path:"/commodities/oil/",
     summary:"A global energy benchmark watched for inflation and growth signals."
   },
-  ETH:{
-    name:"Ethereum",
-    unit:"USD",
-    dec:2,
-    path:"/ratios/bitcoin-gold/",
-    summary:"Second-largest cryptocurrency by market cap."
-  }
 };
 
 const RATIO_META={
@@ -453,7 +439,8 @@ function renderRatioPage(key,data){
 
   if(!rows.length){
     host.innerHTML=`
-                                           Daily data is temporarily unavailable.
+      <div class="status">
+        Daily data is temporarily unavailable.
         Please try again after the next scheduled update.
       </div>
     `;
