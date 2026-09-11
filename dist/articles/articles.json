@@ -1,17 +1,170 @@
 [
-  {"slug":"how-to-set-gold-price-alert","title":"How to Set a Gold Price Alert (Browser, Email & Telegram)","category":"Guide","excerpt":"Three ways to get notified when gold drops: browser push, email, and Telegram — all free, no app required, works on any device.","date":"2026-09-08","url":"articles/how-to-set-gold-price-alert.html"},
-  {"slug":"is-gold-good-investment","title":"Is Gold a Good Investment? Arguments on Both Sides","category":"Fundamentals","excerpt":"A balanced look at why people choose gold and why others skip it — without a yes or no conclusion, because that depends on you.","date":"2026-09-08","url":"articles/is-gold-good-investment.html"},
-  {"slug":"gold-vs-sp500","title":"Gold vs. S&P 500: How They've Compared Over Time","category":"Comparison","excerpt":"How gold and US equities have performed relative to each other across different market conditions — without picking a winner.","date":"2026-09-08","url":"articles/gold-vs-sp500.html"},
-  {"slug":"what-is-gold-etf","title":"What Is a Gold ETF and How Does It Work?","category":"Guide","excerpt":"A plain-English explanation of gold exchange-traded funds — what they hold, how they trade, and how they differ from each other.","date":"2026-09-08","url":"articles/what-is-gold-etf.html"},
-  {"slug":"gold-price-history-major-moves","title":"Gold Price History: Major Moves and What Drove Them","category":"Fundamentals","excerpt":"The key turning points in gold's modern price history — what drove each major move and what the pattern suggests about reading pullbacks today.","date":"2026-09-08","url":"articles/gold-price-history-major-moves.html"},
-  {"slug":"gold-silver-ratio-explained","title":"The Gold/Silver Ratio Explained","category":"Guide","excerpt":"What the gold/silver ratio measures, why it matters to precious metals investors, and how to read it on GoldAlert's cross-asset panel.","date":"2026-09-08","url":"articles/gold-silver-ratio-explained.html"},
-  {"slug":"central-bank-gold-buying","title":"Why Central Banks Buy Gold (And Why It Matters for the Price)","category":"Fundamentals","excerpt":"Central banks have been net buyers of gold for over a decade. Here's what they're doing and why it matters for anyone tracking the gold price.","date":"2026-09-08","url":"articles/central-bank-gold-buying.html"},
-  {"slug":"backtesting-pullback-rule","title":"Backtesting a Pullback Rule: What the Numbers Actually Show","category":"Guide","excerpt":"How to read the forward-return backtest table without over-trusting a small sample or a lucky average.","date":"2026-09-07","url":"articles/backtesting-pullback-rule.html"},
-  {"slug":"what-moves-gold-price","title":"What Moves the Gold Price Day to Day","category":"Fundamentals","excerpt":"The main forces behind day-to-day moves in the spot gold price, in plain language.","date":"2026-09-07","url":"articles/what-moves-gold-price.html"},
-  {"slug":"why-silver-more-volatile","title":"Why Silver Is More Volatile Than Gold","category":"Fundamentals","excerpt":"Why silver tends to swing harder than gold in percentage terms, and what that means for reading its signal streaks.","date":"2026-09-07","url":"articles/why-silver-more-volatile.html"},
-  {"slug":"mining-stocks-amplify-gold-moves","title":"How Mining Stocks Amplify Gold Price Moves","category":"Fundamentals","excerpt":"Why gold mining shares often move by a larger percentage than gold itself, and where that leverage can break down.","date":"2026-09-07","url":"articles/mining-stocks-amplify-gold-moves.html"},
-  {"slug":"gld-vs-physical-gold","title":"GLD vs. Physical Gold: Costs and Trade-offs","category":"Comparison","excerpt":"How SPDR Gold Shares (GLD) and physical bullion differ in cost, custody, and liquidity before you compare their price charts.","date":"2026-09-07","url":"articles/gld-vs-physical-gold.html"},
-  {"slug":"paxg-vs-xaut","title":"PAXG vs. XAUT: Which Gold-Backed Token Fits You","category":"Comparison","excerpt":"Pax Gold and Tether Gold both track spot gold, but differ in issuer, redemption terms, and where they trade.","date":"2026-09-07","url":"articles/paxg-vs-xaut.html"},
-  {"slug":"read-gold-buy-signal","title":"How to Read a Gold Buy Signal","category":"Guide","excerpt":"Learn how the 3-day watch and 5-day strong-buy pullback signals are calculated, tested and interpreted.","date":"2026-09-01","url":"articles/read-gold-buy-signal.html"},
-  {"slug":"gold-stocks-etfs-crypto","title":"Gold Stocks vs. ETFs vs. Gold-Backed Crypto","category":"Comparison","excerpt":"Physical bullion, mining shares, ETFs and gold-backed tokens compared side by side before you read a signal.","date":"2026-09-01","url":"articles/gold-stocks-etfs-crypto.html"}
+  {
+    "slug": "how-to-read-bitcoin-gold-ratio",
+    "title": "How to Read the Bitcoin/Gold Ratio",
+    "category": "Market Ratios",
+    "excerpt": "What the ratio measures, how GoldAlert calculates it, and what rising or falling values can—and cannot—tell investors.",
+    "date": "2026-09-11",
+    "url": "articles/how-to-read-bitcoin-gold-ratio.html"
+  },
+  {
+    "slug": "gold-oil-ratio-explained",
+    "title": "Gold/Oil Ratio Explained: Formula, History and What It Means",
+    "category": "Market Ratios",
+    "excerpt": "Why investors compare gold with crude oil, how the ratio is calculated, and why checking underlying prices separately always matters.",
+    "date": "2026-09-11",
+    "url": "articles/gold-oil-ratio-explained.html"
+  },
+  {
+    "slug": "gold-copper-ratio-economic-cycle",
+    "title": "Gold/Copper Ratio and the Economic Cycle",
+    "category": "Market Ratios",
+    "excerpt": "A practical guide to comparing defensive gold demand with copper's industrial sensitivity — and where the signal can mislead.",
+    "date": "2026-09-11",
+    "url": "articles/gold-copper-ratio-economic-cycle.html"
+  },
+  {
+    "slug": "gold-platinum-ratio-guide",
+    "title": "Gold/Platinum Ratio: A Practical Guide",
+    "category": "Market Ratios",
+    "excerpt": "How to calculate and interpret the relative price of two precious metals with very different demand and supply profiles.",
+    "date": "2026-09-11",
+    "url": "articles/gold-platinum-ratio-guide.html"
+  },
+  {
+    "slug": "how-to-use-goldalert-commodity-dashboard",
+    "title": "How to Use the GoldAlert Commodity Dashboard",
+    "category": "Guide",
+    "excerpt": "A practical workflow for reading commodity closes, daily changes, timestamps and macro ratios — and what to check before drawing conclusions.",
+    "date": "2026-09-11",
+    "url": "articles/how-to-use-goldalert-commodity-dashboard.html"
+  },
+  {
+    "slug": "gold-inflation-hedge-explained",
+    "title": "Is Gold an Inflation Hedge? A Balanced Explanation",
+    "category": "Fundamentals",
+    "excerpt": "Why gold may preserve purchasing power over long periods — and why it doesn't automatically rise every time an inflation report comes in hot.",
+    "date": "2026-09-11",
+    "url": "articles/gold-inflation-hedge-explained.html"
+  },
+  {
+    "slug": "how-to-set-gold-price-alert",
+    "title": "How to Set a Gold Price Alert (Browser, Email & Telegram)",
+    "category": "Guide",
+    "excerpt": "Three ways to get notified when gold drops: browser push, email, and Telegram — all free, no app required, works on any device.",
+    "date": "2026-09-08",
+    "url": "articles/how-to-set-gold-price-alert.html"
+  },
+  {
+    "slug": "is-gold-good-investment",
+    "title": "Is Gold a Good Investment? Arguments on Both Sides",
+    "category": "Fundamentals",
+    "excerpt": "A balanced look at why people choose gold and why others skip it — without a yes or no conclusion, because that depends on you.",
+    "date": "2026-09-08",
+    "url": "articles/is-gold-good-investment.html"
+  },
+  {
+    "slug": "gold-vs-sp500",
+    "title": "Gold vs. S&P 500: How They've Compared Over Time",
+    "category": "Comparison",
+    "excerpt": "How gold and US equities have performed relative to each other across different market conditions — without picking a winner.",
+    "date": "2026-09-08",
+    "url": "articles/gold-vs-sp500.html"
+  },
+  {
+    "slug": "what-is-gold-etf",
+    "title": "What Is a Gold ETF and How Does It Work?",
+    "category": "Guide",
+    "excerpt": "A plain-English explanation of gold exchange-traded funds — what they hold, how they trade, and how they differ from each other.",
+    "date": "2026-09-08",
+    "url": "articles/what-is-gold-etf.html"
+  },
+  {
+    "slug": "gold-price-history-major-moves",
+    "title": "Gold Price History: Major Moves and What Drove Them",
+    "category": "Fundamentals",
+    "excerpt": "The key turning points in gold's modern price history — what drove each major move and what the pattern suggests about reading pullbacks today.",
+    "date": "2026-09-08",
+    "url": "articles/gold-price-history-major-moves.html"
+  },
+  {
+    "slug": "gold-silver-ratio-explained",
+    "title": "The Gold/Silver Ratio Explained",
+    "category": "Guide",
+    "excerpt": "What the gold/silver ratio measures, why it matters to precious metals investors, and how to read it on GoldAlert's cross-asset panel.",
+    "date": "2026-09-08",
+    "url": "articles/gold-silver-ratio-explained.html"
+  },
+  {
+    "slug": "central-bank-gold-buying",
+    "title": "Why Central Banks Buy Gold (And Why It Matters for the Price)",
+    "category": "Fundamentals",
+    "excerpt": "Central banks have been net buyers of gold for over a decade. Here's what they're doing and why it matters for anyone tracking the gold price.",
+    "date": "2026-09-08",
+    "url": "articles/central-bank-gold-buying.html"
+  },
+  {
+    "slug": "backtesting-pullback-rule",
+    "title": "Backtesting a Pullback Rule: What the Numbers Actually Show",
+    "category": "Guide",
+    "excerpt": "How to read the forward-return backtest table without over-trusting a small sample or a lucky average.",
+    "date": "2026-09-07",
+    "url": "articles/backtesting-pullback-rule.html"
+  },
+  {
+    "slug": "what-moves-gold-price",
+    "title": "What Moves the Gold Price Day to Day",
+    "category": "Fundamentals",
+    "excerpt": "The main forces behind day-to-day moves in the spot gold price, in plain language.",
+    "date": "2026-09-07",
+    "url": "articles/what-moves-gold-price.html"
+  },
+  {
+    "slug": "why-silver-more-volatile",
+    "title": "Why Silver Is More Volatile Than Gold",
+    "category": "Fundamentals",
+    "excerpt": "Why silver tends to swing harder than gold in percentage terms, and what that means for reading its signal streaks.",
+    "date": "2026-09-07",
+    "url": "articles/why-silver-more-volatile.html"
+  },
+  {
+    "slug": "mining-stocks-amplify-gold-moves",
+    "title": "How Mining Stocks Amplify Gold Price Moves",
+    "category": "Fundamentals",
+    "excerpt": "Why gold mining shares often move by a larger percentage than gold itself, and where that leverage can break down.",
+    "date": "2026-09-07",
+    "url": "articles/mining-stocks-amplify-gold-moves.html"
+  },
+  {
+    "slug": "gld-vs-physical-gold",
+    "title": "GLD vs. Physical Gold: Costs and Trade-offs",
+    "category": "Comparison",
+    "excerpt": "How SPDR Gold Shares (GLD) and physical bullion differ in cost, custody, and liquidity before you compare their price charts.",
+    "date": "2026-09-07",
+    "url": "articles/gld-vs-physical-gold.html"
+  },
+  {
+    "slug": "paxg-vs-xaut",
+    "title": "PAXG vs. XAUT: Which Gold-Backed Token Fits You",
+    "category": "Comparison",
+    "excerpt": "Pax Gold and Tether Gold both track spot gold, but differ in issuer, redemption terms, and where they trade.",
+    "date": "2026-09-07",
+    "url": "articles/paxg-vs-xaut.html"
+  },
+  {
+    "slug": "read-gold-buy-signal",
+    "title": "How to Read a Gold Buy Signal",
+    "category": "Guide",
+    "excerpt": "Learn how the 3-day watch and 5-day strong-buy pullback signals are calculated, tested and interpreted.",
+    "date": "2026-09-01",
+    "url": "articles/read-gold-buy-signal.html"
+  },
+  {
+    "slug": "gold-stocks-etfs-crypto",
+    "title": "Gold Stocks vs. ETFs vs. Gold-Backed Crypto",
+    "category": "Comparison",
+    "excerpt": "Physical bullion, mining shares, ETFs and gold-backed tokens compared side by side before you read a signal.",
+    "date": "2026-09-01",
+    "url": "articles/gold-stocks-etfs-crypto.html"
+  }
 ]
