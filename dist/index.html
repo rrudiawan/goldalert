@@ -9,6 +9,11 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://goldalert.org/">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GoldAlert">
 <link rel="icon" type="image/svg+xml" href="icons/logo.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
@@ -244,6 +249,29 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
 .strength .fill{height:100%;border-radius:3px}
 .strength .num{font-size:11px;color:var(--muted);min-width:22px;text-align:right}
 
+.toolkit-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:12px;margin-top:12px}
+.unit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
+.unit-price{background:#0B1B29;border:1px solid var(--line);border-radius:9px;padding:9px 10px}
+.unit-price b{display:block;color:var(--brass-soft);font-family:Fraunces,serif;font-size:16px}
+.unit-price span{font-size:11px;color:var(--muted)}
+.sentiment-card{background:#0B1B29;border:1px solid var(--line);border-radius:11px;padding:14px}
+.sentiment-score{font:600 34px/1 Fraunces,serif;color:var(--brass-soft)}
+.sentiment-meter{height:10px;background:#20384c;border-radius:99px;overflow:hidden;margin:12px 0 8px}
+.sentiment-meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--brass),var(--red));border-radius:99px;transition:width .25s}
+.live-quote-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.live-quote{min-height:126px;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:#0B1B29}
+.copy-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.copy-row button{padding:7px 11px;font-size:12px}
+.feature-callout{display:flex;align-items:center;justify-content:space-between;gap:14px;border:1px solid var(--line);border-radius:11px;background:#0B1B29;padding:13px 15px;margin-top:12px}
+.feature-callout a{flex-shrink:0;background:var(--brass);color:#231803;text-decoration:none;border-radius:9px;padding:8px 13px;font-weight:600;font-size:13px}
+.install-app{display:none;background:transparent;color:var(--brass-soft);border:1px solid var(--brass);white-space:nowrap}
+.install-app.show{display:inline-flex}
+.install-dialog{max-width:460px;color:var(--paper);background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 18px 60px rgba(0,0,0,.45)}
+.install-dialog::backdrop{background:rgba(0,0,0,.65)}
+.install-dialog h2{margin-top:0}.install-dialog form{text-align:right}
+html[data-theme="light"] .unit-price,html[data-theme="light"] .sentiment-card,html[data-theme="light"] .live-quote,html[data-theme="light"] .feature-callout{background:#FFFFFF}
+@media(max-width:700px){.toolkit-grid,.live-quote-grid{grid-template-columns:1fr}.feature-callout{align-items:flex-start;flex-direction:column}}
+
 .currSel{width:auto;min-width:88px}
 
 .site-nav{display:flex;gap:14px;flex-wrap:wrap;margin:-2px 0 16px;font-size:14px}
@@ -277,6 +305,7 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
     </div>
   </div>
   <div class="headRight">
+    <button type="button" class="install-app" id="installApp">Install App</button>
     <select id="langSel" class="langSel" aria-label="Select language">
       <option value="en">English</option>
       <option value="zh">中文 (简体)</option>
@@ -296,9 +325,10 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
 
 <main id="main">
 <nav class="site-nav" aria-label="Primary navigation">
-  <a href="#board" data-i18n="navBoard">Signal Board</a> 
+  <a href="#board" data-i18n="navBoard">Signal Board</a>
     <a href="/commodities/">Commodities</a>
   <a href="/ratios/">Market Ratios</a>
+  <a href="/embed/">Widgets</a>
   <a href="#watchlist" data-i18n="navWatchlist">Watchlist</a>
   <a href="#news" data-i18n="navNews">News</a>
   <a href="#articles" data-i18n="navLearn">Learn</a>
@@ -323,9 +353,27 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
     <option value="INR">INR ₹</option>
     <option value="CNY">CNY ¥</option>
     <option value="JPY">JPY ¥</option>
+    <option value="CHF">CHF Fr</option>
+    <option value="AUD">AUD A$</option>
   </select>
 </div>
 <div class="snapshot" id="snapshot"></div>
+
+<section class="panel" id="metalsToolkit" aria-labelledby="metalsToolkitTitle">
+  <div class="row between">
+    <div><h2 id="metalsToolkitTitle" style="margin:0">Live Gold &amp; Silver Toolkit</h2><p class="sub" style="margin:4px 0 0">Spot-market context, local-currency estimates, practical weight conversions and transparent pullback sentiment.</p></div>
+  </div>
+  <div class="live-quote-grid" aria-label="Live precious metals quotes">
+    <div><div class="live-quote" id="tvGoldQuote"></div><div class="copy-row"><button class="ghost" id="copyGoldClose" type="button">Copy latest gold close</button><span class="note" id="copyGoldStatus" aria-live="polite"></span></div></div>
+    <div><div class="live-quote" id="tvSilverQuote"></div><div class="copy-row"><button class="ghost" id="copySilverClose" type="button">Copy latest silver close</button><span class="note" id="copySilverStatus" aria-live="polite"></span></div></div>
+  </div>
+  <p class="note">Live XAU/USD and XAG/USD quote panels are provided by TradingView and may be delayed. Copy buttons use GoldAlert's latest scheduled daily close in the currency selected above.</p>
+  <div class="toolkit-grid">
+    <div class="sentiment-card"><h3 style="margin:0">Gold &amp; Silver by Weight</h3><p class="note" style="margin:4px 0 0">Indicative metal value calculated from 1 troy ounce = 31.1034768 grams.</p><div class="unit-grid" id="unitPrices"><span class="note">Loading daily prices…</span></div></div>
+    <div class="sentiment-card"><div class="row between"><h3 style="margin:0">Gold Market Fear / Pullback Index</h3><span class="sentiment-score" id="sentimentScore">—</span></div><div class="sentiment-meter" aria-hidden="true"><i id="sentimentFill"></i></div><b id="sentimentLabel">Loading…</b><p class="note" id="sentimentDetail">Calculated only from GoldAlert's existing rule-based signal universe.</p></div>
+  </div>
+  <div class="feature-callout"><div><b>Share GoldAlert data on your own website</b><div class="note">Create a lightweight gold or silver price widget with your preferred currency, unit and color theme.</div></div><a href="/embed/">Build an embeddable widget →</a></div>
+</section>
 
 <!-- AD SLOT: Leaderboard 728x90 -->
 <div class="ad-slot leaderboard" data-i18n="adLeaderboard">Ad Space 728×90 (Leaderboard)</div>
@@ -581,6 +629,13 @@ footer.site .fmeta{font-size:12px;color:var(--muted);line-height:1.6}
   </div>
 </footer>
 </main>
+
+<dialog class="install-dialog" id="installHelp">
+  <h2>Install GoldAlert</h2>
+  <p id="installInstructions">Install this site from your browser menu to open it like an app.</p>
+  <p class="note">The installed app uses the same GoldAlert website and updates automatically. No App Store account is required.</p>
+  <form method="dialog"><button type="submit">Close</button></form>
+</dialog>
 
 <div class="cookie-bar" id="cookieBar">
   <p data-i18n="cookieText">This site uses cookies for basic analytics to understand how the tool is used. No personal data is sold.</p>
@@ -1449,8 +1504,8 @@ function board(){
 /* ================= currency conversion ================= */
 let currCode = LS.get("sim.currency","USD");
 let fxRates = null;
-const CURR_SYM = {USD:"$",EUR:"€",GBP:"£",IDR:"Rp",INR:"₹",CNY:"¥",JPY:"¥"};
-const CURR_DEC = {USD:2,EUR:2,GBP:2,IDR:0,INR:2,CNY:2,JPY:0};
+const CURR_SYM = {USD:"$",EUR:"€",GBP:"£",IDR:"Rp",INR:"₹",CNY:"¥",JPY:"¥",CHF:"Fr ",AUD:"A$"};
+const CURR_DEC = {USD:2,EUR:2,GBP:2,IDR:0,INR:2,CNY:2,JPY:0,CHF:2,AUD:2};
 async function loadFx(){
   const cacheKey="fx.rates";
   const cached=LS.get(cacheKey,null);
@@ -1850,5 +1905,6 @@ if("serviceWorker" in navigator && location.protocol.startsWith("http")){
   navigator.serviceWorker.register("sw.js").catch(()=>{});
 }
 </script>
+<script src="enhancements.js"></script>
 </body>
 </html>
