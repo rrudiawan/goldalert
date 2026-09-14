@@ -57,6 +57,13 @@ const ASSET_META={
     path:"/commodities/oil/",
     summary:"A global energy benchmark watched for inflation and growth signals."
   },
+  ETH:{
+    name:"Ethereum",
+    unit:"USD",
+    dec:2,
+    path:"/",
+    summary:"Second-largest cryptocurrency by market cap."
+  }
 };
 
 const RATIO_META={
@@ -103,7 +110,7 @@ const RATIO_META={
   "gold-oil":{
     name:"Gold/Oil Ratio",
     a:"XAUUSD",
-    b:"CL",
+    b:"OIL",
     dec:1,
     path:"/ratios/gold-oil/",
     unit:"barrels of oil per ounce of gold",
@@ -295,11 +302,20 @@ function assetCard(id,rows){
   `;
 }
 
+/* ID aliases: pipeline stores some assets under legacy IDs */
+const DATA_ALIAS={CL:"OIL",NG:"NATGAS",HG:"COPPER"};
+function resolveId(id,data){
+  if(data[id]) return id;
+  const alias=DATA_ALIAS[id];
+  return alias&&data[alias]?alias:id;
+}
+
 function ratioRows(key,data){
   const meta=RATIO_META[key];
-
-  return data[meta.a]&&data[meta.b]
-    ?aligned(data[meta.a],data[meta.b])
+  const a=resolveId(meta.a,data);
+  const b=resolveId(meta.b,data);
+  return data[a]&&data[b]
+    ?aligned(data[a],data[b])
     :[];
 }
 
@@ -345,7 +361,8 @@ function ratioCard(key,data){
 
 function renderAssetPage(id,data){
   const meta=ASSET_META[id];
-  const rows=data[id];
+  const resolvedId=resolveId(id,data);
+  const rows=data[resolvedId];
 
   const host=
     document.querySelector(
