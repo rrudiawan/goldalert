@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,follow">
+  <title>GoldAlert Price Widget</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0B1724;--panel:#10202F;--line:#1E3A50;--gold:#F0CE85;--text:#E9F0F6;--muted:#9FB6C9;--green:#39B58C}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}.widget{height:100vh;min-height:190px;border:1px solid var(--line);background:linear-gradient(145deg,var(--panel),var(--bg));padding:16px;display:flex;flex-direction:column;justify-content:space-between}.top{display:flex;justify-content:space-between;gap:12px}.brand{font-weight:700;color:var(--gold)}.asset{font-size:12px;color:var(--muted);text-align:right}.price{font:700 30px/1.1 Georgia,serif;color:var(--gold);margin:8px 0 2px}.meta,.status{font-size:12px;color:var(--muted)}.status{display:flex;justify-content:space-between;gap:8px;margin:9px 0}.pill{border:1px solid var(--line);border-radius:999px;padding:2px 8px}.watch{color:var(--gold);border-color:#8a6828}.strong{color:#8ff0ca;border-color:#2b7f65}.footer{border-top:1px solid var(--line);padding-top:8px;display:flex;justify-content:space-between;gap:10px;font-size:11px;color:var(--muted)}a{color:var(--gold);text-decoration:none}body.light{--bg:#F4F7FA;--panel:#FFFFFF;--line:#D9E2EA;--gold:#8A5B00;--text:#182635;--muted:#607487;color-scheme:light}
+  </style>
+</head>
+<body><main class="widget" aria-live="polite"><div><div class="top"><a class="brand" href="https://goldalert.org/" target="_blank" rel="noopener">GoldAlert</a><div class="asset" id="assetName">Gold</div></div><div class="price" id="price">Loading…</div><div class="meta" id="unit"></div><div class="status"><span id="change">Latest daily close</span><span class="pill" id="signal">HOLD</span></div></div><div class="footer"><span id="date">Loading data…</span><a href="https://goldalert.org/methodology.html" target="_blank" rel="noopener">Methodology →</a></div></main>
+<script>
+"use strict";
+const params=new URLSearchParams(location.search),metal=params.get("metal")==="silver"?"silver":"gold",currency=(params.get("currency")||"USD").toUpperCase(),unit=["oz","g","kg"].includes(params.get("unit"))?params.get("unit"):"oz",theme=params.get("theme")==="light"?"light":"dark";
+document.body.className=theme;
+const id=metal==="silver"?"XAGUSD":"XAUUSD",name=metal==="silver"?"Silver":"Gold",grams=31.1034768,symbols={USD:"$",EUR:"€",GBP:"£",JPY:"¥",CHF:"Fr ",AUD:"A$",IDR:"Rp",INR:"₹",CNY:"¥"};
+document.getElementById("assetName").textContent=name;
+function render(rows,assetSignal,rate){
+  const latest=rows.at(-1),previous=rows.at(-2),factor=unit==="g"?1/grams:unit==="kg"?1000/grams:1,value=latest.c*factor*rate,dec=["JPY","IDR"].includes(currency)?0:2,change=previous?(latest.c-previous.c)/previous.c*100:null,level=assetSignal&&assetSignal.level||"HOLD";
+  document.getElementById("price").textContent=(symbols[currency]||currency+" ")+value.toLocaleString("en-US",{minimumFractionDigits:dec,maximumFractionDigits:dec});
+  document.getElementById("unit").textContent=`${currency} per ${unit==="oz"?"troy ounce":unit==="g"?"gram":"kilogram"}`;
+  document.getElementById("change").textContent=change==null?"Latest daily close":`${change>=0?"+":""}${change.toFixed(2)}% daily`;
+  const pill=document.getElementById("signal");pill.textContent=level;pill.className="pill "+(level==="100% BUY"?"strong":level==="50% BUY"?"watch":"");
+  document.getElementById("date").textContent=`Close ${latest.d} · indicative`;
+}
+Promise.all([fetch("../data/market-history.json",{cache:"no-store"}).then(r=>r.json()),fetch("../data/signals.json",{cache:"no-store"}).then(r=>r.json()),currency==="USD"?Promise.resolve({rates:{USD:1}}):fetch("https://open.er-api.com/v6/latest/USD").then(r=>r.json())]).then(([history,signals,fx])=>{const rows=history.assets&&history.assets[id],rate=currency==="USD"?1:fx.rates&&fx.rates[currency];if(!rows||!rate)throw new Error("data unavailable");render(rows,signals.signals&&signals.signals[id],rate);}).catch(()=>{document.getElementById("price").textContent="Data unavailable";document.getElementById("date").textContent="Visit GoldAlert.org";});
+</script></body></html>
