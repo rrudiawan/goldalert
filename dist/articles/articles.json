@@ -1,5 +1,85 @@
 [
   {
+    "slug": "how-gold-price-per-gram-kilogram-is-calculated",
+    "title": "Gold Price per Gram and Kilogram: The Exact Formula",
+    "category": "Price Basics",
+    "excerpt": "The exact troy-ounce conversion, a worked example, and why a dealer's gram price is usually different from the raw metal value.",
+    "date": "2026-09-15",
+    "url": "articles/how-gold-price-per-gram-kilogram-is-calculated.html"
+  },
+  {
+    "slug": "troy-ounce-vs-regular-ounce-gold",
+    "title": "Troy Ounce vs. Regular Ounce: Why Gold Uses a Different Unit",
+    "category": "Price Basics",
+    "excerpt": "A troy ounce is 31.1034768 grams, not 28.3495—and that small-looking distinction can create a large pricing error.",
+    "date": "2026-09-15",
+    "url": "articles/troy-ounce-vs-regular-ounce-gold.html"
+  },
+  {
+    "slug": "spot-gold-vs-futures-vs-bullion-price",
+    "title": "Spot Gold vs. Futures vs. Bullion Price: What You Are Seeing",
+    "category": "Market Structure",
+    "excerpt": "Three related prices answer three different questions. Learn what each quote includes before comparing screens or dealer offers.",
+    "date": "2026-09-15",
+    "url": "articles/spot-gold-vs-futures-vs-bullion-price.html"
+  },
+  {
+    "slug": "why-gold-price-differs-by-currency",
+    "title": "Why the Gold Price Differs by Currency",
+    "category": "Price Basics",
+    "excerpt": "Your local gold return combines the dollar gold price with the exchange rate—so investors in different countries can see different outcomes.",
+    "date": "2026-09-15",
+    "url": "articles/why-gold-price-differs-by-currency.html"
+  },
+  {
+    "slug": "live-gold-price-vs-daily-close",
+    "title": "Live Gold Price vs. Daily Close: Which Number Should You Use?",
+    "category": "Data Literacy",
+    "excerpt": "Live quotes explain what is happening now; daily closes create stable observations for signals, comparisons and backtests.",
+    "date": "2026-09-15",
+    "url": "articles/live-gold-price-vs-daily-close.html"
+  },
+  {
+    "slug": "how-to-read-gold-market-sentiment-pullback-index",
+    "title": "How to Read the Gold Market Fear and Pullback Index",
+    "category": "Guide",
+    "excerpt": "What GoldAlert's 0–100 breadth score measures, how its bands are built, and why a high score is not a rebound forecast.",
+    "date": "2026-09-15",
+    "url": "articles/how-to-read-gold-market-sentiment-pullback-index.html"
+  },
+  {
+    "slug": "real-interest-rates-and-gold",
+    "title": "Real Interest Rates and Gold: A Practical Guide",
+    "category": "Macro",
+    "excerpt": "Why inflation-adjusted bond yields affect gold's opportunity cost—and why the relationship can break for long periods.",
+    "date": "2026-09-15",
+    "url": "articles/real-interest-rates-and-gold.html"
+  },
+  {
+    "slug": "us-dollar-and-gold-price",
+    "title": "How the U.S. Dollar Affects the Gold Price",
+    "category": "Macro",
+    "excerpt": "Gold and the dollar often move in opposite directions, but risk, real yields and local exchange rates make the relationship more human than a rule.",
+    "date": "2026-09-15",
+    "url": "articles/us-dollar-and-gold-price.html"
+  },
+  {
+    "slug": "gold-market-hours-weekend-prices",
+    "title": "Gold Market Hours, Daily Closes and Weekend Prices",
+    "category": "Data Literacy",
+    "excerpt": "Why gold quotes can freeze on weekends, reopen with a gap, or show different daily candles across data providers.",
+    "date": "2026-09-15",
+    "url": "articles/gold-market-hours-weekend-prices.html"
+  },
+  {
+    "slug": "how-to-embed-gold-price-widget",
+    "title": "How to Embed a Gold Price Widget on Your Website",
+    "category": "Guide",
+    "excerpt": "A ten-minute guide to choosing the currency, unit and theme, pasting the iframe, and labeling the data responsibly.",
+    "date": "2026-09-15",
+    "url": "articles/how-to-embed-gold-price-widget.html"
+  },
+  {
     "slug": "how-to-read-bitcoin-gold-ratio",
     "title": "How to Read the Bitcoin/Gold Ratio",
     "category": "Market Ratios",
