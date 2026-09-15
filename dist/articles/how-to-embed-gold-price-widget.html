@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Embed a Gold Price Widget | GoldAlert</title>
+<meta name="description" content="Add a lightweight gold or silver price widget to a website, choose its currency and unit, and label the data responsibly.">
+<link rel="canonical" href="https://goldalert.org/articles/how-to-embed-gold-price-widget.html"><link rel="icon" type="image/svg+xml" href="../icons/logo.svg"><link rel="stylesheet" href="../static-page.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4893271383583986" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Embed a Gold Price Widget on Your Website","description":"Build and add a GoldAlert gold or silver price iframe with a chosen currency, unit and theme.","datePublished":"2026-09-15","dateModified":"2026-09-15","author":{"@type":"Organization","name":"GoldAlert Editorial Desk"},"totalTime":"PT10M","step":[{"@type":"HowToStep","name":"Open the builder","text":"Open GoldAlert's free widget builder."},{"@type":"HowToStep","name":"Choose settings","text":"Select gold or silver, currency, weight unit and theme."},{"@type":"HowToStep","name":"Copy the iframe","text":"Copy the generated iframe code."},{"@type":"HowToStep","name":"Paste and test","text":"Paste it into the website editor and test on desktop and mobile."}],"mainEntityOfPage":{"@type":"WebPage","@id":"https://goldalert.org/articles/how-to-embed-gold-price-widget.html"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the GoldAlert price widget free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The builder generates a lightweight iframe. Keep the visible GoldAlert attribution and methodology link intact."}},{"@type":"Question","name":"Does the widget show a live dealer quote?","acceptedAnswer":{"@type":"Answer","text":"No. It shows GoldAlert's latest scheduled daily close, change and rule-based status. Currency values are indicative."}},{"@type":"Question","name":"Can I change the widget colors?","acceptedAnswer":{"@type":"Answer","text":"The builder offers light and dark themes. The embedded content remains isolated inside the iframe."}}]}</script>
+</head><body><article class="page"><nav><a href="../index.html">Gold Signals</a><a href="../commodities/">Commodities</a><a href="../ratios/">Market Ratios</a><a href="../articles.html">Articles</a><a href="../methodology.html">Methodology</a></nav>
+<h1>How to embed a gold price widget on your website</h1>
+<p class="lede">Open the GoldAlert widget builder, choose gold or silver, select a currency, unit and theme, then copy the generated iframe into your site. The important final step is checking that readers can see the timestamp, unit and data limitation.</p>
+<p class="note">Reviewed September 15, 2026 · GoldAlert Editorial Desk · 10-minute implementation guide</p>
+
+<h2>1. Build the version your readers need</h2>
+<p>Visit the <a href="../embed/">free GoldAlert widget builder</a>. Choose Gold or Silver, then select USD, EUR, GBP, JPY, CHF, AUD, IDR, INR or CNY. Select a troy ounce, gram or kilogram and preview the light and dark themes.</p>
+<p>Match the unit to your audience. A bullion-focused U.S. site may prefer troy ounces, while readers in much of Asia or Europe may find grams more natural.</p>
+
+<h2>2. Copy one iframe</h2>
+<p>The builder produces code similar to this:</p>
+<div class="card"><code>&lt;iframe src="https://goldalert.org/widget/?metal=gold&amp;currency=EUR&amp;unit=g&amp;theme=light" width="380" height="220" style="border:0" loading="lazy" title="GoldAlert gold price widget"&gt;&lt;/iframe&gt;</code></div>
+<p>Paste it into a Custom HTML, Embed or Code block in your publishing system. Do not paste it into a plain-text paragraph, which may display the code instead of the widget.</p>
+
+<h2>3. Test the page, not only the preview</h2>
+<ul><li>Confirm the widget fits on a narrow phone screen.</li><li>Check that the title describes the embedded content for assistive technology.</li><li>Open the GoldAlert and Methodology links.</li><li>Verify that your site's security policy permits frames from goldalert.org.</li><li>Make sure a consent or optimization plugin has not delayed the iframe indefinitely.</li></ul>
+<p>The `loading="lazy"` attribute helps browsers postpone an off-screen iframe, reducing unnecessary initial work. If the widget is the first thing on the page, the browser may load it immediately.</p>
+
+<h2>What the widget says—and does not say</h2>
+<p>The GoldAlert widget displays the latest scheduled daily close, daily percentage change and the existing HOLD, WATCH or STRONG pullback stage. It is not an executable dealer bid or ask and should not be marketed as a tick-by-tick price feed.</p>
+<p>The attribution and methodology link provide essential provenance. Keeping them visible helps readers and answer engines understand who published the value, what it measures and where to inspect the calculation.</p>
+
+<h2>Responsible SEO use</h2>
+<p>An iframe alone is not a complete article. Add original text explaining why the price matters to your audience, what currency and unit you selected, and when the value updates. Avoid creating dozens of near-identical pages that differ only by a query parameter.</p>
+<p>GoldAlert keeps parameterized widget views out of search indexes while allowing links to be followed. The canonical <a href="../embed/">widget-builder page</a> remains indexable. That separates a useful product page from thin duplicate combinations.</p>
+
+<h2>Understanding the widget URL</h2>
+<p>The iframe source uses readable query parameters. `metal` selects gold or silver, `currency` selects the display currency, `unit` chooses ounce, gram or kilogram, and `theme` chooses light or dark. The builder creates these safely, so most publishers do not need to edit them by hand.</p>
+<p>If you do edit the URL, change one parameter at a time and reload the page. Unsupported values fall back to defaults rather than becoming new products or currencies. Keep the source on `https://goldalert.org/widget/` so updates and methodology remain consistent.</p>
+
+<h2>Responsive placement</h2>
+<p>The generated iframe uses a 380-pixel width, which suits many sidebars and content columns. On a narrow container, CSS can set `max-width:100%` while retaining the fixed height. Test at the actual breakpoint used by your site instead of resizing only a desktop browser window.</p>
+<p>Avoid squeezing the frame until labels are clipped. If a sidebar is too narrow, place the widget in the main content column or a full-width mobile row.</p>
+
+<h2>Accessibility details that matter</h2>
+<p>The iframe needs a meaningful `title`, such as “GoldAlert silver price widget.” Do not use “widget” alone because a screen-reader user needs to know what the frame contains. Maintain adequate surrounding contrast and do not hide the frame behind keyboard-inaccessible controls.</p>
+<p>The internal widget uses text labels alongside color for price change and rule status. Publishers should preserve that content rather than taking a screenshot, which loses live text, links and accessibility semantics.</p>
+
+<h2>Content Security Policy and privacy</h2>
+<p>A restrictive site may use a Content Security Policy with `frame-src`. In that case, permit `https://goldalert.org` explicitly. Do not broadly allow every frame origin merely to solve one embed.</p>
+<p>The widget loads its market files from GoldAlert and may request an indicative exchange rate for non-dollar views. Review your own privacy disclosure and consent setup to determine how third-party resources should be described to your visitors.</p>
+
+<h2>Performance and layout stability</h2>
+<p>Set both width and height so the browser reserves space before the iframe arrives. That reduces layout shift. Lazy loading is useful below the fold, but a widget used as the primary content may deserve normal loading so readers do not stare at an empty area.</p>
+<p>Do not add several identical widgets above the main article. Multiple frames increase requests and weaken the page's purpose. One relevant widget plus original analysis is usually clearer.</p>
+
+<h2>Failure states and cache checks</h2>
+<p>If the frame says “Data unavailable,” open its source URL directly. Confirm that the market-history and signal files load and that a privacy or security extension is not blocking them. If the page shows an old value, compare the displayed close date with GoldAlert's main dashboard.</p>
+<p>Never replace an unavailable value with zero. Zero is a real number and would imply a market event. A visible error preserves meaning while the source recovers.</p>
+
+<h2>Editorial copy to place around the widget</h2>
+<p>Explain the selected metal, currency, unit and refresh convention in one short paragraph. For example: “The panel below shows GoldAlert's latest scheduled gold close converted to euros per gram. It is an indicative reference, not a dealer offer.”</p>
+<p>Then add unique context relevant to the page: local bullion units, how premiums work, or why daily closes are used. This surrounding explanation is what turns an embed into useful editorial content.</p>
+
+<h2>Safe customization boundaries</h2>
+<p>You may select from the builder's supported settings and style the outer container. Do not cover the source, date, status or methodology attribution. Those are not decorative; they prevent the number from being separated from its meaning.</p>
+<p>If you need a different instrument or data license, use a suitable provider rather than relabeling the GoldAlert output. A widget remains trustworthy only when its visual label matches its actual data.</p>
+
+<h2>A launch checklist</h2>
+<ol><li>Generate the iframe in the official builder.</li><li>Paste it into an HTML-capable block.</li><li>Set a descriptive title and reserve its dimensions.</li><li>Test desktop, phone, keyboard navigation and both themes.</li><li>Confirm source, date, currency and unit are visible.</li><li>Add original explanatory copy.</li><li>Recheck after publishing and after any security-plugin change.</li></ol>
+
+<h2>Frequently asked questions</h2>
+<h3>Can I embed the widget in WordPress?</h3><p>Yes, if your role and site configuration allow iframes. Use a Custom HTML block and preview the published page.</p>
+<h3>Can I remove the attribution?</h3><p>No. Keep the visible GoldAlert source and methodology link intact. They provide context and trust for readers.</p>
+<h3>Why does the price differ from my dealer?</h3><p>The widget uses a scheduled market close and indicative currency conversion. A dealer quote may include a newer reference, bid-ask spread, fabrication, tax, delivery and margin.</p>
+
+<h2>Related reading and sources</h2><ul><li><a href="how-gold-price-per-gram-kilogram-is-calculated.html">Gold Price per Gram and Kilogram</a></li><li><a href="live-gold-price-vs-daily-close.html">Live Gold Price vs. Daily Close</a></li><li><a href="https://www.tradingview.com/widget-docs/" rel="noopener">TradingView: Widget Documentation</a></li></ul>
+<div class="card" style="margin-top:20px;padding:12px 14px;border-left:3px solid var(--brass,#D9A441)"><p style="margin:0;font-size:13px"><strong>Need advanced charting?</strong> GoldAlert's interactive charts are powered by <a href="https://www.tradingview.com/?aff_id=170924" target="_blank" rel="noopener sponsored">TradingView</a>. The link is a referral link; GoldAlert may earn a commission at no additional cost to you.</p></div>
+<p class="note">The widget is an educational reference display. Verify live and executable prices with the relevant broker, venue or dealer.</p><footer>GoldAlert · September 2026</footer></article></body></html>
