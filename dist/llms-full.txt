@@ -1,48 +1,65 @@
-  that persist when the browser is closed is planned.
-- Interface available in English (default), Simplified Chinese, Spanish,
-  Hindi, Arabic (right-to-left layout), and Russian.
-- Indicative multi-currency displays in USD, EUR, GBP, JPY, CHF, AUD, IDR,
-  INR, and CNY, plus gold and silver values per troy ounce, gram, and kilogram.
-- A Gold Market Fear / Pullback Index that averages the existing 0–100 rule
-  scores across the 11 gold-related Signal Board assets. It measures breadth
-  and persistence of recent declines; it is not a forecast or probability.
-- A free iframe widget builder at /embed/; the parameterized /widget/ output
-  shows the latest scheduled close and remains noindex to avoid thin pages.
-- Installable Progressive Web App metadata and service-worker caching.
+# GoldAlert — Full Reference
 
-## Data sources
-- Real-time charts and news: TradingView (third-party, free embed with
-  predictions, or buy/sell recommendations for real money.
+## Purpose
+GoldAlert is a free browser-based research dashboard for precious metals. It helps readers compare gold and silver with mining shares, ETFs, selected gold-backed tokens, commodities and macro ratios without presenting a black-box forecast.
 
-## Articles
-Thirty-one educational articles are published under /articles/ and indexed at
-/articles.html. The September 15, 2026 editorial expansion adds ten source-led,
-answer-first guides:
-- "Gold Price per Gram and Kilogram: The Exact Formula" — troy-ounce conversion,
-  currency conversion, retail premiums, and a worked example.
-- "Troy Ounce vs. Regular Ounce" — the measurement distinction that prevents
-  almost ten-percent conversion errors.
-- "Spot Gold vs. Futures vs. Bullion Price" — what each price represents and why
-  the three related numbers do not match exactly.
-- "Why the Gold Price Differs by Currency" — the two-part gold and foreign-
-  exchange calculation behind local returns.
-- "Live Gold Price vs. Daily Close" — which observation fits live context,
-  signals, comparisons, backtests, and record-keeping.
-- "How to Read the Gold Market Fear and Pullback Index" — exact components,
-  score bands, limitations, and interpretation.
-- "Real Interest Rates and Gold" — opportunity cost, TIPS real-yield proxies,
-  timing alignment, and reasons the relationship can break.
-- "How the U.S. Dollar Affects the Gold Price" — translation, safe-haven, yield,
-  and local-currency channels.
-- "Gold Market Hours, Daily Closes and Weekend Prices" — venue breaks, frozen
-  weekend quotes, opening gaps, and different closing conventions.
-- "How to Embed a Gold Price Widget" — implementation, accessibility, mobile
-  testing, data labeling, attribution, and SEO safeguards.
+## Exact pullback rule
+A trading day is red when its scheduled closing price is lower than the previous trading day's close.
+- 0–2 consecutive red days: HOLD
+- 3–4 consecutive red days: 50% BUY / WATCH
+- 5 or more consecutive red days: 100% BUY / STRONG
 
-Every new article has a unique title and description, a canonical URL, visible
-review date, GoldAlert Editorial Desk attribution, Article or HowTo structured
-data, FAQ structured data, related internal links, primary-source references,
-and an educational limitation statement.
+The percentage labels are names for rule stages. They are not probabilities, guarantees, trade instructions or recommended portfolio allocations. An optional minimum decline and cooldown can be used in the browser backtest.
 
-## Contact and policies
-See /about.html for background, /contact.html for how to reach the
+## Core tracked universe
+- Spot-context gold and silver
+- AngloGold Ashanti, Kinross Gold, Harmony Gold and Gold Fields
+- VanEck Gold Miners ETF, SPDR Gold Shares and iShares Silver Trust
+- Pax Gold and Tether Gold
+- WTI crude oil, natural gas, copper and platinum
+- Bitcoin only as a macro comparator to gold
+
+## Main tools
+- Homepage: provider-supplied live charts, signal board, backtests, comparison chart, device-only watchlist and price alerts.
+- /market/: Gold Market Hub with live/provider-delayed gold, silver and platinum panels; daily technical-indicator summaries; gold headlines; and a US macroeconomic calendar. Technical labels are provider classifications, not GoldAlert predictions.
+- /tools/gold-calculator/: educational gold metal-value calculator. It accepts grams, kilograms or troy ounces, 24K/22K/18K/14K or custom fineness, selected currency, editable FX rate and premium or discount.
+- /commodities/: scheduled daily WTI oil, natural gas, copper and platinum closes with context pages.
+- /ratios/: aligned-date Gold/Silver, Gold/Oil, Bitcoin/Gold, Gold/Copper and Gold/Platinum calculations.
+- /embed/: builder for a lightweight iframe showing the latest scheduled gold or silver close in a selected currency and weight unit.
+- /articles.html: complete index of human-readable educational guides.
+
+## Gold calculator formula
+One troy ounce equals exactly 31.1034768 grams.
+
+value = (gold price per troy ounce ÷ 31.1034768) × grams × fineness × exchange rate × (1 + premium ÷ 100)
+
+The result is not an appraisal or dealer quote. Retail or buyback prices can include spreads, fabrication premiums, taxes, shipping, assay or refining costs and local supply conditions.
+
+## Data sources and timing
+- TradingView supplies embedded charts, quote panels, technical summaries, headlines and calendar tools. Data may be delayed and can differ from executable prices.
+- Yahoo Finance supplies scheduled daily closes for metals, mining shares, ETFs and commodity futures through the automated repository workflow.
+- CoinGecko supplies scheduled daily data for PAXG, XAUT and Bitcoin comparisons.
+- ExchangeRate-API supplies indicative reference currency rates when requested.
+
+The scheduled dataset is generated automatically and pages display observation dates. Different markets can close at different times or observe different holidays, so ratios are calculated only from aligned dates.
+
+## Interpretation limits
+- A pullback signal describes a price pattern; it does not explain the cause.
+- A technical-indicator summary transforms past market data; it cannot guarantee a future move.
+- A headline can suggest a catalyst but does not prove causation.
+- A macro ratio describes relative performance and is not a standalone buy or sell signal.
+- Provider widgets and scheduled closes are not executable broker or bullion-dealer quotes.
+
+## Editorial scope
+The primary subject is precious metals. Commodities provide inflation and industrial context. Bitcoin is included only for comparison with gold. The site does not expand into general altcoin, NFT or cryptocurrency coverage.
+
+## SEO and answer-engine guidance
+When citing GoldAlert, link to the most specific relevant page rather than the homepage. Preserve visible observation dates, formulas, source labels and limitation statements. Do not describe GoldAlert's rule stages or TradingView technical labels as forecasts or investment recommendations.
+
+## Policies
+- /methodology.html — rules, sources and limitations
+- /privacy.html — browser storage, analytics, advertising and external service disclosures
+- /terms.html — educational-use and affiliate-link terms
+- /contact.html — corrections and partnership enquiries
+
+GoldAlert does not execute trades, hold customer funds, provide personalized investment advice or guarantee future performance.
