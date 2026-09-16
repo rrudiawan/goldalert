@@ -76,6 +76,30 @@
           "type": "image/png"
         }
       ]
+    },
+    {
+      "name": "Gold Market Hub",
+      "short_name": "Market Hub",
+      "url": "/market/",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Gold Calculator",
+      "short_name": "Calculator",
+      "url": "/tools/gold-calculator/",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }
