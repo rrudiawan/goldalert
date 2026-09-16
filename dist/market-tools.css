@@ -306,7 +306,12 @@ th{
 
   .grid,
   .stats,
-  .method{
+  .method,
+  .widget-grid.three,
+  .widget-grid.two,
+  .driver-grid,
+  .calculator-layout,
+  .form-grid{
     grid-template-columns:1fr
   }
 
