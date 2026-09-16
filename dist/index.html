@@ -1557,7 +1557,7 @@ function renderSnapshot(){
     const badge=tier.key==="strong"?'<span class="pill strong">100% BUY</span>':tier.key==="watch"?'<span class="pill watch">50% BUY</span>':'<span class="pill">HOLD</span>';
     return `<div class="snap-card">
       <div class="lbl">${aName(a)} · ${aNote(a)}</div>
-      <div class="val">${fmtCurr(last.c)}</div>
+      <div class="val">${(a.grp==="logam"||a.id==="PAXG"||a.id==="XAUT")?fmtUnit(last.c):fmtCurr(last.c)}</div>
       <div class="row between"><div class="chg ${d>0?"up":d<0?"down":"flat"}">${prev?pctFmt(d):"—"}</div>${badge}</div>
     </div>`;
   };
