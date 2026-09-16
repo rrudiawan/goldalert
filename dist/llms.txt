@@ -1,5 +1,5 @@
 # GoldAlert
-GoldAlert (https://goldalert.org/) is a free educational precious-metals dashboard. It combines provider-supplied live market context with scheduled daily closes used for transparent pullback signals, commodity dashboards and macro ratios.
+GoldAlert (https://goldalert.org/) is a free educational precious-metals dashboard with 31 articles. It combines provider-supplied live market context with scheduled daily closes used for transparent pullback signals, commodity dashboards and macro ratios.
 
 ## Core signal rule
 - 0–2 consecutive lower daily closes: HOLD
