@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gold Calculator: Weight, Purity &amp; Currency | GoldAlert</title>
+  <meta name="description" content="Estimate gold metal value by weight, purity, currency and premium using GoldAlert's latest scheduled daily close or your own gold price.">
+  <link rel="canonical" href="https://goldalert.org/tools/gold-calculator/">
+  <link rel="icon" href="/icons/logo.svg">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/market-tools.css">
+  <script defer src="/gold-calculator.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"GoldAlert Gold Calculator",
+    "url":"https://goldalert.org/tools/gold-calculator/",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "isAccessibleForFree":true,
+    "description":"An educational gold metal-value calculator for grams, kilograms and troy ounces with purity, currency and premium controls."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"How is gold value per gram calculated?","acceptedAnswer":{"@type":"Answer","text":"Divide the gold price per troy ounce by 31.1034768, then multiply by the number of grams and the item's fineness."}},
+      {"@type":"Question","name":"Does the result equal a dealer's buy or sell price?","acceptedAnswer":{"@type":"Answer","text":"No. A dealer quote can include bid-ask spread, fabrication premium, taxes, shipping, assay costs and local market conditions."}},
+      {"@type":"Question","name":"What purity is 22-karat gold?","acceptedAnswer":{"@type":"Answer","text":"Twenty-two-karat gold is approximately 91.67 percent pure, commonly shown as 916 or 917 fineness."}}
+    ]
+  }
+  </script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4893271383583986" crossorigin="anonymous"></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="/"><img src="/icons/logo.svg" alt="GoldAlert"><span><strong>GoldAlert</strong><small class="tag">Precious Metals, Commodities &amp; Macro Ratios</small></span></a>
+      <a href="/methodology.html">Methodology</a>
+    </header>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="/">Gold Signals</a>
+      <a href="/market/">Market Hub</a>
+      <a href="/commodities/">Commodities</a>
+      <a href="/ratios/">Market Ratios</a>
+      <a href="/tools/gold-calculator/" aria-current="page">Gold Calculator</a>
+      <a href="/articles.html">Articles</a>
+      <a href="/methodology.html">Methodology</a>
+    </nav>
+
+    <div class="crumbs"><a href="/">Home</a><span>›</span><span>Gold Calculator</span></div>
+
+    <section class="hero">
+      <div class="eyebrow">Weight · purity · currency · premium</div>
+      <h1>Gold Value Calculator</h1>
+      <p class="lede">Estimate the raw metal value of gold in grams, kilograms or troy ounces. Start with GoldAlert's latest scheduled daily close, or replace it with the price you want to test.</p>
+      <div class="status" id="priceStatus" aria-live="polite">Loading GoldAlert's latest scheduled gold close…</div>
+    </section>
+
+    <section class="calculator-layout" aria-label="Gold calculator">
+      <form class="panel calculator-form" id="calculatorForm">
+        <h2>Inputs</h2>
+        <div class="form-grid">
+          <label>Weight<input id="weight" type="number" min="0" step="any" value="10" inputmode="decimal" required></label>
+          <label>Weight unit<select id="weightUnit"><option value="g">Grams</option><option value="kg">Kilograms</option><option value="oz">Troy ounces</option></select></label>
+          <label>Purity<select id="purity"><option value="0.9999">24K · 999.9</option><option value="0.9167">22K · 916.7</option><option value="0.75">18K · 750</option><option value="0.585">14K · 585</option><option value="custom">Custom fineness</option></select></label>
+          <label id="customPurityWrap" hidden>Custom fineness<input id="customPurity" type="number" min="1" max="1000" step="0.1" value="999.9" inputmode="decimal"><small>Enter parts per thousand, for example 875.</small></label>
+          <label>Gold price per troy ounce<input id="spotPrice" type="number" min="0" step="any" inputmode="decimal" required></label>
+          <label>Price currency<select id="currency"><option>USD</option><option>EUR</option><option>GBP</option><option>IDR</option><option>INR</option><option>CNY</option><option>JPY</option><option>CHF</option><option>AUD</option></select></label>
+          <label>USD exchange rate<input id="exchangeRate" type="number" min="0.000001" step="any" value="1" inputmode="decimal"><small>Units of selected currency per USD. You can edit this rate.</small></label>
+          <label>Premium / discount (%)<input id="premium" type="number" min="-100" step="any" value="0" inputmode="decimal"><small>Use a negative number for a discount.</small></label>
+        </div>
+        <div class="button-row"><button class="cta button" type="button" id="refreshPrice">Reload latest close</button><button class="secondary button" type="button" id="refreshFx">Use today's reference FX rate</button></div>
+      </form>
+
+      <section class="panel calculator-result" aria-labelledby="result-title">
+        <div class="eyebrow">Estimated reference value</div>
+        <h2 id="result-title">Result</h2>
+        <output class="result-value" id="resultValue">—</output>
+        <dl class="result-breakdown">
+          <div><dt>Gross weight</dt><dd id="grossWeight">—</dd></div>
+          <div><dt>Fine-gold content</dt><dd id="fineGold">—</dd></div>
+          <div><dt>Raw metal value</dt><dd id="metalValue">—</dd></div>
+          <div><dt>Premium / discount</dt><dd id="premiumValue">—</dd></div>
+          <div><dt>Price observation</dt><dd id="observationDate">Manual input</dd></div>
+        </dl>
+        <p class="note" id="fxStatus" aria-live="polite">USD uses an exchange rate of 1.</p>
+      </section>
+    </section>
+
+    <section class="panel">
+      <h2>Formula</h2>
+      <div class="formula">value = (gold price per troy ounce ÷ 31.1034768) × grams × fineness × exchange rate × (1 + premium ÷ 100)</div>
+      <p>Gold uses the troy ounce, not the everyday avoirdupois ounce. One troy ounce equals exactly 31.1034768 grams. Purity reduces gross weight to estimated fine-gold content.</p>
+    </section>
+
+    <section class="panel">
+      <h2>What this estimate does not include</h2>
+      <div class="method">
+        <p>A real dealer quote may include bid-ask spread, fabrication premium, assay or refining costs, taxes, shipping, payment fees and local supply conditions.</p>
+        <p>The scheduled close can differ from a live spot quote. Confirm the current price and product terms with a broker or bullion dealer before a transaction.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Frequently asked questions</h2>
+      <details><summary>How do I calculate gold price per gram?</summary><p>Divide the price per troy ounce by 31.1034768. Then multiply by the number of grams and the item's purity as a decimal.</p></details>
+      <details><summary>Is 22K gold pure gold?</summary><p>No. Twenty-two-karat gold is approximately 91.67% pure. The remaining metal is an alloy added for color, strength or workability.</p></details>
+      <details><summary>Is this a dealer quote?</summary><p>No. It is an educational metal-value estimate. A dealer's executable price can be higher or lower after spreads, premiums, taxes and fees.</p></details>
+      <p><a href="/articles/how-gold-price-per-gram-kilogram-is-calculated.html">Read the full guide to gram and kilogram pricing →</a></p>
+    </section>
+
+    <p class="disclaimer">Educational estimate only. This calculator is not an appraisal, offer, tax calculation or investment recommendation.</p>
+    <footer class="footer"><span>© GoldAlert</span><span><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/contact.html">Contact</a></span></footer>
+  
+<div class="card" style="margin-top:20px;padding:12px 14px;border-left:3px solid var(--brass,#D9A441)"><p style="margin:0;font-size:13px"><strong>Want to go deeper?</strong> GoldAlert's charts are powered by <a href="https://www.tradingview.com/?aff_id=170924" target="_blank" rel="noopener sponsored">TradingView</a>. For advanced technical analysis, <a href="https://www.tradingview.com/?aff_id=170924" target="_blank" rel="noopener sponsored">explore TradingView plans →</a> (referral link — we may earn a commission at no cost to you).</p></div>
+</main>
+</body>
+</html>
