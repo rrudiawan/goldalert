@@ -1,23 +1,23 @@
-- /methodology.html — exact calculation rules, data limitations, and version history
-- /commodities/ — commodity signal dashboard (WTI Oil, Natural Gas, Copper)
-- /ratios/ — cross-asset ratio tools (Gold/Silver, Gold/Oil, Gold/Bitcoin, Gold/Copper)
-- /embed/ — builder for the free gold and silver price iframe widget
-- /articles.html — full article index (31 articles)
-- /about.html — background on the project
-- /contact.html — how to reach the operator
-- /privacy.html — data and cookie disclosures
-- /articles/gold-price-history-major-moves.html — Gold Price History: Major Moves and What Drove Them
-- /articles/gold-silver-ratio-explained.html — The Gold/Silver Ratio Explained
-- /articles/central-bank-gold-buying.html — Why Central Banks Buy Gold (And Why It Matters for the Price)
-- /articles/how-gold-price-per-gram-kilogram-is-calculated.html — Gold Price per Gram and Kilogram: The Exact Formula
-- /articles/troy-ounce-vs-regular-ounce-gold.html — Troy Ounce vs. Regular Ounce: Why Gold Uses a Different Unit
-- /articles/spot-gold-vs-futures-vs-bullion-price.html — Spot Gold vs. Futures vs. Bullion Price: What You Are Seeing
-- /articles/why-gold-price-differs-by-currency.html — Why the Gold Price Differs by Currency
-- /articles/live-gold-price-vs-daily-close.html — Live Gold Price vs. Daily Close: Which Number Should You Use?
-- /articles/how-to-read-gold-market-sentiment-pullback-index.html — How to Read the Gold Market Fear and Pullback Index
-- /articles/real-interest-rates-and-gold.html — Real Interest Rates and Gold: A Practical Guide
-- /articles/us-dollar-and-gold-price.html — How the U.S. Dollar Affects the Gold Price
-- /articles/gold-market-hours-weekend-prices.html — Gold Market Hours, Daily Closes and Weekend Prices
-- /articles/how-to-embed-gold-price-widget.html — How to Embed a Gold Price Widget on Your Website
+# GoldAlert
+GoldAlert (https://goldalert.org/) is a free educational precious-metals dashboard. It combines provider-supplied live market context with scheduled daily closes used for transparent pullback signals, commodity dashboards and macro ratios.
 
-All content is educational and does not constitute financial, investment, tax, or legal advice.
+## Core signal rule
+- 0–2 consecutive lower daily closes: HOLD
+- 3–4 consecutive lower daily closes: 50% BUY / WATCH
+- 5 or more consecutive lower daily closes: 100% BUY / STRONG
+
+These labels are rule stages, not probabilities, forecasts or individualized position-size recommendations.
+
+## Primary pages
+- / — gold and silver tools, charts, signal board, backtests, watchlist and price alerts
+- /market/ — live precious-metals context, daily technical summaries, gold news and a US economic calendar
+- /tools/gold-calculator/ — gold value estimate by weight, purity, currency and premium
+- /commodities/ — daily WTI oil, natural gas, copper and platinum context
+- /ratios/ — Gold/Silver, Gold/Oil, Bitcoin/Gold, Gold/Copper and Gold/Platinum ratios
+- /embed/ — free gold and silver iframe widget builder
+- /articles.html — complete educational article index
+- /methodology.html — calculation rules, sources, limitations and version history
+- /privacy.html — browser storage, analytics, advertising and third-party disclosures
+
+
+## Editorial scope
