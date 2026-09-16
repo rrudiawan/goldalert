@@ -24,17 +24,11 @@ const ASSETS=[
 ];
 
 const SIGNAL_ASSETS=new Set([
-  "XAUUSD",
-  "XAGUSD",
-  "AU",
-  "KGC",
-  "HMY",
-  "GFI",
-  "GDX",
-  "GLD",
-  "SLV",
-  "PAXG",
-  "XAUT"
+  "XAUUSD","XAGUSD",
+  "AU","KGC","HMY","GFI","GDX","GLD","SLV",
+  "PAXG","XAUT",
+  "CL","NG","HG","PL",
+  "BTC","ETH"
 ]);
 
 const BROWSER_HEADERS={
