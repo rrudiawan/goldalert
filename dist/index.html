@@ -347,7 +347,14 @@ html[data-theme="light"] .unit-price,html[data-theme="light"] .sentiment-card,ht
 
 <div class="row between" style="margin-bottom:8px">
   <span class="sub" data-i18n="snapshotLabel">At a glance</span>
-  <select id="currSel" class="currSel" aria-label="Select display currency">
+  <div style="display:flex;gap:6px;align-items:center">
+    <select id="unitSel" aria-label="Select price unit per weight"
+      style="font-size:12px;padding:3px 6px;border:0.5px solid var(--line);border-radius:6px;background:var(--surface-2,#10202F);color:var(--text)">
+      <option value="oz">per oz</option>
+      <option value="g">per gram</option>
+      <option value="kg">per kg</option>
+    </select>
+    <select id="currSel" class="currSel" aria-label="Select display currency">
     <option value="USD">USD $</option>
     <option value="EUR">EUR €</option>
     <option value="GBP">GBP £</option>
@@ -358,6 +365,7 @@ html[data-theme="light"] .unit-price,html[data-theme="light"] .sentiment-card,ht
     <option value="CHF">CHF Fr</option>
     <option value="AUD">AUD A$</option>
   </select>
+  </div>
 </div>
 <div class="snapshot" id="snapshot"></div>
 
@@ -1505,6 +1513,12 @@ function board(){
 
 /* ================= currency conversion ================= */
 let currCode = LS.get("sim.currency","USD");
+let unitCode = LS.get("sim.unit","oz"); /* oz | g | kg */
+const UNIT_FACTOR = {oz:1, g:31.1034768, kg:0.0311034768};
+function fmtUnit(usdPerOz){
+  const factor = UNIT_FACTOR[unitCode] || 1;
+  return fmtCurr(usdPerOz / factor);
+}
 let fxRates = null;
 const CURR_SYM = {USD:"$",EUR:"€",GBP:"£",IDR:"Rp",INR:"₹",CNY:"¥",JPY:"¥",CHF:"Fr ",AUD:"A$"};
 const CURR_DEC = {USD:2,EUR:2,GBP:2,IDR:0,INR:2,CNY:2,JPY:0,CHF:2,AUD:2};
@@ -1886,6 +1900,14 @@ function bind(){
 
 applyTheme(); applyI18n(); buildChips(); loadCfg(); bind();
 $("currSel").value = currCode;
+  if($("unitSel")){
+    $("unitSel").value = unitCode;
+    $("unitSel").onchange = () => {
+      unitCode = $("unitSel").value;
+      LS.set("sim.unit", unitCode);
+      renderSnapshot(); board();
+    };
+  }
 renderTargetSelect(); renderTargetList();
 const savedSubscription = LS.get("sim.subscribed", null);
 if(savedSubscription){
