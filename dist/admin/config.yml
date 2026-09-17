@@ -1,0 +1,100 @@
+# Decap CMS — GoldAlert Admin Panel
+# Akses: goldalert.org/admin/
+# Login: akun GitHub rrudiawan
+
+backend:
+  name: github
+  repo: rrudiawan/goldalert
+  branch: main
+  base_url: https://sveltia-cms-auth.pages.dev  # OAuth proxy gratis, no server needed
+
+# File upload (untuk gambar artikel jika perlu)
+media_folder: dist/images
+public_folder: /images
+
+# Semua perubahan langsung publish ke main
+publish_mode: simple
+
+collections:
+
+  # ── 1. ARTIKEL ────────────────────────────────────────────
+  - name: articles
+    label: "Artikel"
+    label_singular: "Artikel"
+    folder: dist/articles
+    create: true
+    slug: "{{slug}}"
+    extension: html
+    format: frontmatter
+    editor:
+      preview: false
+    fields:
+      - { label: "Judul", name: title, widget: string }
+      - { label: "Kategori", name: category, widget: select,
+          options: ["Guide","Market Ratios","Fundamentals","Commodities","ETFs","Crypto"] }
+      - { label: "Ringkasan (excerpt)", name: excerpt, widget: text }
+      - { label: "Tanggal", name: date, widget: datetime, format: "YYYY-MM-DD",
+          date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Konten (HTML)", name: body, widget: markdown }
+
+  # ── 2. HALAMAN STATIS ─────────────────────────────────────
+  - name: pages
+    label: "Halaman"
+    files:
+
+      - label: "Methodology"
+        name: methodology
+        file: dist/methodology.html
+        fields:
+          - { label: "Konten", name: body, widget: text }
+
+      - label: "About"
+        name: about
+        file: dist/about.html
+        fields:
+          - { label: "Konten", name: body, widget: text }
+
+      - label: "Privacy Policy"
+        name: privacy
+        file: dist/privacy.html
+        fields:
+          - { label: "Konten", name: body, widget: text }
+
+      - label: "Terms"
+        name: terms
+        file: dist/terms.html
+        fields:
+          - { label: "Konten", name: body, widget: text }
+
+  # ── 3. AFILIASI (Where to Buy) ───────────────────────────
+  - name: settings
+    label: "Pengaturan Situs"
+    files:
+
+      - label: "Link Afiliasi"
+        name: affiliates
+        file: dist/data/affiliates.json
+        fields:
+          - label: "Daftar Afiliasi"
+            name: affiliates
+            widget: list
+            fields:
+              - { label: "Nama", name: name, widget: string }
+              - { label: "URL Afiliasi", name: url, widget: string }
+              - { label: "Deskripsi", name: desc, widget: text }
+              - { label: "Aktif", name: active, widget: boolean, default: true }
+
+      - label: "Index Artikel (articles.json)"
+        name: articles_index
+        file: dist/articles/articles.json
+        fields:
+          - label: "Artikel"
+            name: articles
+            widget: list
+            fields:
+              - { label: "Slug",     name: slug,     widget: string }
+              - { label: "Judul",    name: title,    widget: string }
+              - { label: "Kategori", name: category, widget: string }
+              - { label: "Excerpt",  name: excerpt,  widget: text }
+              - { label: "Tanggal",  name: date,     widget: string }
+              - { label: "URL",      name: url,      widget: string }
