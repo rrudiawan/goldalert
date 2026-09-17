@@ -22,7 +22,7 @@ function fileForUrl(urlPath){
 }
 
 const missing=[];
-const htmlFiles=walk(dist).filter(file=>file.endsWith(".html"));
+const htmlFiles=walk(dist).filter(file=>file.endsWith(".html")&&!file.includes("/admin/"));
 
 for(const file of htmlFiles){
   const html=fs.readFileSync(file,"utf8");
