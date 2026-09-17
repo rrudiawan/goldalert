@@ -541,11 +541,11 @@ function renderRatioPage(key,data){
 
       <a
         class="cta"
-        href="https://www.sprottmoney.ca/?acc=rudy-rudiawan-6bc8d"
+        href="https://www.bullionvaultaffiliate.com/rrudiawan/en"
         target="_blank"
-        rel="noopener sponsored"
+        rel="sponsored noopener noreferrer"
       >
-        Browse Sprott Money →
+        Explore BullionVault →
       </a>
 
       <p class="note">
