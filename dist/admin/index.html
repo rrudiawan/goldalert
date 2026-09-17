@@ -1,14 +1,383 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
-  <title>GoldAlert Admin</title>
-  <!-- Decap CMS (penerus Netlify CMS) -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>GoldAlert Admin</title>
+<style>
+:root{--bg:#0b1724;--panel:#10202f;--line:#1e3044;--gold:#d9a441;--text:#e8edf2;--muted:#6b7f8e;--green:#1f8f6b;--red:#c0392b;--radius:12px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,sans-serif;min-height:100vh}
+header{background:var(--panel);border-bottom:1px solid var(--line);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+header h1{font-size:1.1rem;color:var(--gold)}
+.badge{background:var(--gold);color:#231803;font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px}
+nav{display:flex;gap:4px;flex-wrap:wrap;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--panel)}
+nav button{background:transparent;border:1px solid var(--line);color:var(--muted);padding:7px 14px;border-radius:8px;cursor:pointer;font-size:13px;transition:.15s}
+nav button.active,nav button:hover{background:var(--gold);color:#231803;border-color:var(--gold);font-weight:600}
+main{max-width:900px;margin:0 auto;padding:20px 16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin-bottom:16px}
+.card h2{font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);margin-bottom:14px}
+label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px;margin-top:12px}
+input,textarea,select{width:100%;background:#07111a;border:1px solid var(--line);color:var(--text);padding:9px 11px;border-radius:8px;font-size:14px;font-family:inherit}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold)}
+textarea{min-height:120px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.row{grid-template-columns:1fr}}
+.btn{background:var(--gold);color:#231803;border:0;padding:10px 20px;border-radius:9px;font-weight:700;cursor:pointer;font-size:14px;margin-top:14px;display:inline-block}
+.btn:hover{opacity:.9}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--muted);padding:7px 13px;border-radius:8px;cursor:pointer;font-size:13px}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.toast{position:fixed;bottom:24px;right:20px;background:var(--green);color:#fff;padding:12px 20px;border-radius:10px;font-weight:600;font-size:14px;display:none;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.toast.err{background:var(--red)}
+.art-item{padding:10px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.art-item:last-child{border-bottom:0}
+.art-title{font-size:14px;font-weight:500}
+.art-meta{font-size:11px;color:var(--muted);margin-top:2px}
+.tag{display:inline-block;background:rgba(217,164,65,.15);color:var(--gold);font-size:10px;padding:1px 7px;border-radius:5px;margin-right:4px}
+.section{display:none}.section.active{display:block}
+#login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;gap:16px;text-align:center}
+#login-screen h2{color:var(--gold);font-size:1.4rem}
+#login-screen p{color:var(--muted);max-width:360px}
+.token-form{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;max-width:400px;width:100%}
+.token-form input{margin-bottom:12px}
+.info-box{background:rgba(217,164,65,.08);border:1px solid rgba(217,164,65,.3);border-radius:9px;padding:12px 14px;margin-bottom:16px;font-size:13px;color:var(--gold)}
+</style>
 </head>
 <body>
-  <!-- Decap CMS will mount here automatically -->
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+  <img src="/icons/logo.svg" width="56" height="56" alt="">
+  <h2>GoldAlert Admin</h2>
+  <p>Masuk menggunakan GitHub Personal Access Token Anda. Token disimpan hanya di browser ini, tidak pernah dikirim ke server lain.</p>
+  <div class="token-form">
+    <div class="info-box">
+      Token diperlukan sekali. Buat di<br>
+      <a href="https://github.com/settings/tokens" target="_blank" style="color:var(--gold)">
+        github.com/settings/tokens
+      </a><br>
+      Pilih <b>Classic</b>, centang <b>repo</b> + <b>workflow</b>
+    </div>
+    <label>GitHub Personal Access Token</label>
+    <input id="token-input" type="password" placeholder="ghp_...">
+    <button class="btn" style="width:100%;margin-top:8px" onclick="doLogin()">Masuk →</button>
+  </div>
+</div>
+
+<!-- MAIN APP (hidden until login) -->
+<div id="app" style="display:none">
+<header>
+  <div style="display:flex;align-items:center;gap:10px">
+    <img src="/icons/logo.svg" width="28" height="28" alt="">
+    <h1>GoldAlert Admin</h1>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <span id="user-name" style="font-size:12px;color:var(--muted)"></span>
+    <span class="badge">ADMIN</span>
+    <button class="btn-ghost" onclick="doLogout()" style="font-size:12px;padding:5px 10px">Keluar</button>
+  </div>
+</header>
+
+<nav>
+  <button class="active" onclick="show('articles')">📄 Artikel</button>
+  <button onclick="show('newart')">✏️ Artikel Baru</button>
+  <button onclick="show('affiliates')">🏦 Afiliasi</button>
+  <button onclick="show('pages')">📋 Halaman</button>
+</nav>
+
+<main>
+
+  <!-- ARTICLES -->
+  <div id="sec-articles" class="section active">
+    <div class="card">
+      <h2>Artikel Live</h2>
+      <div id="art-list"><p style="color:var(--muted)">Memuat…</p></div>
+    </div>
+  </div>
+
+  <!-- EDIT ARTICLE -->
+  <div id="sec-edit" class="section">
+    <div class="card">
+      <h2 id="edit-label">Edit Artikel</h2>
+      <label>Judul</label><input id="e-title">
+      <div class="row">
+        <div><label>Kategori</label>
+          <select id="e-cat">
+            <option>Guide</option><option>Market Ratios</option>
+            <option>Fundamentals</option><option>Commodities</option>
+            <option>ETFs</option><option>Crypto</option>
+          </select>
+        </div>
+        <div><label>Tanggal</label><input id="e-date" type="date"></div>
+      </div>
+      <label>Excerpt</label><textarea id="e-excerpt" rows="3"></textarea>
+      <label>URL (contoh: articles/gold-signals.html)</label><input id="e-url">
+      <br>
+      <button class="btn" onclick="saveArticle()">💾 Simpan</button>
+      <button class="btn-ghost" style="margin-left:8px" onclick="show('articles')">← Batal</button>
+    </div>
+  </div>
+
+  <!-- NEW ARTICLE -->
+  <div id="sec-newart" class="section">
+    <div class="card">
+      <h2>Artikel Baru</h2>
+      <label>Judul</label><input id="n-title" placeholder="Judul artikel">
+      <div class="row">
+        <div><label>Kategori</label>
+          <select id="n-cat">
+            <option>Guide</option><option>Market Ratios</option>
+            <option>Fundamentals</option><option>Commodities</option>
+          </select>
+        </div>
+        <div><label>Tanggal</label><input id="n-date" type="date"></div>
+      </div>
+      <label>Excerpt (ringkasan)</label>
+      <textarea id="n-excerpt" rows="3" placeholder="1-2 kalimat ringkasan untuk halaman daftar artikel"></textarea>
+      <label>Konten HTML</label>
+      <textarea id="n-body" rows="14" placeholder="&lt;p&gt;Tulis konten di sini...&lt;/p&gt;"></textarea>
+      <br>
+      <button class="btn" onclick="createArticle()">🚀 Publish</button>
+    </div>
+  </div>
+
+  <!-- AFFILIATES -->
+  <div id="sec-affiliates" class="section">
+    <div class="card">
+      <h2>Link Afiliasi</h2>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:14px">Edit URL afiliasi di bagian "Where to Buy" homepage.</p>
+      <div id="aff-list"><p style="color:var(--muted)">Memuat…</p></div>
+      <br>
+      <button class="btn" onclick="saveAffiliates()">💾 Simpan Semua Perubahan</button>
+    </div>
+  </div>
+
+  <!-- PAGES -->
+  <div id="sec-pages" class="section">
+    <div class="card">
+      <h2>Halaman Statis</h2>
+      <label>Pilih Halaman</label>
+      <select id="page-sel" onchange="loadPage()">
+        <option value="dist/methodology.html">Methodology</option>
+        <option value="dist/about.html">About</option>
+        <option value="dist/privacy.html">Privacy Policy</option>
+        <option value="dist/terms.html">Terms</option>
+        <option value="dist/contact.html">Contact</option>
+      </select>
+      <label>Konten HTML</label>
+      <textarea id="page-body" rows="22"></textarea>
+      <br>
+      <button class="btn" onclick="savePage()">💾 Simpan Halaman</button>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const REPO = 'rrudiawan/goldalert';
+const API  = 'https://api.github.com/repos/' + REPO + '/contents/';
+let GH_TOKEN = '';
+let articles = [], affMap = {}, pageCache = {}, editIdx = -1;
+
+// ── Auth ──────────────────────────────────────────────────────
+async function doLogin() {
+  const t = document.getElementById('token-input').value.trim();
+  if (!t) return;
+  // Verify token by calling /user
+  try {
+    const r = await fetch('https://api.github.com/user',
+      {headers: {Authorization: 'Bearer ' + t, Accept: 'application/vnd.github+json'}});
+    if (!r.ok) throw new Error('Invalid token');
+    const u = await r.json();
+    GH_TOKEN = t;
+    localStorage.setItem('ga_admin_token', t);
+    document.getElementById('user-name').textContent = u.login;
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    loadArticles();
+    loadAffiliates();
+  } catch(e) {
+    alert('Token tidak valid. Pastikan token punya akses repo.');
+  }
+}
+function doLogout() {
+  localStorage.removeItem('ga_admin_token');
+  location.reload();
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('ga_admin_token');
+  if (saved) { document.getElementById('token-input').value = saved; doLogin(); }
+  document.getElementById('n-date').value = new Date().toISOString().slice(0,10);
+});
+
+// ── API ───────────────────────────────────────────────────────
+async function ghGet(path) {
+  const r = await fetch(API + path,
+    {headers: {Authorization: 'Bearer ' + GH_TOKEN, Accept: 'application/vnd.github+json'}});
+  if (!r.ok) throw new Error('GET failed: ' + path);
+  const d = await r.json();
+  return {content: decodeURIComponent(escape(atob(d.content.replace(/\n/g,'')))), sha: d.sha};
+}
+async function ghPut(path, content, sha, message) {
+  const encoded = btoa(unescape(encodeURIComponent(content)));
+  const r = await fetch(API + path, {
+    method: 'PUT',
+    headers: {Authorization: 'Bearer ' + GH_TOKEN, Accept: 'application/vnd.github+json',
+              'Content-Type': 'application/json'},
+    body: JSON.stringify({message, content: encoded, sha, branch: 'main'})
+  });
+  return r.ok;
+}
+
+function toast(msg, err=false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast' + (err ? ' err' : '');
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 3500);
+}
+
+// ── Nav ───────────────────────────────────────────────────────
+function show(sec) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + sec).classList.add('active');
+  const btn = document.querySelector('nav button[onclick="show(\''+sec+'\')"]');
+  if (btn) btn.classList.add('active');
+}
+
+// ── Articles ──────────────────────────────────────────────────
+async function loadArticles() {
+  try {
+    const {content} = await ghGet('dist/articles/articles.json');
+    articles = JSON.parse(content);
+    const list = document.getElementById('art-list');
+    list.innerHTML = articles.map((a,i) => `
+      <div class="art-item">
+        <div style="flex:1;min-width:0">
+          <div class="art-title">${a.title}</div>
+          <div class="art-meta"><span class="tag">${a.category}</span>${a.date}</div>
+        </div>
+        <button class="btn-ghost" onclick="editArticle(${i})">Edit</button>
+      </div>`).join('');
+  } catch(e) { toast('Gagal muat artikel', true); }
+}
+function editArticle(i) {
+  editIdx = i; const a = articles[i];
+  document.getElementById('edit-label').textContent = 'Edit: ' + a.title;
+  document.getElementById('e-title').value   = a.title   || '';
+  document.getElementById('e-cat').value     = a.category|| '';
+  document.getElementById('e-date').value    = a.date    || '';
+  document.getElementById('e-excerpt').value = a.excerpt || '';
+  document.getElementById('e-url').value     = a.url     || '';
+  show('edit');
+}
+async function saveArticle() {
+  if (editIdx < 0) return;
+  articles[editIdx] = {
+    ...articles[editIdx],
+    title:    document.getElementById('e-title').value,
+    category: document.getElementById('e-cat').value,
+    date:     document.getElementById('e-date').value,
+    excerpt:  document.getElementById('e-excerpt').value,
+    url:      document.getElementById('e-url').value,
+  };
+  try {
+    const {sha} = await ghGet('dist/articles/articles.json');
+    const ok = await ghPut('dist/articles/articles.json',
+      JSON.stringify(articles, null, 2), sha,
+      'Admin: edit article "' + articles[editIdx].title + '"');
+    if (ok) { toast('\u2705 Disimpan! Situs update ~2 menit.'); show('articles'); loadArticles(); }
+    else toast('Gagal simpan', true);
+  } catch(e) { toast('Error: ' + e.message, true); }
+}
+async function createArticle() {
+  const title   = document.getElementById('n-title').value.trim();
+  const cat     = document.getElementById('n-cat').value;
+  const date    = document.getElementById('n-date').value;
+  const excerpt = document.getElementById('n-excerpt').value.trim();
+  const body    = document.getElementById('n-body').value.trim();
+  if (!title || !body) { toast('Judul dan konten wajib diisi', true); return; }
+  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  const html = `<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>${title} | GoldAlert</title>\n<meta name="description" content="${excerpt}">\n<link rel="canonical" href="https://goldalert.org/articles/${slug}.html">\n<link rel="icon" type="image/svg+xml" href="../icons/logo.svg">\n<link rel="stylesheet" href="../static-page.css">\n<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4893271383583986" crossorigin="anonymous"></scr`+`ipt>\n</head>\n<body>\n<article class="page">\n<nav><a href="/">Gold Signals</a><a href="/market/">Market Hub</a><a href="/articles.html">Articles</a></nav>\n<h1>${title}</h1>\n<p class="lede">${excerpt}</p>\n${body}\n<p class="note">This article is educational and does not constitute investment advice.</p>\n<footer>GoldAlert &middot; ${date}</footer>\n</article>\n</body>\n</html>`;
+  try {
+    const r = await fetch(API + 'dist/articles/' + slug + '.html', {
+      method: 'PUT',
+      headers: {Authorization: 'Bearer ' + GH_TOKEN, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json'},
+      body: JSON.stringify({message: 'Admin: new article "' + title + '"', content: btoa(unescape(encodeURIComponent(html))), branch: 'main'})
+    });
+    if (!r.ok) { toast('Gagal buat artikel', true); return; }
+    articles.unshift({slug, title, category: cat, excerpt, date, url: 'articles/' + slug + '.html'});
+    const {sha} = await ghGet('dist/articles/articles.json');
+    await ghPut('dist/articles/articles.json', JSON.stringify(articles, null, 2), sha, 'Admin: index new article "' + title + '"');
+    toast('\uD83C\uDF89 Artikel dipublish! Update ~2 menit.');
+    document.getElementById('n-title').value = document.getElementById('n-body').value = document.getElementById('n-excerpt').value = '';
+    show('articles'); loadArticles();
+  } catch(e) { toast('Error: ' + e.message, true); }
+}
+
+// ── Affiliates ────────────────────────────────────────────────
+let affHtmlCache = '', affSha = '';
+async function loadAffiliates() {
+  try {
+    const {content, sha} = await ghGet('dist/index.html');
+    affHtmlCache = content; affSha = sha;
+    const matches = [...content.matchAll(/<div class="affiliate-item">[\s\S]*?class="go" href="([^"]+)"/g)];
+    const names   = [...content.matchAll(/<div class="name">([^<]+)<\/div>/g)];
+    affMap = {};
+    const list = document.getElementById('aff-list');
+    list.innerHTML = names.map((m, i) => {
+      const name = m[1]; const url = matches[i] ? matches[i][1] : '';
+      affMap[name] = {url, idx: i};
+      return `<div style="padding:12px 0;border-bottom:1px solid var(--line)">
+        <div style="font-weight:600;margin-bottom:6px">${name}</div>
+        <label>URL Afiliasi</label>
+        <input id="af-${i}" value="${url}">
+      </div>`;
+    }).join('');
+  } catch(e) { toast('Gagal muat afiliasi', true); }
+}
+async function saveAffiliates() {
+  let html = affHtmlCache;
+  const names = [...html.matchAll(/<div class="name">([^<]+)<\/div>/g)];
+  names.forEach((m, i) => {
+    const el = document.getElementById('af-' + i);
+    if (!el) return;
+    const newUrl = el.value.trim();
+    const oldUrl = affMap[m[1]]?.url;
+    if (oldUrl && newUrl && newUrl !== oldUrl)
+      html = html.split(oldUrl).join(newUrl);
+  });
+  try {
+    const {sha} = await ghGet('dist/index.html');
+    const ok = await ghPut('dist/index.html', html, sha, 'Admin: update affiliate URLs');
+    if (ok) { affHtmlCache = html; toast('\u2705 Afiliasi disimpan! Update ~2 menit.'); }
+    else toast('Gagal simpan', true);
+  } catch(e) { toast('Error: ' + e.message, true); }
+}
+
+// ── Static Pages ──────────────────────────────────────────────
+async function loadPage() {
+  const sel = document.getElementById('page-sel').value;
+  if (!pageCache[sel]) {
+    const {content} = await ghGet(sel);
+    pageCache[sel] = content;
+  }
+  document.getElementById('page-body').value = pageCache[sel];
+}
+async function savePage() {
+  const sel  = document.getElementById('page-sel').value;
+  const body = document.getElementById('page-body').value;
+  try {
+    const {sha} = await ghGet(sel);
+    const ok = await ghPut(sel, body, sha, 'Admin: update ' + sel);
+    if (ok) { pageCache[sel] = body; toast('\u2705 Halaman disimpan!'); }
+    else toast('Gagal simpan', true);
+  } catch(e) { toast('Error: ' + e.message, true); }
+}
+</script>
 </body>
 </html>
