@@ -365,6 +365,9 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
   </nav>
 </header>
 
+<!-- REAL-TIME TICKER -->
+<div class="tvbox" style="margin-bottom:16px"><div id="tvTicker"></div></div>
+
 <main id="main">
 
 <p class="intro" data-i18n="introTLDR">This free tool tracks gold, silver, four gold mining stocks, three ETFs, and two gold-backed cryptoassets. It marks 3–4 consecutive red days as 50% BUY / WATCH and 5 or more as 100% BUY / STRONG. The labels describe rule stages, not probabilities or individualized position sizes.</p>
@@ -418,8 +421,77 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 <!-- AD SLOT: Leaderboard 728x90 -->
 <div class="ad-slot leaderboard" data-i18n="adLeaderboard">Ad Space 728×90 (Leaderboard)</div>
 
-<!-- REAL-TIME TICKER -->
-<div class="tvbox" style="margin-bottom:16px"><div id="tvTicker"></div></div>
+<!-- RULE -->
+<section class="panel" id="board">
+  <h2 data-i18n="rulesTitle">Buy Signal Rule</h2>
+  <div class="tier-grid" aria-label="Signal levels">
+    <div class="tier"><b data-i18n="tierHoldLabel">HOLD</b><span class="note" data-i18n="tierHoldNote">0–2 consecutive red trading days</span></div>
+    <div class="tier watch"><b data-i18n="tierWatchLabel">50% BUY / WATCH</b><span class="note" data-i18n="tierWatchNote">3–4 consecutive red trading days</span></div>
+    <div class="tier strong"><b data-i18n="tierStrongLabel">100% BUY / STRONG</b><span class="note" data-i18n="tierStrongNote">5 or more consecutive red trading days</span></div>
+  </div>
+  <div class="grid4">
+    <div class="field">
+      <label for="streakLen" data-i18n="lblBacktestLevel">Backtest signal level</label>
+      <select id="streakLen" aria-label="Select backtest signal level">
+        <option value="3" data-i18n="optWatch3">3-day 50% Buy / Watch</option>
+        <option value="5" data-i18n="optStrong5">5-day 100% Buy / Strong</option>
+      </select>
+    </div>
+    <div class="field"><label for="minDrop" data-i18n="lblMinDrop">Minimum total drop (%)</label><input id="minDrop" type="number" step="0.1" value="0"></div>
+    <div class="field"><label for="cooldown" data-i18n="lblCooldown">Cooldown between signals (days)</label><input id="cooldown" type="number" value="5"></div>
+    <div class="field"><label for="rangeDays" data-i18n="lblRange">Backtest range (trading days)</label>
+      <select id="rangeDays" aria-label="Select backtest date range"><option value="120">120</option><option value="250" selected>250</option><option value="500">500</option></select>
+    </div>
+  </div>
+  <div class="note" data-i18n="rulesNote">Signals are calculated from each asset's daily close. A day counts as "red" when its close is lower than the previous trading day's.</div>
+</section>
+
+<!-- NOTIFICATIONS -->
+<section class="panel" id="notifications">
+  <h2 data-i18n="notifTitle">Enable Buy Signal Notifications</h2>
+  <p class="sub" style="margin-top:-4px;margin-bottom:14px" data-i18n="notifSub">Get notified the moment an asset hits the rule you set above — three ways, pick any or all.</p>
+
+  <h3 data-i18n="notifBrowserTitle">1. Browser push (free, instant, while this page is open)</h3>
+  <button id="notifBtn" class="ghost" data-i18n="btnNotif">🔔 Enable Browser Notifications</button>
+  <div class="status-msg" id="notifStatus"></div>
+
+  <hr>
+  <h3 data-i18n="notifPersonalTitle">2. Personal email &amp; Telegram alerts (works even when this page is closed)</h3>
+  <p class="sub" style="margin-top:-2px;margin-bottom:10px" data-i18n="notifPersonalSub">Get a message the moment your chosen assets change tier, checked automatically on a schedule.</p>
+  <div class="notify-grid">
+    <div class="field"><label for="subEmail" data-i18n="lblEmail">Email (optional)</label><input id="subEmail" type="email" placeholder="you@example.com"></div>
+    <div class="field"><label for="subTelegram" data-i18n="lblTelegram">Telegram Chat ID (optional)</label><input id="subTelegram" type="text" placeholder="123456789"></div>
+  </div>
+  <p class="note" data-i18n="telegramHelp">Don't know your Telegram Chat ID? Message <a href="https://t.me/userinfobot" target="_blank" rel="noopener">@userinfobot</a> to get it, then open our alert bot and send <code>/start</code> so it's allowed to message you.</p>
+  <div class="field">
+    <label for="subPref" data-i18n="lblNotifyPref">Notify me about</label>
+    <select id="subPref" aria-label="Select notification preference">
+      <option value="any" data-i18n="prefAny">Any asset reaching WATCH or STRONG</option>
+      <option value="metals" data-i18n="prefMetals">Gold &amp; silver only</option>
+      <option value="stocks" data-i18n="prefStocks">Mining stocks only</option>
+      <option value="etf" data-i18n="prefEtf">ETFs only</option>
+      <option value="crypto" data-i18n="prefCrypto">Gold-backed crypto only</option>
+    </select>
+  </div>
+  <div class="row"><button id="btnSubscribe" data-i18n="btnSubscribe">Subscribe — it's free</button></div>
+  <div class="status-msg" id="subStatus"></div>
+
+  <hr>
+  <h3 data-i18n="targetTitle">3. Simple price target alert</h3>
+  <p class="sub" style="margin-top:-2px;margin-bottom:10px" data-i18n="targetSub">No streak rule needed — just tell us the price and direction. Fires as a browser notification.</p>
+  <div class="grid3">
+    <div class="field"><label for="targetAsset" data-i18n="targetAssetLbl">Asset</label><select id="targetAsset" aria-label="Select price target asset"></select></div>
+    <div class="field"><label for="targetDir" data-i18n="targetDirLbl">Alert when price is</label>
+      <select id="targetDir" aria-label="Select price target direction">
+        <option value="below" data-i18n="targetBelow">At or below</option>
+        <option value="above" data-i18n="targetAbove">At or above</option>
+      </select>
+    </div>
+    <div class="field"><label for="targetPrice" data-i18n="targetPriceLbl">Target price (USD)</label><input id="targetPrice" type="number" step="0.01" placeholder="4200"></div>
+  </div>
+  <div class="row"><button id="btnAddTarget" class="ghost" data-i18n="btnAddTarget">Add price alert</button></div>
+  <div id="targetList" style="margin-top:10px"></div>
+</section>
 
 <!-- MAIN REAL-TIME CHART -->
 <section class="panel">
@@ -449,31 +521,6 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 <div class="ad-slot chart-ad" role="region" aria-label="Advertisement" data-ad-slot="chart-2">
   <div>Advertisement · Sponsor placement<span class="ad-meta">Precious metals, investing, fintech or market-data partners</span></div>
 </div>
-
-<!-- RULE -->
-<section class="panel" id="board">
-  <h2 data-i18n="rulesTitle">Buy Signal Rule</h2>
-  <div class="tier-grid" aria-label="Signal levels">
-    <div class="tier"><b data-i18n="tierHoldLabel">HOLD</b><span class="note" data-i18n="tierHoldNote">0–2 consecutive red trading days</span></div>
-    <div class="tier watch"><b data-i18n="tierWatchLabel">50% BUY / WATCH</b><span class="note" data-i18n="tierWatchNote">3–4 consecutive red trading days</span></div>
-    <div class="tier strong"><b data-i18n="tierStrongLabel">100% BUY / STRONG</b><span class="note" data-i18n="tierStrongNote">5 or more consecutive red trading days</span></div>
-  </div>
-  <div class="grid4">
-    <div class="field">
-      <label for="streakLen" data-i18n="lblBacktestLevel">Backtest signal level</label>
-      <select id="streakLen" aria-label="Select backtest signal level">
-        <option value="3" data-i18n="optWatch3">3-day 50% Buy / Watch</option>
-        <option value="5" data-i18n="optStrong5">5-day 100% Buy / Strong</option>
-      </select>
-    </div>
-    <div class="field"><label for="minDrop" data-i18n="lblMinDrop">Minimum total drop (%)</label><input id="minDrop" type="number" step="0.1" value="0"></div>
-    <div class="field"><label for="cooldown" data-i18n="lblCooldown">Cooldown between signals (days)</label><input id="cooldown" type="number" value="5"></div>
-    <div class="field"><label for="rangeDays" data-i18n="lblRange">Backtest range (trading days)</label>
-      <select id="rangeDays" aria-label="Select backtest date range"><option value="120">120</option><option value="250" selected>250</option><option value="500">500</option></select>
-    </div>
-  </div>
-  <div class="note" data-i18n="rulesNote">Signals are calculated from each asset's daily close. A day counts as "red" when its close is lower than the previous trading day's.</div>
-</section>
 
 <!-- CROSS-ASSET RATIOS -->
 <section class="panel">
@@ -536,53 +583,6 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 
 <!-- AD SLOT: In-content -->
 <div class="ad-slot inline" data-i18n="adInline">Ad Space (responsive)</div>
-
-<!-- NOTIFICATIONS -->
-<section class="panel" id="notifications">
-  <h2 data-i18n="notifTitle">Enable Buy Signal Notifications</h2>
-  <p class="sub" style="margin-top:-4px;margin-bottom:14px" data-i18n="notifSub">Get notified the moment an asset hits the rule you set above — three ways, pick any or all.</p>
-
-  <h3 data-i18n="notifBrowserTitle">1. Browser push (free, instant, while this page is open)</h3>
-  <button id="notifBtn" class="ghost" data-i18n="btnNotif">🔔 Enable Browser Notifications</button>
-  <div class="status-msg" id="notifStatus"></div>
-
-  <hr>
-  <h3 data-i18n="notifPersonalTitle">2. Personal email &amp; Telegram alerts (works even when this page is closed)</h3>
-  <p class="sub" style="margin-top:-2px;margin-bottom:10px" data-i18n="notifPersonalSub">Get a message the moment your chosen assets change tier, checked automatically on a schedule.</p>
-  <div class="notify-grid">
-    <div class="field"><label for="subEmail" data-i18n="lblEmail">Email (optional)</label><input id="subEmail" type="email" placeholder="you@example.com"></div>
-    <div class="field"><label for="subTelegram" data-i18n="lblTelegram">Telegram Chat ID (optional)</label><input id="subTelegram" type="text" placeholder="123456789"></div>
-  </div>
-  <p class="note" data-i18n="telegramHelp">Don't know your Telegram Chat ID? Message <a href="https://t.me/userinfobot" target="_blank" rel="noopener">@userinfobot</a> to get it, then open our alert bot and send <code>/start</code> so it's allowed to message you.</p>
-  <div class="field">
-    <label for="subPref" data-i18n="lblNotifyPref">Notify me about</label>
-    <select id="subPref" aria-label="Select notification preference">
-      <option value="any" data-i18n="prefAny">Any asset reaching WATCH or STRONG</option>
-      <option value="metals" data-i18n="prefMetals">Gold &amp; silver only</option>
-      <option value="stocks" data-i18n="prefStocks">Mining stocks only</option>
-      <option value="etf" data-i18n="prefEtf">ETFs only</option>
-      <option value="crypto" data-i18n="prefCrypto">Gold-backed crypto only</option>
-    </select>
-  </div>
-  <div class="row"><button id="btnSubscribe" data-i18n="btnSubscribe">Subscribe — it's free</button></div>
-  <div class="status-msg" id="subStatus"></div>
-
-  <hr>
-  <h3 data-i18n="targetTitle">3. Simple price target alert</h3>
-  <p class="sub" style="margin-top:-2px;margin-bottom:10px" data-i18n="targetSub">No streak rule needed — just tell us the price and direction. Fires as a browser notification.</p>
-  <div class="grid3">
-    <div class="field"><label for="targetAsset" data-i18n="targetAssetLbl">Asset</label><select id="targetAsset" aria-label="Select price target asset"></select></div>
-    <div class="field"><label for="targetDir" data-i18n="targetDirLbl">Alert when price is</label>
-      <select id="targetDir" aria-label="Select price target direction">
-        <option value="below" data-i18n="targetBelow">At or below</option>
-        <option value="above" data-i18n="targetAbove">At or above</option>
-      </select>
-    </div>
-    <div class="field"><label for="targetPrice" data-i18n="targetPriceLbl">Target price (USD)</label><input id="targetPrice" type="number" step="0.01" placeholder="4200"></div>
-  </div>
-  <div class="row"><button id="btnAddTarget" class="ghost" data-i18n="btnAddTarget">Add price alert</button></div>
-  <div id="targetList" style="margin-top:10px"></div>
-</section>
 
 <!-- AFFILIATE RESOURCES -->
 <section class="panel" id="resources">
