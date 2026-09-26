@@ -402,22 +402,6 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 </div>
 <div class="snapshot" id="snapshot"></div>
 
-<section class="panel" id="metalsToolkit" aria-labelledby="metalsToolkitTitle">
-  <div class="row between">
-    <div><h2 id="metalsToolkitTitle" style="margin:0">Live Gold &amp; Silver Toolkit</h2><p class="sub" style="margin:4px 0 0">Spot-market context, local-currency estimates, practical weight conversions and transparent pullback sentiment.</p></div>
-  </div>
-  <div class="live-quote-grid" aria-label="Live precious metals quotes">
-    <div><div class="live-quote" id="tvGoldQuote"></div><div class="copy-row"><button class="ghost" id="copyGoldClose" type="button">Copy latest gold close</button><span class="note" id="copyGoldStatus" aria-live="polite"></span></div></div>
-    <div><div class="live-quote" id="tvSilverQuote"></div><div class="copy-row"><button class="ghost" id="copySilverClose" type="button">Copy latest silver close</button><span class="note" id="copySilverStatus" aria-live="polite"></span></div></div>
-  </div>
-  <p class="note">Live XAU/USD and XAG/USD quote panels are provided by <a href="https://www.tradingview.com/?aff_id=170924" target="_blank" rel="noopener sponsored">TradingView</a> and may be delayed. Copy buttons use GoldAlert's latest scheduled daily close in the currency selected above.</p>
-  <div class="toolkit-grid">
-    <div class="sentiment-card"><h3 style="margin:0">Gold &amp; Silver by Weight</h3><p class="note" style="margin:4px 0 0">Indicative metal value calculated from 1 troy ounce = 31.1034768 grams.</p><div class="unit-grid" id="unitPrices"><span class="note">Loading daily prices…</span></div></div>
-    <div class="sentiment-card"><div class="row between"><h3 style="margin:0">Gold Market Fear / Pullback Index</h3><span class="sentiment-score" id="sentimentScore">—</span></div><div class="sentiment-meter" aria-hidden="true"><i id="sentimentFill"></i></div><b id="sentimentLabel">Loading…</b><p class="note" id="sentimentDetail">Calculated only from GoldAlert's existing rule-based signal universe.</p></div>
-  </div>
-  <div class="feature-callout"><div><b>Share GoldAlert data on your own website</b><div class="note">Create a lightweight gold or silver price widget with your preferred currency, unit and color theme.</div></div><a href="/embed/">Build an embeddable widget →</a></div>
-</section>
-
 <!-- AD SLOT: Leaderboard 728x90 -->
 <div class="ad-slot leaderboard" data-i18n="adLeaderboard">Ad Space 728×90 (Leaderboard)</div>
 
@@ -444,6 +428,32 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
     </div>
   </div>
   <div class="note" data-i18n="rulesNote">Signals are calculated from each asset's daily close. A day counts as "red" when its close is lower than the previous trading day's.</div>
+</section>
+
+<!-- SIGNAL BOARD -->
+<section class="panel">
+  <div class="row between" style="margin-bottom:10px">
+    <h2 style="margin:0" data-i18n="boardTitle">Signal Board — All Assets</h2>
+    <div class="row">
+      <button id="btnExport" class="ghost" data-i18n="btnExport">Export CSV</button>
+      <button id="btnReload" class="ghost" data-i18n="btnReload">Reload daily data</button>
+    </div>
+  </div>
+  <div class="scroll"><table id="boardTable">
+    <thead><tr>
+      <th data-i18n="thAsset">Asset</th><th data-i18n="thClose">Close</th><th data-i18n="thChange">Day Δ</th>
+      <th data-i18n="thLast10">Last 10 Days</th><th data-i18n="thStreak">Red Streak</th>
+      <th data-i18n="thStrength">Strength</th>
+      <th data-i18n="thStatus">Status</th><th data-i18n="thSignals">Signals in Range</th>
+    </tr></thead>
+    <tbody><tr><td colspan="8" class="note" data-i18n="loadingData">Fetching daily data…</td></tr></tbody>
+  </table></div>
+  <div class="note" style="margin-top:8px" data-i18n="boardNote">The close column uses official daily data (usually one session behind the real-time chart above). Use the chart to watch the market; use this table to calculate signals.</div>
+  <p class="note" style="margin-top:10px" id="trackRecord"></p>
+  <details>
+    <summary data-i18n="backtestSummary">Show forward-return backtest by asset</summary>
+    <div class="backtest-scroll"><table id="backtestTable"></table></div>
+  </details>
 </section>
 
 <!-- NOTIFICATIONS -->
@@ -508,6 +518,44 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
   <div>Advertisement · Responsive leaderboard<span class="ad-meta">Recommended creative: 970×90 desktop / 320×100 mobile</span></div>
 </div>
 
+<!-- LIVE GOLD & SILVER TOOLKIT -->
+<section class="panel" id="metalsToolkit" aria-labelledby="metalsToolkitTitle">
+  <div class="row between">
+    <div><h2 id="metalsToolkitTitle" style="margin:0">Live Gold &amp; Silver Toolkit</h2><p class="sub" style="margin:4px 0 0">Spot-market context, local-currency estimates, practical weight conversions and transparent pullback sentiment.</p></div>
+  </div>
+  <div class="live-quote-grid" aria-label="Live precious metals quotes">
+    <div><div class="live-quote" id="tvGoldQuote"></div><div class="copy-row"><button class="ghost" id="copyGoldClose" type="button">Copy latest gold close</button><span class="note" id="copyGoldStatus" aria-live="polite"></span></div></div>
+    <div><div class="live-quote" id="tvSilverQuote"></div><div class="copy-row"><button class="ghost" id="copySilverClose" type="button">Copy latest silver close</button><span class="note" id="copySilverStatus" aria-live="polite"></span></div></div>
+  </div>
+  <p class="note">Live XAU/USD and XAG/USD quote panels are provided by <a href="https://www.tradingview.com/?aff_id=170924" target="_blank" rel="noopener sponsored">TradingView</a> and may be delayed. Copy buttons use GoldAlert's latest scheduled daily close in the currency selected above.</p>
+  <div class="toolkit-grid">
+    <div class="sentiment-card"><h3 style="margin:0">Gold &amp; Silver by Weight</h3><p class="note" style="margin:4px 0 0">Indicative metal value calculated from 1 troy ounce = 31.1034768 grams.</p><div class="unit-grid" id="unitPrices"><span class="note">Loading daily prices…</span></div></div>
+    <div class="sentiment-card"><div class="row between"><h3 style="margin:0">Gold Market Fear / Pullback Index</h3><span class="sentiment-score" id="sentimentScore">—</span></div><div class="sentiment-meter" aria-hidden="true"><i id="sentimentFill"></i></div><b id="sentimentLabel">Loading…</b><p class="note" id="sentimentDetail">Calculated only from GoldAlert's existing rule-based signal universe.</p></div>
+  </div>
+  <div class="feature-callout"><div><b>Share GoldAlert data on your own website</b><div class="note">Create a lightweight gold or silver price widget with your preferred currency, unit and color theme.</div></div><a href="/embed/">Build an embeddable widget →</a></div>
+</section>
+
+<!-- KEY COMMODITIES -->
+<section class="panel" id="commodities">
+  <h2 style="margin:0 0 4px">Key Commodity Prices</h2>
+  <p class="sub" style="margin:0 0 14px">Live prices for the three most-watched global commodities — context for macro moves that often drag gold.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+    <div>
+      <div class="sub" style="margin-bottom:6px;font-weight:600">🛢 Crude Oil — WTI (USOIL)</div>
+      <div class="tvbox" style="height:200px"><div id="tvOil"></div></div>
+    </div>
+    <div>
+      <div class="sub" style="margin-bottom:6px;font-weight:600">🔥 Natural Gas (NATGAS)</div>
+      <div class="tvbox" style="height:200px"><div id="tvNatGas"></div></div>
+    </div>
+    <div>
+      <div class="sub" style="margin-bottom:6px;font-weight:600">🔧 Copper (COPPER)</div>
+      <div class="tvbox" style="height:200px"><div id="tvCopper"></div></div>
+    </div>
+  </div>
+  <p class="note" style="margin-top:10px">Commodity charts powered by <a href="https://www.tradingview.com/?aff_id=170924" target="_blank" rel="noopener sponsored">TradingView</a>. WTI Crude Oil, Natural Gas, and Copper are the three most-traded non-precious commodities globally and frequently move in tandem with macro sentiment that also drives gold.</p>
+</section>
+
 <!-- MARKETS AT A GLANCE -->
 <section class="panel">
   <div class="row between" style="margin-bottom:12px">
@@ -527,32 +575,6 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
   <h2 data-i18n="ratiosTitle">Cross-Asset Ratios</h2>
   <p class="sub" style="margin-top:-4px;margin-bottom:12px" data-i18n="ratiosSub">Relationships between asset categories that a single price chart can't show.</p>
   <div class="grid3" id="ratioStrip"></div>
-</section>
-
-<!-- SIGNAL BOARD -->
-<section class="panel">
-  <div class="row between" style="margin-bottom:10px">
-    <h2 style="margin:0" data-i18n="boardTitle">Signal Board — All Assets</h2>
-    <div class="row">
-      <button id="btnExport" class="ghost" data-i18n="btnExport">Export CSV</button>
-      <button id="btnReload" class="ghost" data-i18n="btnReload">Reload daily data</button>
-    </div>
-  </div>
-  <div class="scroll"><table id="boardTable">
-    <thead><tr>
-      <th data-i18n="thAsset">Asset</th><th data-i18n="thClose">Close</th><th data-i18n="thChange">Day Δ</th>
-      <th data-i18n="thLast10">Last 10 Days</th><th data-i18n="thStreak">Red Streak</th>
-      <th data-i18n="thStrength">Strength</th>
-      <th data-i18n="thStatus">Status</th><th data-i18n="thSignals">Signals in Range</th>
-    </tr></thead>
-    <tbody><tr><td colspan="8" class="note" data-i18n="loadingData">Fetching daily data…</td></tr></tbody>
-  </table></div>
-  <div class="note" style="margin-top:8px" data-i18n="boardNote">The close column uses official daily data (usually one session behind the real-time chart above). Use the chart to watch the market; use this table to calculate signals.</div>
-  <p class="note" style="margin-top:10px" id="trackRecord"></p>
-  <details>
-    <summary data-i18n="backtestSummary">Show forward-return backtest by asset</summary>
-    <div class="backtest-scroll"><table id="backtestTable"></table></div>
-  </details>
 </section>
 
 <!-- COMPARE ASSETS -->
@@ -1842,20 +1864,41 @@ const CFG=["streakLen","minDrop","cooldown","rangeDays"];
 function loadCfg(){ const c=LS.get("sim.cfg",{}); CFG.forEach(k=>{ if(c[k]!==undefined&&$(k)) $(k).value=c[k]; }); }
 function saveCfg(){ const c={}; CFG.forEach(k=>{ if($(k)) c[k]=$(k).value; }); LS.set("sim.cfg",c); }
 
+function mountCommodities(){
+  const theme=tvTheme(), locale=t("tvLocale");
+  tvEmbed("tvOil","mini-symbol-overview",{
+    symbol:"NYMEX:CL1!",width:"100%",height:"100%",locale,
+    dateRange:"12M",colorTheme:theme,isTransparent:true,autosize:true,
+    largeChartUrl:"https://www.tradingview.com/symbols/NYMEX-CL1/"
+  },"200px","WTI Crude Oil chart by TradingView","https://www.tradingview.com/symbols/NYMEX-CL1/");
+  tvEmbed("tvNatGas","mini-symbol-overview",{
+    symbol:"NYMEX:NG1!",width:"100%",height:"100%",locale,
+    dateRange:"12M",colorTheme:theme,isTransparent:true,autosize:true,
+    largeChartUrl:"https://www.tradingview.com/symbols/NYMEX-NG1/"
+  },"200px","Natural Gas chart by TradingView","https://www.tradingview.com/symbols/NYMEX-NG1/");
+  tvEmbed("tvCopper","mini-symbol-overview",{
+    symbol:"COMEX:HG1!",width:"100%",height:"100%",locale,
+    dateRange:"12M",colorTheme:theme,isTransparent:true,autosize:true,
+    largeChartUrl:"https://www.tradingview.com/symbols/COMEX-HG1/"
+  },"200px","Copper chart by TradingView","https://www.tradingview.com/symbols/COMEX-HG1/");
+}
+
 /* ================= lazy-load below-the-fold widgets ================= */
-let newsMounted=false, overviewMounted=false;
+let newsMounted=false, overviewMounted=false, commoditiesMounted=false;
 function setupLazyWidgets(){
-  const nEl=$("tvNews"), oEl=$("tvOverview");
-  if(!("IntersectionObserver" in window)){ mountNews(); mountOverview(); newsMounted=overviewMounted=true; return; }
+  const nEl=$("tvNews"), oEl=$("tvOverview"), cEl=$("tvOil");
+  if(!("IntersectionObserver" in window)){ mountNews(); mountOverview(); mountCommodities(); newsMounted=overviewMounted=commoditiesMounted=true; return; }
   const io=new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
       if(!e.isIntersecting) return;
       if(e.target.id==="tvNews" && !newsMounted){ newsMounted=true; mountNews(); io.unobserve(e.target); }
       if(e.target.id==="tvOverview" && !overviewMounted){ overviewMounted=true; mountOverview(); io.unobserve(e.target); }
+      if(e.target.id==="tvOil" && !commoditiesMounted){ commoditiesMounted=true; mountCommodities(); io.unobserve(e.target); }
     });
   }, {rootMargin:"200px"});
   if(nEl) io.observe(nEl);
   if(oEl) io.observe(oEl);
+  if(cEl) io.observe(cEl);
 }
 
 /* ================= cookie consent + analytics (GA4) ================= */
@@ -1886,6 +1929,7 @@ function fullRefresh(){
   mountTicker(); mountChart();
   if(newsMounted) mountNews();
   if(overviewMounted) mountOverview();
+  if(commoditiesMounted) mountCommodities();
 }
 
 function bind(){
@@ -1904,6 +1948,7 @@ function bind(){
     mountTicker();mountChart();
     if(newsMounted) mountNews();
     if(overviewMounted) mountOverview();
+    if(commoditiesMounted) mountCommodities();
   });
 
   $("notifBtn").onclick = async ()=>{
