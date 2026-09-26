@@ -56,4 +56,34 @@
   <url><loc>https://goldalert.org/market/</loc></url>
   <url><loc>https://goldalert.org/tools/gold-calculator/</loc></url>
   <url><loc>https://goldalert.org/admin/</loc></url>
+  <url>
+    <loc>https://goldalert.org/articles/money-metals-vs-apmex-gold-comparison.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://goldalert.org/articles/silver-gold-bull-review-2026.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://goldalert.org/articles/jm-bullion-gold-bar-review-2026.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://goldalert.org/articles/gold-price-alert-setup-guide.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://goldalert.org/articles/gold-price-eur-gbp-aud-chf-guide.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
