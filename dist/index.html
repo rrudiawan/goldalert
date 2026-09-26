@@ -1372,7 +1372,7 @@ const ASSETS=[
   {id:"CL",     name:"WTI Crude Oil",    note:"NYMEX",        tv:"NYMEX:CL1!",       grp:"komoditas", src:"yahoo",     code:"CL=F",        dec:2},
   {id:"NG",     name:"Natural Gas",      note:"NYMEX",        tv:"NYMEX:NG1!",       grp:"komoditas", src:"yahoo",     code:"NG=F",        dec:3},
   {id:"HG",     name:"Copper",           note:"COMEX",        tv:"COMEX:HG1!",       grp:"komoditas", src:"yahoo",     code:"HG=F",        dec:3},
-  {id:"PL",     name:"Platinum",         note:"NYMEX",        tv:"NYMEX:PL1!",       grp:"komoditas", src:"yahoo",     code:"PL=F",        dec:2},
+  {id:"PL",     name:"Platinum",         note:"Spot",         tv:"TVC:PLATINUM",     grp:"komoditas", src:"yahoo",     code:"PL=F",        dec:2},
   {id:"BTC",    name:"Bitcoin",          note:"BTC/USD",      tv:"COINBASE:BTCUSD",  grp:"broadcrypto",src:"yahoo",   code:"BTC-USD",     dec:0},
   {id:"ETH",    name:"Ethereum",         note:"ETH/USD",      tv:"COINBASE:ETHUSD",  grp:"broadcrypto",src:"yahoo",   code:"ETH-USD",     dec:2}
 ];
@@ -1904,15 +1904,15 @@ function mountCommodities(){
     largeChartUrl:"https://www.tradingview.com/symbols/TVC-UKOIL/"
   },"200px","Brent Crude Oil chart by TradingView","https://www.tradingview.com/symbols/TVC-UKOIL/");
   tvEmbed("tvWheat","mini-symbol-overview",{
-    symbol:"CBOT:ZW1!",width:"100%",height:"100%",locale,
+    symbol:"CAPITALCOM:WHEAT",width:"100%",height:"100%",locale,
     dateRange:"12M",colorTheme:theme,isTransparent:true,autosize:true,
-    largeChartUrl:"https://www.tradingview.com/symbols/CBOT-ZW1/"
-  },"200px","Wheat chart by TradingView","https://www.tradingview.com/symbols/CBOT-ZW1/");
+    largeChartUrl:"https://www.tradingview.com/symbols/CAPITALCOM-WHEAT/"
+  },"200px","Wheat chart by TradingView","https://www.tradingview.com/symbols/CAPITALCOM-WHEAT/");
   tvEmbed("tvCorn","mini-symbol-overview",{
-    symbol:"CBOT:ZC1!",width:"100%",height:"100%",locale,
+    symbol:"CAPITALCOM:CORN",width:"100%",height:"100%",locale,
     dateRange:"12M",colorTheme:theme,isTransparent:true,autosize:true,
-    largeChartUrl:"https://www.tradingview.com/symbols/CBOT-ZC1/"
-  },"200px","Corn chart by TradingView","https://www.tradingview.com/symbols/CBOT-ZC1/");
+    largeChartUrl:"https://www.tradingview.com/symbols/CAPITALCOM-CORN/"
+  },"200px","Corn chart by TradingView","https://www.tradingview.com/symbols/CAPITALCOM-CORN/");
 }
 
 /* ================= lazy-load below-the-fold widgets ================= */
