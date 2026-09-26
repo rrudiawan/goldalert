@@ -552,8 +552,20 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
       <div class="sub" style="margin-bottom:6px;font-weight:600">🔧 Copper (COPPER)</div>
       <div class="tvbox" style="height:200px"><div id="tvCopper"></div></div>
     </div>
+    <div>
+      <div class="sub" style="margin-bottom:6px;font-weight:600">🛢 Brent Crude Oil (ICE)</div>
+      <div class="tvbox" style="height:200px"><div id="tvBrent"></div></div>
+    </div>
+    <div>
+      <div class="sub" style="margin-bottom:6px;font-weight:600">🌾 Wheat (CBOT)</div>
+      <div class="tvbox" style="height:200px"><div id="tvWheat"></div></div>
+    </div>
+    <div>
+      <div class="sub" style="margin-bottom:6px;font-weight:600">🌽 Corn (CBOT)</div>
+      <div class="tvbox" style="height:200px"><div id="tvCorn"></div></div>
+    </div>
   </div>
-  <p class="note" style="margin-top:10px">Commodity charts powered by <a href="https://www.tradingview.com/?aff_id=170924" target="_blank" rel="noopener sponsored">TradingView</a>. WTI Crude Oil, Natural Gas, and Copper are the three most-traded non-precious commodities globally and frequently move in tandem with macro sentiment that also drives gold.</p>
+  <p class="note" style="margin-top:10px">Commodity charts powered by <a href="https://www.tradingview.com/?aff_id=170924" target="_blank" rel="noopener sponsored">TradingView</a>. These six commodities are among the most-traded globally — energy, industrial metals, and agricultural staples that frequently move with the same macro forces that drive gold.</p>
 </section>
 
 <!-- MARKETS AT A GLANCE -->
@@ -1881,6 +1893,21 @@ function mountCommodities(){
     dateRange:"12M",colorTheme:theme,isTransparent:true,autosize:true,
     largeChartUrl:"https://www.tradingview.com/symbols/COMEX-HG1/"
   },"200px","Copper chart by TradingView","https://www.tradingview.com/symbols/COMEX-HG1/");
+  tvEmbed("tvBrent","mini-symbol-overview",{
+    symbol:"TVC:UKOIL",width:"100%",height:"100%",locale,
+    dateRange:"12M",colorTheme:theme,isTransparent:true,autosize:true,
+    largeChartUrl:"https://www.tradingview.com/symbols/TVC-UKOIL/"
+  },"200px","Brent Crude Oil chart by TradingView","https://www.tradingview.com/symbols/TVC-UKOIL/");
+  tvEmbed("tvWheat","mini-symbol-overview",{
+    symbol:"CBOT:ZW1!",width:"100%",height:"100%",locale,
+    dateRange:"12M",colorTheme:theme,isTransparent:true,autosize:true,
+    largeChartUrl:"https://www.tradingview.com/symbols/CBOT-ZW1/"
+  },"200px","Wheat chart by TradingView","https://www.tradingview.com/symbols/CBOT-ZW1/");
+  tvEmbed("tvCorn","mini-symbol-overview",{
+    symbol:"CBOT:ZC1!",width:"100%",height:"100%",locale,
+    dateRange:"12M",colorTheme:theme,isTransparent:true,autosize:true,
+    largeChartUrl:"https://www.tradingview.com/symbols/CBOT-ZC1/"
+  },"200px","Corn chart by TradingView","https://www.tradingview.com/symbols/CBOT-ZC1/");
 }
 
 /* ================= lazy-load below-the-fold widgets ================= */
