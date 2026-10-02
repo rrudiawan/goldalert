@@ -40,6 +40,19 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "GoldAlert",
+  "url": "https://goldalert.org/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://goldalert.org/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "GoldAlert",
   "url": "https://goldalert.org/",
@@ -73,8 +86,22 @@
 }
 </script>
 
+<!-- Hreflang: 6 languages served from the same URL via JS i18n -->
+<link rel="alternate" hreflang="en" href="https://goldalert.org/">
+<link rel="alternate" hreflang="zh" href="https://goldalert.org/?lang=zh">
+<link rel="alternate" hreflang="es" href="https://goldalert.org/?lang=es">
+<link rel="alternate" hreflang="hi" href="https://goldalert.org/?lang=hi">
+<link rel="alternate" hreflang="ar" href="https://goldalert.org/?lang=ar">
+<link rel="alternate" hreflang="ru" href="https://goldalert.org/?lang=ru">
+<link rel="alternate" hreflang="x-default" href="https://goldalert.org/">
+
+<!-- Preconnect for render-critical and third-party origins -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://s3.tradingview.com" crossorigin>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://query1.finance.yahoo.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -358,7 +385,7 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
       </div>
     </a>
     <div class="headRight">
-      <button type="button" class="install-app" id="installApp">Install App</button>
+      <button type="button" class="install-app" id="installApp" aria-label="Install GoldAlert as a Progressive Web App">Install App</button>
       <select id="langSel" class="langSel" aria-label="Select language">
         <option value="en">English</option>
         <option value="zh">中文 (简体)</option>
@@ -378,27 +405,27 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
   </div>
   <nav class="site-nav" id="primaryNav" aria-label="Primary navigation">
     <a class="active" aria-current="page" href="#board" data-i18n="navBoard">Signal Board</a>
-    <a href="#signalboard">Signal Table</a>
-    <a href="#notifications">Alerts</a>
-    <a href="#charts">Charts</a>
-    <a href="#metalsToolkit">Metals Toolkit</a>
-    <a href="#commodities">Commodities</a>
-    <a href="#markets">Markets</a>
-    <a href="#ratios">Ratios</a>
-    <a href="#compare">Compare</a>
-    <a href="#watchlist" data-i18n="navWatchlist">Watchlist</a>
-    <a href="#resources">Where to Buy</a>
-    <a href="#news" data-i18n="navNews">News</a>
-    <a href="#articles" data-i18n="navLearn">Learn</a>
-    <a href="/tools/gold-calculator/">Calculator</a>
-    <a href="/methodology.html" data-i18n="navMethodology">Methodology</a>
+    <a href="#signalboard" aria-label="Signal Table section">Signal Table</a>
+    <a href="#notifications" aria-label="Alerts section">Alerts</a>
+    <a href="#charts" aria-label="Real-Time Charts section">Charts</a>
+    <a href="#metalsToolkit" aria-label="Metals Toolkit section">Metals Toolkit</a>
+    <a href="#commodities" aria-label="Commodities section">Commodities</a>
+    <a href="#markets" aria-label="Markets at a Glance section">Markets</a>
+    <a href="#ratios" aria-label="Cross-Asset Ratios section">Ratios</a>
+    <a href="#compare" aria-label="Compare Two Assets section">Compare</a>
+    <a href="#watchlist" data-i18n="navWatchlist" aria-label="Private Watchlist section">Watchlist</a>
+    <a href="#resources" aria-label="Where to Buy Physical Gold section">Where to Buy</a>
+    <a href="#news" data-i18n="navNews" aria-label="Live News section">News</a>
+    <a href="#articles" data-i18n="navLearn" aria-label="Blog articles section">Learn</a>
+    <a href="/tools/gold-calculator/" aria-label="Gold & Silver Calculator tool">Calculator</a>
+    <a href="/methodology.html" data-i18n="navMethodology" aria-label="Signal methodology explained">Methodology</a>
   </nav>
 </header>
 
 <!-- REAL-TIME TICKER -->
 <div class="tvbox" style="margin-bottom:16px"><div id="tvTicker"></div></div>
 
-<main id="main">
+<main id="main" aria-label="GoldAlert signal dashboard">
 
 <p class="intro" data-i18n="introTLDR">This free tool tracks gold, silver, four gold mining stocks, three ETFs, and two gold-backed cryptoassets. It marks 3–4 consecutive red days as 50% BUY / WATCH and 5 or more as 100% BUY / STRONG. The labels describe rule stages, not probabilities or individualized position sizes.</p>
 <div class="trust-strip" aria-label="Simulator attributes">
@@ -436,8 +463,8 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 <div class="ad-slot leaderboard" data-i18n="adLeaderboard">Ad Space 728×90 (Leaderboard)</div>
 
 <!-- RULE -->
-<section class="panel" id="board">
-  <h2 data-i18n="rulesTitle">Buy Signal Rule</h2>
+<section class="panel" id="board" aria-labelledby="boardRulesTitle">
+  <h2 id="boardRulesTitle" data-i18n="rulesTitle">Buy Signal Rule</h2>
   <div class="tier-grid" aria-label="Signal levels">
     <div class="tier"><b data-i18n="tierHoldLabel">HOLD</b><span class="note" data-i18n="tierHoldNote">0–2 consecutive red trading days</span></div>
     <div class="tier watch"><b data-i18n="tierWatchLabel">50% BUY / WATCH</b><span class="note" data-i18n="tierWatchNote">3–4 consecutive red trading days</span></div>
@@ -461,12 +488,12 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 </section>
 
 <!-- SIGNAL BOARD -->
-<section class="panel" id="signalboard">
+<section class="panel" id="signalboard" aria-labelledby="signalboardTitle">
   <div class="row between" style="margin-bottom:10px">
-    <h2 style="margin:0" data-i18n="boardTitle">Signal Board — All Assets</h2>
+    <h2 id="signalboardTitle" style="margin:0" data-i18n="boardTitle">Signal Board — All Assets</h2>
     <div class="row">
-      <button id="btnExport" class="ghost" data-i18n="btnExport">Export CSV</button>
-      <button id="btnReload" class="ghost" data-i18n="btnReload">Reload daily data</button>
+      <button id="btnExport" class="ghost" data-i18n="btnExport" aria-label="Export signal data as CSV">Export CSV</button>
+      <button id="btnReload" class="ghost" data-i18n="btnReload" aria-label="Reload daily price data from server">Reload daily data</button>
     </div>
   </div>
   <div class="scroll"><table id="boardTable">
@@ -487,12 +514,12 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 </section>
 
 <!-- NOTIFICATIONS -->
-<section class="panel" id="notifications">
-  <h2 data-i18n="notifTitle">Enable Buy Signal Notifications</h2>
+<section class="panel" id="notifications" aria-labelledby="notificationsTitle">
+  <h2 id="notificationsTitle" data-i18n="notifTitle">Enable Buy Signal Notifications</h2>
   <p class="sub" style="margin-top:-4px;margin-bottom:14px" data-i18n="notifSub">Get notified the moment an asset hits the rule you set above — three ways, pick any or all.</p>
 
   <h3 data-i18n="notifBrowserTitle">1. Browser push (free, instant, while this page is open)</h3>
-  <button id="notifBtn" class="ghost" data-i18n="btnNotif">🔔 Enable Browser Notifications</button>
+  <button id="notifBtn" class="ghost" data-i18n="btnNotif" aria-label="Enable browser push notifications for buy signals">🔔 Enable Browser Notifications</button>
   <div class="status-msg" id="notifStatus"></div>
 
   <hr>
@@ -513,7 +540,7 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
       <option value="crypto" data-i18n="prefCrypto">Gold-backed crypto only</option>
     </select>
   </div>
-  <div class="row"><button id="btnSubscribe" data-i18n="btnSubscribe">Subscribe — it's free</button></div>
+  <div class="row"><button id="btnSubscribe" data-i18n="btnSubscribe" aria-label="Subscribe for free email and Telegram buy signal alerts">Subscribe — it's free</button></div>
   <div class="status-msg" id="subStatus"></div>
 
   <hr>
@@ -529,14 +556,14 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
     </div>
     <div class="field"><label for="targetPrice" data-i18n="targetPriceLbl">Target price (USD)</label><input id="targetPrice" type="number" step="0.01" placeholder="4200"></div>
   </div>
-  <div class="row"><button id="btnAddTarget" class="ghost" data-i18n="btnAddTarget">Add price alert</button></div>
+  <div class="row"><button id="btnAddTarget" class="ghost" data-i18n="btnAddTarget" aria-label="Add a price target alert for the selected asset">Add price alert</button></div>
   <div id="targetList" style="margin-top:10px"></div>
 </section>
 
 <!-- MAIN REAL-TIME CHART -->
-<section class="panel" id="charts">
+<section class="panel" id="charts" aria-labelledby="chartsTitle">
   <div class="row between" style="margin-bottom:12px">
-    <h2 style="margin:0" data-i18n="chartTitle">Real-Time Charts</h2>
+    <h2 id="chartsTitle" style="margin:0" data-i18n="chartTitle">Real-Time Charts</h2>
     <span class="note" data-i18n="chartSub">Live data from the exchanges, via TradingView</span>
   </div>
   <div class="chips" id="assetChips" style="margin-bottom:12px"></div>
@@ -554,8 +581,8 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
     <div><h2 id="metalsToolkitTitle" style="margin:0">Live Gold &amp; Silver Toolkit</h2><p class="sub" style="margin:4px 0 0">Spot-market context, local-currency estimates, practical weight conversions and transparent pullback sentiment.</p></div>
   </div>
   <div class="live-quote-grid" aria-label="Live precious metals quotes">
-    <div><div class="live-quote" id="tvGoldQuote"></div><div class="copy-row"><button class="ghost" id="copyGoldClose" type="button">Copy latest gold close</button><span class="note" id="copyGoldStatus" aria-live="polite"></span></div></div>
-    <div><div class="live-quote" id="tvSilverQuote"></div><div class="copy-row"><button class="ghost" id="copySilverClose" type="button">Copy latest silver close</button><span class="note" id="copySilverStatus" aria-live="polite"></span></div></div>
+    <div><div class="live-quote" id="tvGoldQuote"></div><div class="copy-row"><button class="ghost" id="copyGoldClose" type="button" aria-label="Copy latest gold closing price to clipboard">Copy latest gold close</button><span class="note" id="copyGoldStatus" aria-live="polite"></span></div></div>
+    <div><div class="live-quote" id="tvSilverQuote"></div><div class="copy-row"><button class="ghost" id="copySilverClose" type="button" aria-label="Copy latest silver closing price to clipboard">Copy latest silver close</button><span class="note" id="copySilverStatus" aria-live="polite"></span></div></div>
   </div>
   <p class="note">Live XAU/USD and XAG/USD quote panels are provided by <a href="https://www.tradingview.com/?aff_id=170924" target="_blank" rel="noopener sponsored">TradingView</a> and may be delayed. Copy buttons use GoldAlert's latest scheduled daily close in the currency selected above.</p>
   <div class="toolkit-grid">
@@ -566,8 +593,8 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 </section>
 
 <!-- KEY COMMODITIES -->
-<section class="panel" id="commodities">
-  <h2 style="margin:0 0 4px">Key Commodity Prices</h2>
+<section class="panel" id="commodities" aria-labelledby="commoditiesTitle">
+  <h2 id="commoditiesTitle" style="margin:0 0 4px">Key Commodity Prices</h2>
   <p class="sub" style="margin:0 0 14px">Live prices for six of the most-watched global commodities — energy, metals, and agricultural staples that move with the same macro forces as gold.</p>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
     <div>
@@ -599,9 +626,9 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 </section>
 
 <!-- MARKETS AT A GLANCE -->
-<section class="panel" id="markets">
+<section class="panel" id="markets" aria-labelledby="marketsTitle">
   <div class="row between" style="margin-bottom:12px">
-    <h2 style="margin:0" data-i18n="overviewTitle">Markets at a Glance</h2>
+    <h2 id="marketsTitle" style="margin:0" data-i18n="overviewTitle">Markets at a Glance</h2>
     <div class="seg" id="segGroup"></div>
   </div>
   <div class="tvbox ovbox"><div id="tvOverview" style="height:100%"></div></div>
@@ -613,15 +640,15 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 </div>
 
 <!-- CROSS-ASSET RATIOS -->
-<section class="panel" id="ratios">
-  <h2 data-i18n="ratiosTitle">Cross-Asset Ratios</h2>
+<section class="panel" id="ratios" aria-labelledby="ratiosTitle">
+  <h2 id="ratiosTitle" data-i18n="ratiosTitle">Cross-Asset Ratios</h2>
   <p class="sub" style="margin-top:-4px;margin-bottom:12px" data-i18n="ratiosSub">Relationships between asset categories that a single price chart can't show.</p>
   <div class="grid3" id="ratioStrip"></div>
 </section>
 
 <!-- COMPARE ASSETS -->
-<section class="panel" id="compare">
-  <h2 data-i18n="compareTitle">Compare Two Assets</h2>
+<section class="panel" id="compare" aria-labelledby="compareTitle">
+  <h2 id="compareTitle" data-i18n="compareTitle">Compare Two Assets</h2>
   <p class="sub" style="margin-top:-4px;margin-bottom:12px" data-i18n="compareSub">Both series rebased to 100 at the start of the range, so relative performance is easy to read regardless of price scale.</p>
   <div class="compare-controls">
     <div class="field"><label for="compareA" data-i18n="compareALbl">Asset A</label><select id="compareA" aria-label="Select first asset to compare"></select></div>
@@ -633,8 +660,8 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 </section>
 
 <!-- LOCAL WATCHLIST -->
-<section class="panel" id="watchlist">
-  <h2 data-i18n="watchTitle">Private Watchlist &amp; Notional P/L</h2>
+<section class="panel" id="watchlist" aria-labelledby="watchlistTitle">
+  <h2 id="watchlistTitle" data-i18n="watchTitle">Private Watchlist &amp; Notional P/L</h2>
   <p class="sub" style="margin-top:-4px" data-i18n="watchSub">Saved only on this device. No account or personal information is required.</p>
   <div class="watch-form">
     <div class="field"><label for="watchAsset" data-i18n="watchAssetLbl">Asset</label><select id="watchAsset" aria-label="Add asset to watchlist"></select></div>
@@ -649,8 +676,8 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 <div class="ad-slot inline" data-i18n="adInline">Ad Space (responsive)</div>
 
 <!-- AFFILIATE RESOURCES -->
-<section class="panel" id="resources">
-  <h2 data-i18n="resourcesTitle">Where to Buy Physical Gold &amp; Silver</h2>
+<section class="panel" id="resources" aria-labelledby="resourcesTitle">
+  <h2 id="resourcesTitle" data-i18n="resourcesTitle">Where to Buy Physical Gold &amp; Silver</h2>
   <p class="sub" style="margin-top:-4px;margin-bottom:14px" data-i18n="resourcesSub">A few reputable bullion dealers, for when a signal above points you toward an actual purchase.</p>
   <div class="affiliate-list">
     <div class="affiliate-item">
@@ -677,15 +704,15 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 </section>
 
 <!-- NEWS -->
-<section class="panel" id="news">
-  <h2 data-i18n="newsTitle">Live Gold &amp; Precious Metals News</h2>
+<section class="panel" id="news" aria-labelledby="newsTitle">
+  <h2 id="newsTitle" data-i18n="newsTitle">Live Gold &amp; Precious Metals News</h2>
   <p class="sub" style="margin-top:-4px;margin-bottom:14px" data-i18n="newsSub">Real-time headlines covering gold, mining stocks, ETFs, and the broader metals market — powered by TradingView.</p>
   <div class="tvbox" style="height:400px"><div id="tvNews" style="height:100%"></div></div>
 </section>
 
 <!-- ARTICLES -->
-<section class="panel" id="articles">
-  <h2 data-i18n="articlesTitle">From the Blog</h2>
+<section class="panel" id="articles" aria-labelledby="articlesTitle">
+  <h2 id="articlesTitle" data-i18n="articlesTitle">From the Blog</h2>
   <p class="sub" style="margin-top:-4px;margin-bottom:14px" data-i18n="articlesSub">Guides and analysis to help you read the gold market.</p>
   <div class="article-grid">
     <div class="article-card">
@@ -713,8 +740,8 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 <div class="ad-slot rect" data-i18n="adRect">Ad Space 300×250</div>
 
 <!-- FAQ -->
-<section class="panel" id="faq">
-  <h2 data-i18n="faqTitle">Frequently Asked Questions</h2>
+<section class="panel" id="faq" aria-labelledby="faqTitle">
+  <h2 id="faqTitle" data-i18n="faqTitle">Frequently Asked Questions</h2>
   <div id="faqList"></div>
 </section>
 
