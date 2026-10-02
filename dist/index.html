@@ -102,8 +102,13 @@
 <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://query1.finance.yahoo.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Non-blocking font load: preload trick avoids render-blocking while keeping FOUT small -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
 <style>
+/* Ensure text is visible before web fonts arrive (font-display:swap equivalent for inline CSS) */
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:400 600;font-display:swap;src:local('Fraunces')}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:400 600;font-display:swap;src:local('IBM Plex Sans')}
 :root{
   --ink:#0B1724; --panel:#10202F; --panel-2:#152A3C; --line:#1E3A50;
   --brass:#D9A441; --brass-soft:#F0CE85; --silver:#9FB6C9; --sky:#5FA8D3;
@@ -370,7 +375,16 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 #backToTop:active{transform:translateY(0)}
 #backToTop title{display:none}
 </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4893271383583986" crossorigin="anonymous"></script>
+<!-- AdSense loaded after page is interactive to avoid blocking LCP/FCP -->
+<script>
+(window.requestIdleCallback||function(cb){setTimeout(cb,1500)})(function(){
+  var s=document.createElement('script');
+  s.async=true;
+  s.crossOrigin='anonymous';
+  s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4893271383583986';
+  document.head.appendChild(s);
+});
+</script>
 </head>
 <body>
 <div class="wrap">
@@ -378,7 +392,7 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 <header class="top">
   <div class="header-main">
     <a class="brand" href="/" aria-label="GoldAlert home">
-      <img class="logo-mark" src="icons/logo.svg" alt="" width="42" height="42">
+      <img class="logo-mark" src="icons/logo.svg" alt="" width="42" height="42" loading="eager" fetchpriority="high" decoding="async">
       <div>
         <h1 data-i18n="title">GoldAlert</h1>
         <div class="brand-tag">Precious Metals, Commodities &amp; Macro Ratios</div>
@@ -2108,7 +2122,13 @@ renderComparison();
 if("Notification" in window && Notification.permission==="granted"){
   $("notifStatus").textContent=t("notifGranted"); $("notifStatus").className="status-msg ok";
 }
-mountTicker(); mountChart(); setupLazyWidgets(); setupCookieConsent();
+// Defer ticker until after first paint — it is above-fold but not the LCP element.
+// mountChart is critical (user sees it immediately), so that stays synchronous.
+mountChart(); setupLazyWidgets(); setupCookieConsent();
+// Ticker and non-critical init deferred to next idle slot to unblock LCP
+(window.requestIdleCallback||function(cb){setTimeout(cb,200)})(function(){
+  mountTicker();
+});
 $("fyear").textContent = new Date().getFullYear();
 if(currCode!=="USD") loadFx().then(()=>{ board(); renderSnapshot(); });
 loadAll();
@@ -2117,7 +2137,7 @@ if("serviceWorker" in navigator && location.protocol.startsWith("http")){
   navigator.serviceWorker.register("sw.js").catch(()=>{});
 }
 </script>
-<script src="enhancements.js"></script>
+<script src="enhancements.js" defer></script>
 
 <!-- Back to Top -->
 <button id="backToTop" aria-label="Kembali ke atas" title="Kembali ke atas">&#8679;</button>
