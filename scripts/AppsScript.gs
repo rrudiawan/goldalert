@@ -61,24 +61,42 @@ function getSheet_(name, headerRow) {
   return sheet;
 }
 
+function json_(payload) {
+  return ContentService.createTextOutput(JSON.stringify(payload))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+/** Lightweight deployment health check. Does not expose subscriber data. */
+function doGet() {
+  return json_({ ok: true, service: "GoldAlert alerts", version: 2 });
+}
+
 /** Receives POST requests from the website's subscribe form. */
 function doPost(e) {
+  const lock = LockService.getScriptLock();
   try {
+    lock.waitLock(10000);
     const body = JSON.parse(e.postData.contents);
-    const email = (body.email || "").trim();
-    const telegram = (body.telegram || "").trim();
+    const email = String(body.email || "").trim().toLowerCase();
+    const telegram = String(body.telegram || "").trim();
     const pref = (body.pref || "any").trim();
     if (!email && !telegram) {
-      return ContentService.createTextOutput(JSON.stringify({ ok: false, error: "empty" }))
-        .setMimeType(ContentService.MimeType.JSON);
+      return json_({ ok: false, error: "empty" });
     }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json_({ ok: false, error: "invalid_email" });
+    if (telegram && !/^-?\d{5,20}$/.test(telegram)) return json_({ ok: false, error: "invalid_telegram" });
+    if (!["any", "metals", "stocks", "etf", "crypto"].includes(pref)) return json_({ ok: false, error: "invalid_preference" });
+
     const sheet = getSheet_(SHEET_SUBSCRIBERS, ["Timestamp", "Email", "Telegram Chat ID", "Preference"]);
+    const rows = sheet.getDataRange().getValues().slice(1);
+    const duplicate = rows.some(row => String(row[1]).toLowerCase() === email && String(row[2]) === telegram && row[3] === pref);
+    if (duplicate) return json_({ ok: true, duplicate: true });
     sheet.appendRow([new Date(), email, telegram, pref]);
-    return ContentService.createTextOutput(JSON.stringify({ ok: true }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return json_({ ok: true });
   } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({ ok: false, error: String(err) }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return json_({ ok: false, error: String(err) });
+  } finally {
+    if (lock.hasLock()) lock.releaseLock();
   }
 }
 
@@ -120,9 +138,9 @@ function checkAndNotify() {
   });
 
   // Persist the new state regardless, so next run compares against today's levels.
+  const nextState = [["Asset", "Level"]].concat(Object.keys(signals).map(id => [id, signals[id].level]));
   stateSheet.clearContents();
-  stateSheet.appendRow(["Asset", "Level"]);
-  Object.keys(signals).forEach(id => stateSheet.appendRow([id, signals[id].level]));
+  stateSheet.getRange(1, 1, nextState.length, 2).setValues(nextState);
 
   if (upgraded.length === 0) {
     Logger.log("No tier upgrades this run.");
@@ -135,6 +153,7 @@ function checkAndNotify() {
 
   subs.forEach(row => {
     const [, email, telegram, pref] = row;
+    if (!email && !telegram) return;
     const allowed = assetsForPref_(pref);
     const relevant = allowed ? upgraded.filter(u => allowed.includes(u.id)) : upgraded;
     if (relevant.length === 0) return;

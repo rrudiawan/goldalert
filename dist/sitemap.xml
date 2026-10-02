@@ -1,89 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://goldalert.org/</loc></url>
-  <url><loc>https://goldalert.org/methodology.html</loc></url>
   <url><loc>https://goldalert.org/about.html</loc></url>
-  <url><loc>https://goldalert.org/contact.html</loc></url>
-  <url><loc>https://goldalert.org/privacy.html</loc></url>
-  <url><loc>https://goldalert.org/terms.html</loc></url>
   <url><loc>https://goldalert.org/articles.html</loc></url>
-  <url><loc>https://goldalert.org/embed/</loc></url>
-
-  <url><loc>https://goldalert.org/commodities/</loc></url>
-  <url><loc>https://goldalert.org/commodities/oil/</loc></url>
-  <url><loc>https://goldalert.org/commodities/copper/</loc></url>
-  <url><loc>https://goldalert.org/commodities/natural-gas/</loc></url>
-
-  <url><loc>https://goldalert.org/ratios/</loc></url>
-  <url><loc>https://goldalert.org/ratios/gold-silver/</loc></url>
-  <url><loc>https://goldalert.org/ratios/bitcoin-gold/</loc></url>
-  <url><loc>https://goldalert.org/ratios/gold-copper/</loc></url>
-
-  <url><loc>https://goldalert.org/articles/read-gold-buy-signal.html</loc></url>
-  <url><loc>https://goldalert.org/articles/gold-stocks-etfs-crypto.html</loc></url>
   <url><loc>https://goldalert.org/articles/backtesting-pullback-rule.html</loc></url>
-  <url><loc>https://goldalert.org/articles/what-moves-gold-price.html</loc></url>
-  <url><loc>https://goldalert.org/articles/why-silver-more-volatile.html</loc></url>
-  <url><loc>https://goldalert.org/articles/mining-stocks-amplify-gold-moves.html</loc></url>
+  <url><loc>https://goldalert.org/articles/central-bank-gold-buying.html</loc></url>
   <url><loc>https://goldalert.org/articles/gld-vs-physical-gold.html</loc></url>
-  <url><loc>https://goldalert.org/articles/paxg-vs-xaut.html</loc></url>
-  <url><loc>https://goldalert.org/articles/how-to-set-gold-price-alert.html</loc></url>
-  <url><loc>https://goldalert.org/articles/is-gold-good-investment.html</loc></url>
-  <url><loc>https://goldalert.org/articles/gold-vs-sp500.html</loc></url>
-  <url><loc>https://goldalert.org/articles/what-is-gold-etf.html</loc></url>
+  <url><loc>https://goldalert.org/articles/gold-copper-ratio-economic-cycle.html</loc></url>
+  <url><loc>https://goldalert.org/articles/gold-inflation-hedge-explained.html</loc></url>
+  <url><loc>https://goldalert.org/articles/gold-market-hours-weekend-prices.html</loc></url>
+  <url><loc>https://goldalert.org/articles/gold-oil-ratio-explained.html</loc></url>
+  <url><loc>https://goldalert.org/articles/gold-platinum-ratio-guide.html</loc></url>
+  <url><loc>https://goldalert.org/articles/gold-price-alert-setup-guide.html</loc></url>
+  <url><loc>https://goldalert.org/articles/gold-price-eur-gbp-aud-chf-guide.html</loc></url>
   <url><loc>https://goldalert.org/articles/gold-price-history-major-moves.html</loc></url>
   <url><loc>https://goldalert.org/articles/gold-silver-ratio-explained.html</loc></url>
-  <url><loc>https://goldalert.org/articles/central-bank-gold-buying.html</loc></url>
-  <url><loc>https://goldalert.org/ratios/gold-platinum/</loc></url>
-  <url><loc>https://goldalert.org/ratios/gold-oil/</loc></url>
-  <url><loc>https://goldalert.org/commodities/platinum/</loc></url>
-  <url><loc>https://goldalert.org/articles/how-to-read-bitcoin-gold-ratio.html</loc></url>
-  <url><loc>https://goldalert.org/articles/gold-oil-ratio-explained.html</loc></url>
-  <url><loc>https://goldalert.org/articles/gold-copper-ratio-economic-cycle.html</loc></url>
-  <url><loc>https://goldalert.org/articles/gold-platinum-ratio-guide.html</loc></url>
-  <url><loc>https://goldalert.org/articles/how-to-use-goldalert-commodity-dashboard.html</loc></url>
-  <url><loc>https://goldalert.org/articles/gold-inflation-hedge-explained.html</loc></url>
+  <url><loc>https://goldalert.org/articles/gold-stocks-etfs-crypto.html</loc></url>
+  <url><loc>https://goldalert.org/articles/gold-vs-sp500.html</loc></url>
   <url><loc>https://goldalert.org/articles/how-gold-price-per-gram-kilogram-is-calculated.html</loc></url>
-  <url><loc>https://goldalert.org/articles/troy-ounce-vs-regular-ounce-gold.html</loc></url>
-  <url><loc>https://goldalert.org/articles/spot-gold-vs-futures-vs-bullion-price.html</loc></url>
-  <url><loc>https://goldalert.org/articles/why-gold-price-differs-by-currency.html</loc></url>
-  <url><loc>https://goldalert.org/articles/live-gold-price-vs-daily-close.html</loc></url>
-  <url><loc>https://goldalert.org/articles/how-to-read-gold-market-sentiment-pullback-index.html</loc></url>
-  <url><loc>https://goldalert.org/articles/real-interest-rates-and-gold.html</loc></url>
-  <url><loc>https://goldalert.org/articles/us-dollar-and-gold-price.html</loc></url>
-  <url><loc>https://goldalert.org/articles/gold-market-hours-weekend-prices.html</loc></url>
   <url><loc>https://goldalert.org/articles/how-to-embed-gold-price-widget.html</loc></url>
+  <url><loc>https://goldalert.org/articles/how-to-read-bitcoin-gold-ratio.html</loc></url>
+  <url><loc>https://goldalert.org/articles/how-to-read-gold-market-sentiment-pullback-index.html</loc></url>
+  <url><loc>https://goldalert.org/articles/how-to-set-gold-price-alert.html</loc></url>
+  <url><loc>https://goldalert.org/articles/how-to-use-goldalert-commodity-dashboard.html</loc></url>
+  <url><loc>https://goldalert.org/articles/is-gold-good-investment.html</loc></url>
+  <url><loc>https://goldalert.org/articles/jm-bullion-gold-bar-review-2026.html</loc></url>
+  <url><loc>https://goldalert.org/articles/live-gold-price-vs-daily-close.html</loc></url>
+  <url><loc>https://goldalert.org/articles/mining-stocks-amplify-gold-moves.html</loc></url>
+  <url><loc>https://goldalert.org/articles/money-metals-vs-apmex-gold-comparison.html</loc></url>
+  <url><loc>https://goldalert.org/articles/paxg-vs-xaut.html</loc></url>
+  <url><loc>https://goldalert.org/articles/read-gold-buy-signal.html</loc></url>
+  <url><loc>https://goldalert.org/articles/real-interest-rates-and-gold.html</loc></url>
+  <url><loc>https://goldalert.org/articles/silver-gold-bull-review-2026.html</loc></url>
+  <url><loc>https://goldalert.org/articles/spot-gold-vs-futures-vs-bullion-price.html</loc></url>
+  <url><loc>https://goldalert.org/articles/troy-ounce-vs-regular-ounce-gold.html</loc></url>
+  <url><loc>https://goldalert.org/articles/us-dollar-and-gold-price.html</loc></url>
+  <url><loc>https://goldalert.org/articles/what-is-gold-etf.html</loc></url>
+  <url><loc>https://goldalert.org/articles/what-moves-gold-price.html</loc></url>
+  <url><loc>https://goldalert.org/articles/why-gold-price-differs-by-currency.html</loc></url>
+  <url><loc>https://goldalert.org/articles/why-silver-more-volatile.html</loc></url>
+  <url><loc>https://goldalert.org/commodities/</loc></url>
+  <url><loc>https://goldalert.org/commodities/copper/</loc></url>
+  <url><loc>https://goldalert.org/commodities/natural-gas/</loc></url>
+  <url><loc>https://goldalert.org/commodities/oil/</loc></url>
+  <url><loc>https://goldalert.org/commodities/platinum/</loc></url>
+  <url><loc>https://goldalert.org/contact.html</loc></url>
+  <url><loc>https://goldalert.org/embed/</loc></url>
   <url><loc>https://goldalert.org/market/</loc></url>
+  <url><loc>https://goldalert.org/methodology.html</loc></url>
+  <url><loc>https://goldalert.org/privacy.html</loc></url>
+  <url><loc>https://goldalert.org/ratios/</loc></url>
+  <url><loc>https://goldalert.org/ratios/bitcoin-gold/</loc></url>
+  <url><loc>https://goldalert.org/ratios/gold-copper/</loc></url>
+  <url><loc>https://goldalert.org/ratios/gold-oil/</loc></url>
+  <url><loc>https://goldalert.org/ratios/gold-platinum/</loc></url>
+  <url><loc>https://goldalert.org/ratios/gold-silver/</loc></url>
+  <url><loc>https://goldalert.org/terms.html</loc></url>
   <url><loc>https://goldalert.org/tools/gold-calculator/</loc></url>
-  <url><loc>https://goldalert.org/admin/</loc></url>
-  <url>
-    <loc>https://goldalert.org/articles/money-metals-vs-apmex-gold-comparison.html</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://goldalert.org/articles/silver-gold-bull-review-2026.html</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://goldalert.org/articles/jm-bullion-gold-bar-review-2026.html</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://goldalert.org/articles/gold-price-alert-setup-guide.html</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://goldalert.org/articles/gold-price-eur-gbp-aud-chf-guide.html</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
 </urlset>

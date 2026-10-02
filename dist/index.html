@@ -312,6 +312,13 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
 .backtest-scroll{overflow:auto;max-height:380px;margin-top:10px}
 @media(max-width:700px){.tier-grid{grid-template-columns:1fr}.compare-controls,.watch-form{grid-template-columns:1fr 1fr}.compare-controls button,.watch-form button{width:100%}}
 
+/* Defer paint/layout work for deep sections until they approach the viewport.
+   The intrinsic size keeps scroll position stable while work is deferred. */
+#commodities,#markets,#ratios,#compare,#watchlist,#resources,#news,#articles,#faq{
+  content-visibility:auto;
+  contain-intrinsic-size:auto 520px;
+}
+
 .target-item{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:9px;padding:9px 12px;background:#0B1B29;margin-bottom:6px;font-size:13px}
 .target-item .x{color:var(--muted);cursor:pointer;font-size:16px;line-height:1;background:none;border:0}
 .target-item .x:hover{color:var(--red)}
@@ -666,7 +673,7 @@ html[data-theme="light"] .site-nav{background:#F7F9FC}
       <a class="go" href="https://www.silvergoldbull.com/" target="_blank" rel="noopener sponsored" data-i18n="resGo">Visit →</a>
     </div>
   </div>
-  <p class="note" style="margin-top:12px">Affiliate disclosure: The Sprott Money link is an affiliate link. GoldAlert may earn a commission if you make a purchase through it, at no additional cost to you.</p>
+  <p class="note" style="margin-top:12px">Affiliate disclosure: The BullionVault and Sprott Money links are affiliate links. GoldAlert may earn a commission if you open an account or make a purchase through them, at no additional cost to you. Editorial content and signal calculations are not influenced by affiliate relationships.</p>
 </section>
 
 <!-- NEWS -->
@@ -1387,9 +1394,12 @@ const ASSETS=[
   {id:"SLV",    name:"iShares Silver",   note:"silverEtf",    tv:"AMEX:SLV",         grp:"etf",    src:"yahoo",     code:"SLV", dec:2},
   {id:"PAXG",   name:"Pax Gold",         note:"crypto",       tv:"COINBASE:PAXGUSD", grp:"kripto",    src:"coingecko", code:"pax-gold",    dec:2},
   {id:"XAUT",   name:"Tether Gold",      note:"crypto",       tv:"KRAKEN:XAUTUSD",   grp:"kripto",    src:"coingecko", code:"tether-gold", dec:2},
-  {id:"CL",     name:"WTI Crude Oil",    note:"NYMEX",        tv:"NYMEX:CL1!",       grp:"komoditas", src:"yahoo",     code:"CL=F",        dec:2},
-  {id:"NG",     name:"Natural Gas",      note:"NYMEX",        tv:"NYMEX:NG1!",       grp:"komoditas", src:"yahoo",     code:"NG=F",        dec:3},
-  {id:"HG",     name:"Copper",           note:"COMEX",        tv:"COMEX:HG1!",       grp:"komoditas", src:"yahoo",     code:"HG=F",        dec:3},
+  // Public TVC symbols render inside free embeds. The NYMEX/COMEX continuous
+  // futures symbols are retained only as Yahoo data sources below because
+  // TradingView marks those futures as platform-only inside third-party widgets.
+  {id:"CL",     name:"WTI Crude Oil",    note:"NYMEX",        tv:"TVC:USOIL",         grp:"komoditas", src:"yahoo",     code:"CL=F",        dec:2},
+  {id:"NG",     name:"Natural Gas",      note:"NYMEX",        tv:"OANDA:NATGASUSD",   grp:"komoditas", src:"yahoo",     code:"NG=F",        dec:3},
+  {id:"HG",     name:"Copper",           note:"COMEX",        tv:"CAPITALCOM:COPPER", grp:"komoditas", src:"yahoo",     code:"HG=F",        dec:3},
   {id:"PL",     name:"Platinum",         note:"Spot",         tv:"TVC:PLATINUM",     grp:"komoditas", src:"yahoo",     code:"PL=F",        dec:2},
   {id:"BTC",    name:"Bitcoin",          note:"BTC/USD",      tv:"COINBASE:BTCUSD",  grp:"broadcrypto",src:"yahoo",   code:"BTC-USD",     dec:0},
   {id:"ETH",    name:"Ethereum",         note:"ETH/USD",      tv:"COINBASE:ETHUSD",  grp:"broadcrypto",src:"yahoo",   code:"ETH-USD",     dec:2}
@@ -1902,20 +1912,20 @@ function saveCfg(){ const c={}; CFG.forEach(k=>{ if($(k)) c[k]=$(k).value; }); L
 function mountCommodities(){
   const theme=tvTheme(), locale=t("tvLocale");
   tvEmbed("tvOil","mini-symbol-overview",{
-    symbol:"NYMEX:CL1!",width:"100%",height:"100%",locale,
+    symbol:"TVC:USOIL",width:"100%",height:"100%",locale,
     dateRange:"12M",colorTheme:theme,isTransparent:true,autosize:true,
-    largeChartUrl:"https://www.tradingview.com/symbols/NYMEX-CL1/"
-  },"200px","WTI Crude Oil chart by TradingView","https://www.tradingview.com/symbols/NYMEX-CL1/");
+    largeChartUrl:"https://www.tradingview.com/symbols/TVC-USOIL/"
+  },"200px","WTI Crude Oil chart by TradingView","https://www.tradingview.com/symbols/TVC-USOIL/");
   tvEmbed("tvNatGas","mini-symbol-overview",{
-    symbol:"NYMEX:NG1!",width:"100%",height:"100%",locale,
+    symbol:"OANDA:NATGASUSD",width:"100%",height:"100%",locale,
     dateRange:"12M",colorTheme:theme,isTransparent:true,autosize:true,
-    largeChartUrl:"https://www.tradingview.com/symbols/NYMEX-NG1/"
-  },"200px","Natural Gas chart by TradingView","https://www.tradingview.com/symbols/NYMEX-NG1/");
+    largeChartUrl:"https://www.tradingview.com/symbols/OANDA-NATGASUSD/"
+  },"200px","Natural Gas chart by TradingView","https://www.tradingview.com/symbols/OANDA-NATGASUSD/");
   tvEmbed("tvCopper","mini-symbol-overview",{
-    symbol:"COMEX:HG1!",width:"100%",height:"100%",locale,
+    symbol:"CAPITALCOM:COPPER",width:"100%",height:"100%",locale,
     dateRange:"12M",colorTheme:theme,isTransparent:true,autosize:true,
-    largeChartUrl:"https://www.tradingview.com/symbols/COMEX-HG1/"
-  },"200px","Copper chart by TradingView","https://www.tradingview.com/symbols/COMEX-HG1/");
+    largeChartUrl:"https://www.tradingview.com/symbols/CAPITALCOM-COPPER/"
+  },"200px","Copper chart by TradingView","https://www.tradingview.com/symbols/CAPITALCOM-COPPER/");
   tvEmbed("tvBrent","mini-symbol-overview",{
     symbol:"TVC:UKOIL",width:"100%",height:"100%",locale,
     dateRange:"12M",colorTheme:theme,isTransparent:true,autosize:true,
