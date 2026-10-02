@@ -1,7 +1,9 @@
-# GoldAlert
-GoldAlert (https://goldalert.org/) is a free educational precious-metals dashboard with 31 articles. It combines provider-supplied live market context with scheduled daily closes used for transparent pullback signals, commodity dashboards and macro ratios.
+# GoldAlert — Free Precious Metals Signal Dashboard
+
+GoldAlert (https://goldalert.org/) is a free educational precious-metals dashboard. It combines provider-supplied live market context with scheduled daily closes used for transparent pullback signals, commodity dashboards and macro ratios.
 
 ## Core signal rule
+
 - 0–2 consecutive lower daily closes: HOLD
 - 3–4 consecutive lower daily closes: 50% BUY / WATCH
 - 5 or more consecutive lower daily closes: 100% BUY / STRONG
@@ -9,15 +11,29 @@ GoldAlert (https://goldalert.org/) is a free educational precious-metals dashboa
 These labels are rule stages, not probabilities, forecasts or individualized position-size recommendations.
 
 ## Primary pages
-- / — gold and silver tools, charts, signal board, backtests, watchlist and price alerts
-- /market/ — live precious-metals context, daily technical summaries, gold news and a US economic calendar
-- /tools/gold-calculator/ — gold value estimate by weight, purity, currency and premium
-- /commodities/ — daily WTI oil, natural gas, copper and platinum context
-- /ratios/ — Gold/Silver, Gold/Oil, Bitcoin/Gold, Gold/Copper and Gold/Platinum ratios
-- /embed/ — free gold and silver iframe widget builder
-- /articles.html — complete educational article index
-- /methodology.html — calculation rules, sources, limitations and version history
-- /privacy.html — browser storage, analytics, advertising and third-party disclosures
 
+- https://goldalert.org/ — gold and silver tools, charts, signal board, backtests, watchlist and price alerts
+- https://goldalert.org/market/ — live precious-metals context, daily technical summaries, gold news and a US economic calendar
+- https://goldalert.org/tools/gold-calculator/ — gold value estimate by weight, purity, currency and premium
+- https://goldalert.org/commodities/ — daily WTI oil, natural gas, copper and platinum context
+- https://goldalert.org/ratios/ — Gold/Silver, Gold/Oil, Bitcoin/Gold, Gold/Copper and Gold/Platinum ratios
+- https://goldalert.org/embed/ — free gold and silver iframe widget builder
+- https://goldalert.org/articles.html — complete educational article index
+- https://goldalert.org/methodology.html — calculation rules, sources, limitations and version history
+- https://goldalert.org/privacy.html — browser storage, analytics, advertising and third-party disclosures
+- https://goldalert.org/about.html — about GoldAlert
+- https://goldalert.org/contact.html — contact information
+
+## Key articles
+
+- https://goldalert.org/articles/central-bank-gold-buying.html — Central bank gold buying trends
+- https://goldalert.org/articles/gold-vs-bitcoin.html — Gold vs Bitcoin comparison
+- https://goldalert.org/articles/how-to-buy-gold.html — How to buy gold guide
 
 ## Editorial scope
+
+GoldAlert publishes rule-based signals and educational content about precious metals, commodities, and macro ratios. It does not provide personalized financial advice. All signal rules are transparent and documented at https://goldalert.org/methodology.html.
+
+## Data sources
+
+Daily close prices: Yahoo Finance, CoinGecko (crypto). Charts: TradingView widgets. Signals are generated from historical daily closes only.

@@ -99,7 +99,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://s3.tradingview.com" crossorigin>
-<link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://query1.finance.yahoo.com">
 <!-- Non-blocking font load: preload trick avoids render-blocking while keeping FOUT small -->
@@ -149,7 +149,7 @@ header.top{position:relative;display:block;border:1px solid var(--line);border-r
 .nav-toggle{display:none;width:42px;height:40px;padding:0;border:1px solid var(--line);border-radius:9px;
   background:transparent;color:var(--paper);font-size:22px;line-height:1;align-items:center;justify-content:center}
 html[data-theme="light"] header.top{background:rgba(255,255,255,.97)}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:16px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:16px;contain:layout style}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .between{justify-content:space-between}
 label{display:block;font-size:14px;color:var(--muted);margin-bottom:4px}
