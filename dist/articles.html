@@ -205,7 +205,7 @@
 fetch("articles/articles.json").then(r=>r.json()).then(articles=>{
   const list=document.getElementById("artList");
   if(!list) return;
-  list.innerHTML=articles.map(a=>`<a class="art card" href="articles/${a.url.split("/").pop()}"><div class="cat">${a.category||"Guide"}</div><h2>${a.title}</h2><div class="date">${a.date||""}</div></a>`).join("");
+  list.innerHTML=articles.map(a=>`<a class="art card" href="articles/${a.url ? a.url.split("/").pop() : a.slug+".html"}"><div class="cat">${a.category||"Guide"}</div><h2>${a.title}</h2><div class="date">${a.date||""}</div></a>`).join("");
 }).catch(()=>{});
 </script>
 </body>
