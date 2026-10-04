@@ -1,9 +1,43 @@
 [
   {
+    "slug": "gold-price-prediction-2027",
+    "title": "Gold Price Prediction 2027: What Analysts Are Watching",
+    "description": "What drives gold price forecasts for 2027 \u2014 interest rates, central bank demand, dollar trends, and the key levels analysts are watching.",
+    "date": "2026-10-04",
+    "tags": [
+      "forecast",
+      "macro",
+      "price"
+    ]
+  },
+  {
+    "slug": "when-to-buy-gold",
+    "title": "When to Buy Gold: Timing Strategies That Have Worked",
+    "description": "A look at timing strategies for buying gold \u2014 seasonal patterns, pullback rules, macro triggers, and what the data says about each approach.",
+    "date": "2026-10-04",
+    "tags": [
+      "strategy",
+      "timing",
+      "buying"
+    ]
+  },
+  {
+    "slug": "gold-price-all-time-high-2026",
+    "title": "Gold All-Time High 2026: What's Driving the Rally",
+    "description": "Gold hit multiple all-time highs in 2026, surpassing $4,000 per troy ounce. Here's what's driving the rally and what to watch next.",
+    "date": "2026-10-04",
+    "tags": [
+      "rally",
+      "macro",
+      "price",
+      "2026"
+    ]
+  },
+  {
     "slug": "gold-price-eur-gbp-aud-chf-guide",
-    "title": "Gold Price in EUR, GBP, AUD, CHF — Live Multi-Currency Guide",
+    "title": "Gold Price in EUR, GBP, AUD, CHF \u2014 Live Multi-Currency Guide",
     "category": "Gold Prices",
-    "excerpt": "Gold has one global price in USD — but for investors in Europe, the UK, Australia, or Switzerland, the local-currency price is what actually matters.",
+    "excerpt": "Gold has one global price in USD \u2014 but for investors in Europe, the UK, Australia, or Switzerland, the local-currency price is what actually matters.",
     "date": "2026-09-26",
     "url": "articles/gold-price-eur-gbp-aud-chf-guide.html"
   },
@@ -11,7 +45,7 @@
     "slug": "gold-price-alert-setup-guide",
     "title": "How to Set a Gold Price Alert and Get Notified Instantly",
     "category": "Gold Tools",
-    "excerpt": "Missing a dip in gold because you weren't watching the screen costs money. Here's how to set up alerts so gold comes to you — free methods included.",
+    "excerpt": "Missing a dip in gold because you weren't watching the screen costs money. Here's how to set up alerts so gold comes to you \u2014 free methods included.",
     "date": "2026-09-26",
     "url": "articles/gold-price-alert-setup-guide.html"
   },
@@ -35,7 +69,7 @@
     "slug": "money-metals-vs-apmex-gold-comparison",
     "title": "Money Metals vs APMEX: Which Is Better for Buying Gold?",
     "category": "Gold Dealers",
-    "excerpt": "Both are top US bullion dealers — but they differ on price, selection, and who they serve best. Here's a straight comparison to help you choose.",
+    "excerpt": "Both are top US bullion dealers \u2014 but they differ on price, selection, and who they serve best. Here's a straight comparison to help you choose.",
     "date": "2026-09-26",
     "url": "articles/money-metals-vs-apmex-gold-comparison.html"
   },
@@ -51,7 +85,7 @@
     "slug": "troy-ounce-vs-regular-ounce-gold",
     "title": "Troy Ounce vs. Regular Ounce: Why Gold Uses a Different Unit",
     "category": "Price Basics",
-    "excerpt": "A troy ounce is 31.1034768 grams, not 28.3495—and that small-looking distinction can create a large pricing error.",
+    "excerpt": "A troy ounce is 31.1034768 grams, not 28.3495\u2014and that small-looking distinction can create a large pricing error.",
     "date": "2026-09-15",
     "url": "articles/troy-ounce-vs-regular-ounce-gold.html"
   },
@@ -67,7 +101,7 @@
     "slug": "why-gold-price-differs-by-currency",
     "title": "Why the Gold Price Differs by Currency",
     "category": "Price Basics",
-    "excerpt": "Your local gold return combines the dollar gold price with the exchange rate—so investors in different countries can see different outcomes.",
+    "excerpt": "Your local gold return combines the dollar gold price with the exchange rate\u2014so investors in different countries can see different outcomes.",
     "date": "2026-09-15",
     "url": "articles/why-gold-price-differs-by-currency.html"
   },
@@ -83,7 +117,7 @@
     "slug": "how-to-read-gold-market-sentiment-pullback-index",
     "title": "How to Read the Gold Market Fear and Pullback Index",
     "category": "Guide",
-    "excerpt": "What GoldAlert's 0–100 breadth score measures, how its bands are built, and why a high score is not a rebound forecast.",
+    "excerpt": "What GoldAlert's 0\u2013100 breadth score measures, how its bands are built, and why a high score is not a rebound forecast.",
     "date": "2026-09-15",
     "url": "articles/how-to-read-gold-market-sentiment-pullback-index.html"
   },
@@ -91,7 +125,7 @@
     "slug": "real-interest-rates-and-gold",
     "title": "Real Interest Rates and Gold: A Practical Guide",
     "category": "Macro",
-    "excerpt": "Why inflation-adjusted bond yields affect gold's opportunity cost—and why the relationship can break for long periods.",
+    "excerpt": "Why inflation-adjusted bond yields affect gold's opportunity cost\u2014and why the relationship can break for long periods.",
     "date": "2026-09-15",
     "url": "articles/real-interest-rates-and-gold.html"
   },
@@ -123,7 +157,7 @@
     "slug": "how-to-read-bitcoin-gold-ratio",
     "title": "How to Read the Bitcoin/Gold Ratio",
     "category": "Market Ratios",
-    "excerpt": "What the ratio measures, how GoldAlert calculates it, and what rising or falling values can—and cannot—tell investors.",
+    "excerpt": "What the ratio measures, how GoldAlert calculates it, and what rising or falling values can\u2014and cannot\u2014tell investors.",
     "date": "2026-09-11",
     "url": "articles/how-to-read-bitcoin-gold-ratio.html"
   },
@@ -139,7 +173,7 @@
     "slug": "gold-copper-ratio-economic-cycle",
     "title": "Gold/Copper Ratio and the Economic Cycle",
     "category": "Market Ratios",
-    "excerpt": "A practical guide to comparing defensive gold demand with copper's industrial sensitivity — and where the signal can mislead.",
+    "excerpt": "A practical guide to comparing defensive gold demand with copper's industrial sensitivity \u2014 and where the signal can mislead.",
     "date": "2026-09-11",
     "url": "articles/gold-copper-ratio-economic-cycle.html"
   },
@@ -155,7 +189,7 @@
     "slug": "how-to-use-goldalert-commodity-dashboard",
     "title": "How to Use the GoldAlert Commodity Dashboard",
     "category": "Guide",
-    "excerpt": "A practical workflow for reading commodity closes, daily changes, timestamps and macro ratios — and what to check before drawing conclusions.",
+    "excerpt": "A practical workflow for reading commodity closes, daily changes, timestamps and macro ratios \u2014 and what to check before drawing conclusions.",
     "date": "2026-09-11",
     "url": "articles/how-to-use-goldalert-commodity-dashboard.html"
   },
@@ -163,7 +197,7 @@
     "slug": "gold-inflation-hedge-explained",
     "title": "Is Gold an Inflation Hedge? A Balanced Explanation",
     "category": "Fundamentals",
-    "excerpt": "Why gold may preserve purchasing power over long periods — and why it doesn't automatically rise every time an inflation report comes in hot.",
+    "excerpt": "Why gold may preserve purchasing power over long periods \u2014 and why it doesn't automatically rise every time an inflation report comes in hot.",
     "date": "2026-09-11",
     "url": "articles/gold-inflation-hedge-explained.html"
   },
@@ -171,7 +205,7 @@
     "slug": "how-to-set-gold-price-alert",
     "title": "How to Set a Gold Price Alert (Browser, Email & Telegram)",
     "category": "Guide",
-    "excerpt": "Three ways to get notified when gold drops: browser push, email, and Telegram — all free, no app required, works on any device.",
+    "excerpt": "Three ways to get notified when gold drops: browser push, email, and Telegram \u2014 all free, no app required, works on any device.",
     "date": "2026-09-08",
     "url": "articles/how-to-set-gold-price-alert.html"
   },
@@ -179,7 +213,7 @@
     "slug": "is-gold-good-investment",
     "title": "Is Gold a Good Investment? Arguments on Both Sides",
     "category": "Fundamentals",
-    "excerpt": "A balanced look at why people choose gold and why others skip it — without a yes or no conclusion, because that depends on you.",
+    "excerpt": "A balanced look at why people choose gold and why others skip it \u2014 without a yes or no conclusion, because that depends on you.",
     "date": "2026-09-08",
     "url": "articles/is-gold-good-investment.html"
   },
@@ -187,7 +221,7 @@
     "slug": "gold-vs-sp500",
     "title": "Gold vs. S&P 500: How They've Compared Over Time",
     "category": "Comparison",
-    "excerpt": "How gold and US equities have performed relative to each other across different market conditions — without picking a winner.",
+    "excerpt": "How gold and US equities have performed relative to each other across different market conditions \u2014 without picking a winner.",
     "date": "2026-09-08",
     "url": "articles/gold-vs-sp500.html"
   },
@@ -195,7 +229,7 @@
     "slug": "what-is-gold-etf",
     "title": "What Is a Gold ETF and How Does It Work?",
     "category": "Guide",
-    "excerpt": "A plain-English explanation of gold exchange-traded funds — what they hold, how they trade, and how they differ from each other.",
+    "excerpt": "A plain-English explanation of gold exchange-traded funds \u2014 what they hold, how they trade, and how they differ from each other.",
     "date": "2026-09-08",
     "url": "articles/what-is-gold-etf.html"
   },
@@ -203,7 +237,7 @@
     "slug": "gold-price-history-major-moves",
     "title": "Gold Price History: Major Moves and What Drove Them",
     "category": "Fundamentals",
-    "excerpt": "The key turning points in gold's modern price history — what drove each major move and what the pattern suggests about reading pullbacks today.",
+    "excerpt": "The key turning points in gold's modern price history \u2014 what drove each major move and what the pattern suggests about reading pullbacks today.",
     "date": "2026-09-08",
     "url": "articles/gold-price-history-major-moves.html"
   },
