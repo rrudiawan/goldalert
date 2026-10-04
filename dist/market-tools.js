@@ -87,6 +87,26 @@ const RATIO_META={
     formula:"Bitcoin close ÷ Gold close",
     summary:"Compares Bitcoin's USD value with one troy ounce of gold."
   },
+  "bitcoin-silver":{
+    name:"Bitcoin/Silver Ratio",
+    a:"BTC",
+    b:"XAGUSD",
+    dec:2,
+    path:"/ratios/#crypto-ratios",
+    unit:"ounces of silver per bitcoin",
+    formula:"Bitcoin close ÷ Silver close",
+    summary:"Shows how many ounces of silver match one Bitcoin using aligned daily closes."
+  },
+  "ethereum-silver":{
+    name:"Ethereum/Silver Ratio",
+    a:"ETH",
+    b:"XAGUSD",
+    dec:2,
+    path:"/ratios/#crypto-ratios",
+    unit:"ounces of silver per ether",
+    formula:"Ethereum close ÷ Silver close",
+    summary:"Shows how many ounces of silver match one Ether using aligned daily closes."
+  },
   "gold-copper":{
     name:"Gold/Copper Ratio",
     a:"XAUUSD",
