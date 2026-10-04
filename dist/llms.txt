@@ -20,6 +20,8 @@ These labels are rule stages, not probabilities, forecasts or individualized pos
 - https://goldalert.org/embed/ — free gold and silver iframe widget builder
 - https://goldalert.org/articles.html — complete educational article index
 - https://goldalert.org/methodology.html — calculation rules, sources, limitations and version history
+- https://goldalert.org/faq.html — answers about prices, signal labels, sources, data timing and alerts
+- https://goldalert.org/disclaimer.html — financial, market-data and historical-performance limitations
 - https://goldalert.org/privacy.html — browser storage, analytics, advertising and third-party disclosures
 - https://goldalert.org/about.html — about GoldAlert
 - https://goldalert.org/contact.html — contact information
@@ -27,13 +29,15 @@ These labels are rule stages, not probabilities, forecasts or individualized pos
 ## Key articles
 
 - https://goldalert.org/articles/central-bank-gold-buying.html — Central bank gold buying trends
-- https://goldalert.org/articles/gold-vs-bitcoin.html — Gold vs Bitcoin comparison
-- https://goldalert.org/articles/how-to-buy-gold.html — How to buy gold guide
+- https://goldalert.org/articles/when-to-buy-gold.html — Educational overview of gold-purchase timing approaches
+- https://goldalert.org/articles/gold-vs-sp500.html — Gold and S&P 500 comparison
+- https://goldalert.org/articles/how-to-read-bitcoin-gold-ratio.html — How to interpret the Bitcoin/Gold ratio
+- https://goldalert.org/articles/gold-silver-ratio-explained.html — Gold/Silver ratio methodology and interpretation
 
 ## Editorial scope
 
-GoldAlert publishes rule-based signals and educational content about precious metals, commodities, and macro ratios. It does not provide personalized financial advice. All signal rules are transparent and documented at https://goldalert.org/methodology.html.
+GoldAlert publishes rule-based signals and educational content about precious metals, commodities and macro ratios. It does not provide personalized financial advice. All signal rules are transparent and documented at https://goldalert.org/methodology.html.
 
 ## Data sources
 
-Daily close prices: Yahoo Finance, CoinGecko (crypto). Charts: TradingView widgets. Signals are generated from historical daily closes only.
+Daily close prices: Yahoo Finance and CoinGecko for supported cryptoassets. Charts: TradingView widgets. Signals are generated from historical daily closes only. If a provider is unavailable, GoldAlert should show unavailable or retain the latest dated close rather than invent a replacement value.
