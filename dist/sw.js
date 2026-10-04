@@ -1,5 +1,5 @@
-const CACHE="goldalert-shell-v6";
-const SHELL=["./","index.html","methodology.html","about.html","contact.html","privacy.html","terms.html",
+const CACHE="goldalert-shell-v7";
+const SHELL=["./","index.html","methodology.html","about.html","contact.html","privacy.html","terms.html","faq.html","disclaimer.html",
   "articles.html","articles/read-gold-buy-signal.html","articles/gold-stocks-etfs-crypto.html",
   "static-page.css","market-tools.css","market-hub.js","gold-calculator.js","enhancements.js","manifest.webmanifest",
   "icons/logo.svg","icons/icon-192.png","embed/index.html","widget/index.html",
