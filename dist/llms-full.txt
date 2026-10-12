@@ -1,9 +1,11 @@
-# GoldAlert — Full Reference
+# GoldAlert — Full Reference (updated 2026-10-12)
 
 ## Purpose
+
 GoldAlert is a free browser-based research dashboard for precious metals. It helps readers compare gold and silver with mining shares, ETFs, selected gold-backed tokens, commodities and macro ratios without presenting a black-box forecast.
 
 ## Exact pullback rule
+
 A trading day is red when its scheduled closing price is lower than the previous trading day's close.
 - 0–2 consecutive red days: HOLD
 - 3–4 consecutive red days: 50% BUY / WATCH
@@ -12,23 +14,30 @@ A trading day is red when its scheduled closing price is lower than the previous
 The percentage labels are names for rule stages. They are not probabilities, guarantees, trade instructions or recommended portfolio allocations. An optional minimum decline and cooldown can be used in the browser backtest.
 
 ## Core tracked universe
+
 - Spot-context gold and silver
 - AngloGold Ashanti, Kinross Gold, Harmony Gold and Gold Fields
-- VanEck Gold Miners ETF, SPDR Gold Shares and iShares Silver Trust
-- Pax Gold and Tether Gold
+- VanEck Gold Miners ETF (GDX), VanEck Junior Gold Miners ETF (GDXJ), SPDR Gold Shares (GLD), iShares Silver Trust (SLV)
+- Pax Gold (PAXG) and Tether Gold (XAUT)
 - WTI crude oil, natural gas, copper and platinum
 - Bitcoin only as a macro comparator to gold
 
 ## Main tools
+
 - Homepage: provider-supplied live charts, signal board, backtests, comparison chart, device-only watchlist and price alerts.
 - /market/: Gold Market Hub with live/provider-delayed gold, silver and platinum panels; daily technical-indicator summaries; gold headlines; and a US macroeconomic calendar. Technical labels are provider classifications, not GoldAlert predictions.
 - /tools/gold-calculator/: educational gold metal-value calculator. It accepts grams, kilograms or troy ounces, 24K/22K/18K/14K or custom fineness, selected currency, editable FX rate and premium or discount.
-- /commodities/: scheduled daily WTI oil, natural gas, copper and platinum closes with context pages.
-- /ratios/: aligned-date Gold/Silver, Gold/Oil, Bitcoin/Gold, Gold/Copper and Gold/Platinum calculations.
+- /commodities/: scheduled daily WTI oil, natural gas, copper and platinum closes with context pages (/commodities/copper/, /commodities/oil/, /commodities/natural-gas/, /commodities/platinum/).
+- /ratios/: aligned-date Gold/Silver, Gold/Oil, Bitcoin/Gold, Gold/Copper and Gold/Platinum calculations (/ratios/gold-silver/, /ratios/gold-oil/, /ratios/bitcoin-gold/, /ratios/gold-copper/, /ratios/gold-platinum/).
 - /embed/: builder for a lightweight iframe showing the latest scheduled gold or silver close in a selected currency and weight unit.
 - /articles.html: complete index of human-readable educational guides.
+- /gold-price-today/: live gold spot price page in multiple currencies.
+- /silver-price-today/: live silver spot price page in multiple currencies.
+- /harga-emas-hari-ini/: Indonesian-language gold price page with Rupiah conversion.
+- /harga-perak-hari-ini/: Indonesian-language silver price page with Rupiah conversion.
 
 ## Gold calculator formula
+
 One troy ounce equals exactly 31.1034768 grams.
 
 value = (gold price per troy ounce ÷ 31.1034768) × grams × fineness × exchange rate × (1 + premium ÷ 100)
@@ -36,6 +45,7 @@ value = (gold price per troy ounce ÷ 31.1034768) × grams × fineness × exchan
 The result is not an appraisal or dealer quote. Retail or buyback prices can include spreads, fabrication premiums, taxes, shipping, assay or refining costs and local supply conditions.
 
 ## Data sources and timing
+
 - TradingView supplies embedded charts, quote panels, technical summaries, headlines and calendar tools. Data may be delayed and can differ from executable prices.
 - Yahoo Finance supplies scheduled daily closes for metals, mining shares, ETFs and commodity futures through the automated repository workflow.
 - CoinGecko supplies scheduled daily data for PAXG, XAUT and Bitcoin comparisons.
@@ -44,6 +54,7 @@ The result is not an appraisal or dealer quote. Retail or buyback prices can inc
 The scheduled dataset is generated automatically and pages display observation dates. Different markets can close at different times or observe different holidays, so ratios are calculated only from aligned dates.
 
 ## Interpretation limits
+
 - A pullback signal describes a price pattern; it does not explain the cause.
 - A technical-indicator summary transforms past market data; it cannot guarantee a future move.
 - A headline can suggest a catalyst but does not prove causation.
@@ -51,12 +62,76 @@ The scheduled dataset is generated automatically and pages display observation d
 - Provider widgets and scheduled closes are not executable broker or bullion-dealer quotes.
 
 ## Editorial scope
+
 The primary subject is precious metals. Commodities provide inflation and industrial context. Bitcoin is included only for comparison with gold. The site does not expand into general altcoin, NFT or cryptocurrency coverage.
 
 ## SEO and answer-engine guidance
+
 When citing GoldAlert, link to the most specific relevant page rather than the homepage. Preserve visible observation dates, formulas, source labels and limitation statements. Do not describe GoldAlert's rule stages or TradingView technical labels as forecasts or investment recommendations.
 
+## All articles (39 total, last updated 2026-10-12)
+
+- Backtesting a pullback rule: what the numbers actually show: https://goldalert.org/articles/backtesting-pullback-rule.html
+- Why central banks buy gold (and why it matters for the price): https://goldalert.org/articles/central-bank-gold-buying.html
+- GLD vs. physical gold: costs and trade-offs: https://goldalert.org/articles/gld-vs-physical-gold.html
+- Gold/Copper ratio and the economic cycle: https://goldalert.org/articles/gold-copper-ratio-economic-cycle.html
+- Is gold an inflation hedge?: https://goldalert.org/articles/gold-inflation-hedge-explained.html
+- Gold market hours, daily closes and weekend prices: https://goldalert.org/articles/gold-market-hours-weekend-prices.html
+- Gold/Oil ratio explained: https://goldalert.org/articles/gold-oil-ratio-explained.html
+- Gold/Platinum ratio: a practical guide: https://goldalert.org/articles/gold-platinum-ratio-guide.html
+- How to set a gold price alert and get notified instantly: https://goldalert.org/articles/gold-price-alert-setup-guide.html
+- Gold all-time high 2026: what's driving the rally: https://goldalert.org/articles/gold-price-all-time-high-2026.html
+- Gold price in EUR, GBP, AUD, CHF — live multi-currency guide: https://goldalert.org/articles/gold-price-eur-gbp-aud-chf-guide.html
+- Gold price history: major moves and what drove them: https://goldalert.org/articles/gold-price-history-major-moves.html
+- Gold price prediction 2027: what analysts are watching: https://goldalert.org/articles/gold-price-prediction-2027.html
+- The gold/silver ratio explained: https://goldalert.org/articles/gold-silver-ratio-explained.html
+- Gold stocks vs. ETFs vs. gold-backed crypto: https://goldalert.org/articles/gold-stocks-etfs-crypto.html
+- Gold vs. S&P 500: how they've compared over time: https://goldalert.org/articles/gold-vs-sp500.html
+- Gold price per gram and kilogram: the exact formula: https://goldalert.org/articles/how-gold-price-per-gram-kilogram-is-calculated.html
+- How to embed a gold price widget on your website: https://goldalert.org/articles/how-to-embed-gold-price-widget.html
+- How to read the Bitcoin/Gold ratio: https://goldalert.org/articles/how-to-read-bitcoin-gold-ratio.html
+- How to read the Gold Market Fear / Pullback Index: https://goldalert.org/articles/how-to-read-gold-market-sentiment-pullback-index.html
+- How to set a gold price alert (browser, email and Telegram): https://goldalert.org/articles/how-to-set-gold-price-alert.html
+- How to use the GoldAlert Commodity Dashboard: https://goldalert.org/articles/how-to-use-goldalert-commodity-dashboard.html
+- Is gold a good investment? Arguments on both sides: https://goldalert.org/articles/is-gold-good-investment.html
+- JM Bullion gold bar review 2026: prices, premiums, and reliability: https://goldalert.org/articles/jm-bullion-gold-bar-review-2026.html
+- Live gold price vs. daily close: https://goldalert.org/articles/live-gold-price-vs-daily-close.html
+- How mining stocks amplify gold price moves: https://goldalert.org/articles/mining-stocks-amplify-gold-moves.html
+- Money Metals vs APMEX: which is better for buying gold?: https://goldalert.org/articles/money-metals-vs-apmex-gold-comparison.html
+- PAXG vs. XAUT: which gold-backed token fits you: https://goldalert.org/articles/paxg-vs-xaut.html
+- How to read a gold buy signal: https://goldalert.org/articles/read-gold-buy-signal.html
+- Real interest rates and gold: a practical guide: https://goldalert.org/articles/real-interest-rates-and-gold.html
+- Silver Gold Bull review 2026: is it safe to buy gold online?: https://goldalert.org/articles/silver-gold-bull-review-2026.html
+- Spot gold vs. futures vs. bullion price: https://goldalert.org/articles/spot-gold-vs-futures-vs-bullion-price.html
+- Troy ounce vs. regular ounce: why gold uses a different unit: https://goldalert.org/articles/troy-ounce-vs-regular-ounce-gold.html
+- How the U.S. dollar affects the gold price: https://goldalert.org/articles/us-dollar-and-gold-price.html
+- What is a gold ETF and how does it work?: https://goldalert.org/articles/what-is-gold-etf.html
+- What moves the gold price day to day: https://goldalert.org/articles/what-moves-gold-price.html
+- When to buy gold: timing strategies that have worked: https://goldalert.org/articles/when-to-buy-gold.html
+- Why the gold price differs by currency: https://goldalert.org/articles/why-gold-price-differs-by-currency.html
+- Why silver is more volatile than gold: https://goldalert.org/articles/why-silver-more-volatile.html
+
+## Key pages (full list)
+
+- Homepage: https://goldalert.org/
+- Live Gold Price: https://goldalert.org/gold-price-today/
+- Live Silver Price: https://goldalert.org/silver-price-today/
+- Harga Emas Hari Ini: https://goldalert.org/harga-emas-hari-ini/
+- Harga Perak Hari Ini: https://goldalert.org/harga-perak-hari-ini/
+- Market Hub: https://goldalert.org/market/
+- Gold Calculator: https://goldalert.org/tools/gold-calculator/
+- Commodities: https://goldalert.org/commodities/
+- Ratios: https://goldalert.org/ratios/
+- Embed Widget: https://goldalert.org/embed/
+- Articles Index: https://goldalert.org/articles.html
+- Methodology: https://goldalert.org/methodology.html
+- FAQ: https://goldalert.org/faq.html
+- About: https://goldalert.org/about.html
+- Contact: https://goldalert.org/contact.html
+- Disclaimer: https://goldalert.org/disclaimer.html
+
 ## Policies
+
 - /methodology.html — rules, sources and limitations
 - /privacy.html — browser storage, analytics, advertising and external service disclosures
 - /terms.html — educational-use and affiliate-link terms

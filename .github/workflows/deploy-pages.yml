@@ -45,6 +45,15 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Submit URLs to IndexNow (Bing)
-        run: node scripts/submit-indexnow.mjs
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Rebuild llms.txt and llms-full.txt
+        run: node scripts/update-llms.mjs
+        continue-on-error: true
+
+      - name: Submit to all search engines and AI crawlers
+        run: node scripts/submit-discovery.mjs
         continue-on-error: true

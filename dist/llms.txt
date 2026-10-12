@@ -1,6 +1,6 @@
 # GoldAlert
 
-> Free, rules-based precious metals signal tracker. Tracks gold, silver, platinum, and related assets — no subscriptions, no AI hype, no guesswork.
+> Free, rules-based precious metals signal tracker. Tracks gold, silver, platinum, copper, oil, natural gas and related assets — no subscriptions, no AI hype, no guesswork.
 
 GoldAlert generates buy signals when gold or silver prices fall for 3 or 5 consecutive trading days. This is a transparent, backtested pullback rule, not a black-box algorithm. The dashboard is free, requires no login, and updates daily.
 
@@ -12,6 +12,7 @@ GoldAlert generates buy signals when gold or silver prices fall for 3 or 5 conse
 - Commodity dashboard: copper, platinum, oil, natural gas
 - Gold price calculator (troy ounce, gram, kilogram, multi-currency)
 - Embeddable price widget for blogs and websites
+- Indonesian gold market pages: Antam, Pegadaian, harga emas hari ini
 
 ## Signal rule (transparent)
 
@@ -19,32 +20,65 @@ GoldAlert generates buy signals when gold or silver prices fall for 3 or 5 conse
 - 3–4 consecutive down-days: 50% BUY / WATCH
 - 5+ consecutive down-days: 100% BUY / STRONG
 
-This rule is based on historical gold daily price data. Full backtesting methodology is published at https://goldalert.org/methodology.html
+Full backtesting methodology: https://goldalert.org/methodology.html
 
 ## Key pages
 
 - Homepage / Signal Dashboard: https://goldalert.org/
 - Live Gold Price: https://goldalert.org/gold-price-today/
 - Live Silver Price: https://goldalert.org/silver-price-today/
+- Harga Emas Hari Ini (Indonesian): https://goldalert.org/harga-emas-hari-ini/
+- Harga Perak Hari Ini (Indonesian): https://goldalert.org/harga-perak-hari-ini/
 - Market Hub (ratios, commodities): https://goldalert.org/market/
 - Gold Calculator: https://goldalert.org/tools/gold-calculator/
+- Commodity Hub: https://goldalert.org/commodities/
+- Ratio Hub: https://goldalert.org/ratios/
 - Articles: https://goldalert.org/articles.html
 - Methodology: https://goldalert.org/methodology.html
 - FAQ: https://goldalert.org/faq.html
 - Embed Widget: https://goldalert.org/embed/
 
-## Articles (selected)
+## All articles (39 total, updated 2026-10-12)
 
-- Gold All-Time High 2026: https://goldalert.org/articles/gold-price-all-time-high-2026.html
-- Gold Price Prediction 2027: https://goldalert.org/articles/gold-price-prediction-2027.html
-- When to Buy Gold: https://goldalert.org/articles/when-to-buy-gold.html
-- Is Gold a Good Investment?: https://goldalert.org/articles/is-gold-good-investment.html
-- Central Bank Gold Buying: https://goldalert.org/articles/central-bank-gold-buying.html
-- Real Interest Rates and Gold: https://goldalert.org/articles/real-interest-rates-and-gold.html
-- Gold vs S&P 500: https://goldalert.org/articles/gold-vs-sp500.html
-- Gold Inflation Hedge Explained: https://goldalert.org/articles/gold-inflation-hedge-explained.html
-- Gold Silver Ratio: https://goldalert.org/articles/gold-silver-ratio-explained.html
-- Backtesting the Pullback Rule: https://goldalert.org/articles/backtesting-pullback-rule.html
+- Backtesting a pullback rule: what the numbers actually show: https://goldalert.org/articles/backtesting-pullback-rule.html
+- Why central banks buy gold (and why it matters for the price): https://goldalert.org/articles/central-bank-gold-buying.html
+- GLD vs. physical gold: costs and trade-offs: https://goldalert.org/articles/gld-vs-physical-gold.html
+- Gold/Copper ratio and the economic cycle: https://goldalert.org/articles/gold-copper-ratio-economic-cycle.html
+- Is gold an inflation hedge?: https://goldalert.org/articles/gold-inflation-hedge-explained.html
+- Gold market hours, daily closes and weekend prices: https://goldalert.org/articles/gold-market-hours-weekend-prices.html
+- Gold/Oil ratio explained: https://goldalert.org/articles/gold-oil-ratio-explained.html
+- Gold/Platinum ratio: a practical guide: https://goldalert.org/articles/gold-platinum-ratio-guide.html
+- How to set a gold price alert and get notified instantly: https://goldalert.org/articles/gold-price-alert-setup-guide.html
+- Gold all-time high 2026: what's driving the rally: https://goldalert.org/articles/gold-price-all-time-high-2026.html
+- Gold price in EUR, GBP, AUD, CHF — live multi-currency guide: https://goldalert.org/articles/gold-price-eur-gbp-aud-chf-guide.html
+- Gold price history: major moves and what drove them: https://goldalert.org/articles/gold-price-history-major-moves.html
+- Gold price prediction 2027: what analysts are watching: https://goldalert.org/articles/gold-price-prediction-2027.html
+- The gold/silver ratio explained: https://goldalert.org/articles/gold-silver-ratio-explained.html
+- Gold stocks vs. ETFs vs. gold-backed crypto: https://goldalert.org/articles/gold-stocks-etfs-crypto.html
+- Gold vs. S&P 500: how they've compared over time: https://goldalert.org/articles/gold-vs-sp500.html
+- Gold price per gram and kilogram: the exact formula: https://goldalert.org/articles/how-gold-price-per-gram-kilogram-is-calculated.html
+- How to embed a gold price widget on your website: https://goldalert.org/articles/how-to-embed-gold-price-widget.html
+- How to read the Bitcoin/Gold ratio: https://goldalert.org/articles/how-to-read-bitcoin-gold-ratio.html
+- How to read the Gold Market Fear / Pullback Index: https://goldalert.org/articles/how-to-read-gold-market-sentiment-pullback-index.html
+- How to set a gold price alert (browser, email and Telegram): https://goldalert.org/articles/how-to-set-gold-price-alert.html
+- How to use the GoldAlert Commodity Dashboard: https://goldalert.org/articles/how-to-use-goldalert-commodity-dashboard.html
+- Is gold a good investment? Arguments on both sides: https://goldalert.org/articles/is-gold-good-investment.html
+- JM Bullion gold bar review 2026: prices, premiums, and reliability: https://goldalert.org/articles/jm-bullion-gold-bar-review-2026.html
+- Live gold price vs. daily close: https://goldalert.org/articles/live-gold-price-vs-daily-close.html
+- How mining stocks amplify gold price moves: https://goldalert.org/articles/mining-stocks-amplify-gold-moves.html
+- Money Metals vs APMEX: which is better for buying gold?: https://goldalert.org/articles/money-metals-vs-apmex-gold-comparison.html
+- PAXG vs. XAUT: which gold-backed token fits you: https://goldalert.org/articles/paxg-vs-xaut.html
+- How to read a gold buy signal: https://goldalert.org/articles/read-gold-buy-signal.html
+- Real interest rates and gold: a practical guide: https://goldalert.org/articles/real-interest-rates-and-gold.html
+- Silver Gold Bull review 2026: is it safe to buy gold online?: https://goldalert.org/articles/silver-gold-bull-review-2026.html
+- Spot gold vs. futures vs. bullion price: https://goldalert.org/articles/spot-gold-vs-futures-vs-bullion-price.html
+- Troy ounce vs. regular ounce: why gold uses a different unit: https://goldalert.org/articles/troy-ounce-vs-regular-ounce-gold.html
+- How the U.S. dollar affects the gold price: https://goldalert.org/articles/us-dollar-and-gold-price.html
+- What is a gold ETF and how does it work?: https://goldalert.org/articles/what-is-gold-etf.html
+- What moves the gold price day to day: https://goldalert.org/articles/what-moves-gold-price.html
+- When to buy gold: timing strategies that have worked: https://goldalert.org/articles/when-to-buy-gold.html
+- Why the gold price differs by currency: https://goldalert.org/articles/why-gold-price-differs-by-currency.html
+- Why silver is more volatile than gold: https://goldalert.org/articles/why-silver-more-volatile.html
 
 ## About
 

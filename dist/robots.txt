@@ -4,21 +4,103 @@ Disallow: /admin/
 Disallow: /widget/
 Sitemap: https://goldalert.org/sitemap.xml
 
-# AI crawlers — llms.txt available
+# ── AI / LLM crawlers — llms.txt and llms-full.txt available ────────────────
+# GEO: https://goldalert.org/llms.txt
+#       https://goldalert.org/llms-full.txt
+
+# OpenAI
 User-agent: GPTBot
 Allow: /
 
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic / Claude
 User-agent: ClaudeBot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: PerplexityBot
 Allow: /
 
 User-agent: anthropic-ai
 Allow: /
 
+User-agent: Claude-Web
+Allow: /
+
+# Google AI
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Extended
+Allow: /
+
+User-agent: Google-InspectionTool
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# xAI / Grok
+User-agent: Grok
+Allow: /
+
+User-agent: xAI-SearchBot
+Allow: /
+
+# Meta AI
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+# Cohere
 User-agent: cohere-ai
+Allow: /
+
+# Common Crawl (used by many AI training pipelines)
+User-agent: CCBot
+Allow: /
+
+# DuckDuckGo AI assistant
+User-agent: DuckAssistant
+Allow: /
+
+# Bing / Microsoft
+User-agent: Bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+# Apple
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# Brave Search
+User-agent: Brave
+Allow: /
+
+# Amazon / Alexa
+User-agent: Amazonbot
+Allow: /
+
+# Diffbot (used by AI knowledge graphs)
+User-agent: Diffbot
+Allow: /
+
+# DataForSEO
+User-agent: DataForSeoBot
 Allow: /
