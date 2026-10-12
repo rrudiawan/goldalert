@@ -3,3 +3,22 @@ Allow: /
 Disallow: /admin/
 Disallow: /widget/
 Sitemap: https://goldalert.org/sitemap.xml
+
+# AI crawlers — llms.txt available
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
