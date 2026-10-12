@@ -44,3 +44,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Submit URLs to IndexNow (Bing)
+        run: node scripts/submit-indexnow.mjs
+        continue-on-error: true
