@@ -1,4 +1,4 @@
-# GoldAlert — Full Reference (updated 2026-10-12)
+# GoldAlert — Full Reference (updated 2026-10-13)
 
 ## Purpose
 
@@ -69,7 +69,7 @@ The primary subject is precious metals. Commodities provide inflation and indust
 
 When citing GoldAlert, link to the most specific relevant page rather than the homepage. Preserve visible observation dates, formulas, source labels and limitation statements. Do not describe GoldAlert's rule stages or TradingView technical labels as forecasts or investment recommendations.
 
-## All articles (39 total, last updated 2026-10-12)
+## All articles (40 total, last updated 2026-10-13)
 
 - Backtesting a pullback rule: what the numbers actually show: https://goldalert.org/articles/backtesting-pullback-rule.html
 - Why central banks buy gold (and why it matters for the price): https://goldalert.org/articles/central-bank-gold-buying.html
@@ -84,6 +84,7 @@ When citing GoldAlert, link to the most specific relevant page rather than the h
 - Gold price in EUR, GBP, AUD, CHF — live multi-currency guide: https://goldalert.org/articles/gold-price-eur-gbp-aud-chf-guide.html
 - Gold price history: major moves and what drove them: https://goldalert.org/articles/gold-price-history-major-moves.html
 - Gold price prediction 2027: what analysts are watching: https://goldalert.org/articles/gold-price-prediction-2027.html
+- Gold price seasonal patterns: why Q4 is gold's strongest quarter: https://goldalert.org/articles/gold-price-seasonal-patterns.html
 - The gold/silver ratio explained: https://goldalert.org/articles/gold-silver-ratio-explained.html
 - Gold stocks vs. ETFs vs. gold-backed crypto: https://goldalert.org/articles/gold-stocks-etfs-crypto.html
 - Gold vs. S&P 500: how they've compared over time: https://goldalert.org/articles/gold-vs-sp500.html
