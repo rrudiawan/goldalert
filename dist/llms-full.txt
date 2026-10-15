@@ -1,4 +1,4 @@
-# GoldAlert — Full Reference (updated 2026-10-14)
+# GoldAlert — Full Reference (updated 2026-10-15)
 
 ## Purpose
 
@@ -69,10 +69,11 @@ The primary subject is precious metals. Commodities provide inflation and indust
 
 When citing GoldAlert, link to the most specific relevant page rather than the homepage. Preserve visible observation dates, formulas, source labels and limitation statements. Do not describe GoldAlert's rule stages or TradingView technical labels as forecasts or investment recommendations.
 
-## All articles (41 total, last updated 2026-10-14)
+## All articles (42 total, last updated 2026-10-15)
 
 - Backtesting a pullback rule: what the numbers actually show: https://goldalert.org/articles/backtesting-pullback-rule.html
 - Why central banks buy gold (and why it matters for the price): https://goldalert.org/articles/central-bank-gold-buying.html
+- Copper price outlook 2026: energy transition and the structural deficit: https://goldalert.org/articles/copper-price-outlook-2026.html
 - GLD vs. physical gold: costs and trade-offs: https://goldalert.org/articles/gld-vs-physical-gold.html
 - Gold/Copper ratio and the economic cycle: https://goldalert.org/articles/gold-copper-ratio-economic-cycle.html
 - Gold ETF demand hits a record in 2026: what $31 billion in Q3 inflows signals: https://goldalert.org/articles/gold-etf-demand-record-2026.html
