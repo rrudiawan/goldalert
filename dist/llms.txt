@@ -38,10 +38,11 @@ Full backtesting methodology: https://goldalert.org/methodology.html
 - FAQ: https://goldalert.org/faq.html
 - Embed Widget: https://goldalert.org/embed/
 
-## All articles (43 total, updated 2026-10-16)
+## All articles (44 total, updated 2026-10-17)
 
 - Backtesting a pullback rule: what the numbers actually show: https://goldalert.org/articles/backtesting-pullback-rule.html
 - Why central banks buy gold (and why it matters for the price): https://goldalert.org/articles/central-bank-gold-buying.html
+- The 2026 commodity supercycle: what it means for gold: https://goldalert.org/articles/commodity-supercycle-and-gold.html
 - Copper price outlook 2026: energy transition and the structural deficit: https://goldalert.org/articles/copper-price-outlook-2026.html
 - GLD vs. physical gold: costs and trade-offs: https://goldalert.org/articles/gld-vs-physical-gold.html
 - Gold/Copper ratio and the economic cycle: https://goldalert.org/articles/gold-copper-ratio-economic-cycle.html
