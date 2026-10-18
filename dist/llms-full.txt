@@ -1,4 +1,4 @@
-# GoldAlert — Full Reference (updated 2026-10-17)
+# GoldAlert — Full Reference (updated 2026-10-18)
 
 ## Purpose
 
@@ -69,7 +69,7 @@ The primary subject is precious metals. Commodities provide inflation and indust
 
 When citing GoldAlert, link to the most specific relevant page rather than the homepage. Preserve visible observation dates, formulas, source labels and limitation statements. Do not describe GoldAlert's rule stages or TradingView technical labels as forecasts or investment recommendations.
 
-## All articles (44 total, last updated 2026-10-17)
+## All articles (45 total, last updated 2026-10-18)
 
 - Backtesting a pullback rule: what the numbers actually show: https://goldalert.org/articles/backtesting-pullback-rule.html
 - Why central banks buy gold (and why it matters for the price): https://goldalert.org/articles/central-bank-gold-buying.html
@@ -106,6 +106,7 @@ When citing GoldAlert, link to the most specific relevant page rather than the h
 - PAXG vs. XAUT: which gold-backed token fits you: https://goldalert.org/articles/paxg-vs-xaut.html
 - How to read a gold buy signal: https://goldalert.org/articles/read-gold-buy-signal.html
 - Real interest rates and gold: a practical guide: https://goldalert.org/articles/real-interest-rates-and-gold.html
+- Silver demand from solar panels in 2026: why the deficit persists despite thrifting: https://goldalert.org/articles/silver-demand-solar-panels-2026.html
 - Silver Gold Bull review 2026: is it safe to buy gold online?: https://goldalert.org/articles/silver-gold-bull-review-2026.html
 - Spot gold vs. futures vs. bullion price: https://goldalert.org/articles/spot-gold-vs-futures-vs-bullion-price.html
 - Troy ounce vs. regular ounce: why gold uses a different unit: https://goldalert.org/articles/troy-ounce-vs-regular-ounce-gold.html
