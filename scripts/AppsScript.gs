@@ -115,13 +115,27 @@ const TIER_RANK = { HOLD: 0, "50% BUY": 1, "100% BUY": 2 };
 
 /** Run this on a time-driven trigger. Compares current vs. last-known tiers
  *  and notifies matching subscribers about any asset that just went up a tier. */
-function checkAndNotify() {
-  const resp = UrlFetchApp.fetch(SIGNALS_URL, { muteHttpExceptions: true });
-  if (resp.getResponseCode() !== 200) {
-    Logger.log("Could not fetch signals.json: HTTP " + resp.getResponseCode());
-    return;
+function fetchSignals_() {
+  let lastError = "unknown error";
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const resp = UrlFetchApp.fetch(SIGNALS_URL, {
+        muteHttpExceptions: true,
+        followRedirects: true,
+      });
+      const status = resp.getResponseCode();
+      if (status === 200) return JSON.parse(resp.getContentText());
+      lastError = "HTTP " + status;
+    } catch (err) {
+      lastError = String(err);
+    }
+    if (attempt < 3) Utilities.sleep(attempt * 2000);
   }
-  const data = JSON.parse(resp.getContentText());
+  throw new Error("Signals temporarily unavailable after 3 attempts: " + lastError);
+}
+
+function checkAndNotify() {
+  const data = fetchSignals_();
   const signals = data.signals || {};
 
   const stateSheet = getSheet_(SHEET_STATE, ["Asset", "Level"]);
@@ -183,6 +197,11 @@ function checkAndNotify() {
 
 /** Optional: run manually once to verify the Sheet + Telegram token are wired up. */
 function testRun() {
-  Logger.log("Signals URL reachable: " + (UrlFetchApp.fetch(SIGNALS_URL, { muteHttpExceptions: true }).getResponseCode() === 200));
+  try {
+    const data = fetchSignals_();
+    Logger.log("Signals URL reachable: " + !!data.signals);
+  } catch (err) {
+    Logger.log("Signals URL reachable: false — " + err);
+  }
   Logger.log("Telegram token set: " + !!PropertiesService.getScriptProperties().getProperty("TELEGRAM_BOT_TOKEN"));
 }
