@@ -32,9 +32,11 @@ jobs:
           node-version: 24
 
       - name: Publish the next due article
+        id: publish
         run: node scripts/publish-scheduled-article.mjs
 
       - name: Refresh llms files
+        if: steps.publish.outputs.published == 'true'
         run: node scripts/update-llms.mjs
 
       - name: Commit published article
@@ -54,6 +56,6 @@ jobs:
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
       - name: Notify search discovery services
-        if: steps.commit.outputs.changed == 'true'
+        if: steps.publish.outputs.published == 'true' && steps.commit.outputs.changed == 'true'
         run: node scripts/submit-discovery.mjs
 
