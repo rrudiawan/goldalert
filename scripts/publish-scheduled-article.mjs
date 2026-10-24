@@ -1,4 +1,4 @@
-import { copyFile, readFile, writeFile } from "node:fs/promises";
+import { appendFile, copyFile, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 
@@ -18,6 +18,9 @@ const next = queue
 
 if (!next) {
   console.log(`No scheduled article is due at ${now.toISOString()}.`);
+  if (process.env.GITHUB_OUTPUT) {
+    await appendFile(process.env.GITHUB_OUTPUT, "published=false\n");
+  }
   process.exit(0);
 }
 
@@ -49,6 +52,10 @@ if (!sitemap.includes(`<loc>${articleUrl}</loc>`)) {
 next.status = "published";
 next.publishedAt = now.toISOString();
 await writeFile(QUEUE_FILE, `${JSON.stringify(queue, null, 2)}\n`);
+
+if (process.env.GITHUB_OUTPUT) {
+  await appendFile(process.env.GITHUB_OUTPUT, "published=true\n");
+}
 
 console.log(`Published ${next.slug} (${articleUrl}).`);
 
