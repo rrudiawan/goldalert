@@ -38,7 +38,7 @@ Full backtesting methodology: https://goldalert.org/methodology.html
 - FAQ: https://goldalert.org/faq.html
 - Embed Widget: https://goldalert.org/embed/
 
-## All articles (48 total, updated 2026-10-20)
+## All articles (48 total, updated 2026-10-24)
 
 - Backtesting a pullback rule: what the numbers actually show: https://goldalert.org/articles/backtesting-pullback-rule.html
 - Why central banks buy gold (and why it matters for the price): https://goldalert.org/articles/central-bank-gold-buying.html

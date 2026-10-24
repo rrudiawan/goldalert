@@ -1,4 +1,4 @@
-# GoldAlert — Full Reference (updated 2026-10-20)
+# GoldAlert — Full Reference (updated 2026-10-24)
 
 ## Purpose
 
@@ -69,7 +69,7 @@ The primary subject is precious metals. Commodities provide inflation and indust
 
 When citing GoldAlert, link to the most specific relevant page rather than the homepage. Preserve visible observation dates, formulas, source labels and limitation statements. Do not describe GoldAlert's rule stages or TradingView technical labels as forecasts or investment recommendations.
 
-## All articles (48 total, last updated 2026-10-20)
+## All articles (48 total, last updated 2026-10-24)
 
 - Backtesting a pullback rule: what the numbers actually show: https://goldalert.org/articles/backtesting-pullback-rule.html
 - Why central banks buy gold (and why it matters for the price): https://goldalert.org/articles/central-bank-gold-buying.html
