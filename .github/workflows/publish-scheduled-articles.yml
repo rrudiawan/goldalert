@@ -1,0 +1,59 @@
+name: Publish scheduled GoldAlert articles
+
+on:
+  schedule:
+    # Five deliberately different publication times (WIB = UTC+7).
+    - cron: "47 11 * * 0" # Sunday 18:47 WIB
+    - cron: "26 1 * * 1"  # Monday 08:26 WIB
+    - cron: "34 12 * * 2" # Tuesday 19:34 WIB
+    - cron: "53 0 * * 3"  # Wednesday 07:53 WIB
+    - cron: "11 13 * * 4" # Thursday 20:11 WIB
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scheduled-article-publisher
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Publish the next due article
+        run: node scripts/publish-scheduled-article.mjs
+
+      - name: Refresh llms files
+        run: node scripts/update-llms.mjs
+
+      - name: Commit published article
+        id: commit
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No article is due."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist scheduled/articles/manifest.json
+          git commit -m "publish: next scheduled GoldAlert article"
+          git push origin main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Notify search discovery services
+        if: steps.commit.outputs.changed == 'true'
+        run: node scripts/submit-discovery.mjs
+
