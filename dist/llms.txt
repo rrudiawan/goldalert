@@ -38,7 +38,7 @@ Full backtesting methodology: https://goldalert.org/methodology.html
 - FAQ: https://goldalert.org/faq.html
 - Embed Widget: https://goldalert.org/embed/
 
-## All articles (51 total, updated 2026-10-27)
+## All articles (52 total, updated 2026-10-28)
 
 - Backtesting a pullback rule: what the numbers actually show: https://goldalert.org/articles/backtesting-pullback-rule.html
 - Why central banks buy gold (and why it matters for the price): https://goldalert.org/articles/central-bank-gold-buying.html
@@ -69,6 +69,7 @@ Full backtesting methodology: https://goldalert.org/methodology.html
 - How to read the Gold Market Fear / Pullback Index: https://goldalert.org/articles/how-to-read-gold-market-sentiment-pullback-index.html
 - How to set a gold price alert (browser, email and Telegram): https://goldalert.org/articles/how-to-set-gold-price-alert.html
 - How to use the GoldAlert Commodity Dashboard: https://goldalert.org/articles/how-to-use-goldalert-commodity-dashboard.html
+- Gold for Indonesian investors: why rupiah returns can differ from XAU/USD: https://goldalert.org/articles/indonesia-gold-investors-rupiah-dollar-guide-2026.html
 - Is gold a good investment? Arguments on both sides: https://goldalert.org/articles/is-gold-good-investment.html
 - JM Bullion gold bar review 2026: prices, premiums, and reliability: https://goldalert.org/articles/jm-bullion-gold-bar-review-2026.html
 - Live gold price vs. daily close: https://goldalert.org/articles/live-gold-price-vs-daily-close.html
