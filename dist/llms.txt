@@ -38,7 +38,7 @@ Full backtesting methodology: https://goldalert.org/methodology.html
 - FAQ: https://goldalert.org/faq.html
 - Embed Widget: https://goldalert.org/embed/
 
-## All articles (52 total, updated 2026-10-28)
+## All articles (53 total, updated 2026-10-29)
 
 - Backtesting a pullback rule: what the numbers actually show: https://goldalert.org/articles/backtesting-pullback-rule.html
 - Why central banks buy gold (and why it matters for the price): https://goldalert.org/articles/central-bank-gold-buying.html
@@ -78,6 +78,7 @@ Full backtesting methodology: https://goldalert.org/methodology.html
 - Oil, inflation and the Fed: why gold is struggling despite geopolitical risk: https://goldalert.org/articles/oil-inflation-fed-gold-october-2026.html
 - PAXG vs. XAUT: which gold-backed token fits you: https://goldalert.org/articles/paxg-vs-xaut.html
 - Platinum investment guide 2026: four straight deficits, the hydrogen play, and what the 44% crash means for buyers: https://goldalert.org/articles/platinum-investment-guide-2026.html
+- After a precious-metals selloff: a five-step weekly review: https://goldalert.org/articles/precious-metals-selloff-weekly-review-checklist.html
 - How to read a gold buy signal: https://goldalert.org/articles/read-gold-buy-signal.html
 - Real interest rates and gold: a practical guide: https://goldalert.org/articles/real-interest-rates-and-gold.html
 - Silver's 2026 reset: what the deep correction means for long-term investors: https://goldalert.org/articles/silver-2026-reset-long-term-investor-guide.html
